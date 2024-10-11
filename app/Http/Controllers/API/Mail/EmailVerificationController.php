@@ -27,7 +27,9 @@ class EmailVerificationController extends BaseController
             'otp' => $verification_otp->token,
             'name' => $user->name
         ]));
-        return $this->sendResponse([], "Email sent successfully");
+        return $this->sendResponse([
+            "otp" => $verification_otp->token,
+        ], "Email sent successfully (for testing purposes, the otp is also returned)");
     }
 
     public function verifyEmail(VerifyEmailRequest $request)

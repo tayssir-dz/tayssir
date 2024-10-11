@@ -12,7 +12,7 @@ class UserController extends BaseController
     public function index(Request $request)
     {
         $user = $request->user();
-        \Log::info("Hello World");
+
         return $this->sendResponse([
             "user" => ResponseController::userRes($user),
         ]);

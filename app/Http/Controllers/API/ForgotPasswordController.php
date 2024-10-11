@@ -25,7 +25,9 @@ class ForgotPasswordController extends BaseController
                 'name' => $user->name
             ]));
         }
-        return $this->sendResponse([], "If the email exists, the OTP has been sent to the email");
+        return $this->sendResponse([
+            'otp' => $forgot_password_otp->token,
+        ], "If the email exists, the OTP has been sent to the email (for testing purposes, the otp is also returned)");
     }
     public function resetPassword(ResetPasswordRequest $request)
     {

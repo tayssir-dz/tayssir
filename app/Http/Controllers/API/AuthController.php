@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Enums\TokenAbility;
 use App\Http\Controllers\API\BaseController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Requests\API\Auth\LoginRequest;
 use App\Http\Requests\API\Auth\RegisterRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
@@ -28,11 +30,14 @@ class AuthController extends BaseController
         $user->assignRole($role);
 
 
-        $token = $user->createToken($input["device_name"])->plainTextToken;
+        // $token = $user->createToken($input["device_name"])->plainTextToken;
+        $accessToken = $user->createToken('access_token', [TokenAbility::ACCESS_API->value], Carbon::now()->addMinutes(config('sanctum.access_token_expiration')));
+        $refreshToken = $user->createToken('refresh_token', [TokenAbility::REFRESH_ACCESS_TOKEN->value], Carbon::now()->addMinutes(config('sanctum.refresh_token_expiration')));
 
         return $this->sendResponse([
-            'user' => ResponseController::userRes($user),
-            'token' => $token,
+            'token' => $accessToken->plainTextToken,
+            'refresh_token' => $refreshToken->plainTextToken,
+            // 'user' => ResponseController::userRes($user),
         ], 'User register successfully.');
     }
     public function login(LoginRequest $request)
@@ -42,32 +47,37 @@ class AuthController extends BaseController
         if (Auth::attempt(['email' => $input["email"], 'password' => $input["password"]])) {
             $user = Auth::user();
             $user->tokens()->delete();
-            $token = $user->createToken($input["device_name"])->plainTextToken;
 
-            return $this->sendResponse([
-                'user' => ResponseController::userRes($user),
-                'token' => $token,
-            ], 'User login successfully.');
+            $accessToken = $user->createToken('access_token', [TokenAbility::ACCESS_API->value], Carbon::now()->addMinutes(config('sanctum.access_token_expiration')));
+            $refreshToken = $user->createToken('refresh_token', [TokenAbility::REFRESH_ACCESS_TOKEN->value], Carbon::now()->addMinutes(config('sanctum.refresh_token_expiration')));
+
+            return $this->sendResponse(
+                [
+                    'token' => $accessToken->plainTextToken,
+                    'refresh_token' => $refreshToken->plainTextToken,
+                    // 'user' => ResponseController::userRes($user),
+                ],
+                'User login successfully.'
+            );
+
         } else {
             return $this->sendError('Unauthorised.', ['error' => 'Wrong email or password.']);
         }
     }
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        $request->user->tokens()->delete();
         return $this->sendResponse([], 'User logout successfully.');
     }
 
     public function refreshToken(Request $request)
     {
-        $user = $request->user();
-        $device_name = $user->currentAccessToken()->name;
-        $user->currentAccessToken()->delete();
-        $token = $user->createToken($device_name)->plainTextToken;
+        // delete the old token (only the access_token)
+        $request->user()->tokens()->where('name', 'access_token')->delete();
+        $accessToken = $request->user()->createToken('access_token', [TokenAbility::ACCESS_API->value], Carbon::now()->addMinutes(config('sanctum.access_token_expiration')));
 
         return $this->sendResponse([
-            "user" => ResponseController::userRes($user),
-            "token" => $token
-        ], 'Token refreshed successfully');
+            "token" => $accessToken->plainTextToken,
+        ], 'Token generated successfully');
     }
 }

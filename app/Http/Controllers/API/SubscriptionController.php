@@ -63,7 +63,7 @@ class SubscriptionController extends BaseController
 
     public function unsubscribe(UnsubscribeRequest $request)
     {
-        $subscription_id = 1;
+        $subscription_id = $request->input('id');
         $user = $request->user();
 
         $subscriptionCard = $user->subscriptionCards->where('subscription_id', $subscription_id)->first();

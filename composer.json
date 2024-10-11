@@ -21,6 +21,7 @@
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "league/flysystem-aws-s3-v3": "3.0",
         "pelmered/filament-money-field": "^1.4",
         "spatie/filament-simple-stats": "^0.1.4",
         "spatie/laravel-medialibrary": "^11.9",
