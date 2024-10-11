@@ -35,6 +35,14 @@
                 preparation with our interactive quizzes!
                 <span class="font-bold">(the previous text is auto generated)</span>
             </p>
+            <div class="w-full flex justify-end items-center gap-4">
+                <a href="/dashboard" class="btn btn-primary">
+                    go to swagger
+                </a>
+                <a href="/dashboard" class="btn btn-primary">
+                    go to dashboard
+                </a>
+            </div>
         </div>
     </div>
 </body>
