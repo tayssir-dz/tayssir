@@ -14,7 +14,7 @@ preparation with our interactive quizzes!
 
 ---
 
-## TODO
+<!-- ## TODO
 
     - card translation !
 
@@ -24,4 +24,4 @@ preparation with our interactive quizzes!
     - each question should have a note (nullable)
     - account attributes
 
--
+- -->
