@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Filament\Resources\UnitResource\RelationManagers;
+
+use App\Filament\Resources\ChapterResource;
+use Filament\Forms;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+class ChaptersRelationManager extends RelationManager
+{
+    public static function getModelLabel(): string
+    {
+        return __('custom.models.chapter');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('custom.models.chapters');
+    }
+    public static function getTitle($ownerRecord, string $pageClass): string
+    {
+        return __('custom.models.chapters');
+    }
+    protected static string $relationship = 'chapters';
+
+    public function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                TextInput::make('name')->required()->minLength(3)->label(__('custom.models.chapter.name')),
+                Textarea::make("description")->rows(4)->label(__('custom.models.chapter.description')),
+            ])->columns(1);
+    }
+
+    public function table(Table $table): Table
+    {
+        return $table
+            ->recordTitleAttribute('name')
+            ->columns([
+                TextColumn::make('name')->label(__('custom.models.chapter.name')),
+                TextColumn::make('description')->limit(30)->label(__('custom.models.chapter.description')),
+                TextColumn::make('questions_count')
+                    ->badge()
+                    ->label(__('custom.models.questions'))
+                    ->counts('questions')
+                    ->colors(['primary']),
+            ])
+            ->filters([
+                //
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+                Tables\Actions\AttachAction::make(),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\LinkAction::make("Details")->icon('heroicon-o-eye')->color('secondary')->url(fn($record) => ChapterResource::getUrl("edit", ['record' => $record]))
+                    ->label(__('custom.models.chapter.action.details')),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+}
