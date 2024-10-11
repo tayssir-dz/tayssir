@@ -1,0 +1,200 @@
+<?php
+
+return [
+    // ------------------------ CUSTOM --------------------------
+    'nav.section.platform' => 'المنصة',
+    'nav.section.content' => 'المحتوى',
+    'nav.section.management' => 'الإدارة',
+
+
+    'models.cards' => 'البطاقات (قديم)',
+    'models.card' => 'بطاقة',
+
+    'models.divisions' => 'الشعب',
+    'models.division' => 'شعبة',
+
+    'models.materials' => 'المواد',
+    'models.material' => 'مادة',
+
+    'models.units' => 'الوحدات',
+    'models.unit' => 'وحدة',
+
+    'models.chapters' => 'الفصول',
+    'models.chapter' => 'فصل',
+
+    'models.questions' => 'الأسئلة',
+    'models.question' => 'سؤال',
+
+    'models.users' => 'المستخدمين',
+    'models.user' => 'مستخدم',
+    'models.subscriptions' => 'الاشتراكات',
+    'models.subscription' => 'اشتراك',
+
+    'models.discounts' => "التخفيضات",
+    'models.discount' => "تخفيض",
+
+    'models.subscriptionCards' => "بطاقات الاشتراك",
+    'models.subscriptionCard' => "بطاقة الاشتراك",
+
+
+    // # Division
+    "forms.division.create.section.infos" => "معلومات الشعبة",
+    "forms.division.create.section.image" => "صورة الشعبة",
+
+    'models.division.name' => 'اسم الشعبة',
+    'models.division.description' => 'وصف الشعبة',
+
+    // # Material
+    "forms.material.create.section.infos" => "معلومات المادة",
+    "forms.material.create.section.image" => "صورة المادة",
+
+    'models.material.name' => 'اسم المادة',
+    'models.material.description' => 'وصف المادة',
+    'models.material.code' => 'رمز المادة',
+    'models.material.code.placeholder' => 'رمز لتمييز المادة',
+    'models.material.color' => 'لون المادة',
+    'models.material.division' => 'الشعبة',
+    'models.material.action.details' => 'تفاصيل المادة',
+
+    // # Unit
+    'models.unit.name' => 'اسم الوحدة',
+    'models.unit.description' => 'وصف الوحدة',
+    'models.unit.material' => 'المادة',
+    'models.unit.action.details' => 'تفاصيل الوحدة',
+
+    // # User
+    'models.user.name' => 'الاسم',
+    'models.user.avatar' => 'الصورة الشخصية',
+    'models.user.email' => 'البريد الإلكتروني',
+    'models.user.password' => 'كلمة المرور',
+    'models.user.phone' => 'رقم الهاتف',
+    'models.user.roles' => 'الأدوار',
+    'models.user.email_verified' => 'تم التحقق من البريد الإلكتروني',
+    'models.user.email_not_verified' => 'لم يتم التحقق من البريد الإلكتروني',
+    'models.user.points' => 'النقاط',
+
+    'models.user.tabs.all' => 'الكل',
+    'models.user.tabs.students' => 'الطلاب',
+    'models.user.tabs.with_roles' => 'ذوي الأدوار',
+
+    'models.user.perfonal_info' => 'المعلومات الشخصية',
+    'models.user.subscribtion' => 'حالة الاشتراك',
+    'models.user.subscribed' => 'مشترك',
+    'models.user.not_subscribed' => 'غير مشترك',
+
+    'models.user.roles_and_subscription' => 'الأدوار والاشتراك',
+
+
+    // # Chapter
+    'models.chapter.name' => 'اسم الفصل',
+    'models.chapter.description' => 'وصف الفصل',
+    'models.chapter.unit' => 'الوحدة',
+    'models.chapter.action.details' => 'تفاصيل الفصل',
+
+    // # Chapter
+    'models.question.tabs.infos' => 'معلومات السؤال',
+    'models.question.tabs.assets' => 'المرفقات',
+    'models.question.tabs.options' => 'الخيارات',
+    'models.question.question' => 'السؤال',
+    'models.question.points' => 'النقاط',
+    'models.question.hint' => 'تلميح',
+    'models.question.question_image' => 'صورة مرفقة للسؤال',
+    'models.question.explaination_asset' => 'مرفق الشرح',
+    'models.question.hint_image' => 'صورة التلميح',
+    'models.question.type' => 'نوع السؤال',
+    'models.question.types.multiple_choices' => 'اختيار واحد أو اختيارات متعددة',
+    'models.question.types.fill_in_the_blanks' => 'املأ الفراغات',
+    'models.question.types.pick_the_intruder' => 'اختر الغريب',
+    'models.question.types.true_or_false' => 'صح أو خطأ',
+    'models.question.types.match_with_arrows' => 'مطابقة بالسهام',
+    'models.question.options' => 'الخيارات',
+    'models.question.option' => 'خيار',
+    'models.question.option.iscorrect' => 'صحيح؟',
+    // new
+    'models.question.words' => 'كلمات',
+    'models.question.word' => 'كلمة',
+    'models.question.word.is_intruder' => 'غريب؟',
+    'models.question.duo' => 'زوج',
+    'models.question.duos' => 'أزواج',
+    'models.question.duo.first' => 'الجملة الاولى',
+    'models.question.duo.second' => 'الجملة الثانية',
+
+    // Card
+
+    "models.card.code" => "الكود",
+    "models.card.code.warning" => "يستحسن اضافة البطاقات من الامر 'اضافة بطاقات' في الصفحة الاساسية للبطاقات",
+    "models.card.tab.code" => "الكود",
+    "models.card.tab.pricing" => "السعر",
+    "models.card.tab.subscription" => "الاشتراك",
+    "models.card." => "الكود",
+    "models.card.price" => "السعر",
+    "models.card.subscription_type" => "نوع الاشتراك",
+    "models.card.user" => "المستخدم",
+    "models.card.activated" => "مفعلة",
+    "models.card.expired" => "منتهي",
+    'models.card.done' => 'تم',
+    "models.card.expires_at" => "ينتهي في",
+    "models.card.activated_at" => "تم التفعيل في",
+    'models.card.is_on_discount' => 'على خصم',
+    'models.card.discount_price' => 'سعر الخصم',
+    'models.card.discount_percentage' => 'نسبة الخصم %',
+    'models.card.subscription.yearly' => 'الاشتراك السنوي',
+    'models.card.display_price' => 'سعر العرض',
+    'models.card.number_of_cards' => 'عدد البطاقات',
+    'models.card.status' => 'الحالة',
+    'models.card.status.idle' => 'جاهز',
+    'models.card.status.expired' => 'منتهي',
+    'models.card.status.active' => 'مفعل',
+    'models.card.status.done' => 'تم',
+    'models.card.status.problem' => 'معطل',
+    'models.card.create_cards' => 'اضافة بطاقات',
+
+    # Subscription
+    'models.subscription.name' => 'الاسم',
+    'models.subscription.description' => 'الوصف',
+    'models.subscription.discounts' => "التخفيضات",
+    "models.subscription.discounts.empty" => "لا يوجد تخفيضات",
+    'models.subscription.price' => "السعر",
+    'models.subscription.ending_date' => "تاريخ الانتهاء",
+
+    # Discount
+    'models.discount.name' => 'الاسم',
+    'models.discount.description' => 'الوصف',
+    'models.discount.amount' => 'مبلغ التخفيض',
+    'models.discount.percentage' => 'نسبة التخفيض',
+    'models.discount.from' => "من",
+    'models.discount.to' => "إلى",
+    'models.discount.subscriptions' => "الاشتراكات",
+    'models.discount.subscriptions.empty' => "لا يوجد اشتراكات",
+    'models.discount.tabs.informations' => "معلومات التخفيض",
+    'models.discount.tabs.reduction' => "التخفيض",
+    'models.discount.tabs.period' => "الفترة",
+
+
+    # Subscription Card
+    'models.subscriptionCard.code' => 'الكود',
+    'models.subscriiptionCard.user' => 'المستخدم',
+    'models.subscriptionCard.subscription' => 'الاشتراك',
+    'models.subscriptionCard.redeemed_at' => "تم استخدامها في",
+    'models.subscriptionCard.redeemed_at.empty' => "لم يتم استخدامها بعد",
+
+    'models.subscriptionCard.copy_code' => 'نسخ الكود',
+    'models.subscriptionCard.create_subscriptionCards' => 'اضافة بطاقات الاشتراك',
+    'models.subscriptionCard.number_of_cards' => 'عدد البطاقات المراد إنشاؤها',
+    'models.subscriptionCard.attach_user' => "ربط المستخدم",
+    'models.subscriptionCard.user.email' => "البريد الإلكتروني",
+    'models.subscriptionCard.user.empty' => "لا يوجد مستخدم",
+    'models.subscriptionCard.user.added_successfully' => "تم ربط المستخدم بنجاح",
+    'models.subscriptionCard.user.not_found' => "المستخدم غير موجود",
+    'models.subscriptionCard.user.already_subscribed' => "المستخدم مشترك بالفعل",
+    'models.subscriptionCard.activated_cards' => "البطاقات المفعلة",
+    'models.subscriptionCard.unactivated_cards' => "البطاقات الغير مفعلة",
+    'models.subscriptionCard.code_copied' => "تم نسخ الكود",
+
+    # Currency
+    "currency.local.dzd" => env('MONEY_DEFAULT_LOCALE_AR', 'ar_DZ'),
+
+    # Stats
+    "stats.users.new" => 'المستخدمين الجدد',
+    "stats.users.last30Days" => 'خلال الـ 30 يوما',
+];
