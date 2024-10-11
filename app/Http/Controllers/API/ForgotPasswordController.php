@@ -20,10 +20,10 @@ class ForgotPasswordController extends BaseController
             if (!$forgot_password_otp->status) {
                 return $this->sendError("Failed to generate OTP");
             }
-            Mail::to($user->email)->send(new ForgotPasswordMail([
-                'otp' => $forgot_password_otp->token,
-                'name' => $user->name
-            ]));
+            // Mail::to($user->email)->send(new ForgotPasswordMail([
+            //     'otp' => $forgot_password_otp->token,
+            //     'name' => $user->name
+            // ]));
         }
         return $this->sendResponse([
             'otp' => $forgot_password_otp->token,
