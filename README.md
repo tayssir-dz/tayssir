@@ -25,16 +25,3 @@ preparation with our interactive quizzes!
     - account attributes
 
 - -->
-
-# changes :
-
--   phone number is unique (both in the database and in the request validation)
--   added refresh token system
--   access token expiration is set to 1 hour
--   refresh token expiration is set to 7 days
--   remove the device from auth request (not needed anymore after developing the refresh token system)
--   auth request (register and login) returns the access token and the refresh token
--   tokens now have two abilities (refresh_token, access_api)
--   to interact with any secured endpoint you should send the access token (bearer token)
--   to refresh the access token you should send the refresh token instead (bearer token)
--   return the otp in the response of the send verification email endpoint and request password change
