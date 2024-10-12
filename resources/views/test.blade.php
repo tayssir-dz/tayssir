@@ -28,4 +28,7 @@
             <option value="{{ $id }}">{{ $commune }}</option>
         @endforeach
     </select>
+    {{-- @foreach (communes($wilaya_id = null, $withWilaya = true, 'arabic_name') as $id => $commune)
+        <option value="{{ $id }}">{{ $commune }}</option>
+    @endforeach --}}
 </body>

@@ -8,17 +8,25 @@ use App\Models\User;
 
 class ResponseController
 {
+    public static function WilayaRes($wilaya)
+    {
+        return [
+            "id" => $wilaya->id,
+            "name" => $wilaya->name,
+            "arabic_name" => $wilaya->arabic_name,
+        ];
+    }
+
+    public static function CommuneRes($commune)
+    {
+        return [
+            "id" => $commune->id,
+            "name" => $commune->name,
+            "arabic_name" => $commune->arabic_name,
+        ];
+    }
     public static function userRes($user)
     {
-        // $subscriptionCards = $user->subscriptionCards;
-
-        // // for each subscription card, check if the subscription is still active and return an array of subscription names
-
-        // $subscriptionNames = $subscriptionCards->map(function ($subscriptionCard) {
-        //     if ($subscriptionCard->subscription && Carbon::now()->lessThan($subscriptionCard->subscription->ending_date)) {
-        //         return $subscriptionCard->subscription->name;
-        //     }
-        // })->filter()->toArray();
         return [
             'id' => $user->id,
             "name" => $user->name,
@@ -26,10 +34,12 @@ class ResponseController
             "image_url" => $user->avatar_url,
             "phone_number" => $user->phone_number,
             "email_verified" => $user->email_verified_at !== null,
-            "wilaya" => $user->wilaya->arabic_name,
-            "commune" => $user->commune->arabic_name,
+            "wilaya" => $user->wilaya ? ResponseController::WilayaRes($user->wilaya) : null,
+            "commune" => $user->wilaya && $user->commune ? ResponseController::CommuneRes($user->commune) : null,
             // "subscriptions" => $subscriptionNames,
             // 'subscribed' => $subscriptionCard && $subscriptionCard->subscription && Carbon::now()->lessThan($user->subscriptionCard->subscription->ending_date),
         ];
     }
+
+
 }

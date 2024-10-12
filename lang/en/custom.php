@@ -72,6 +72,12 @@ return [
     'models.user.email_verified' => 'Email verified',
     'models.user.email_not_verified' => 'Email not verified',
     'models.user.points' => 'Points',
+    'models.user.wilaya' => 'Wilaya',
+    'models.user.wilayas' => 'Wilayas',
+    'models.user.commune' => 'Commune',
+    'models.user.communes' => 'Communes',
+    'models.user.wilaya.field' => "name",
+    'models.user.commune.field' => "name",
 
     'models.user.tabs.all' => 'All',
     'models.user.tabs.students' => 'Students',

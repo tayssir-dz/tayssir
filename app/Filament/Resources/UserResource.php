@@ -84,13 +84,63 @@ class UserResource extends Resource implements HasShieldPermissions
             ->schema([
                 Section::make(__('custom.models.user.perfonal_info'))
                     ->schema([
-                        TextInput::make("email")->required()->email()->label(__('custom.models.user.email')),
-                        TextInput::make("name")->required()->label(__('custom.models.user.name')),
-                        PhoneInput::make('phone_number')->label(__('custom.models.user.phone')),
-                        TextInput::make("password")->password()->required()->label(__('custom.models.user.password'))->visibleOn('create'),
-                        TextInput::make("points")->numeric()->required()->label(__('custom.models.user.points'))->visibleOn('edit')
+                        TextInput::make("name")
+                            ->required()
+                            ->label(__('custom.models.user.name'))
+                            ->columnSpan(2),
 
-                    ])->columnSpan(2)->columns(1),
+                        TextInput::make("email")
+                            ->disabledOn("edit")
+                            ->required()
+                            ->email()
+                            ->label(__('custom.models.user.email')),
+
+                        PhoneInput::make('phone_number')
+                            ->disabledOn("edit")
+                            ->label(__('custom.models.user.phone')),
+
+                        TextInput::make("password")
+                            ->password()
+                            ->required()
+                            ->label(__('custom.models.user.password'))
+                            ->visibleOn('create'),
+
+                        TextInput::make("points")
+                            ->numeric()
+                            ->required()
+                            ->label(__('custom.models.user.points'))
+                            ->visibleOn('edit')->columnSpan(2),
+
+                        Select::make('wilaya_id')
+                            ->label(__("custom.models.user.wilaya"))
+                            ->relationship(name: 'wilaya', titleAttribute: __("custom.models.user.wilaya.field"))  // Select field for wilaya
+                            ->searchable()
+                            ->preload()
+                            ->reactive()  // Makes it reactive to changes
+                            ->afterStateUpdated(fn(callable $set) => $set('commune_id', null)),  // Clear commune when wilaya changes
+
+                        Select::make('commune_id')
+                            ->label(__("custom.models.user.commune"))
+                            ->options(function (callable $get) {
+                                $wilayaId = $get('wilaya_id');
+                                if ($wilayaId) {
+                                    return collect(communes($wilayaId))
+                                        ->filter(fn($name) => !is_null($name))
+                                        ->toArray();
+                                }
+                                return [];
+                            })
+                            ->disabled(fn(callable $get) => !$get('wilaya_id'))  // Disable if no Wilaya selected
+                            ->searchable()
+                            ->preload()
+                            ->afterStateUpdated(function (callable $set, callable $get) {
+                                if (!$get('wilaya_id')) {
+                                    $set('commune_id', null);
+                                }
+                            }),
+
+
+                    ])->columnSpan(2)->columns(2),
                 Group::make()->schema([
                     Section::make(__('custom.models.user.avatar'))->schema([
                         FileUpload::make("avatar_url")->image()->imageEditor()
@@ -176,6 +226,10 @@ class UserResource extends Resource implements HasShieldPermissions
             ->filters([
                 Tables\Filters\SelectFilter::make('roles')->relationship("roles", "name")->multiple()->preload()
                     ->searchable()->label(__('custom.models.user.roles')),
+
+                Tables\Filters\SelectFilter::make('wilaya')->relationship("wilaya", __("custom.models.user.wilaya.field"))->multiple()->preload()
+                    ->searchable()->label(__('custom.models.user.wilayas')),
+
 
                 // Tables\Filters\Filter::make('email_verified')
                 //     ->query(fn(Builder $query): Builder => $query->where('email_verified_at', '!=', null))

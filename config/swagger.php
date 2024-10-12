@@ -34,7 +34,9 @@ return [
     "enable" => env('SWAGGER_ENABLED', true),
 
     /* Show Prefix */
-    "show_prefix" => [],
+    "show_prefix" => [
+        // '/api/'
+    ],
 
     /* API Versions */
     "versions" => [

@@ -72,6 +72,12 @@ return [
     'models.user.email_verified' => 'تم التحقق من البريد الإلكتروني',
     'models.user.email_not_verified' => 'لم يتم التحقق من البريد الإلكتروني',
     'models.user.points' => 'النقاط',
+    'models.user.wilaya' => 'الولاية',
+    'models.user.wilayas' => 'الولايات',
+    'models.user.commune' => 'البلدية',
+    'models.user.communes' => 'البلديات',
+    'models.user.wilaya.field' => "arabic_name",
+    'models.user.commune.field' => "arabic_name",
 
     'models.user.tabs.all' => 'الكل',
     'models.user.tabs.students' => 'الطلاب',
