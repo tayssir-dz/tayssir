@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 // MENNADOS
 Route::prefix('v1')->group(function () {
     Route::get("/", function () {
-        $questions = Question::all();
-        return ["message" => "Welcome to " . env('APP_NAME') . " API", 'questions' => $questions];
+        $communes = communes(16, $withWilaya = true, $name = "arabic_name");
+        return response()->json($communes);
     });
 
 

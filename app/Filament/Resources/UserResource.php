@@ -29,6 +29,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use BezhanSalleh\FilamentShield\Support\Utils;
+use Kossa\AlgerianCities\Commune;
 use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
 class UserResource extends Resource implements HasShieldPermissions
@@ -123,11 +124,17 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->label(__("custom.models.user.commune"))
                             ->options(function (callable $get) {
                                 $wilayaId = $get('wilaya_id');
+                                $field = __("custom.models.user.wilaya.field"); // 'name' or 'arabic_name' based on the language
+                    
                                 if ($wilayaId) {
-                                    return collect(communes($wilayaId))
-                                        ->filter(fn($name) => !is_null($name))
+                                    // Query the communes based on the selected wilaya and the dynamic field
+                                    $communes = Commune::where('wilaya_id', $wilayaId)
+                                        ->pluck($field, 'id')  // Return array of id => name or arabic_name
                                         ->toArray();
+
+                                    return $communes;
                                 }
+
                                 return [];
                             })
                             ->disabled(fn(callable $get) => !$get('wilaya_id'))  // Disable if no Wilaya selected
@@ -137,7 +144,7 @@ class UserResource extends Resource implements HasShieldPermissions
                                 if (!$get('wilaya_id')) {
                                     $set('commune_id', null);
                                 }
-                            }),
+                            })
 
 
                     ])->columnSpan(2)->columns(2),
