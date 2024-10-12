@@ -21,24 +21,6 @@ Route::prefix('v1')->group(function () {
     });
 
 
-    Route::prefix("subscriptions")->group(function () {
-        Route::get("/", [SubscriptionController::class, "userSubscriptions"])
-            ->middleware(["auth:sanctum", "access"])
-            ->summary("Get user subscriptions")
-            ->description("this returns an array of user subscriptions (id, name, description, ending_date)");
-
-        Route::post("/redeem", [SubscriptionController::class, "redeem"])
-            ->middleware(["auth:sanctum", "access"])
-            ->summary("Redeem a subscription")
-            ->description("this endpoint takes the code of the card and redeems it for the user, it errors if the card is already used by the user, if its used by another user, if the user already subscribed to the same subscription so there is no need to subscribe again");
-
-        Route::post("/unsibscribe", [SubscriptionController::class, 'unsubscribe'])
-            ->middleware(["auth:sanctum", "access"])
-            ->summary("Unsubscribe from a subscription")
-            ->description("this endpoint takes the subscription id and unsubscribes the user from the subscription");
-
-    });
-
     Route::prefix('auth')->group(function () {
         Route::post("register", [AuthController::class, 'register'])
             ->summary("Register a new user")
@@ -76,20 +58,6 @@ Route::prefix('v1')->group(function () {
             ->description("this endpoint unverifies the user email (testing)");
     });
 
-    Route::prefix('forget-password')->group(function () {
-        Route::post("/", [ForgotPasswordController::class, "forgotPassword"])
-            ->summary("Forgot password")
-            ->description("this endpoint takes the user email and sends a reset password mail");
-
-        Route::post("/verify-otp", [ForgotPasswordController::class, "verifyOtp"])
-            ->summary("Verify OTP")
-            ->description("this endpoint takes the user email and the otp and verifies the otp");
-
-        Route::post("/reset-password", [ForgotPasswordController::class, "resetPassword"])
-            ->summary("Reset password")
-            ->description("this endpoint takes the user email, the reset code, and the new password and resets the user password");
-    });
-
     Route::prefix("user")->group(function () {
         Route::get("/", [UserController::class, "index"])
             ->middleware(["auth:sanctum", "access"])
@@ -105,6 +73,38 @@ Route::prefix('v1')->group(function () {
             ->middleware(["auth:sanctum", "access"])
             ->summary("Change user password")
             ->description("this endpoint takes the old password and the new password and changes the user password");
+    });
+
+    Route::prefix('forget-password')->group(function () {
+        Route::post("/", [ForgotPasswordController::class, "forgotPassword"])
+            ->summary("Forgot password")
+            ->description("this endpoint takes the user email and sends a reset password mail");
+
+        Route::post("/verify-otp", [ForgotPasswordController::class, "verifyOtp"])
+            ->summary("Verify OTP")
+            ->description("this endpoint takes the user email and the otp and verifies the otp");
+
+        Route::post("/reset-password", [ForgotPasswordController::class, "resetPassword"])
+            ->summary("Reset password")
+            ->description("this endpoint takes the user email, the reset code, and the new password and resets the user password");
+    });
+
+    Route::prefix("subscriptions")->group(function () {
+        Route::get("/", [SubscriptionController::class, "userSubscriptions"])
+            ->middleware(["auth:sanctum", "access"])
+            ->summary("Get user subscriptions")
+            ->description("this returns an array of user subscriptions (id, name, description, ending_date)");
+
+        Route::post("/redeem", [SubscriptionController::class, "redeem"])
+            ->middleware(["auth:sanctum", "access"])
+            ->summary("Redeem a subscription")
+            ->description("this endpoint takes the code of the card and redeems it for the user, it errors if the card is already used by the user, if its used by another user, if the user already subscribed to the same subscription so there is no need to subscribe again");
+
+        Route::post("/unsibscribe", [SubscriptionController::class, 'unsubscribe'])
+            ->middleware(["auth:sanctum", "access"])
+            ->summary("Unsubscribe from a subscription")
+            ->description("this endpoint takes the subscription id and unsubscribes the user from the subscription");
+
     });
 });
 
