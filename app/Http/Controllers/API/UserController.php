@@ -17,7 +17,7 @@ class UserController extends BaseController
             "user" => ResponseController::userRes($user),
         ]);
     }
-    public function update(UpdateProfileRequest $request)
+    public function updateUser(UpdateProfileRequest $request)
     {
         $user = $request->user();
         if ($request->phone_number) {
@@ -25,6 +25,17 @@ class UserController extends BaseController
         }
         if ($request->name) {
             $user->name = $request->name;
+        }
+        if ($request->wilaya_id) {
+            $user->wilaya_id = $request->wilaya_id;
+        }
+        if ($request->commune_id) {
+            $user->commune_id = $request->commune_id;
+        }
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = $image->store('avatars');
+            $user->avatar_url = $path;
         }
         $user->save();
 

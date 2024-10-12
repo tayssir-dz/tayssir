@@ -96,7 +96,7 @@ Route::prefix('v1')->group(function () {
             ->summary("Get user infos")
             ->description("this endpoint returns the user data");
 
-        Route::put("/", [UserController::class, "update"])
+        Route::put("/", [UserController::class, "updateUser"])
             ->middleware(["auth:sanctum", "access"])
             ->summary("Update user infos")
             ->description("this endpoint takes the user name, email, and phone number and updates the user data");
@@ -106,6 +106,5 @@ Route::prefix('v1')->group(function () {
             ->summary("Change user password")
             ->description("this endpoint takes the old password and the new password and changes the user password");
     });
-
 });
 

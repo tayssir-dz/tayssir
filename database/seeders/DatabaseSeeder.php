@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             ShieldSeeder::class,
+            WilayaCommuneSeeder::class,
         ]);
 
         // User::factory(10)->create();

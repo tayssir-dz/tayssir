@@ -7,3 +7,5 @@ Route::get('/', function () {
     return view('home');
 })->name("login");
 
+Route::view("/test", "test");
+

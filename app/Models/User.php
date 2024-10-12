@@ -11,6 +11,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Kossa\AlgerianCities\Commune;
+use Kossa\AlgerianCities\Wilaya;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -48,6 +50,8 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
         'email',
         'password',
         'points',
+        'wilaya_id',
+        'commune_id',
     ];
     // protected $with = ['subscriptionCard'];
 
@@ -78,6 +82,16 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
     public function subscriptionCards()
     {
         return $this->hasMany(SubscriptionCard::class);
+    }
+
+    public function wilaya()
+    {
+        return $this->belongsTo(Wilaya::class);
+    }
+
+    public function commune()
+    {
+        return $this->belongsTo(Commune::class);
     }
 }
 

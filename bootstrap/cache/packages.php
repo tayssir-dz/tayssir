@@ -181,6 +181,13 @@
       0 => 'Kirschbaum\\PowerJoins\\PowerJoinsServiceProvider',
     ),
   ),
+  'kossa/algerian-cities' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Kossa\\AlgerianCities\\Providers\\AlgerianCitiesServiceProvider',
+    ),
+  ),
   'laravel/sanctum' => 
   array (
     'providers' => 

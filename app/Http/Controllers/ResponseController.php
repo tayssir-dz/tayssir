@@ -26,6 +26,8 @@ class ResponseController
             "image_url" => $user->avatar_url,
             "phone_number" => $user->phone_number,
             "email_verified" => $user->email_verified_at !== null,
+            "wilaya" => $user->wilaya->arabic_name,
+            "commune" => $user->commune->arabic_name,
             // "subscriptions" => $subscriptionNames,
             // 'subscribed' => $subscriptionCard && $subscriptionCard->subscription && Carbon::now()->lessThan($user->subscriptionCard->subscription->ending_date),
         ];

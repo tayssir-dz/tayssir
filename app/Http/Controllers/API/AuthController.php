@@ -19,12 +19,15 @@ class AuthController extends BaseController
     public function register(RegisterRequest $request)
     {
         $input = $request->all();
+
         $input['password'] = bcrypt($input['password']);
         $user = User::create([
             'email' => $input['email'],
             'name' => $input['name'],
             'phone_number' => $input['phone_number'],
             'password' => $input['password'],
+            'wilaya_id' => $input['wilaya_id'],
+            'commune_id' => $input['commune_id'],
         ]);
         $role = Role::firstOrCreate(['name' => 'student']);
         $user->assignRole($role);

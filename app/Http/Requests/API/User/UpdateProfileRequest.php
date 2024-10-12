@@ -22,9 +22,11 @@ class UpdateProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required_without:phone_number|string|min:6|max:255',
-            'phone_number' => 'required_without:name,image|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name' => 'sometimes|nullable|string|min:6|max:255',
+            'phone_number' => 'sometimes|nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'image' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'wilaya_id' => 'sometimes|nullable|numeric|exists:wilayas,id',
+            'commune_id' => 'sometimes|nullable|numeric|exists:communes,id|exists:communes,id,wilaya_id,' . $this->wilaya_id,
         ];
     }
 }
