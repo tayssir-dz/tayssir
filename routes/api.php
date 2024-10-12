@@ -81,6 +81,10 @@ Route::prefix('v1')->group(function () {
             ->summary("Forgot password")
             ->description("this endpoint takes the user email and sends a reset password mail");
 
+        Route::post("/verify-otp", [ForgotPasswordController::class, "verifyOtp"])
+            ->summary("Verify OTP")
+            ->description("this endpoint takes the user email and the otp and verifies the otp");
+
         Route::post("/reset-password", [ForgotPasswordController::class, "resetPassword"])
             ->summary("Reset password")
             ->description("this endpoint takes the user email, the reset code, and the new password and resets the user password");

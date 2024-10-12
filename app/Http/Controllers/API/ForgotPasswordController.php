@@ -4,8 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\ForgotPassword\ForgotPasswordRequest;
 use App\Http\Requests\API\ForgotPassword\ResetPasswordRequest;
+use App\Http\Requests\API\ForgotPassword\VerifyOtpRequest;
 use App\Mail\ForgotPasswordMail;
 use App\Models\User;
+use Carbon\Carbon;
 use Ichtrojan\Otp\Otp;
 use Illuminate\Http\Request;
 use Mail;
@@ -45,7 +47,24 @@ class ForgotPasswordController extends BaseController
         $user->save();
 
         return $this->sendResponse([], "Password reset successfully");
+    }
 
+    public function verifyOtp(VerifyOtpRequest $request)
+    {
+        $otpRecord = \DB::table('otps')
+            ->where('identifier', $request->email)
+            ->where('token', $request->otp)
+            ->where('valid', 1)
+            ->first();
+        if (!$otpRecord) {
+            return $this->sendError("Invalid OTP");
+        }
 
+        $expiry = Carbon::parse($otpRecord->created_at)->addMinutes($otpRecord->validity);
+        if ($expiry->isPast()) {
+            return $this->sendError("OTP has expired");
+        }
+
+        return $this->sendResponse([], "OTP is valid");
     }
 }
