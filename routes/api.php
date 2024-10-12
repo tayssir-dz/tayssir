@@ -16,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 // MENNADOS
 Route::prefix('v1')->group(function () {
     Route::get("/", function () {
-        $communes = communes(16, $withWilaya = true, $name = "arabic_name");
-        return response()->json($communes);
+        throw new \Exception("test");
+        return response()->json([
+            "message" => "Welcome to " . config('app.name') . " API",
+            "version" => "1"
+        ]);
     });
 
 
