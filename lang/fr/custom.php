@@ -69,6 +69,7 @@ return [
     'models.user.email' => 'Email',
     'models.user.password' => 'Mot de passe',
     'models.user.phone' => 'Téléphone',
+    'models.user.phone.empty' => 'Pas de numéro de téléphone',
     'models.user.roles' => 'Rôles',
     'models.user.email_verified' => 'Email vérifié',
     'models.user.email_not_verified' => 'Email non vérifié',

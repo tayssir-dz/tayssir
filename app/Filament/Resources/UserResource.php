@@ -144,7 +144,16 @@ class UserResource extends Resource implements HasShieldPermissions
                                 if (!$get('wilaya_id')) {
                                     $set('commune_id', null);
                                 }
-                            })
+                            }),
+                        Select::make('role')
+                            ->label(__('custom.models.user.roles'))
+                            ->relationship('roles', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable()
+                            ->visible(auth()->user()->can("assign_role_user"))
+                            ->label(__('role'))
+                            ->columnSpan(2),
 
 
                     ])->columnSpan(2)->columns(2),
@@ -154,17 +163,6 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->directory('avatars')
                             ->deletable()
                             ->label("")
-                    ]),
-                    Section::make(__('custom.models.user.roles_and_subscription'))->schema([
-
-                        Select::make('role')
-                            ->label(__('custom.models.user.roles'))
-                            ->relationship('roles', 'name')
-                            ->multiple()
-                            ->preload()
-                            ->searchable()
-                            ->visible(auth()->user()->can("assign_role_user"))
-                            ->label(__('role')),
                     ]),
                 ])
 
@@ -196,6 +194,7 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->label(__('custom.models.user.email')),
 
                 PhoneColumn::make('phone_number')
+                    ->default(__("custom.models.user.phone.empty"))
                     ->weight(FontWeight::SemiBold)
                     ->label(__('custom.models.user.phone')),
 
@@ -208,6 +207,7 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->numeric(),
 
                 TextColumn::make('roles.name')
+                    ->default("_")
                     ->badge()
                     ->alignCenter()
                     ->color("primary")

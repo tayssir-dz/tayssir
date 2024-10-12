@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Resources\UserResource\Widgets\UsersCard;
+use App\View\Components\Logo;
 use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -32,7 +33,8 @@ class AdminPanelProvider extends PanelProvider
             ->id('dashboard')
             ->path('dashboard')
             ->login()
-            // ->registration()->requiresEmailVerification(false)
+            ->brandLogo(fn() => view('components.brand'))
+            ->brandLogoHeight('2rem')
             ->colors(
                 [
                     'primary' => Color::hex("#00C4F6"),

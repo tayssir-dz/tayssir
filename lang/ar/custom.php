@@ -68,6 +68,7 @@ return [
     'models.user.email' => 'البريد الإلكتروني',
     'models.user.password' => 'كلمة المرور',
     'models.user.phone' => 'رقم الهاتف',
+    'models.user.phone.empty' => 'لا يوجد رقم هاتف',
     'models.user.roles' => 'الأدوار',
     'models.user.email_verified' => 'تم التحقق من البريد الإلكتروني',
     'models.user.email_not_verified' => 'لم يتم التحقق من البريد الإلكتروني',
