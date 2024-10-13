@@ -10,7 +10,9 @@ use Ichtrojan\Otp\Otp;
 use Illuminate\Http\Request;
 use Mail;
 use Validator;
+use G4T\Swagger\Attributes\SwaggerSection;
 
+#[SwaggerSection("This section is responsible for managing user email verification processes. It includes sending verification emails, verifying the user's email based on a code, and providing testing functionality to unverify emails. It helps maintain a verified email system, ensuring only verified users access specific features.")]
 class EmailVerificationController extends BaseController
 {
     public function sendVerificationMail(Request $request)

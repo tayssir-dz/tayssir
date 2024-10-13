@@ -10,7 +10,9 @@ use Exception;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Http\Request;
 use Validator;
+use G4T\Swagger\Attributes\SwaggerSection;
 
+#[SwaggerSection("This section oversees subscription management, allowing users to view their subscriptions, redeem subscription cards, and unsubscribe from active subscriptions. It enforces checks to ensure valid subscriptions and handles user-specific subscription actions securely, including error handling for invalid or already used subscription codes.")]
 class SubscriptionController extends BaseController
 {
     public function redeem(RedeemRequest $request)

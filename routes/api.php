@@ -1,22 +1,16 @@
 <?php
 
-use App\Enums\TokenAbility;
-use App\Filament\Resources\MaterialResource;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\CardsController;
 use App\Http\Controllers\API\ForgotPasswordController;
 use App\Http\Controllers\API\Mail\EmailVerificationController;
 use App\Http\Controllers\API\SubscriptionController;
 use App\Http\Controllers\API\UserController;
-use App\Models\Question;
 use Illuminate\Support\Facades\Route;
 
 
-
-// MENNADOS
+// MENNADOS PEDADAA
 Route::prefix('v1')->group(function () {
     Route::get("/", function () {
-        throw new \Exception("test");
         return response()->json([
             "message" => "Welcome to " . config('app.name') . " API",
             "version" => "1"
@@ -107,7 +101,6 @@ Route::prefix('v1')->group(function () {
             ->middleware(["auth:sanctum", "access"])
             ->summary("Unsubscribe from a subscription")
             ->description("this endpoint takes the subscription id and unsubscribes the user from the subscription");
-
     });
 });
 
