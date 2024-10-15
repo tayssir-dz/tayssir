@@ -65,7 +65,7 @@ return [
 
     // # User
     'models.user.name' => 'Nom',
-    'models.user.avatar' => 'Avatar',
+    'models.user.avatar' => 'Photo de profil',
     'models.user.email' => 'Email',
     'models.user.password' => 'Mot de passe',
     'models.user.phone' => 'Téléphone',

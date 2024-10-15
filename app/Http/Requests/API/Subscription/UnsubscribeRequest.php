@@ -23,6 +23,7 @@ class UnsubscribeRequest extends FormRequest
     {
         return [
             "id" => "required|numeric|exists:subscriptions,id",
+            "password" => "required|string"
         ];
     }
 }

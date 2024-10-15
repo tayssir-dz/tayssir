@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ForgotPasswordController;
-use App\Http\Controllers\API\Mail\EmailVerificationController;
+use App\Http\Controllers\API\EmailVerificationController;
 use App\Http\Controllers\API\SubscriptionController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +43,10 @@ Route::prefix('v1')->group(function () {
             ->middleware(["auth:sanctum", "access"])
             ->summary("Send verification mail to user")
             ->description("this endpoint sends a verification mail to the user email");
+
+        Route::post("/verify-otp", [EmailVerificationController::class, "verifyOtp"])
+            ->summary("Verify OTP")
+            ->description("this endpoint takes the user email and the otp and verifies the otp");
 
         Route::post("verify-email", [EmailVerificationController::class, "verifyEmail"])
             ->middleware(["auth:sanctum", "access"])
@@ -100,7 +104,7 @@ Route::prefix('v1')->group(function () {
         Route::post("/unsibscribe", [SubscriptionController::class, 'unsubscribe'])
             ->middleware(["auth:sanctum", "access"])
             ->summary("Unsubscribe from a subscription")
-            ->description("this endpoint takes the subscription id and unsubscribes the user from the subscription");
+            ->description("this endpoint takes the subscription id and the user's password and unsubscribes the user from the subscription");
     });
 });
 

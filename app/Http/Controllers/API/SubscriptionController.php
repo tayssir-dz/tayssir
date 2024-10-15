@@ -66,7 +66,12 @@ class SubscriptionController extends BaseController
     public function unsubscribe(UnsubscribeRequest $request)
     {
         $subscription_id = $request->input('id');
+        $password = $request->input('password');
         $user = $request->user();
+
+        if (!\Hash::check($password, $user->password)) {
+            return $this->sendError("Invalid password");
+        }
 
         $subscriptionCard = $user->subscriptionCards->where('subscription_id', $subscription_id)->first();
 

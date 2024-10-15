@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\API\Mail;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\API\BaseController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Requests\API\EmailVerification\VerifyEmailRequest;
+use App\Http\Requests\API\ForgotPassword\VerifyOtpRequest;
 use App\Mail\EmailVerificationMail;
+use Carbon\Carbon;
 use Ichtrojan\Otp\Otp;
 use Illuminate\Http\Request;
 use Mail;
@@ -58,5 +60,24 @@ class EmailVerificationController extends BaseController
         $user->email_verified_at = null;
         $user->save();
         return response()->json(["message" => "User unverified successfully"]);
+    }
+
+    public function verifyOtp(VerifyOtpRequest $request)
+    {
+        $otpRecord = \DB::table('otps')
+            ->where('identifier', $request->email)
+            ->where('token', $request->otp)
+            ->where('valid', 1)
+            ->first();
+        if (!$otpRecord) {
+            return $this->sendError("Invalid OTP");
+        }
+
+        $expiry = Carbon::parse($otpRecord->created_at)->addMinutes($otpRecord->validity);
+        if ($expiry->isPast()) {
+            return $this->sendError("OTP has expired");
+        }
+
+        return $this->sendResponse([], "OTP is valid");
     }
 }

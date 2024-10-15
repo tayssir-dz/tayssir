@@ -34,6 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('dashboard')
             ->login()
             ->brandLogo(fn() => view('components.brand'))
+            ->darkModeBrandLogo(fn() => view('components.brand-dark'))
             ->brandLogoHeight('2rem')
             ->colors(
                 [
