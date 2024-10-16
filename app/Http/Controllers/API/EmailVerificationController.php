@@ -21,11 +21,11 @@ class EmailVerificationController extends BaseController
     {
         $user = $request->user();
         if ($user->email_verified_at !== null) {
-            return $this->sendError("Email already verified");
+            return $this->sendError(__("response.email_already_verified"));
         }
         $verification_otp = (new Otp)->generate($user->email, 'numeric', 6, 10);
         if (!$verification_otp->status) {
-            return $this->sendError("Failed to generate OTP");
+            return $this->sendError(__("response.failed_to_generate_otp"));
         }
         // Mail::to($user->email)->send(new EmailVerificationMail([
         //     'otp' => $verification_otp->token,
@@ -33,33 +33,33 @@ class EmailVerificationController extends BaseController
         // ]));
         return $this->sendResponse([
             "otp" => $verification_otp->token,
-        ], "Email sent successfully (for testing purposes, the otp is also returned)");
+        ], __("response.email_sent_successfully"));
     }
 
     public function verifyEmail(VerifyEmailRequest $request)
     {
         $user = $request->user();
         if ($user->email_verified_at !== null) {
-            return $this->sendError("Email already verified");
+            return $this->sendError(__("response.email_already_verified"));
         }
         $obj = (new Otp)->validate($user->email, $request->otp);
         if ($obj->status === false) {
-            return $this->sendError("Invalid OTP");
+            return $this->sendError(__("response.invalid_otp"));
         }
         $user->email_verified_at = now();
         $user->save();
-        return $this->sendResponse(["user" => ResponseController::userRes($user)], "Email verified successfully");
+        return $this->sendResponse(["user" => ResponseController::userRes($user)], __("response.email_verified_successfully"));
     }
 
     public function unverifyMe(Request $request)
     {
         $user = $request->user();
         if ($user->email_verified_at === null) {
-            return $this->sendError("Email already unverified");
+            return $this->sendError(__("response.email_already_unverified"));
         }
         $user->email_verified_at = null;
         $user->save();
-        return response()->json(["message" => "User unverified successfully"]);
+        return response()->json(["message" => __("response.user_unverified_successfully")]);
     }
 
     public function verifyOtp(VerifyOtpRequest $request)
@@ -70,14 +70,13 @@ class EmailVerificationController extends BaseController
             ->where('valid', 1)
             ->first();
         if (!$otpRecord) {
-            return $this->sendError("Invalid OTP");
+            return $this->sendError(__("response.invalid_otp"));
         }
 
         $expiry = Carbon::parse($otpRecord->created_at)->addMinutes($otpRecord->validity);
         if ($expiry->isPast()) {
-            return $this->sendError("OTP has expired");
+            return $this->sendError(__("response.otp_has_expired"));
         }
-
-        return $this->sendResponse([], "OTP is valid");
+        return $this->sendResponse([], __("response.otp_is_valid"));
     }
 }

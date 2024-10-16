@@ -43,7 +43,7 @@ class UserController extends BaseController
 
         return $this->sendResponse([
             "user" => ResponseController::userRes($user),
-        ], "User updated successfully.");
+        ], __("response.user_updated_successfully"));
     }
 
     public function updatePassword(Request $request)
@@ -57,7 +57,7 @@ class UserController extends BaseController
         }
         $user = $request->user();
         if (!\Hash::check($request->current_password, $user->password)) {
-            return $this->sendError("Current password is incorrect.");
+            return $this->sendError(__("response.current_password_is_incorrect"));
         }
         $device_name = $user->currentAccessToken()->name;
         $user->currentAccessToken()->delete();
@@ -69,6 +69,6 @@ class UserController extends BaseController
         return $this->sendResponse([
             "user" => ResponseController::userRes($user),
             "token" => $token,
-        ], "Password updated successfully.");
+        ], __("response.password_updated_successfully"));
     }
 }

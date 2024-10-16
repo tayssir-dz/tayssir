@@ -43,7 +43,7 @@ class AuthController extends BaseController
             'token' => $accessToken->plainTextToken,
             'refresh_token' => $refreshToken->plainTextToken,
             // 'user' => ResponseController::userRes($user),
-        ], 'User register successfully.');
+        ], __("response.user_register_successfully"));
     }
     public function login(LoginRequest $request)
     {
@@ -62,17 +62,17 @@ class AuthController extends BaseController
                     'refresh_token' => $refreshToken->plainTextToken,
                     // 'user' => ResponseController::userRes($user),
                 ],
-                'User login successfully.'
+                __("response.user_login_successfully")
             );
 
         } else {
-            return $this->sendError('Unauthorised.', ['error' => 'Wrong email or password.']);
+            return $this->sendError(__("response.unauthorised"), ['error' => __("response.wrong_email_or_password")]);
         }
     }
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
-        return $this->sendResponse([], 'User logout successfully.');
+        return $this->sendResponse([], __("response.user_logout_successfully"));
     }
 
     public function refreshToken(Request $request)
@@ -83,6 +83,6 @@ class AuthController extends BaseController
 
         return $this->sendResponse([
             "token" => $accessToken->plainTextToken,
-        ], 'Token generated successfully');
+        ], __("response.token_generated_successfully"));
     }
 }

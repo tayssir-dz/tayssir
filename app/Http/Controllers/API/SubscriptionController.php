@@ -20,27 +20,27 @@ class SubscriptionController extends BaseController
         $code = $request->input('code');
         $user = $request->user();
         if ($user->subscriptionCard !== null) {
-            return $this->sendError("User already has a subscription card");
+            return $this->sendError(__("response.user_already_has_subscription_card"));
         }
         $subscriptionCard = SubscriptionCard::where('code', $code)->first();
         if ($subscriptionCard === null) {
-            return $this->sendError("Invalid code");
+            return $this->sendError(__("response.invalid_code"));
         }
         if ($subscriptionCard->user_id === $user->id) {
-            return $this->sendError("Subscription card already redeemed by user");
+            return $this->sendError(__("response.subscription_card_already_redeemed_by_user"));
         }
         if ($subscriptionCard->user_id !== null) {
-            return $this->sendError("Subscription card already redeemed");
+            return $this->sendError(__("response.subscription_card_already_redeemed"));
         }
         try {
             $subscriptionCard->user_id = $user->id;
             $subscriptionCard->redeemed_at = now();
             $subscriptionCard->save();
-            return $this->sendResponse(message: "Subscription card redeemed successfully");
+            return $this->sendResponse(message: __("response.subscription_card_redeemed_successfully"));
         } catch (UniqueConstraintViolationException $e) {
-            return $this->sendError(error: "User already subscribed", code: 409);
+            return $this->sendError(error: __("response.user_already_subscribed"), code: 409);
         } catch (Exception $e) {
-            return $this->sendError("An error occurred", $e->getMessage(), 500);
+            return $this->sendError(__("response.an_error_occurred"), $e->getMessage(), 500);
         }
     }
 
@@ -70,17 +70,17 @@ class SubscriptionController extends BaseController
         $user = $request->user();
 
         if (!\Hash::check($password, $user->password)) {
-            return $this->sendError("Invalid password");
+            return $this->sendError(__("response.invalid_password"));
         }
 
         $subscriptionCard = $user->subscriptionCards->where('subscription_id', $subscription_id)->first();
 
         if ($subscriptionCard === null) {
-            return $this->sendError("User is not subscribed to this subscription");
+            return $this->sendError(__("response.user_not_subscribed_to_this_subscription"));
         }
 
         if ($subscriptionCard->subscription->ending_date->lessThan(Carbon::now())) {
-            return $this->sendError("Subscription already expired");
+            return $this->sendError(__("response.subscription_already_expired"));
         }
 
         $subscriptionCard->user_id = null;
@@ -88,6 +88,6 @@ class SubscriptionController extends BaseController
 
         $subscriptionCard->save();
 
-        return $this->sendResponse("User unsubscribed successfully");
+        return $this->sendResponse(__("response.subscription_unsubscribed_successfully"));
     }
 }

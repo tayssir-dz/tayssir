@@ -22,7 +22,7 @@ class ForgotPasswordController extends BaseController
         if ($user) {
             $forgot_password_otp = (new Otp)->generate($user->email, 'numeric', 6, 10);
             if (!$forgot_password_otp->status) {
-                return $this->sendError("Failed to generate OTP");
+                return $this->sendError(__("response.failed_to_generate_otp"));
             }
             // Mail::to($user->email)->send(new ForgotPasswordMail([
             //     'otp' => $forgot_password_otp->token,
@@ -31,24 +31,24 @@ class ForgotPasswordController extends BaseController
         }
         return $this->sendResponse([
             'otp' => $forgot_password_otp->token,
-        ], "If the email exists, the OTP has been sent to the email (for testing purposes, the otp is also returned)");
+        ], __("response.email_sent_successfully"));
     }
     public function resetPassword(ResetPasswordRequest $request)
     {
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
-            return $this->sendError("User not found");
+            return $this->sendError(__("response.user_not_found"));
         }
 
         $obj = (new Otp)->validate($user->email, $request->otp);
         if ($obj->status === false) {
-            return $this->sendError("Invalid OTP");
+            return $this->sendError(__("response.invalid_otp"));
         }
         $user->password = bcrypt($request->new_password);
         $user->save();
 
-        return $this->sendResponse([], "Password reset successfully");
+        return $this->sendResponse([], __("response.password_reset_successfully"));
     }
 
     public function verifyOtp(VerifyOtpRequest $request)
@@ -59,14 +59,14 @@ class ForgotPasswordController extends BaseController
             ->where('valid', 1)
             ->first();
         if (!$otpRecord) {
-            return $this->sendError("Invalid OTP");
+            return $this->sendError(__("response.invalid_otp"));
         }
 
         $expiry = Carbon::parse($otpRecord->created_at)->addMinutes($otpRecord->validity);
         if ($expiry->isPast()) {
-            return $this->sendError("OTP has expired");
+            return $this->sendError(__("response.otp_has_expired"));
         }
 
-        return $this->sendResponse([], "OTP is valid");
+        return $this->sendResponse([], __("response.otp_is_valid"));
     }
 }
