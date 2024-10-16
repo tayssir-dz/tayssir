@@ -22,7 +22,7 @@ class RedeemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "code" => "required|numeric|digits:12",
+            "card_code" => "required|numeric|digits:12",
         ];
     }
 }

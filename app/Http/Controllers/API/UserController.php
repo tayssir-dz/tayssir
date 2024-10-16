@@ -34,7 +34,7 @@ class UserController extends BaseController
         if ($request->commune_id) {
             $user->commune_id = $request->commune_id;
         }
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('profile_picture')) {
             $image = $request->file('image');
             $path = $image->store('avatars');
             $user->avatar_url = $path;

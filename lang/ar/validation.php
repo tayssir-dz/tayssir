@@ -189,6 +189,20 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        "phone_number" => "رقم الهاتف",
+        "password" => "كلمة المرور",
+        "password_confirmation" => "تأكيد كلمة المرور",
+        "email" => "البريد الإلكتروني",
+        "name" => "الاسم",
+        "wilaya_id" => "الولاية",
+        "commune_id" => "البلدية",
+        "otp" => "OTP",
+        "new_password" => "كلمة المرور الجديدة",
+        "new_password_confirmation" => "تأكيد كلمة المرور الجديدة",
+        "card_code" => "رمز البطاقة",
+        'subscription_id' => 'رقم الاشتراك',
+        'profile_picture' => 'الصورة الشخصية',
+    ],
 
 ];

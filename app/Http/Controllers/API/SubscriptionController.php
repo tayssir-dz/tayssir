@@ -17,7 +17,7 @@ class SubscriptionController extends BaseController
 {
     public function redeem(RedeemRequest $request)
     {
-        $code = $request->input('code');
+        $code = $request->input('card_code');
         $user = $request->user();
         if ($user->subscriptionCard !== null) {
             return $this->sendError(__("response.user_already_has_subscription_card"));
@@ -65,7 +65,7 @@ class SubscriptionController extends BaseController
 
     public function unsubscribe(UnsubscribeRequest $request)
     {
-        $subscription_id = $request->input('id');
+        $subscription_id = $request->input('subscription_id');
         $password = $request->input('password');
         $user = $request->user();
 

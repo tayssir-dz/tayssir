@@ -22,7 +22,7 @@ class UnsubscribeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "id" => "required|numeric|exists:subscriptions,id",
+            "subscription_id" => "required|numeric|exists:subscriptions,id",
             "password" => "required|string"
         ];
     }
