@@ -62,6 +62,7 @@ return [
     'models.unit.description' => 'Description de l\'unité',
     'models.unit.material' => 'Matière',
     'models.unit.action.details' => 'Détails de l\'unité',
+    'models.unit.subscriptions' => 'Abonnements',
 
     // # User
     'models.user.name' => 'Nom',

@@ -13,6 +13,7 @@ use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -25,13 +26,17 @@ use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
-use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use BezhanSalleh\FilamentShield\Support\Utils;
 use Kossa\AlgerianCities\Commune;
 use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
+use Filament\Tables\Table;  // Add this line
+use Filament\Forms\Components\CheckboxList; // Add this to use statements
+use Filament\Forms\Components\Placeholder;
+use Illuminate\Support\HtmlString;
+
 class UserResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $recordTitleAttribute = 'email';
@@ -125,7 +130,7 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->options(function (callable $get) {
                                 $wilayaId = $get('wilaya_id');
                                 $field = __("custom.models.user.wilaya.field"); // 'name' or 'arabic_name' based on the language
-                    
+
                                 if ($wilayaId) {
                                     // Query the communes based on the selected wilaya and the dynamic field
                                     $communes = Commune::where('wilaya_id', $wilayaId)
@@ -155,6 +160,23 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->label(__('role'))
                             ->columnSpan(2),
 
+                        Placeholder::make('active_subscriptions')
+                            ->label(__('custom.models.user.subscribtion'))
+                            ->content(function ($record) {
+                                if (!$record)
+                                    return '';
+
+                                return new HtmlString(
+                                    $record->active_subscriptions
+                                        ->map(function ($subscriptionCard) {
+                                            return sprintf(
+                                                '<div class="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-primary-500 text-white">%s</div>',
+                                                $subscriptionCard->subscription->name
+                                            );
+                                        })->join(' ')
+                                );
+                            })
+                            ->columnSpan(2),
 
                     ])->columnSpan(2)->columns(2),
                 Group::make()->schema([
@@ -207,13 +229,22 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->numeric(),
 
                 TextColumn::make('roles.name')
-                    ->default("_")
                     ->badge()
-                    ->alignCenter()
                     ->color("primary")
-                    ->sortable()
-                    ->searchable()
+                    ->separator(',')
+                    ->listWithLineBreaks()
                     ->label(__('custom.models.user.roles')),
+
+                TextColumn::make('subscriptions')
+                    ->badge()
+                    ->color('success')
+                    ->getStateUsing(function ($record) {
+                        return $record->active_subscriptions->map(function ($sub) {
+                            return $sub->subscription->name;
+                        });
+                    })
+                    ->listWithLineBreaks()
+                    ->label(__('custom.models.user.subscribtion')),
 
                 ToggleColumn::make('email_verified_at')
                     ->sortable()

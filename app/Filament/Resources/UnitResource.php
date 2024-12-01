@@ -62,6 +62,13 @@ class UnitResource extends Resource implements HasShieldPermissions
                     TextInput::make('name')->required()->minLength(3)->label(__('custom.models.unit.name')),
                     Select::make('material_id')->relationship('material', 'code')->searchable()->required()->label(__('custom.models.unit.material')),
                     Textarea::make("description")->rows(4)->columnSpan(2)->label(__('custom.models.unit.description')),
+                    Select::make('subscriptions')
+                        ->multiple()
+                        ->relationship('subscriptions', 'name')
+                        ->searchable()
+                        ->preload()
+                        ->label(__('custom.models.unit.subscriptions'))
+                        ->columnSpan(2),
                 ])->columns(2)
             ]);
     }
@@ -77,6 +84,12 @@ class UnitResource extends Resource implements HasShieldPermissions
                     ->badge()
                     ->label(__('custom.models.chapters'))
                     ->counts('chapters')
+                    ->sortable()
+                    ->colors(['primary']),
+                TextColumn::make('subscriptions_count')
+                    ->badge()
+                    ->label(__('custom.models.subscriptions'))
+                    ->counts('subscriptions')
                     ->sortable()
                     ->colors(['primary']),
             ])

@@ -6,6 +6,7 @@ use App\Filament\Resources\UnitResource;
 use Filament\Forms;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -43,6 +44,12 @@ class UnitsRelationManager extends RelationManager
                 Textarea::make("description")
                     ->rows(4)
                     ->label(__('custom.models.unit.description')),
+                Select::make('subscriptions')
+                    ->multiple()
+                    ->relationship('subscriptions', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->label(__('custom.models.unit.subscriptions')),
             ])->columns(1);
     }
 
@@ -60,6 +67,11 @@ class UnitsRelationManager extends RelationManager
                     ->badge()
                     ->label(__('custom.models.chapters'))
                     ->counts('chapters')
+                    ->colors(['primary']),
+                TextColumn::make('subscriptions_count')
+                    ->badge()
+                    ->label(__('custom.models.subscriptions'))
+                    ->counts('subscriptions')
                     ->colors(['primary']),
             ])
             ->filters([

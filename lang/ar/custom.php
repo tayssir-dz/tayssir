@@ -61,6 +61,7 @@ return [
     'models.unit.description' => 'وصف الوحدة',
     'models.unit.material' => 'المادة',
     'models.unit.action.details' => 'تفاصيل الوحدة',
+    'models.unit.subscriptions' => 'الاشتراكات',
 
     // # User
     'models.user.name' => 'الاسم',

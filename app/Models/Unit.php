@@ -50,4 +50,13 @@ class Unit extends Model
     {
         return $this->hasMany(Chapter::class);
     }
+
+    /**
+     * Get the subscriptions for the unit.
+     */
+
+    public function subscriptions()
+    {
+        return $this->belongsToMany(Subscription::class);
+    }
 }

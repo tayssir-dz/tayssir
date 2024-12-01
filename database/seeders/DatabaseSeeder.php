@@ -18,15 +18,19 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ShieldSeeder::class,
             WilayaCommuneSeeder::class,
+            GuestSubscriptionSeeder::class
         ]);
 
         // User::factory(10)->create();
 
-        // $user = User::factory()->create([
-        //     'name' => 'admin',
-        //     'email' => 'admin@admin.dev',
-        //     'password' => bcrypt('admin'),
-        // ]);
-        // $user->assignRole(Role::create(['name' => 'super_admin']));
+        // Create the super_admin role if it doesn't exist
+        $role = Role::firstOrCreate(['name' => 'super_admin']);
+
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.dev',
+            'password' => bcrypt('admin'),
+        ]);
+        $user->assignRole($role);
     }
 }

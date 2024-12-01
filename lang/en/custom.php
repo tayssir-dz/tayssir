@@ -61,6 +61,7 @@ return [
     'models.unit.description' => 'Unit description',
     'models.unit.material' => 'Material',
     'models.unit.action.details' => 'Unit details',
+    'models.unit.subscriptions' => 'Subscriptions',
 
     // # User
     'models.user.name' => 'Name',

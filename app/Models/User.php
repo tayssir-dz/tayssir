@@ -93,6 +93,47 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
     {
         return $this->belongsTo(Commune::class);
     }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(SubscriptionCard::class)
+            ->where('redeemed_at', '!=', null)
+            ->where(function ($query) {
+                $query->whereNull('expires_at')
+                    ->orWhere('expires_at', '>', now());
+            })
+            ->with('subscription')
+            ->latest('redeemed_at');
+    }
+
+    public function getActiveSubscriptionsAttribute()
+    {
+        $subscriptions = $this->subscriptions()->get();
+
+        if ($subscriptions->isEmpty()) {
+            return collect([
+                SubscriptionCard::make([
+                    'subscription_id' => Subscription::GUEST_ID
+                ])
+            ]);
+        }
+
+        // If there are other subscriptions besides guest, remove guest
+        // if ($subscriptions->count() > 1) {
+        //     return $subscriptions->filter(function ($sub) {
+        //         return $sub->subscription_id !== Subscription::GUEST_ID;
+        //     });
+        // }
+
+        return $subscriptions;
+    }
+
+    public function accessibleUnits()
+    {
+        return Unit::whereHas('subscriptions', function ($query) {
+            $query->where('subscriptions.id', $this->subscription->subscription_id);
+        });
+    }
 }
 
 
