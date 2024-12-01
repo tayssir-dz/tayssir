@@ -98,9 +98,11 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
     {
         return $this->hasMany(SubscriptionCard::class)
             ->where('redeemed_at', '!=', null)
-            ->where(function ($query) {
-                $query->whereNull('expires_at')
-                    ->orWhere('expires_at', '>', now());
+            ->whereHas('subscription', function ($query) {
+                $query->where(function ($q) {
+                    $q->whereNull('ending_date')
+                        ->orWhere('ending_date', '>', now());
+                });
             })
             ->with('subscription')
             ->latest('redeemed_at');

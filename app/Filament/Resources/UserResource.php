@@ -237,7 +237,7 @@ class UserResource extends Resource implements HasShieldPermissions
 
                 TextColumn::make('subscriptions')
                     ->badge()
-                    ->color('success')
+                    ->color('primary')
                     ->getStateUsing(function ($record) {
                         return $record->active_subscriptions->map(function ($sub) {
                             return $sub->subscription->name;
