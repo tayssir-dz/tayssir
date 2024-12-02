@@ -3,7 +3,7 @@
 return [
 
     // ------------------------ CUSTOM --------------------------
-    'nav.section.platform' => 'Platforme',
+    'nav.section.platform' => 'Plateforme',
     'nav.section.content' => 'Contenu',
     'nav.section.management' => 'Gestion',
 
@@ -22,7 +22,7 @@ return [
     'models.chapters' => 'Les Chapitres',
     'models.chapter' => 'Chapitre',
 
-    'models.questions' => 'Les Questions',
+    'models.questions' => 'Questions',
     'models.question' => 'Question',
 
     'models.users' => 'Utilisateurs',
@@ -108,26 +108,36 @@ return [
     'models.question.question' => 'Question',
     'models.question.points' => 'Points',
     'models.question.hint' => 'Indice',
-    'models.question.question_image' => 'Image de la question',
-    'models.question.explaination_asset' => 'Ressource d\'explication',
-    'models.question.hint_image' => 'Image d\'indice',
-    'models.question.type' => 'Type de question',
-    'models.question.types.multiple_choices' => "Choix unique / Choix multiples",
-    'models.question.types.fill_in_the_blanks' => 'Remplir les blancs',
-    'models.question.types.pick_the_intruder' => 'Choisir l\'intrus',
+    'models.question.question_image' => 'Image de la Question',
+    'models.question.explaination_asset' => 'Ressource d\'Explication',
+    'models.question.hint_image' => 'Image d\'Indice',
+    'models.question.type' => 'Type de Question',
+    'models.question.types.multiple_choices' => 'Choix Multiples',
+    'models.question.types.fill_in_the_blanks' => 'Texte à Trous',
+    'models.question.types.pick_the_intruder' => 'Trouver l\'Intrus',
     'models.question.types.true_or_false' => 'Vrai ou Faux',
-    'models.question.types.match_with_arrows' => 'Associer avec des flèches',
+    'models.question.types.match_with_arrows' => 'Relier avec des Flèches',
     'models.question.options' => 'Options',
     'models.question.option' => 'Option',
-    'models.question.option.iscorrect' => 'Est correcte?',
-
+    'models.question.option.iscorrect' => 'Est Correct',
     'models.question.words' => 'Mots',
     'models.question.word' => 'Mot',
-    'models.question.word.is_intruder' => 'Est un intrus?',
-    'models.question.duo' => 'Duo',
-    'models.question.duos' => 'Duos',
-    'models.question.duo.first' => 'Première phrase',
-    'models.question.duo.second' => 'Deuxième phrase',
+    'models.question.word.is_intruder' => 'Est l\'Intrus',
+    'models.question.duos' => 'Paires',
+    'models.question.duo.first' => 'Premier Élément',
+    'models.question.duo.second' => 'Second Élément',
+
+    // Question translations
+    'models.question.fill_blank.answer' => 'Réponse',
+    'models.question.fill_blank.answers' => 'Réponses',
+    'models.question.fill_blank.paragraph' => 'Paragraphe',
+    'models.question.fill_blank.paragraph_help' => 'Écrivez votre paragraphe avec des espaces réservés comme [1], [2], etc.',
+    'models.question.fill_blank.word' => 'Mot',
+    'models.question.fill_blank.placeholder' => 'Espace réservé (ex: [1])',
+    'models.question.fill_blank.words' => 'Mots à Remplir',
+    'models.question.true_false.correct_answer' => 'Réponse Correcte',
+    'models.question.true_false.true' => 'Vrai',
+    'models.question.true_false.false' => 'Faux',
 
     // Card
 
@@ -181,7 +191,7 @@ return [
 
     # Subscription Card
     'models.subscriptionCard.code' => 'Code',
-    'models.subscriiptionCard.user' => 'Utilisateur',
+    'models.subscriptionCard.user' => 'Utilisateur',
     'models.subscriptionCard.subscription' => 'Abonnement',
     'models.subscriptionCard.redeemed_at' => "Utilisé à",
     'models.subscriptionCard.redeemed_at.empty' => "Non utilisé",

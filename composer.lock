@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87e7ca179cc9940c25df2f5394955c36",
+    "content-hash": "ff4b7b2da188f30bae9d9fa13aac915f",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -1504,16 +1504,16 @@
         },
         {
             "name": "dutchcodingcompany/filament-developer-logins",
-            "version": "1.2.1",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DutchCodingCompany/filament-developer-logins.git",
-                "reference": "ffd56599885fcf4cff7f95e749fba2db9d1d53ef"
+                "reference": "2282a40b22e4270960f29e01ea0df102d005ac5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DutchCodingCompany/filament-developer-logins/zipball/ffd56599885fcf4cff7f95e749fba2db9d1d53ef",
-                "reference": "ffd56599885fcf4cff7f95e749fba2db9d1d53ef",
+                "url": "https://api.github.com/repos/DutchCodingCompany/filament-developer-logins/zipball/2282a40b22e4270960f29e01ea0df102d005ac5c",
+                "reference": "2282a40b22e4270960f29e01ea0df102d005ac5c",
                 "shasum": ""
             },
             "require": {
@@ -1551,7 +1551,7 @@
             "authors": [
                 {
                     "name": "Bram Raaijmakers",
-                    "email": "bram@dutchcodingcompany.com",
+                    "email": "b.raaijmakers@protonmail.com",
                     "role": "Developer"
                 }
             ],
@@ -1567,7 +1567,7 @@
                 "issues": "https://github.com/dutchcodingcompany/filament-developer-logins/issues",
                 "source": "https://github.com/dutchcodingcompany/filament-developer-logins"
             },
-            "time": "2024-06-19T08:58:06+00:00"
+            "time": "2024-11-19T13:01:56+00:00"
         },
         {
             "name": "egulias/email-validator",

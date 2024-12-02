@@ -32,6 +32,10 @@ return [
     'otp_is_valid' => 'OTP صالح',
 
     'user_not_found' => 'المستخدم غير موجود',
+    'email_exists' => 'البريد الإلكتروني موجود بالفعل',
+    'email_not_exists' => 'البريد الإلكتروني غير موجود',
+    'phone_exists' => 'رقم الهاتف موجود بالفعل',
+    'phone_not_exists' => 'رقم الهاتف غير موجود',
     "password_reset_successfully" => "تمت إعادة تعيين كلمة المرور بنجاح",
 
     'user_already_has_subscription_card' => 'المستخدم لديه بطاقة اشتراك بالفعل',

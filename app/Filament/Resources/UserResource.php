@@ -199,7 +199,8 @@ class UserResource extends Resource implements HasShieldPermissions
             ->columns([
                 ImageColumn::make('avatar_url')
                     ->label(__('custom.models.user.avatar'))
-                    ->default("https://static.vecteezy.com/system/resources/previews/020/911/746/non_2x/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png")
+                    // ->defaultView('something')
+                    // ->default("https://static.vecteezy.com/system/resources/previews/020/911/746/non_2x/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png")
                     ->alignCenter()
                     ->circular(),
 

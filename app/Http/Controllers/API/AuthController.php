@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Enums\TokenAbility;
 use App\Http\Controllers\API\BaseController;
 use App\Http\Controllers\ResponseController;
+use App\Http\Requests\API\Auth\CheckEmailRequest;
+use App\Http\Requests\API\Auth\CheckPhoneNumberRequest;
 use App\Http\Requests\API\Auth\LoginRequest;
 use App\Http\Requests\API\Auth\RegisterRequest;
 use Carbon\Carbon;
@@ -84,5 +86,25 @@ class AuthController extends BaseController
         return $this->sendResponse([
             "token" => $accessToken->plainTextToken,
         ], __("response.token_generated_successfully"));
+    }
+
+    public function checkEmail(CheckEmailRequest $request)
+    {
+        $exists = User::where('email', $request->email)->exists();
+        
+        return $this->sendResponse([
+            'message' => $exists ? __('response.email_exists') : __('response.email_not_exists'),
+            'exists' => $exists
+        ]);
+    }
+
+    public function checkPhoneNumber(CheckPhoneNumberRequest $request)
+    {
+        $exists = User::where('phone_number', $request->phone_number)->exists();
+        
+        return $this->sendResponse([
+            'message' => $exists ? __('response.phone_exists') : __('response.phone_not_exists'),
+            'exists' => $exists
+        ]);
     }
 }

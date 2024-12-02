@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ShieldSeeder::class,
             WilayaCommuneSeeder::class,
-            GuestSubscriptionSeeder::class
+            GuestSubscriptionSeeder::class,
+            ContentSeeder::class
         ]);
 
         // User::factory(10)->create();

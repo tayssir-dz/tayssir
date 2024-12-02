@@ -27,6 +27,15 @@ Route::prefix('v1')->group(function () {
             ->summary("Login a user")
             ->description("this endpoint takes the user email and password and logs the user in, it returns the user data and a token");
 
+        Route::post("check-email", [AuthController::class, 'checkEmail'])
+            ->summary("Check if email exists")
+            ->description("this endpoint checks if an email exists in the system");
+
+
+        Route::post("check-phone-number", [AuthController::class, 'checkPhoneNumber'])
+        ->summary("Check if phone number exists")
+        ->description("this endpoint checks if a phone number exists in the system");
+
         Route::post("logout", [AuthController::class, 'logout'])
             ->middleware(["auth:sanctum", "access"])
             ->summary("Logout a user")
@@ -107,4 +116,3 @@ Route::prefix('v1')->group(function () {
             ->description("this endpoint takes the subscription id and the user's password and unsubscribes the user from the subscription");
     });
 });
-

@@ -6,9 +6,11 @@ use Filament\Forms;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -71,96 +73,158 @@ class QuestionsRelationManager extends RelationManager
                             ]),
                         Tabs\Tab::make('question_type')->label(__('custom.models.question.type'))
                             ->schema([
-                                Forms\Components\Select::make('question_type')->options([
-                                    'multiple_choices' => __('custom.models.question.types.multiple_choices'),
-                                    'fill_in_the_blanks' => __('custom.models.question.types.fill_in_the_blanks'),
-                                    'pick_the_intruder' => __('custom.models.question.types.pick_the_intruder'),
-                                    'true_or_false' => __('custom.models.question.types.true_or_false'),
-                                    'match_with_arrows' => __('custom.models.question.types.match_with_arrows'),
-                                ])->required()->live()->label(__('custom.models.question.type'))
-                                    ->afterStateUpdated(function ($set) {
-                                        $set("options", null);
+                                Forms\Components\Select::make('question_type')
+                                    ->options([
+                                        'multiple_choices' => __('custom.models.question.types.multiple_choices'),
+                                        'fill_in_the_blanks' => __('custom.models.question.types.fill_in_the_blanks'),
+                                        'pick_the_intruder' => __('custom.models.question.types.pick_the_intruder'),
+                                        'true_or_false' => __('custom.models.question.types.true_or_false'),
+                                        'match_with_arrows' => __('custom.models.question.types.match_with_arrows'),
+                                    ])
+                                    ->required()
+                                    ->live()
+                                    ->label(__('custom.models.question.type'))
+                                    ->afterStateUpdated(function (callable $set) {
+                                        $set('options', null);
                                     }),
 
-                                // multiple choices
-                                Repeater::make("options")->afterStateUpdated(function ($get, $set) {
-                                    $options = $get("options");
-                                    $options = array_map(function ($option) {
-                                        return array_filter($option, function ($value) {
-                                            return $value != null;
-                                        });
-                                    }, $options);
-                                    $set("options", $options);
-                                })
-                                    ->label(__('custom.models.question.options'))
+                                // Multiple choices options
+                                Repeater::make('options')
                                     ->schema([
-                                        TextInput::make('option')->required()->minLength(3)->columnSpan(3)->label(__('custom.models.question.option')),
-                                        Toggle::make('is_correct')->inline(false)->label(__('custom.models.question.option.iscorrect')),
-                                    ])->visible(fn($get) => $get('question_type') === 'multiple_choices')
-                                    ->columns(4)->reorderableWithDragAndDrop(false),
-
-                                // fill in the blanks
-                                Repeater::make("options")->schema([
-                                    TextInput::make('fill_in_the_blanks')
-                                ])->visible(fn($get) => $get('question_type') === 'fill_in_the_blanks'),
-
-                                // pick the intruder
-                                Repeater::make("options")->afterStateUpdated(function ($get, $set) {
-                                    $options = $get("options");
-                                    $options = array_map(function ($option) {
-                                        return array_filter($option, function ($value) {
-                                            return $value != null;
-                                        });
-                                    }, $options);
-                                    $set("options", $options);
-                                })
-                                    ->label(__('custom.models.question.words'))
-                                    ->schema([
-                                        TextInput::make('option')->required()->minLength(3)->columnSpan(3)->label(__('custom.models.question.word')),
-                                        Toggle::make('is_intruder')->inline(false)->label(__('custom.models.question.word.is_intruder')),
-                                    ])->visible(fn($get) => $get('question_type') === 'pick_the_intruder')
-                                    ->columns(4)->reorderableWithDragAndDrop(false),
-
-
-                                ToggleButtons::make('options')
-                                    ->afterStateUpdated(function ($get, $set) {
-                                        $options = $get("options");
-                                        $set("options", ["correct" => $options]);
-                                    })
-                                    ->label(__('custom.models.question.option.iscorrect'))
-                                    ->grouped()
-                                    ->options([
-                                        'true' => 'صحيح',
-                                        'false' => "خطا"
+                                        TextInput::make('option')
+                                            ->required()
+                                            ->minLength(1)
+                                            ->label(__('custom.models.question.option')),
+                                        Toggle::make('is_correct')
+                                            ->inline(false)
+                                            ->label(__('custom.models.question.option.iscorrect')),
                                     ])
-                                    ->inline()
-                                    ->visible(fn($get) => $get('question_type') === 'true_or_false'),
+                                    ->columns(2)
+                                    ->minItems(2)
+                                    ->maxItems(6)
+                                    ->columnSpanFull()
+                                    ->label(__('custom.models.question.options'))
+                                    ->visible(fn ($get) => $get('question_type') === 'multiple_choices')
+                                    ->live()
+                                    ->afterStateUpdated(function ($state, callable $set) {
+                                        if (!is_array($state)) return;
 
-                                Repeater::make("options")->afterStateUpdated(function ($get, $set) {
-                                    $options = $get("options");
-                                    $options = array_map(function ($option) {
-                                        return array_filter($option, function ($value) {
-                                            return $value != null;
-                                        });
-                                    }, $options);
-                                    $set("options", $options);
-                                })
-                                    ->label(__('custom.models.question.duos'))
+                                        // Ensure at least one option is marked as correct
+                                        $hasCorrectOption = false;
+                                        foreach ($state as $option) {
+                                            if (isset($option['is_correct']) && $option['is_correct']) {
+                                                $hasCorrectOption = true;
+                                                break;
+                                            }
+                                        }
+
+                                        if (!$hasCorrectOption && count($state) > 0) {
+                                            $state[0]['is_correct'] = true;
+                                            $set('options', $state);
+                                        }
+                                    }),
+
+                                // Fill in the blanks options
+                                Group::make([
+                                    Textarea::make('options.paragraph')
+                                        ->label(__('custom.models.question.fill_blank.paragraph'))
+                                        ->required()
+                                        ->helperText(__('custom.models.question.fill_blank.paragraph_help')),
+                                    
+                                    Repeater::make('options.answers')
+                                        ->schema([
+                                            TextInput::make('word')
+                                                ->required()
+                                                ->label(__('custom.models.question.fill_blank.word')),
+                                            TextInput::make('placeholder')
+                                                ->required()
+                                                ->label(__('custom.models.question.fill_blank.placeholder'))
+                                                ->prefix('[')
+                                                ->suffix(']')
+                                                ->maxLength(2)
+                                                ->numeric(),
+                                        ])
+                                        ->defaultItems(1)
+                                        ->columns(2)
+                                        ->minItems(1)
+                                        ->maxItems(5)
+                                        ->label(__('custom.models.question.fill_blank.words'))
+                                        ->collapsible()
+                                ])
+                                ->visible(fn ($get) => $get('question_type') === 'fill_in_the_blanks')
+                                ->columnSpanFull(),
+
+                                // Pick the intruder options
+                                Repeater::make('options')
+                                    ->schema([
+                                        TextInput::make('word')
+                                            ->required()
+                                            ->minLength(1)
+                                            ->label(__('custom.models.question.word')),
+                                        Toggle::make('is_intruder')
+                                            ->inline(false)
+                                            ->label(__('custom.models.question.word.is_intruder')),
+                                    ])
+                                    ->columns(2)
+                                    ->minItems(3)
+                                    ->maxItems(8)
+                                    ->columnSpanFull()
+                                    ->label(__('custom.models.question.words'))
+                                    ->visible(fn ($get) => $get('question_type') === 'pick_the_intruder')
+                                    ->live()
+                                    ->afterStateUpdated(function ($state, callable $set) {
+                                        if (!is_array($state)) return;
+
+                                        // Ensure exactly one word is marked as intruder
+                                        $intruderCount = 0;
+                                        foreach ($state as $option) {
+                                            if (isset($option['is_intruder']) && $option['is_intruder']) {
+                                                $intruderCount++;
+                                            }
+                                        }
+
+                                        if ($intruderCount !== 1 && count($state) > 0) {
+                                            // Reset all to false and set the first one as intruder
+                                            foreach ($state as &$option) {
+                                                $option['is_intruder'] = false;
+                                            }
+                                            $state[0]['is_intruder'] = true;
+                                            $set('options', $state);
+                                        }
+                                    }),
+
+                                // True or False option
+                                Group::make([
+                                    Hidden::make('options.type')->default('true_false'),
+                                    Select::make('options.correct')
+                                        ->options([
+                                            true => __('custom.models.question.true_false.true'),
+                                            false => __('custom.models.question.true_false.false'),
+                                        ])
+                                        ->required()
+                                        ->label(__('custom.models.question.true_false.correct_answer'))
+                                ])
+                                ->visible(fn ($get) => $get('question_type') === 'true_or_false')
+                                ->columnSpanFull(),
+
+                                // Match with arrows options
+                                Repeater::make('options')
                                     ->schema([
                                         TextInput::make('first')
                                             ->required()
-                                            ->minLength(3)
-                                            ->columnSpan(2)
+                                            ->minLength(1)
                                             ->label(__('custom.models.question.duo.first')),
-
                                         TextInput::make('second')
                                             ->required()
-                                            ->minLength(3)
-                                            ->columnSpan(2)
+                                            ->minLength(1)
                                             ->label(__('custom.models.question.duo.second')),
-
-                                    ])->visible(fn($get) => $get('question_type') === 'match_with_arrows')
-                                    ->columns(4)->reorderableWithDragAndDrop(false),
+                                    ])
+                                    ->columns(2)
+                                    ->minItems(2)
+                                    ->maxItems(6)
+                                    ->columnSpanFull()
+                                    ->label(__('custom.models.question.duos'))
+                                    ->visible(fn ($get) => $get('question_type') === 'match_with_arrows'),
                             ]),
                     ]),
             ])->columns(1);

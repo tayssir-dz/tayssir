@@ -121,8 +121,8 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
                     ->color("success")
                     ->locale(__("custom.currency.local.dzd")),
 
-                // MoneyColumn::make("display_price")->state(fn($record) => ),
                 TextColumn::make("ending_date")
+                    ->default("N/A")
                     ->label(__("custom.models.subscription.ending_date"))
                     ->sortable()
             ])
