@@ -49,9 +49,8 @@ Route::prefix('v1')->group(function () {
 
     Route::prefix("email")->group(function () {
         Route::post("send-verification-mail", [EmailVerificationController::class, "sendVerificationMail"])
-            ->middleware(["auth:sanctum", "access"])
-            ->summary("Send verification mail to user")
-            ->description("this endpoint sends a verification mail to the user email");
+            ->summary("Send verification email")
+            ->description("Send a verification email with OTP to verify user email");
 
         Route::post("/verify-otp", [EmailVerificationController::class, "verifyOtp"])
             ->summary("Verify OTP")

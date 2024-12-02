@@ -4,9 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\API\BaseController;
 use App\Http\Controllers\ResponseController;
+use App\Http\Requests\API\EmailVerification\SendVerificationMailRequest;
 use App\Http\Requests\API\EmailVerification\VerifyEmailRequest;
 use App\Http\Requests\API\ForgotPassword\VerifyOtpRequest;
 use App\Mail\EmailVerificationMail;
+use App\Models\User;
 use Carbon\Carbon;
 use Ichtrojan\Otp\Otp;
 use Illuminate\Http\Request;
@@ -17,11 +19,12 @@ use G4T\Swagger\Attributes\SwaggerSection;
 #[SwaggerSection("This section is responsible for managing user email verification processes. It includes sending verification emails, verifying the user's email based on a code, and providing testing functionality to unverify emails. It helps maintain a verified email system, ensuring only verified users access specific features.")]
 class EmailVerificationController extends BaseController
 {
-    public function sendVerificationMail(Request $request)
+    public function sendVerificationMail(SendVerificationMailRequest $request)
     {
-        $user = $request->user();
+        $user = User::where('email', $request->email)->first();
+
         if ($user->email_verified_at !== null) {
-            return $this->sendError(__("response.email_already_verified"));
+            return $this->sendError(__('response.email_already_verified'));
         }
         $verification_otp = (new Otp)->generate($user->email, 'numeric', 6, 10);
         if (!$verification_otp->status) {
