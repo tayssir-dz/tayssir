@@ -195,63 +195,77 @@ class UserResource extends Resource implements HasShieldPermissions
     public static function table(Table $table): Table
     {
         return $table
-            // ->paginated(false)
             ->columns([
-                ImageColumn::make('avatar_url')
+                TextColumn::make('avatar_url')
                     ->label(__('custom.models.user.avatar'))
-                    // ->defaultView('something')
-                    // ->default("https://static.vecteezy.com/system/resources/previews/020/911/746/non_2x/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png")
-                    ->alignCenter()
-                    ->circular(),
+                    ->html()
+                    ->getStateUsing(fn ($record) => view('components.filament-ui.avatar', [
+                        'name' => $record->name,
+                        'avatar_url' => $record->avatar_url,
+                    ])->render()),
 
                 TextColumn::make('name')
-                    ->sortable()
+                    ->label(__('custom.models.user.name'))
                     ->searchable()
-                    ->label(__('custom.models.user.name')),
-
-                TextColumn::make('email')
-                    // ->weight(FontWeight::SemiBold)
-                    // ->color("gray")
                     ->sortable()
-                    ->searchable()
-                    ->label(__('custom.models.user.email')),
+                    ->weight(FontWeight::Bold)
+                    ->size('sm')
+                    ->description(fn ($record) => view('components.small-text')->with([
+                        'text' => $record->email
+                    ])),
 
                 PhoneColumn::make('phone_number')
+                    ->label(__('custom.models.user.phone'))
                     ->default(__("custom.models.user.phone.empty"))
-                    ->weight(FontWeight::SemiBold)
-                    ->label(__('custom.models.user.phone')),
+                    ->searchable()
+                    ->copyable()
+                    ->size('sm')
+                    ->copyMessage('Phone number copied')
+                    ->copyMessageDuration(1500),
 
                 TextColumn::make('points')
-                    ->badge()
-                    ->color("success")
-                    ->sortable()
-                    ->alignCenter()
                     ->label(__('custom.models.user.points'))
+                    ->badge()
+                    ->color(fn ($state) => $state > 1000 ? 'success' : 'warning')
+                    ->alignCenter()
+                    ->sortable()
+                    ->size('sm')
                     ->numeric(),
 
                 TextColumn::make('roles.name')
-                    ->badge()
-                    ->color("primary")
-                    ->separator(',')
-                    ->listWithLineBreaks()
-                    ->label(__('custom.models.user.roles')),
-
-                TextColumn::make('subscriptions')
+                    ->label(__('custom.models.user.roles'))
                     ->badge()
                     ->color('primary')
+                    ->separator(', ')
+                    ->size('sm')
+                    ->default(__('custom.models.user.roles.empty'))
+                    ->wrap(),
+
+                TextColumn::make('subscriptions')
+                    ->label(__('custom.models.user.subscribtion'))
+                    ->badge()
+                    ->color('success')
+                    ->size('sm')
                     ->getStateUsing(function ($record) {
-                        return $record->active_subscriptions->map(function ($sub) {
+                        $subs = $record->active_subscriptions->map(function ($sub) {
                             return $sub->subscription->name;
                         });
+                        return $subs->isEmpty() ? '-' : $subs;
                     })
-                    ->listWithLineBreaks()
-                    ->label(__('custom.models.user.subscribtion')),
+                    ->wrap(),
+
+                TextColumn::make('wilaya.' . __('custom.models.user.wilaya.field'))
+                    ->label(__('custom.models.user.wilaya'))
+                    ->searchable()
+                    ->sortable()
+                    ->size('sm')
+                    ->default(__('custom.models.user.wilaya.empty'))
+                    ->description(fn ($record) => $record->commune?->{__('custom.models.user.commune.field')} ?? __('custom.models.user.commune.empty')),
 
                 ToggleColumn::make('email_verified_at')
+                    ->label(__('custom.models.user.verified'))
                     ->sortable()
-                    // ->alignCenter()
-                    ->label(__('custom.models.user.email_verified'))
-                    // ->visible(auth()->user()->can("verify_email_user"))
+                    ->alignCenter()
                     ->afterStateUpdated(function ($state, $record) {
                         if ($state) {
                             $record->email_verified_at = Date::now();
@@ -262,55 +276,31 @@ class UserResource extends Resource implements HasShieldPermissions
                         }
                     }),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
-                Tables\Filters\SelectFilter::make('roles')->relationship("roles", "name")->multiple()->preload()
-                    ->searchable()->label(__('custom.models.user.roles')),
+                Tables\Filters\SelectFilter::make('roles')
+                    ->relationship('roles', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
+                    ->label(__('custom.models.user.roles')),
 
-                Tables\Filters\SelectFilter::make('wilaya')->relationship("wilaya", __("custom.models.user.wilaya.field"))->multiple()->preload()
-                    ->searchable()->label(__('custom.models.user.wilayas')),
+                Tables\Filters\SelectFilter::make('wilaya')
+                    ->relationship('wilaya', __('custom.models.user.wilaya.field'))
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
+                    ->label(__('custom.models.user.wilayas')),
 
-
-                // Tables\Filters\Filter::make('email_verified')
-                //     ->query(fn(Builder $query): Builder => $query->where('email_verified_at', '!=', null))
-                //     ->toggle()->label(__('custom.models.user.email_verified')),
-
-                // Tables\Filters\TernaryFilter::make('email_verified')
-                //     ->placeholder('All')
-                //     ->trueLabel('Verified')
-                //     ->falseLabel('Not Verified')
-                //     ->queries(
-                //         true: fn(Builder $query) => $query->where('email_verified_at', '!=', null),
-                //         false: fn(Builder $query) => $query->where('email_verified_at', '=', null),
-                //         blank: fn(Builder $query) => $query,
-                //     )
-
-                // Tables\Filters\Filter::make('email_verified')
-                //     ->query(fn(Builder $query): Builder => $query->where('email_verified_at', '!=', null))
-                //     ->label(__('custom.models.user.email_verified')),
-
-                Tables\Filters\Filter::make('email_verified')
-                    ->query(fn(Builder $query): Builder => $query->where('email_verified_at', '!=', null))
-                    ->label(__('custom.models.user.email_verified')),
-                // ->visible(auth()->user()->can("verify_email_user")),
-
-                Tables\Filters\Filter::make('email_not_verified')
-                    ->query(fn(Builder $query): Builder => $query->where('email_verified_at', '=', null))
-                    ->label(__('custom.models.user.email_not_verified')),
-                // ->visible(auth()->user()->can("verify_email_user")),
-
-                // Tables\Filters\Filter::make('email_verified_at')
-                //     ->query(fn(Builder $query): Builder => $query->where('email_verified_at', '==', null))
-                //     ->toggle()->label(__('custom.models.user.email_not_verified')),
-
-                // Tables\Filters\SelectFilter::make('email_verified')->options([
-                //     '*' => 'Verified',
-                //     null => 'Not Verified',
-                // ])->label(__('custom.models.user.email_verified'))->multiple(),
-
-
-
-
-
+                Tables\Filters\TernaryFilter::make('email_verified')
+                    ->label(__('custom.models.user.email_verified'))
+                    ->placeholder(__('custom.models.user.tabs.all'))
+                    ->trueLabel(__('custom.models.user.email_verified'))
+                    ->falseLabel(__('custom.models.user.email_not_verified'))
+                    ->queries(
+                        true: fn (Builder $query) => $query->whereNotNull('email_verified_at'),
+                        false: fn (Builder $query) => $query->whereNull('email_verified_at'),
+                    ),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

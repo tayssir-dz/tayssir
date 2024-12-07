@@ -54,6 +54,7 @@ return [
     'models.material.code' => 'Code de la matière',
     'models.material.code.placeholder' => 'Code pour identifier la matière',
     'models.material.color' => 'Couleur de la matière',
+    'models.material.secondary_color' => 'Couleur secondaire',
     'models.material.division' => 'Filière',
     'models.material.action.details' => 'Détails de la matière',
 
@@ -72,15 +73,18 @@ return [
     'models.user.phone' => 'Téléphone',
     'models.user.phone.empty' => 'Pas de numéro de téléphone',
     'models.user.roles' => 'Rôles',
+    'models.user.roles.empty' => 'Aucun rôle attribué',
+    'models.user.verified' => 'Vérifié',
     'models.user.email_verified' => 'Email vérifié',
     'models.user.email_not_verified' => 'Email non vérifié',
     'models.user.points' => 'Points',
-
     'models.user.wilaya' => 'Wilaya',
     'models.user.wilayas' => 'Wilayas',
+    'models.user.wilaya.empty' => 'Aucune wilaya sélectionnée',
+    'models.user.wilaya.field' => "name",
     'models.user.commune' => 'Commune',
     'models.user.communes' => 'Communes',
-    'models.user.wilaya.field' => "name",
+    'models.user.commune.empty' => 'Aucune commune sélectionnée',
     'models.user.commune.field' => "name",
 
     'models.user.tabs.all' => 'Tous',
@@ -96,10 +100,13 @@ return [
 
 
     // # Chapter
+    "forms.chapter.create.section.infos" => "Informations du chapitre",
+    "forms.chapter.create.section.image" => "Image du chapitre",
     'models.chapter.name' => 'Nom du chapitre',
     'models.chapter.description' => 'Description du chapitre',
     'models.chapter.unit' => 'Unité',
     'models.chapter.action.details' => 'Détails du chapitre',
+    'models.chapter.photo' => 'Photo du chapitre',
 
     // # Chapter
     'models.question.tabs.infos' => 'Informations',
@@ -126,6 +133,7 @@ return [
     'models.question.duos' => 'Paires',
     'models.question.duo.first' => 'Premier Élément',
     'models.question.duo.second' => 'Second Élément',
+    'models.question.add_option' => 'Ajouter une Option',
 
     // Question translations
     'models.question.fill_blank.answer' => 'Réponse',

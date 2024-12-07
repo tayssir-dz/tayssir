@@ -15,9 +15,9 @@ return new class extends Migration {
             $table->string('name');
             $table->string('code');
             $table->string('color');
-            $table->string('image')->nullable();
-            $table->string('description')->nullable();
-            $table->foreignId('division_id')->constrained()->onDelete('cascade');
+            $table->string('secondary_color')->nullable();
+            $table->text('description')->nullable();
+            $table->foreignId('division_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

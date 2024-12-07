@@ -17,6 +17,7 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -60,6 +61,9 @@ class MaterialsRelationManager extends RelationManager
                         ->required()
                         ->label(__('custom.models.material.color')),
 
+                    ColorPicker::make("secondary_color")
+                        ->label(__('custom.models.material.secondary_color')),
+
                     Textarea::make("description")
                         ->rows(4)
                         ->label(__('custom.models.material.description')),
@@ -90,6 +94,10 @@ class MaterialsRelationManager extends RelationManager
                     ->colors(['primary'])
                     ->label(__("custom.models.material.code")),
                 TextColumn::make("description")->label(__("custom.models.material.description"))->limit(30),
+                ColorColumn::make("color")
+                    ->label(__("custom.models.material.color")),
+                ColorColumn::make("secondary_color")
+                    ->label(__("custom.models.material.secondary_color")),
                 TextColumn::make('division.name')->label(__("custom.models.material.division"))->badge()->colors(['gray']),
                 TextColumn::make('units_count')
                     ->badge()

@@ -11,11 +11,13 @@ use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -58,20 +60,58 @@ class ChapterResource extends Resource implements HasShieldPermissions
     {
         return $form
             ->schema([
-                Section::make()->schema([
-                    TextInput::make('name')->required()->minLength(3)->label(__('custom.models.chapter.name')),
-                    Select::make('unit_id')->relationship('unit', 'name')->searchable()->required()->label(__('custom.models.chapter.unit')),
-                    Textarea::make("description")->rows(4)->columnSpan(2)->label(__('custom.models.chapter.description')),
-                ])->columns(2)
-            ]);
+                Section::make(__('custom.forms.chapter.create.section.infos'))->schema([
+                    TextInput::make('name')
+                        ->required()
+                        ->minLength(3)
+                        ->label(__('custom.models.chapter.name')),
+
+                    Select::make('unit_id')
+                        ->relationship('unit', 'name')
+                        ->searchable()
+                        ->required()
+                        ->label(__('custom.models.chapter.unit')),
+
+                    Textarea::make("description")
+                        ->rows(4)
+                        ->columnSpan(2)
+                        ->label(__('custom.models.chapter.description')),
+                ])->columnSpan(2)
+                    ->columns(2),
+
+                Section::make(__('custom.forms.chapter.create.section.image'))->schema([
+                    SpatieMediaLibraryFileUpload::make('photo')
+                        ->collection('chapter_photos')
+                        ->image()
+                        ->imageEditor()
+                        ->label(''),
+                ])->columnSpan(1),
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label(__('custom.models.chapter.name'))->sortable()->searchable(),
-                TextColumn::make('description')->limit(30)->label(__('custom.models.chapter.description')),
+                SpatieMediaLibraryImageColumn::make('photo')
+                    ->collection('chapter_photos')
+                    ->rounded()
+                    ->label(__('custom.models.chapter.photo')),
+
+                TextColumn::make('name')
+                    ->label(__('custom.models.chapter.name'))
+                    ->sortable()
+                    ->searchable(),
+
+                TextColumn::make('description')
+                    ->limit(30)
+                    ->label(__('custom.models.chapter.description')),
+
+                TextColumn::make('unit.name')
+                    ->badge()
+                    ->colors(['gray'])
+                    ->label(__('custom.models.chapter.unit')),
+
                 TextColumn::make('questions_count')
                     ->badge()
                     ->label(__('custom.models.questions'))

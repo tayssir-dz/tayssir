@@ -33,17 +33,14 @@ class ContentSeeder extends Seeder
                 );
 
                 foreach ($divisionData['materials'] as $materialData) {
-                    $material = Material::firstOrCreate(
-                        [
-                            'name' => $materialData['name'],
-                            'division_id' => $division->id
-                        ],
-                        [
-                            'code' => $materialData['code'],
-                            'color' => $materialData['color'],
-                            'description' => $materialData['description'],
-                        ]
-                    );
+                    $material = Material::create([
+                        'name' => $materialData['name'],
+                        'code' => $materialData['code'],
+                        'color' => $materialData['color'],
+                        'secondary_color' => $materialData['secondary_color'] ?? null,
+                        'description' => $materialData['description'],
+                        'division_id' => $division->id,
+                    ]);
 
                     foreach ($materialData['units'] as $unitData) {
                         $unit = Unit::firstOrCreate(
@@ -82,15 +79,33 @@ class ContentSeeder extends Seeder
             $questionType = $this->getRandomQuestionType();
             $options = $this->generateQuestionOptions($questionType);
             
-            Question::create([
-                'question' => $this->arabicFaker->sentence() . '؟',
-                'question_type' => $questionType,
-                'options' => $options,
-                'points' => rand(1, 5),
-                'hint' => rand(0, 1) ? $this->arabicFaker->sentence() : null,
-                'chapter_id' => $chapter->id,
-            ]);
+            if ($questionType === 'true_or_false') {
+                $this->createTrueOrFalseQuestion($chapter);
+            } else {
+                Question::create([
+                    'question' => rtrim($this->arabicFaker->realText(50), '.') . '؟',
+                    'question_type' => $questionType,
+                    'options' => $options,
+                    'points' => rand(1, 5),
+                    'hint' => rand(0, 1) ? rtrim($this->arabicFaker->realText(30), '.') : null,
+                    'chapter_id' => $chapter->id,
+                ]);
+            }
         }
+    }
+
+    private function createTrueOrFalseQuestion($chapter)
+    {
+        $faker = Faker::create('ar_SA');
+        
+        return Question::create([
+            'chapter_id' => $chapter->id,
+            'question' => $faker->sentence() . '؟',
+            'question_type' => 'true_or_false',
+            'options' => ['correct' => $faker->boolean()],
+            'points' => $faker->numberBetween(1, 5),
+            'hint' => $faker->optional()->sentence(),
+        ]);
     }
 
     private function getRandomQuestionType(): string
@@ -110,36 +125,47 @@ class ContentSeeder extends Seeder
     {
         switch ($type) {
             case 'multiple_choices':
-                $numOptions = rand(3, 5);
+                $numOptions = rand(3, 4);
                 $correctOption = rand(0, $numOptions - 1);
                 $options = [];
                 
                 for ($i = 0; $i < $numOptions; $i++) {
                     $options[] = [
-                        'option' => $this->arabicFaker->unique()->word(),
+                        'option' => rtrim($this->arabicFaker->realText(20), '.'),
                         'is_correct' => ($i === $correctOption)
                     ];
                 }
-                $this->arabicFaker->unique(true);
                 return $options;
 
             case 'fill_in_the_blanks':
-                $numBlanks = rand(1, 3);
+                $numBlanks = rand(2, 3);
                 $words = [];
-                $paragraph = $this->arabicFaker->paragraph();
+                $paragraph = rtrim($this->arabicFaker->realText(100), '.');
+                $words_array = explode(' ', $paragraph);
                 
-                for ($i = 0; $i < $numBlanks; $i++) {
-                    $word = $this->arabicFaker->word();
-                    $placeholder = $i + 1;
+                // Ensure we have enough words
+                if (count($words_array) < $numBlanks) {
+                    $numBlanks = count($words_array);
+                }
+                
+                // Select random positions for blanks
+                $positions = array_rand($words_array, $numBlanks);
+                if (!is_array($positions)) {
+                    $positions = [$positions];
+                }
+                
+                foreach ($positions as $index => $pos) {
+                    $word = $words_array[$pos];
+                    $placeholder = $index + 1;
                     $words[] = [
                         'word' => $word,
                         'placeholder' => $placeholder
                     ];
-                    $paragraph = preg_replace('/\b' . preg_quote($word, '/') . '\b/u', "[$placeholder]", $paragraph, 1);
+                    $words_array[$pos] = "[$placeholder]";
                 }
                 
                 return [
-                    'paragraph' => $paragraph,
+                    'paragraph' => implode(' ', $words_array),
                     'answers' => $words
                 ];
 
@@ -150,30 +176,28 @@ class ContentSeeder extends Seeder
                 ];
 
             case 'pick_the_intruder':
-                $numWords = rand(4, 6);
+                $numWords = rand(4, 5);
                 $intruderIndex = rand(0, $numWords - 1);
                 $words = [];
                 
                 for ($i = 0; $i < $numWords; $i++) {
                     $words[] = [
-                        'word' => $this->arabicFaker->unique()->word(),
+                        'word' => rtrim($this->arabicFaker->realText(15), '.'),
                         'is_intruder' => ($i === $intruderIndex)
                     ];
                 }
-                $this->arabicFaker->unique(true);
                 return $words;
 
             case 'match_with_arrows':
-                $numPairs = rand(2, 4);
+                $numPairs = rand(2, 3);
                 $pairs = [];
                 
                 for ($i = 0; $i < $numPairs; $i++) {
                     $pairs[] = [
-                        'first' => $this->arabicFaker->unique()->word(),
-                        'second' => $this->arabicFaker->unique()->word()
+                        'first' => rtrim($this->arabicFaker->realText(15), '.'),
+                        'second' => rtrim($this->arabicFaker->realText(15), '.')
                     ];
                 }
-                $this->arabicFaker->unique(true);
                 return $pairs;
 
             default:

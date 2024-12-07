@@ -14,14 +14,8 @@ preparation with our interactive quizzes!
 
 ---
 
-<!-- ## TODO
-
-    - card translation !
-
-    - material should have 2 colors
-    - unit should have color attribute
-    - chapter has image
-    - each question should have a note (nullable)
-    - account attributes
-
-- -->
+## TODO
+    - add second color to material
+    - make dynamic subscriptions for both units and chapters
+    - add photo to chapter
+    - add exercice/lesson to question 

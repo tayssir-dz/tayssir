@@ -51,9 +51,10 @@ return [
     'models.material.name' => 'اسم المادة',
     'models.material.description' => 'وصف المادة',
     'models.material.code' => 'رمز المادة',
-    'models.material.code.placeholder' => 'رمز لتمييز المادة',
+    'models.material.code.placeholder' => 'رمز لتحديد المادة',
     'models.material.color' => 'لون المادة',
-    'models.material.division' => 'الشعبة',
+    'models.material.secondary_color' => 'اللون الثانوي',
+    'models.material.division' => 'القسم',
     'models.material.action.details' => 'تفاصيل المادة',
 
     // # Unit
@@ -71,13 +72,16 @@ return [
     'models.user.phone' => 'رقم الهاتف',
     'models.user.phone.empty' => 'لا يوجد رقم هاتف',
     'models.user.roles' => 'الأدوار',
+    'models.user.roles.empty' => 'لا توجد أدوار',
+    'models.user.verified' => 'مفعل',
     'models.user.email_verified' => 'تم التحقق من البريد الإلكتروني',
     'models.user.email_not_verified' => 'لم يتم التحقق من البريد الإلكتروني',
     'models.user.points' => 'النقاط',
     'models.user.wilaya' => 'الولاية',
     'models.user.wilayas' => 'الولايات',
+    'models.user.wilaya.empty' => 'لم يتم اختيار الولاية',
     'models.user.commune' => 'البلدية',
-    'models.user.communes' => 'البلديات',
+    'models.user.commune.empty' => 'لم يتم اختيار البلدية',
     'models.user.wilaya.field' => "arabic_name",
     'models.user.commune.field' => "arabic_name",
 
@@ -94,9 +98,12 @@ return [
 
 
     // # Chapter
+    "forms.chapter.create.section.infos" => "معلومات الفصل",
+    "forms.chapter.create.section.image" => "صورة الفصل",
     'models.chapter.name' => 'اسم الفصل',
-    'models.chapter.description' => 'وصف الفصل',
+    'models.chapter.description' => 'الوصف',
     'models.chapter.unit' => 'الوحدة',
+    'models.chapter.photo' => 'صورة الفصل',
     'models.chapter.action.details' => 'تفاصيل الفصل',
 
     // # Chapter
@@ -124,7 +131,7 @@ return [
     'models.question.duos' => 'الأزواج',
     'models.question.duo.first' => 'العنصر الأول',
     'models.question.duo.second' => 'العنصر الثاني',
-
+    'models.question.add_option' => 'إضافة خيار',
     // Question translations
     'models.question.fill_blank.answer' => 'الإجابة',
     'models.question.fill_blank.answers' => 'الإجابات',

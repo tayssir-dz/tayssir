@@ -22,6 +22,7 @@ class Material extends Model implements HasMedia
         'name',
         'code',
         'color',
+        'secondary_color',
         'description',
         'division_id',
     ];

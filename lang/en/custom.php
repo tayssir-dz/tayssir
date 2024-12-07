@@ -53,6 +53,7 @@ return [
     'models.material.code' => 'Material code',
     'models.material.code.placeholder' => 'Code to identify the material',
     'models.material.color' => 'Material color',
+    'models.material.secondary_color' => 'Secondary color',
     'models.material.division' => 'Division',
     'models.material.action.details' => 'Material details',
 
@@ -71,14 +72,18 @@ return [
     'models.user.phone' => 'Phone',
     'models.user.phone.empty' => 'No phone number',
     'models.user.roles' => 'Roles',
+    'models.user.roles.empty' => 'No roles assigned',
+    'models.user.verified' => 'Verified',
     'models.user.email_verified' => 'Email verified',
     'models.user.email_not_verified' => 'Email not verified',
     'models.user.points' => 'Points',
     'models.user.wilaya' => 'Wilaya',
     'models.user.wilayas' => 'Wilayas',
+    'models.user.wilaya.empty' => 'No wilaya selected',
+    'models.user.wilaya.field' => "name",
     'models.user.commune' => 'Commune',
     'models.user.communes' => 'Communes',
-    'models.user.wilaya.field' => "name",
+    'models.user.commune.empty' => 'No commune selected',
     'models.user.commune.field' => "name",
 
     'models.user.tabs.all' => 'All',
@@ -93,9 +98,12 @@ return [
     'models.user.roles_and_subscription' => 'Roles and subscription',
 
     // # Chapter
+    "forms.chapter.create.section.infos" => "Chapter informations",
+    "forms.chapter.create.section.image" => "Chapter image",
     'models.chapter.name' => 'Chapter name',
     'models.chapter.description' => 'Chapter description',
     'models.chapter.unit' => 'Unit',
+    'models.chapter.photo' => 'Photo',
     'models.chapter.action.details' => 'Chapter details',
 
     // # Question
@@ -133,6 +141,7 @@ return [
     'models.question.true_false.correct_answer' => 'Correct Answer',
     'models.question.true_false.true' => 'True',
     'models.question.true_false.false' => 'False',
+    'models.question.add_option' => 'Add Option',
 
     // Card
 

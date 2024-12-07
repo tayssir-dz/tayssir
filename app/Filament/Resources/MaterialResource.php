@@ -83,6 +83,9 @@ class MaterialResource extends Resource implements HasShieldPermissions
                         ->required()
                         ->label(__('custom.models.material.color')),
 
+                    ColorPicker::make('secondary_color')
+                        ->label(__('custom.models.material.secondary_color')),
+
                     Select::make('division_id')
                         ->relationship('division', 'name')
                         ->required()
@@ -111,10 +114,10 @@ class MaterialResource extends Resource implements HasShieldPermissions
     {
         return $table
             ->columns([
-                SpatieMediaLibraryImageColumn::make('image')
-                    ->label(__("custom.forms.material.create.section.image"))
-                    ->collection('materials-image')
-                    ->rounded(),
+                // SpatieMediaLibraryImageColumn::make('image')
+                //     ->label(__("custom.forms.material.create.section.image"))
+                //     ->collection('materials-image')
+                //     ->rounded(),
 
                 TextColumn::make("name")
                     ->label(__("custom.models.material.name"))
@@ -128,7 +131,13 @@ class MaterialResource extends Resource implements HasShieldPermissions
                     ->colors(['primary'])
                     ->label(__("custom.models.material.code")),
 
-                ColorColumn::make("color"),
+                ColorColumn::make("color")
+                    ->label(__("custom.models.material.color")),
+
+                ColorColumn::make("secondary_color")
+                    ->label(__("custom.models.material.secondary_color"))
+                    ->default('#000000')
+                    ,
 
                 TextColumn::make("description")
                     ->label(__("custom.models.material.description"))

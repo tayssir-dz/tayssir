@@ -8,6 +8,7 @@
                     "name": "رياضيات",
                     "code": "MATH",
                     "color": "#4CAF50",
+                    "secondary_color": "#81C784",
                     "description": "مادة الرياضيات",
                     "units": [
                         {
@@ -36,6 +37,7 @@
                     "name": "فيزياء",
                     "code": "PHYS",
                     "color": "#2196F3",
+                    "secondary_color": "#64B5F6",
                     "description": "مادة الفيزياء",
                     "units": [
                         {
@@ -54,6 +56,7 @@
                     "name": "كيمياء",
                     "code": "CHEM",
                     "color": "#9C27B0",
+                    "secondary_color": "#BA68C8",
                     "description": "مادة الكيمياء",
                     "units": [
                         {
@@ -102,6 +105,7 @@
                     "name": "فلسفة",
                     "code": "PHIL",
                     "color": "#795548",
+                    "secondary_color": "#FFB74D",
                     "description": "مادة الفلسفة",
                     "units": [
                         {

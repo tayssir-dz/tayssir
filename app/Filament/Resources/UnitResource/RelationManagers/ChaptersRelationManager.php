@@ -4,11 +4,14 @@ namespace App\Filament\Resources\UnitResource\RelationManagers;
 
 use App\Filament\Resources\ChapterResource;
 use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -35,9 +38,25 @@ class ChaptersRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                TextInput::make('name')->required()->minLength(3)->label(__('custom.models.chapter.name')),
-                Textarea::make("description")->rows(4)->label(__('custom.models.chapter.description')),
-            ])->columns(1);
+                Section::make(__('custom.forms.chapter.create.section.infos'))->schema([
+                    TextInput::make('name')
+                        ->required()
+                        ->minLength(3)
+                        ->label(__('custom.models.chapter.name')),
+
+                    Textarea::make("description")
+                        ->rows(4)
+                        ->label(__('custom.models.chapter.description')),
+
+                ])->columnSpan(2),
+                Section::make(__('custom.forms.chapter.create.section.image'))->schema([
+                    SpatieMediaLibraryFileUpload::make('photo')
+                        ->label("")
+                        ->collection('chapter_photos')
+                        ->image()
+                        ->imageEditor(),
+                ])->columnSpan(1),
+            ])->columns(3);
     }
 
     public function table(Table $table): Table
@@ -45,8 +64,20 @@ class ChaptersRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                TextColumn::make('name')->label(__('custom.models.chapter.name')),
-                TextColumn::make('description')->limit(30)->label(__('custom.models.chapter.description')),
+                SpatieMediaLibraryImageColumn::make('photo')
+                    ->collection('chapter_photos')
+                    ->rounded()
+                    ->label(__('custom.models.chapter.photo')),
+
+                TextColumn::make('name')
+                    ->label(__('custom.models.chapter.name'))
+                    ->sortable()
+                    ->searchable(),
+
+                TextColumn::make('description')
+                    ->limit(30)
+                    ->label(__('custom.models.chapter.description')),
+
                 TextColumn::make('questions_count')
                     ->badge()
                     ->label(__('custom.models.questions'))
