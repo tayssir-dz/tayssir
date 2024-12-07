@@ -86,7 +86,7 @@ return [
     'models.user.commune.field' => "arabic_name",
 
     'models.user.tabs.all' => 'الكل',
-    'models.user.tabs.students' => 'الطلاب',
+    'models.user.tabs.students' => 'الطل��ب',
     'models.user.tabs.with_roles' => 'ذوي الأدوار',
 
     'models.user.perfonal_info' => 'المعلومات الشخصية',
@@ -105,6 +105,7 @@ return [
     'models.chapter.unit' => 'الوحدة',
     'models.chapter.photo' => 'صورة الفصل',
     'models.chapter.action.details' => 'تفاصيل الفصل',
+    "models.chapter.subscriptions" => 'الاشتراكات',
 
     // # Chapter
     'models.question.tabs.infos' => 'المعلومات',
@@ -147,6 +148,7 @@ return [
     'models.question.fill_blank.word' => 'الكلمة',
     'models.question.fill_blank.placeholder' => 'علامة الفراغ (مثال: [1])',
     'models.question.fill_blank.words' => 'كلمات ملء الفراغات',
+    'models.question.fill_blank.add_answer' => 'إضافة إجابة',
 
     // Card
 

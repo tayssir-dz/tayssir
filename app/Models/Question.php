@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Enums\QuestionType;
 
 class Question extends Model implements HasMedia
 {
@@ -50,6 +51,7 @@ class Question extends Model implements HasMedia
      */
     protected $casts = [
         'options' => 'array',
+        'question_type' => QuestionType::class,
     ];
 
     public function chapter()

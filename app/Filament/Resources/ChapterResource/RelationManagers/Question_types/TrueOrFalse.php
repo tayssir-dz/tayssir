@@ -4,12 +4,13 @@ namespace App\Filament\Resources\ChapterResource\RelationManagers\Question_types
 
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\Toggle;
+use App\Enums\QuestionType as QuestionTypeEnum;
 
 class TrueOrFalse extends QuestionType
 {
     public static function getType(): string
     {
-        return 'true_or_false';
+        return QuestionTypeEnum::TRUE_OR_FALSE->value;
     }
 
     public static function getSchema(): array
@@ -22,8 +23,14 @@ class TrueOrFalse extends QuestionType
                 ->onColor('success')
                 ->offColor('danger')
                 ->inline()
-                ->default(0)  // Setting numeric default to ensure proper casting
-                ->rules(['boolean'])  // Enforce boolean type
+                ->default(false)
+                ->live()
+                ->required()
+                ->afterStateHydrated(function (Toggle $component, $state) {
+                    $component->state((bool) ($state ?? false));
+                })
+                ->dehydrateStateUsing(fn($state) => (bool) $state)
+                ->rules(['boolean'])
         ];
     }
 }

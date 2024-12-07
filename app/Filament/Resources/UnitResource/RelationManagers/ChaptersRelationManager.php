@@ -4,6 +4,7 @@ namespace App\Filament\Resources\UnitResource\RelationManagers;
 
 use App\Filament\Resources\ChapterResource;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
@@ -43,6 +44,13 @@ class ChaptersRelationManager extends RelationManager
                         ->required()
                         ->minLength(3)
                         ->label(__('custom.models.chapter.name')),
+
+                    Select::make('subscriptions')
+                        ->multiple()
+                        ->relationship('subscriptions', 'name')
+                        ->searchable()
+                        ->preload()
+                        ->label(__('custom.models.chapter.subscriptions')),
 
                     Textarea::make("description")
                         ->rows(4)

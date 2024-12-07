@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ChapterResource\RelationManagers\Question_types;
 
+use App\Enums\QuestionType as QuestionTypeEnum;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
@@ -13,7 +14,7 @@ class MultipleChoice extends QuestionType
 {
     public static function getType(): string
     {
-        return 'multiple_choices';
+        return QuestionTypeEnum::MULTIPLE_CHOICES->value;
     }
 
     public static function getSchema(): array
@@ -28,9 +29,7 @@ class MultipleChoice extends QuestionType
                                 ->label(trans('custom.models.question.option')),
                             Toggle::make('is_correct')
                                 ->label(trans('custom.models.question.option.iscorrect'))
-                                ->default(false)
-                                ->reactive()
-                                ->fixIndistinctState(),
+                                ->default(false),
                         ])
                         ->defaultItems(4)
                         ->minItems(2)

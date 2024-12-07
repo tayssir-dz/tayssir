@@ -107,6 +107,7 @@ return [
     'models.chapter.unit' => 'Unité',
     'models.chapter.action.details' => 'Détails du chapitre',
     'models.chapter.photo' => 'Photo du chapitre',
+    "models.chapter.subscriptions" => 'Abonnements',
 
     // # Chapter
     'models.question.tabs.infos' => 'Informations',

@@ -105,6 +105,7 @@ return [
     'models.chapter.unit' => 'Unit',
     'models.chapter.photo' => 'Photo',
     'models.chapter.action.details' => 'Chapter details',
+    "models.chapter.subscriptions" => "Subscriptions",
 
     // # Question
     'models.question.tabs.infos' => 'Information',

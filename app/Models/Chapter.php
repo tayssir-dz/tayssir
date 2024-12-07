@@ -53,4 +53,9 @@ class Chapter extends Model implements HasMedia
         return $this->hasMany(Question::class);
     }
 
+    public function subscriptions()
+    {
+        return $this->belongsToMany(Subscription::class);
+    }
+
 }

@@ -15,7 +15,8 @@ preparation with our interactive quizzes!
 ---
 
 ## TODO
-    - add second color to material
-    - make dynamic subscriptions for both units and chapters
-    - add photo to chapter
-    - add exercice/lesson to question 
+
+    - (done) add second color to material
+    - (done) make dynamic subscriptions for both units and chapters
+    - (done) add photo to chapter
+    - (done) add exercice/lesson to question

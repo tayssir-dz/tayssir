@@ -72,6 +72,14 @@ class ChapterResource extends Resource implements HasShieldPermissions
                         ->required()
                         ->label(__('custom.models.chapter.unit')),
 
+                    Select::make('subscriptions')
+                        ->multiple()
+                        ->relationship('subscriptions', 'name')
+                        ->searchable()
+                        ->preload()
+                        ->label(__('custom.models.chapter.subscriptions'))
+                        ->columnSpan(2),
+
                     Textarea::make("description")
                         ->rows(4)
                         ->columnSpan(2)

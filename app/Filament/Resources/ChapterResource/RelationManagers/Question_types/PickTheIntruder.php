@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ChapterResource\RelationManagers\Question_types;
 
+use App\Enums\QuestionType as QuestionTypeEnum;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
@@ -11,7 +12,7 @@ class PickTheIntruder extends QuestionType
 {
     public static function getType(): string
     {
-        return 'pick_the_intruder';
+        return QuestionTypeEnum::PICK_THE_INTRUDER->value;
     }
 
     public static function getSchema(): array

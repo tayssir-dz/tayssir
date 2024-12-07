@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ChapterResource\RelationManagers\Question_types;
 
+use App\Enums\QuestionType as QuestionTypeEnum;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
@@ -10,7 +11,7 @@ class MatchWithArrows extends QuestionType
 {
     public static function getType(): string
     {
-        return 'match_with_arrows';
+        return QuestionTypeEnum::MATCH_WITH_ARROWS->value;
     }
 
     public static function getSchema(): array

@@ -55,8 +55,8 @@ class Subscription extends Model
         return $this->belongsToMany(related: Discount::class);
     }
 
-    public function units()
+    public function chapters()
     {
-        return $this->belongsToMany(Unit::class);
+        return $this->belongsToMany(Chapter::class);
     }
 }

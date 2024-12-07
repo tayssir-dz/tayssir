@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ChapterResource\RelationManagers;
 
+use App\Enums\QuestionType;
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\FillInTheBlanks;
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\MatchWithArrows;
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\MultipleChoice;
@@ -71,18 +72,22 @@ class QuestionsRelationManager extends RelationManager
                         Forms\Components\Tabs\Tab::make('question_type')->label(__('custom.models.question.type'))
                             ->schema([
                                 Forms\Components\Select::make('question_type')
-                                    ->options([
-                                        'multiple_choices' => __('custom.models.question.types.multiple_choices'),
-                                        'fill_in_the_blanks' => __('custom.models.question.types.fill_in_the_blanks'),
-                                        'pick_the_intruder' => __('custom.models.question.types.pick_the_intruder'),
-                                        'true_or_false' => __('custom.models.question.types.true_or_false'),
-                                        'match_with_arrows' => __('custom.models.question.types.match_with_arrows'),
-                                    ])
+                                    ->enum(QuestionType::class)
+                                    ->options(QuestionType::class)
                                     ->required()
                                     ->live()
                                     ->label(__('custom.models.question.type'))
-                                    ->afterStateUpdated(function (callable $set) {
-                                        $set('options', null);
+                                    ->afterStateUpdated(function (callable $set, $state) {
+                                        if ($state === QuestionType::TRUE_OR_FALSE->value) {
+                                            $set('options', ['correct' => false]);
+                                        } elseif ($state === QuestionType::FILL_IN_THE_BLANKS->value) {
+                                            $set('options', [
+                                                'paragraph' => '',
+                                                'answers' => []
+                                            ]);
+                                        } else {
+                                            $set('options', null);
+                                        }
                                     }),
 
                                 // Question type specific components
@@ -103,11 +108,11 @@ class QuestionsRelationManager extends RelationManager
         }
 
         $questionType = match ($data['question_type']) {
-            'true_or_false' => TrueOrFalse::class,
-            'multiple_choices' => MultipleChoice::class,
-            'fill_in_the_blanks' => FillInTheBlanks::class,
-            'pick_the_intruder' => PickTheIntruder::class,
-            'match_with_arrows' => MatchWithArrows::class,
+            QuestionType::TRUE_OR_FALSE->value => TrueOrFalse::class,
+            QuestionType::MULTIPLE_CHOICES->value => MultipleChoice::class,
+            QuestionType::FILL_IN_THE_BLANKS->value => FillInTheBlanks::class,
+            QuestionType::PICK_THE_INTRUDER->value => PickTheIntruder::class,
+            QuestionType::MATCH_WITH_ARROWS->value => MatchWithArrows::class,
             default => null,
         };
 
@@ -122,11 +127,11 @@ class QuestionsRelationManager extends RelationManager
     {
         // Ensure options is set before creation
         $questionType = match ($data['question_type']) {
-            'true_or_false' => TrueOrFalse::class,
-            'multiple_choices' => MultipleChoice::class,
-            'fill_in_the_blanks' => FillInTheBlanks::class,
-            'pick_the_intruder' => PickTheIntruder::class,
-            'match_with_arrows' => MatchWithArrows::class,
+            QuestionType::TRUE_OR_FALSE->value => TrueOrFalse::class,
+            QuestionType::MULTIPLE_CHOICES->value => MultipleChoice::class,
+            QuestionType::FILL_IN_THE_BLANKS->value => FillInTheBlanks::class,
+            QuestionType::PICK_THE_INTRUDER->value => PickTheIntruder::class,
+            QuestionType::MATCH_WITH_ARROWS->value => MatchWithArrows::class,
             default => null,
         };
 
@@ -149,7 +154,8 @@ class QuestionsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('question_type')
                     ->label(__('custom.models.question.type'))
                     ->badge()
-                    ->color("gray")
+                    ->formatStateUsing(fn(QuestionType $state) => $state->getLabel())
+                    ->color(fn(QuestionType $state) => $state->getColor()),
             ])
             ->filters([
                 //
