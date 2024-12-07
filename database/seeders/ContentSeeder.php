@@ -127,28 +127,26 @@ class ContentSeeder extends Seeder
             case 'multiple_choices':
                 $numOptions = rand(3, 4);
                 $correctOption = rand(0, $numOptions - 1);
-                $options = [];
+                $choices = [];
 
                 for ($i = 0; $i < $numOptions; $i++) {
-                    $options[] = [
+                    $choices[] = [
                         'option' => rtrim($this->arabicFaker->realText(20), '.'),
                         'is_correct' => ($i === $correctOption)
                     ];
                 }
-                return $options;
+                return ['choices' => $choices];
 
             case 'fill_in_the_blanks':
                 $numBlanks = rand(2, 3);
-                $words = [];
+                $answers = [];
                 $paragraph = rtrim($this->arabicFaker->realText(100), '.');
                 $words_array = explode(' ', $paragraph);
 
-                // Ensure we have enough words
                 if (count($words_array) < $numBlanks) {
                     $numBlanks = count($words_array);
                 }
 
-                // Select random positions for blanks
                 $positions = array_rand($words_array, $numBlanks);
                 if (!is_array($positions)) {
                     $positions = [$positions];
@@ -157,7 +155,7 @@ class ContentSeeder extends Seeder
                 foreach ($positions as $index => $pos) {
                     $word = $words_array[$pos];
                     $placeholder = $index + 1;
-                    $words[] = [
+                    $answers[] = [
                         'word' => $word,
                         'placeholder' => $placeholder
                     ];
@@ -166,13 +164,7 @@ class ContentSeeder extends Seeder
 
                 return [
                     'paragraph' => implode(' ', $words_array),
-                    'answers' => $words
-                ];
-
-            case 'true_or_false':
-                return [
-                    'type' => 'true_false',
-                    'correct' => (bool) rand(0, 1)
+                    'answers' => $answers
                 ];
 
             case 'pick_the_intruder':
@@ -186,7 +178,7 @@ class ContentSeeder extends Seeder
                         'is_intruder' => ($i === $intruderIndex)
                     ];
                 }
-                return $words;
+                return ['words' => $words];
 
             case 'match_with_arrows':
                 $numPairs = rand(2, 3);
@@ -198,7 +190,12 @@ class ContentSeeder extends Seeder
                         'second' => rtrim($this->arabicFaker->realText(15), '.')
                     ];
                 }
-                return $pairs;
+                return ['pairs' => $pairs];
+
+            case 'true_or_false':
+                return [
+                    'correct' => (bool) rand(0, 1)
+                ];
 
             default:
                 return [];
