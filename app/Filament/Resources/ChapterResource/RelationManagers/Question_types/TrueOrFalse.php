@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\ChapterResource\RelationManagers\Question_types;
 
 use Filament\Forms\Components\Component;
-use Filament\Forms\Components\Field;
+use Filament\Forms\Components\Toggle;
 
 class TrueOrFalse extends QuestionType
 {
@@ -12,20 +12,18 @@ class TrueOrFalse extends QuestionType
         return 'true_or_false';
     }
 
-    public static function getSchema(): Component
+    public static function getSchema(): array
     {
-        return Field::make('options')
-            ->label(__('questions.correct_answer'))
-            ->view('components.forms.true-false-toggle')
-            ->default(['correct' => false])
-            ->afterStateHydrated(function (Field $component, $state) {
-                if (!is_array($state) || !isset($state['correct'])) {
-                    $component->state(['correct' => false]);
-                }
-            })
-            ->beforeStateDehydrated(function (Field $component, $state) {
-                return ['correct' => (bool) ($state['correct'] ?? false)];
-            })
-            ->required();
+        return [
+            Toggle::make('correct')
+                ->label(trans('custom.models.question.true_false.correct_answer'))
+                ->onIcon('heroicon-m-check')
+                ->offIcon('heroicon-m-x-mark')
+                ->onColor('success')
+                ->offColor('danger')
+                ->inline()
+                ->default(0)  // Setting numeric default to ensure proper casting
+                ->rules(['boolean'])  // Enforce boolean type
+        ];
     }
 }

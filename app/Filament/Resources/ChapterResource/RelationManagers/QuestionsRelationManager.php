@@ -45,7 +45,7 @@ class QuestionsRelationManager extends RelationManager
                                 Forms\Components\TextInput::make('points')
                                     ->required()
                                     ->numeric()
-                                    ->rule(['min' => 1])
+                                    ->minValue(1)
                                     ->label(__('custom.models.question.points')),
                                 Forms\Components\TextInput::make('hint')
                                     ->label(__('custom.models.question.hint')),
@@ -88,12 +88,53 @@ class QuestionsRelationManager extends RelationManager
                                 // Question type specific components
                                 TrueOrFalse::make(),
                                 MultipleChoice::make(),
-                                // FillInTheBlanks::make(),
-                                // PickTheIntruder::make(),
-                                // MatchWithArrows::make(),
+                                FillInTheBlanks::make(),
+                                PickTheIntruder::make(),
+                                MatchWithArrows::make(),
                             ]),
                     ])
             ])->columns(1);
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        if (!isset($data['options'])) {
+            $data['options'] = [];
+        }
+
+        $questionType = match ($data['question_type']) {
+            'true_or_false' => TrueOrFalse::class,
+            'multiple_choices' => MultipleChoice::class,
+            'fill_in_the_blanks' => FillInTheBlanks::class,
+            'pick_the_intruder' => PickTheIntruder::class,
+            'match_with_arrows' => MatchWithArrows::class,
+            default => null,
+        };
+
+        if ($questionType) {
+            $questionType::saveFormState($this->record, $data);
+        }
+
+        return $data;
+    }
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        // Ensure options is set before creation
+        $questionType = match ($data['question_type']) {
+            'true_or_false' => TrueOrFalse::class,
+            'multiple_choices' => MultipleChoice::class,
+            'fill_in_the_blanks' => FillInTheBlanks::class,
+            'pick_the_intruder' => PickTheIntruder::class,
+            'match_with_arrows' => MatchWithArrows::class,
+            default => null,
+        };
+
+        if ($questionType) {
+            $data['options'] = $questionType::getDefaultOptions($data);
+        }
+
+        return $data;
     }
 
     public function table(Table $table): Table

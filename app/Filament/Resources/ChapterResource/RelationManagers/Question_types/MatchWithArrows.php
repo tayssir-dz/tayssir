@@ -13,35 +13,25 @@ class MatchWithArrows extends QuestionType
         return 'match_with_arrows';
     }
 
-    public static function getSchema(): Component
+    public static function getSchema(): array
     {
-        return Repeater::make('options')
-            ->schema([
-                TextInput::make('first')
-                    ->required()
-                    ->minLength(1)
-                    ->label(__('custom.models.question.match.first')),
-                TextInput::make('second')
-                    ->required()
-                    ->minLength(1)
-                    ->label(__('custom.models.question.match.second')),
-            ])
-            ->columns(2)
-            ->minItems(2)
-            ->maxItems(6)
-            ->columnSpanFull()
-            ->label(__('custom.models.question.match.pairs'))
-            ->live()
-            ->afterStateUpdated(function ($state, callable $set) {
-                if (!is_array($state)) return;
-
-                // Remove empty pairs
-                $state = array_filter($state, fn($pair) =>
-                    isset($pair['first']) && !empty($pair['first']) &&
-                    isset($pair['second']) && !empty($pair['second'])
-                );
-
-                $set('options', array_values($state));
-            });
+        return [
+            Repeater::make('pairs')
+                ->schema([
+                    TextInput::make('first')
+                        ->required()
+                        ->minLength(1)
+                        ->label(trans('custom.models.question.duo.first')),
+                    TextInput::make('second')
+                        ->required()
+                        ->minLength(1)
+                        ->label(trans('custom.models.question.duo.second')),
+                ])
+                ->columns(2)
+                ->minItems(2)
+                ->maxItems(6)
+                ->defaultItems(2)
+                ->columnSpanFull()
+        ];
     }
 }

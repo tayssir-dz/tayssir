@@ -15,47 +15,37 @@ class FillInTheBlanks extends QuestionType
         return 'fill_in_the_blanks';
     }
 
-    public static function getSchema(): Component
+    public static function getSchema(): array
     {
-        return Group::make([
-            Textarea::make('options.paragraph')
-                ->label(__('custom.models.question.fill_blank.paragraph'))
-                ->required()
-                ->helperText(__('custom.models.question.fill_blank.paragraph_help')),
+        return [
+            Group::make([
+                Textarea::make('paragraph')
+                    ->label(trans('custom.models.question.fill_blank.paragraph'))
+                    ->required()
+                    ->helperText(trans('custom.models.question.fill_blank.paragraph_help')),
 
-            Repeater::make('options.answers')
-                ->schema([
-                    TextInput::make('word')
-                        ->required()
-                        ->label(__('custom.models.question.fill_blank.word')),
-                    TextInput::make('placeholder')
-                        ->required()
-                        ->label(__('custom.models.question.fill_blank.placeholder'))
-                        ->prefix('[')
-                        ->suffix(']')
-                        ->maxLength(2)
-                        ->numeric()
-                        ->minValue(1)
-                        ->maxValue(10),
-                ])
-                ->defaultItems(1)
-                ->columns(2)
-                ->minItems(1)
-                ->maxItems(5)
-                ->label(__('custom.models.question.fill_blank.words'))
-                ->live()
-                ->afterStateUpdated(function ($state, callable $set) {
-                    if (!is_array($state)) return;
-
-                    // Remove empty answers
-                    $state = array_filter($state, fn($answer) =>
-                        isset($answer['word']) && !empty($answer['word']) &&
-                        isset($answer['placeholder']) && !empty($answer['placeholder'])
-                    );
-
-                    $set('options.answers', array_values($state));
-                })
-        ])
-        ->columnSpanFull();
+                Repeater::make('answers')
+                    ->schema([
+                        TextInput::make('word')
+                            ->required()
+                            ->label(trans('custom.models.question.fill_blank.word')),
+                        TextInput::make('placeholder')
+                            ->required()
+                            ->label(trans('custom.models.question.fill_blank.placeholder'))
+                            ->prefix('[')
+                            ->suffix(']')
+                            ->maxLength(2)
+                            ->numeric()
+                            ->minValue(1)
+                            ->maxValue(10),
+                    ])
+                    ->defaultItems(1)
+                    ->columns(2)
+                    ->minItems(1)
+                    ->maxItems(5)
+                    ->label(trans('custom.models.question.fill_blank.answers'))
+            ])
+                ->columnSpanFull()
+        ];
     }
 }

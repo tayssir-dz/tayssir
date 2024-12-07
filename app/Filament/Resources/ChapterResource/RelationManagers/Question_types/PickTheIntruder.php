@@ -14,47 +14,33 @@ class PickTheIntruder extends QuestionType
         return 'pick_the_intruder';
     }
 
-    public static function getSchema(): Component
+    public static function getSchema(): array
     {
-        return Repeater::make('options')
-            ->schema([
-                TextInput::make('word')
-                    ->required()
-                    ->minLength(1)
-                    ->label(__('custom.models.question.word')),
-                Toggle::make('is_intruder')
-                    ->inline(false)
-                    ->label(__('custom.models.question.word.is_intruder')),
-            ])
-            ->columns(2)
-            ->minItems(3)
-            ->maxItems(8)
-            ->columnSpanFull()
-            ->label(__('custom.models.question.words'))
-            ->live()
-            ->afterStateUpdated(function ($state, callable $set) {
-                if (!is_array($state)) return;
-
-                // Remove empty words
-                $state = array_filter($state, fn($option) =>
-                    isset($option['word']) && !empty($option['word'])
-                );
-
-                // Ensure exactly one word is marked as intruder
-                $intruderCount = 0;
-                foreach ($state as $option) {
-                    if (isset($option['is_intruder']) && $option['is_intruder']) {
-                        $intruderCount++;
+        return [
+            Repeater::make('words')
+                ->schema([
+                    TextInput::make('word')
+                        ->required()
+                        ->minLength(1)
+                        ->label(trans('custom.models.question.word')),
+                    Toggle::make('is_intruder')
+                        ->inline()
+                        ->default(false)
+                        ->label(trans('custom.models.question.word.is_intruder'))
+                        ->reactive(),
+                ])
+                ->columns(2)
+                ->minItems(3)
+                ->maxItems(8)
+                ->defaultItems(3)
+                ->columnSpanFull()
+                ->mutateRelationshipDataBeforeSaveUsing(function (array $data): array {
+                    $intruderCount = collect($data)->where('is_intruder', true)->count();
+                    if ($intruderCount !== 1) {
+                        throw new \Exception('There must be exactly one intruder.');
                     }
-                }
-
-                if ($intruderCount !== 1 && count($state) > 0) {
-                    foreach ($state as &$option) {
-                        $option['is_intruder'] = false;
-                    }
-                    $state[array_key_first($state)]['is_intruder'] = true;
-                    $set('options', array_values($state));
-                }
-            });
+                    return $data;
+                })
+        ];
     }
 }
