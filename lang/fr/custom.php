@@ -134,6 +134,8 @@ return [
     'models.question.duo.first' => 'Premier Élément',
     'models.question.duo.second' => 'Second Élément',
     'models.question.add_option' => 'Ajouter une Option',
+    "models.question.add_word" => "Ajouter un Mot",
+    'models.question.add_duo' => 'Ajouter une Paire',
 
     // Question translations
     'models.question.fill_blank.answer' => 'Réponse',

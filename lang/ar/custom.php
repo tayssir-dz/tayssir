@@ -132,6 +132,9 @@ return [
     'models.question.duo.first' => 'العنصر الأول',
     'models.question.duo.second' => 'العنصر الثاني',
     'models.question.add_option' => 'إضافة خيار',
+    "models.question.add_word" => "إضافة كلمة",
+    'models.question.add_duo' => 'إضافة زوج',
+
     // Question translations
     'models.question.fill_blank.answer' => 'الإجابة',
     'models.question.fill_blank.answers' => 'الإجابات',

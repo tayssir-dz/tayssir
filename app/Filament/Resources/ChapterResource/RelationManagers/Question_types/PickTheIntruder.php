@@ -27,13 +27,19 @@ class PickTheIntruder extends QuestionType
                         ->inline()
                         ->default(false)
                         ->label(trans('custom.models.question.word.is_intruder'))
-                        ->reactive(),
+                        ->reactive()
+                        ->fixIndistinctState(),
                 ])
                 ->columns(2)
                 ->minItems(3)
                 ->maxItems(8)
                 ->defaultItems(3)
+                ->reorderableWithButtons()
+                ->collapsible()
+                ->itemLabel(fn(array $state): ?string => $state['word'] ?? null)
                 ->columnSpanFull()
+                ->label("")
+                ->addActionLabel(trans('custom.models.question.add_word'))
                 ->mutateRelationshipDataBeforeSaveUsing(function (array $data): array {
                     $intruderCount = collect($data)->where('is_intruder', true)->count();
                     if ($intruderCount !== 1) {

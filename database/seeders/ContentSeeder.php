@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 class ContentSeeder extends Seeder
 {
     private $arabicFaker;
-    
+
     public function __construct()
     {
         $this->arabicFaker = Faker::create('ar_SA');
@@ -74,11 +74,11 @@ class ContentSeeder extends Seeder
     private function generateQuestionsForChapter(Chapter $chapter): void
     {
         $numQuestions = rand(5, 10);
-        
+
         for ($i = 0; $i < $numQuestions; $i++) {
             $questionType = $this->getRandomQuestionType();
             $options = $this->generateQuestionOptions($questionType);
-            
+
             if ($questionType === 'true_or_false') {
                 $this->createTrueOrFalseQuestion($chapter);
             } else {
@@ -97,7 +97,7 @@ class ContentSeeder extends Seeder
     private function createTrueOrFalseQuestion($chapter)
     {
         $faker = Faker::create('ar_SA');
-        
+
         return Question::create([
             'chapter_id' => $chapter->id,
             'question' => $faker->sentence() . '؟',
@@ -117,7 +117,7 @@ class ContentSeeder extends Seeder
             'true_or_false',
             'match_with_arrows'
         ];
-        
+
         return $types[array_rand($types)];
     }
 
@@ -128,7 +128,7 @@ class ContentSeeder extends Seeder
                 $numOptions = rand(3, 4);
                 $correctOption = rand(0, $numOptions - 1);
                 $options = [];
-                
+
                 for ($i = 0; $i < $numOptions; $i++) {
                     $options[] = [
                         'option' => rtrim($this->arabicFaker->realText(20), '.'),
@@ -142,18 +142,18 @@ class ContentSeeder extends Seeder
                 $words = [];
                 $paragraph = rtrim($this->arabicFaker->realText(100), '.');
                 $words_array = explode(' ', $paragraph);
-                
+
                 // Ensure we have enough words
                 if (count($words_array) < $numBlanks) {
                     $numBlanks = count($words_array);
                 }
-                
+
                 // Select random positions for blanks
                 $positions = array_rand($words_array, $numBlanks);
                 if (!is_array($positions)) {
                     $positions = [$positions];
                 }
-                
+
                 foreach ($positions as $index => $pos) {
                     $word = $words_array[$pos];
                     $placeholder = $index + 1;
@@ -163,7 +163,7 @@ class ContentSeeder extends Seeder
                     ];
                     $words_array[$pos] = "[$placeholder]";
                 }
-                
+
                 return [
                     'paragraph' => implode(' ', $words_array),
                     'answers' => $words
@@ -172,14 +172,14 @@ class ContentSeeder extends Seeder
             case 'true_or_false':
                 return [
                     'type' => 'true_false',
-                    'correct' => (bool)rand(0, 1)
+                    'correct' => (bool) rand(0, 1)
                 ];
 
             case 'pick_the_intruder':
                 $numWords = rand(4, 5);
                 $intruderIndex = rand(0, $numWords - 1);
                 $words = [];
-                
+
                 for ($i = 0; $i < $numWords; $i++) {
                     $words[] = [
                         'word' => rtrim($this->arabicFaker->realText(15), '.'),
@@ -191,7 +191,7 @@ class ContentSeeder extends Seeder
             case 'match_with_arrows':
                 $numPairs = rand(2, 3);
                 $pairs = [];
-                
+
                 for ($i = 0; $i < $numPairs; $i++) {
                     $pairs[] = [
                         'first' => rtrim($this->arabicFaker->realText(15), '.'),

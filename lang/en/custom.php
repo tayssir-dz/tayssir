@@ -142,7 +142,8 @@ return [
     'models.question.true_false.true' => 'True',
     'models.question.true_false.false' => 'False',
     'models.question.add_option' => 'Add Option',
-
+    "models.question.add_word" => "Add Word",
+    'models.question.add_duo' => 'Add Pair',
     // Card
 
     "models.card.code" => "Code",
