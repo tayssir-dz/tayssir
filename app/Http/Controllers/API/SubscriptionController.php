@@ -47,7 +47,7 @@ class SubscriptionController extends BaseController
     public function userSubscriptions(Request $request)
     {
         $user = $request->user();
-        $subscriptions = $user->subscriptions->map(function ($subscription) {
+        $subscriptions = $user->active_subscriptions->map(function ($subscription) {
             return [
                 "id" => $subscription->id,
                 "name" => $subscription->name,

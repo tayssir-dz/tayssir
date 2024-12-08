@@ -7,6 +7,7 @@ use App\Models\Division;
 use App\Models\Material;
 use App\Models\Question;
 use App\Models\Unit;
+use App\Models\Subscription;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 class ContentSeeder extends Seeder
 {
     private $arabicFaker;
+    private $subscriptionIds;
 
     public function __construct()
     {
@@ -23,7 +25,14 @@ class ContentSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
+
+        // Create subscriptions first
+        $this->seedSubscriptions();
+
         $content = json_decode(file_get_contents(database_path('seeders/json/Content.json')), true);
+
+        // Get all subscription IDs
+        $this->subscriptionIds = Subscription::pluck('id')->toArray();
 
         DB::transaction(function () use ($content, $faker) {
             foreach ($content['divisions'] as $divisionData) {
@@ -48,8 +57,16 @@ class ContentSeeder extends Seeder
                                 'name' => $unitData['name'],
                                 'material_id' => $material->id
                             ],
-                            ['description' => $unitData['description']]
+                            [
+                                'description' => $unitData['description']
+                            ]
                         );
+
+                        // Attach guest and random subscription to unit
+                        $unit->subscriptions()->attach([
+                            Subscription::GUEST_ID,
+                            $this->getRandomSubscription()
+                        ]);
 
                         foreach ($unitData['chapters'] as $chapterData) {
                             $chapter = Chapter::firstOrCreate(
@@ -57,8 +74,16 @@ class ContentSeeder extends Seeder
                                     'name' => $chapterData['name'],
                                     'unit_id' => $unit->id
                                 ],
-                                ['description' => $chapterData['description']]
+                                [
+                                    'description' => $chapterData['description']
+                                ]
                             );
+
+                            // Attach guest and random subscription to chapter
+                            $chapter->subscriptions()->attach([
+                                Subscription::GUEST_ID,
+                                $this->getRandomSubscription()
+                            ]);
 
                             // Only generate questions if the chapter was just created
                             if ($chapter->wasRecentlyCreated) {
@@ -69,6 +94,59 @@ class ContentSeeder extends Seeder
                 }
             }
         });
+    }
+
+    private function seedSubscriptions(): void
+    {
+        // Create guest subscription first to ensure it has ID 1
+        Subscription::firstOrCreate(
+            ['id' => Subscription::GUEST_ID],
+            [
+                'name' => 'مجاني',
+                'description' => 'اشتراك مجاني يتيح الوصول إلى المحتوى الأساسي',
+                'price' => 0,
+                'ending_date' => null,
+            ]
+        );
+
+        $subscriptions = [
+            [
+                'name' => 'فصلي',
+                'description' => 'اشتراك لمدة ثلاثة أشهر',
+                'price' => 299,
+                'ending_date' => now()->addMonths(3),
+            ],
+            [
+                'name' => 'نصف سنوي',
+                'description' => 'اشتراك لمدة ستة أشهر',
+                'price' => 499,
+                'ending_date' => now()->addMonths(6),
+            ],
+            [
+                'name' => 'سنوي',
+                'description' => 'اشتراك لمدة سنة كاملة',
+                'price' => 899,
+                'ending_date' => now()->addYear(),
+            ],
+            [
+                'name' => 'بريميوم',
+                'description' => 'اشتراك مميز مع جمي�� المميزات',
+                'price' => 1299,
+                'ending_date' => now()->addYear(),
+            ],
+        ];
+
+        foreach ($subscriptions as $subscription) {
+            Subscription::firstOrCreate(
+                ['name' => $subscription['name']],
+                $subscription
+            );
+        }
+    }
+
+    private function getRandomSubscription(): int
+    {
+        return $this->subscriptionIds[array_rand($this->subscriptionIds)];
     }
 
     private function generateQuestionsForChapter(Chapter $chapter): void

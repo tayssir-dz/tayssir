@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\ContentController;
 use App\Http\Controllers\API\ForgotPasswordController;
 use App\Http\Controllers\API\EmailVerificationController;
 use App\Http\Controllers\API\SubscriptionController;
@@ -33,8 +34,8 @@ Route::prefix('v1')->group(function () {
 
 
         Route::post("check-phone-number", [AuthController::class, 'checkPhoneNumber'])
-        ->summary("Check if phone number exists")
-        ->description("this endpoint checks if a phone number exists in the system");
+            ->summary("Check if phone number exists")
+            ->description("this endpoint checks if a phone number exists in the system");
 
         Route::post("logout", [AuthController::class, 'logout'])
             ->middleware(["auth:sanctum", "access"])
@@ -113,5 +114,11 @@ Route::prefix('v1')->group(function () {
             ->middleware(["auth:sanctum", "access"])
             ->summary("Unsubscribe from a subscription")
             ->description("this endpoint takes the subscription id and the user's password and unsubscribes the user from the subscription");
+    });
+    Route::prefix("content")->group(function () {
+        Route::get("/", [ContentController::class, "getUserContent"])
+            ->middleware(["auth:sanctum", "access"])
+            ->summary("Get user content")
+            ->description("This endpoint returns the content associated with the authenticated user.");
     });
 });
