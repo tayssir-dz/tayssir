@@ -96,8 +96,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
 
     public function subscriptions()
     {
-        return $this->hasMany(SubscriptionCard::class)
+        $subscriptions = $this->hasMany(SubscriptionCard::class)
             ->where('redeemed_at', '!=', null)
+            ->whereHas('subscription')  // Only get cards with valid subscriptions
             ->whereHas('subscription', function ($query) {
                 $query->where(function ($q) {
                     $q->whereNull('ending_date')
@@ -105,29 +106,35 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
                 });
             })
             ->with('subscription')
-            ->latest('redeemed_at');
+            ->latest('redeemed_at')
+            ->get()
+            ->map(function ($card) {
+                return $card->subscription ?? null;
+            })
+            ->filter();  // Remove any null values
+
+        // Always add guest subscription
+        $guestSubscription = Subscription::find(Subscription::GUEST_ID);
+        if ($guestSubscription && !$subscriptions->contains('id', Subscription::GUEST_ID)) {
+            $subscriptions->push($guestSubscription);
+        }
+
+        return $subscriptions->filter()->values();  // Ensure collection is clean and reindexed
     }
 
     public function getActiveSubscriptionsAttribute()
     {
-        $subscriptions = $this->subscriptions()->get();
+        $subscriptions = $this->subscriptions();
 
-        if ($subscriptions->isEmpty()) {
-            return collect([
-                SubscriptionCard::make([
-                    'subscription_id' => Subscription::GUEST_ID
-                ])
-            ]);
+        // If no subscriptions or only guest, return as is
+        if ($subscriptions->count() <= 1) {
+            return $subscriptions;
         }
 
         // If there are other subscriptions besides guest, remove guest
-        // if ($subscriptions->count() > 1) {
-        //     return $subscriptions->filter(function ($sub) {
-        //         return $sub->subscription_id !== Subscription::GUEST_ID;
-        //     });
-        // }
-
-        return $subscriptions;
+        return $subscriptions->filter(function ($sub) {
+            return $sub && $sub->id !== Subscription::GUEST_ID;
+        })->values();
     }
 
     public function accessibleUnits()

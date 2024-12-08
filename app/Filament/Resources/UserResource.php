@@ -130,7 +130,7 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->options(function (callable $get) {
                                 $wilayaId = $get('wilaya_id');
                                 $field = __("custom.models.user.wilaya.field"); // 'name' or 'arabic_name' based on the language
-
+                    
                                 if ($wilayaId) {
                                     // Query the communes based on the selected wilaya and the dynamic field
                                     $communes = Commune::where('wilaya_id', $wilayaId)
@@ -163,17 +163,22 @@ class UserResource extends Resource implements HasShieldPermissions
                         Placeholder::make('active_subscriptions')
                             ->label(__('custom.models.user.subscribtion'))
                             ->content(function ($record) {
-                                if (!$record)
+                                if (!$record || !$record->active_subscriptions) {
                                     return '';
+                                }
 
                                 return new HtmlString(
                                     $record->active_subscriptions
-                                        ->map(function ($subscriptionCard) {
+                                        ->map(function ($subscription) {
+                                            if (!$subscription)
+                                                return '';
                                             return sprintf(
                                                 '<div class="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-primary-500 text-white">%s</div>',
-                                                $subscriptionCard->subscription->name
+                                                $subscription->name ?? '-'
                                             );
-                                        })->join(' ')
+                                        })
+                                        ->filter()
+                                        ->join(' ')
                                 );
                             })
                             ->columnSpan(2),
@@ -199,7 +204,7 @@ class UserResource extends Resource implements HasShieldPermissions
                 TextColumn::make('avatar_url')
                     ->label(__('custom.models.user.avatar'))
                     ->html()
-                    ->getStateUsing(fn ($record) => view('components.filament-ui.avatar', [
+                    ->getStateUsing(fn($record) => view('components.filament-ui.avatar', [
                         'name' => $record->name,
                         'avatar_url' => $record->avatar_url,
                     ])->render()),
@@ -210,7 +215,7 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->sortable()
                     ->weight(FontWeight::Bold)
                     ->size('sm')
-                    ->description(fn ($record) => view('components.small-text')->with([
+                    ->description(fn($record) => view('components.small-text')->with([
                         'text' => $record->email
                     ])),
 
@@ -226,7 +231,7 @@ class UserResource extends Resource implements HasShieldPermissions
                 TextColumn::make('points')
                     ->label(__('custom.models.user.points'))
                     ->badge()
-                    ->color(fn ($state) => $state > 1000 ? 'success' : 'warning')
+                    ->color(fn($state) => $state > 1000 ? 'success' : 'warning')
                     ->alignCenter()
                     ->sortable()
                     ->size('sm')
@@ -247,9 +252,11 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->color('success')
                     ->size('sm')
                     ->getStateUsing(function ($record) {
-                        $subs = $record->active_subscriptions->map(function ($sub) {
-                            return $sub->subscription->name;
-                        });
+                        $subs = $record->active_subscriptions
+                            ->map(function ($sub) {
+                                return $sub?->name ?? '-';
+                            })
+                            ->filter(fn($name) => $name !== '-');
                         return $subs->isEmpty() ? '-' : $subs;
                     })
                     ->wrap(),
@@ -260,7 +267,7 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->sortable()
                     ->size('sm')
                     ->default(__('custom.models.user.wilaya.empty'))
-                    ->description(fn ($record) => $record->commune?->{__('custom.models.user.commune.field')} ?? __('custom.models.user.commune.empty')),
+                    ->description(fn($record) => $record->commune?->{__('custom.models.user.commune.field')} ?? __('custom.models.user.commune.empty')),
 
                 ToggleColumn::make('email_verified_at')
                     ->label(__('custom.models.user.verified'))
@@ -298,8 +305,8 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->trueLabel(__('custom.models.user.email_verified'))
                     ->falseLabel(__('custom.models.user.email_not_verified'))
                     ->queries(
-                        true: fn (Builder $query) => $query->whereNotNull('email_verified_at'),
-                        false: fn (Builder $query) => $query->whereNull('email_verified_at'),
+                        true: fn(Builder $query) => $query->whereNotNull('email_verified_at'),
+                        false: fn(Builder $query) => $query->whereNull('email_verified_at'),
                     ),
             ])
             ->actions([
