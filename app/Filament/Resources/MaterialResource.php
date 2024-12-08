@@ -114,36 +114,43 @@ class MaterialResource extends Resource implements HasShieldPermissions
     {
         return $table
             ->columns([
-                // SpatieMediaLibraryImageColumn::make('image')
-                //     ->label(__("custom.forms.material.create.section.image"))
-                //     ->collection('materials-image')
-                //     ->rounded(),
+                SpatieMediaLibraryImageColumn::make('image')
+                    ->toggleable()
+                    ->label(__("custom.forms.material.create.section.image"))
+                    ->collection('materials-image')
+                    ->rounded(),
 
                 TextColumn::make("name")
                     ->label(__("custom.models.material.name"))
                     ->searchable()
+                    ->toggleable()
                     ->sortable(),
 
                 TextColumn::make("code")
                     ->searchable()
                     ->sortable()
+                    ->toggleable()
                     ->badge()
                     ->colors(['primary'])
                     ->label(__("custom.models.material.code")),
 
                 ColorColumn::make("color")
+                    ->toggleable()
                     ->label(__("custom.models.material.color")),
 
                 ColorColumn::make("secondary_color")
+                    ->toggleable()
                     ->label(__("custom.models.material.secondary_color"))
                     ->default('#000000')
-                    ,
+                ,
 
                 TextColumn::make("description")
+                    ->toggleable()
                     ->label(__("custom.models.material.description"))
                     ->limit(30),
 
                 TextColumn::make('division.name')
+                    ->toggleable()
                     ->label(__("custom.models.material.division"))
                     ->badge()
                     ->colors(['gray'])
@@ -155,6 +162,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
                     ->label(__('custom.models.units'))
                     ->counts('units')
                     ->sortable()
+                    ->toggleable()
                     ->colors(['primary'])
                     ->sortable(),
             ])

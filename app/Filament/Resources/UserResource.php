@@ -163,21 +163,15 @@ class UserResource extends Resource implements HasShieldPermissions
                         Placeholder::make('active_subscriptions')
                             ->label(__('custom.models.user.subscribtion'))
                             ->content(function ($record) {
-                                if (!$record || !$record->active_subscriptions) {
+                                if (!$record)
                                     return '';
-                                }
 
                                 return new HtmlString(
-                                    $record->active_subscriptions
-                                        ->map(function ($subscription) {
-                                            if (!$subscription)
-                                                return '';
-                                            return sprintf(
-                                                '<div class="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-primary-500 text-white">%s</div>',
-                                                $subscription->name ?? '-'
-                                            );
-                                        })
-                                        ->filter()
+                                    $record->subscriptions
+                                        ->map(fn($sub) => sprintf(
+                                            '<div class="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-primary-500 text-white">%s</div>',
+                                            $sub->name
+                                        ))
                                         ->join(' ')
                                 );
                             })
@@ -202,6 +196,7 @@ class UserResource extends Resource implements HasShieldPermissions
         return $table
             ->columns([
                 TextColumn::make('avatar_url')
+                    ->toggleable()
                     ->label(__('custom.models.user.avatar'))
                     ->html()
                     ->getStateUsing(fn($record) => view('components.filament-ui.avatar', [
@@ -213,6 +208,7 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->label(__('custom.models.user.name'))
                     ->searchable()
                     ->sortable()
+                    ->toggleable()
                     ->weight(FontWeight::Bold)
                     ->size('sm')
                     ->description(fn($record) => view('components.small-text')->with([
@@ -223,6 +219,7 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->label(__('custom.models.user.phone'))
                     ->default(__("custom.models.user.phone.empty"))
                     ->searchable()
+                    ->toggleable()
                     ->copyable()
                     ->size('sm')
                     ->copyMessage('Phone number copied')
@@ -234,12 +231,14 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->color(fn($state) => $state > 1000 ? 'success' : 'warning')
                     ->alignCenter()
                     ->sortable()
+                    ->toggleable()
                     ->size('sm')
                     ->numeric(),
 
                 TextColumn::make('roles.name')
                     ->label(__('custom.models.user.roles'))
                     ->badge()
+                    ->toggleable()
                     ->color('primary')
                     ->separator(', ')
                     ->size('sm')
@@ -249,21 +248,22 @@ class UserResource extends Resource implements HasShieldPermissions
                 TextColumn::make('subscriptions')
                     ->label(__('custom.models.user.subscribtion'))
                     ->badge()
+                    ->wrap()
+                    ->toggleable()
                     ->color('success')
                     ->size('sm')
                     ->getStateUsing(function ($record) {
-                        $subs = $record->active_subscriptions
-                            ->map(function ($sub) {
-                                return $sub?->name ?? '-';
-                            })
-                            ->filter(fn($name) => $name !== '-');
-                        return $subs->isEmpty() ? '-' : $subs;
+                        return $record->subscriptions
+                            ->map(fn($sub) => $sub->name)
+                            ->values()
+                            ->toArray() ?: ['-'];
                     })
                     ->wrap(),
 
                 TextColumn::make('wilaya.' . __('custom.models.user.wilaya.field'))
                     ->label(__('custom.models.user.wilaya'))
                     ->searchable()
+                    ->toggleable()
                     ->sortable()
                     ->size('sm')
                     ->default(__('custom.models.user.wilaya.empty'))
@@ -272,6 +272,7 @@ class UserResource extends Resource implements HasShieldPermissions
                 ToggleColumn::make('email_verified_at')
                     ->label(__('custom.models.user.verified'))
                     ->sortable()
+                    ->toggleable()
                     ->alignCenter()
                     ->afterStateUpdated(function ($state, $record) {
                         if ($state) {

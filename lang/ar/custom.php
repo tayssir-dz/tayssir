@@ -86,7 +86,7 @@ return [
     'models.user.commune.field' => "arabic_name",
 
     'models.user.tabs.all' => 'الكل',
-    'models.user.tabs.students' => 'الطل��ب',
+    'models.user.tabs.students' => 'الطلاب',
     'models.user.tabs.with_roles' => 'ذوي الأدوار',
 
     'models.user.perfonal_info' => 'المعلومات الشخصية',

@@ -94,11 +94,10 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
         return $this->belongsTo(Commune::class);
     }
 
-    public function subscriptions()
+    public function subscription_cards()
     {
-        $subscriptions = $this->hasMany(SubscriptionCard::class)
+        return $this->hasMany(SubscriptionCard::class)
             ->where('redeemed_at', '!=', null)
-            ->whereHas('subscription')  // Only get cards with valid subscriptions
             ->whereHas('subscription', function ($query) {
                 $query->where(function ($q) {
                     $q->whereNull('ending_date')
@@ -106,35 +105,37 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
                 });
             })
             ->with('subscription')
-            ->latest('redeemed_at')
-            ->get()
-            ->map(function ($card) {
-                return $card->subscription ?? null;
-            })
-            ->filter();  // Remove any null values
+            ->latest('redeemed_at');
+    }
 
-        // Always add guest subscription
+    public function getSubscriptionsAttribute()
+    {
+        $subscriptions = $this->subscription_cards
+            ->map(fn($card) => $card->subscription)
+            ->filter();
+
         $guestSubscription = Subscription::find(Subscription::GUEST_ID);
         if ($guestSubscription && !$subscriptions->contains('id', Subscription::GUEST_ID)) {
             $subscriptions->push($guestSubscription);
         }
 
-        return $subscriptions->filter()->values();  // Ensure collection is clean and reindexed
+        return $subscriptions->unique('id')->values();
     }
 
     public function getActiveSubscriptionsAttribute()
     {
-        $subscriptions = $this->subscriptions();
+        $subscriptions = $this->subscription_cards
+            ->map(fn($card) => $card->subscription)
+            ->filter();
 
-        // If no subscriptions or only guest, return as is
-        if ($subscriptions->count() <= 1) {
-            return $subscriptions;
+        if ($subscriptions->isEmpty()) {
+            // If no subscriptions, return guest only
+            return collect([Subscription::find(Subscription::GUEST_ID)])
+                ->filter();
         }
 
-        // If there are other subscriptions besides guest, remove guest
-        return $subscriptions->filter(function ($sub) {
-            return $sub && $sub->id !== Subscription::GUEST_ID;
-        })->values();
+        // If has subscriptions, return them without guest
+        return $subscriptions->unique('id')->values();
     }
 
     public function accessibleUnits()
