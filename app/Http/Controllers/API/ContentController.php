@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\Division;
 use Illuminate\Http\Request;
 
-class ContentController
+class ContentController extends BaseController
 {
     public function getUserContent(Request $request)
     {
@@ -13,7 +13,7 @@ class ContentController
         $userSubscriptions = $request->user()->subscriptions->pluck('id');
         $division = Division::where('id', 2)->first();
 
-        return $division->load([
+        $result = $division->load([
             'materials.units' => function ($query) use ($userSubscriptions) {
                 $query->whereHas('subscriptions', function ($q) use ($userSubscriptions) {
                     $q->whereIn('subscriptions.id', $userSubscriptions);
@@ -26,5 +26,6 @@ class ContentController
                         ]);
             }
         ]);
+        return $this->sendResponse($result);
     }
 }
