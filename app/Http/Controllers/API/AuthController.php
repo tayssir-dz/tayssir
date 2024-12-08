@@ -17,7 +17,7 @@ use Validator;
 use Auth;
 use G4T\Swagger\Attributes\SwaggerSection;
 
-#[SwaggerSection('This section manages all authentication-related actions such as user registration, login, logout, and token refresh. It ensures secure authentication processes, handling both token-based and user-based operations for registering and logging users in and out of the system.')]
+// #[SwaggerSection('This section manages all authentication-related actions such as user registration, login, logout, and token refresh. It ensures secure authentication processes, handling both token-based and user-based operations for registering and logging users in and out of the system.')]
 class AuthController extends BaseController
 {
     public function register(RegisterRequest $request)

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Validator;
 use G4T\Swagger\Attributes\SwaggerSection;
 
-#[SwaggerSection('This section handles all user-related operations such as retrieving user information, updating user details like name, email, and phone number, and allowing users to change their password securely. It enforces proper user authentication and authorization to protect user data.')]
+// #[SwaggerSection('This section handles all user-related operations such as retrieving user information, updating user details like name, email, and phone number, and allowing users to change their password securely. It enforces proper user authentication and authorization to protect user data.')]
 class UserController extends BaseController
 {
     public function index(Request $request)

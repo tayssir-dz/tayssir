@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Mail;
 use G4T\Swagger\Attributes\SwaggerSection;
 
-#[SwaggerSection("This section manages the password recovery process. It handles sending password reset emails, verifying OTPs, and resetting passwords through a secure multi-step process, ensuring that users can regain access to their accounts while maintaining security.")]
+// #[SwaggerSection("This section manages the password recovery process. It handles sending password reset emails, verifying OTPs, and resetting passwords through a secure multi-step process, ensuring that users can regain access to their accounts while maintaining security.")]
 class ForgotPasswordController extends BaseController
 {
     public function forgotPassword(ForgotPasswordRequest $request)

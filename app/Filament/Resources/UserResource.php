@@ -167,7 +167,7 @@ class UserResource extends Resource implements HasShieldPermissions
                                     return '';
 
                                 return new HtmlString(
-                                    $record->subscriptions
+                                    $record->active_subscriptions
                                         ->map(fn($sub) => sprintf(
                                             '<div class="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-primary-500 text-white">%s</div>',
                                             $sub->name
@@ -253,7 +253,7 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->color('success')
                     ->size('sm')
                     ->getStateUsing(function ($record) {
-                        return $record->subscriptions
+                        return $record->active_subscriptions
                             ->map(fn($sub) => $sub->name)
                             ->values()
                             ->toArray() ?: ['-'];
