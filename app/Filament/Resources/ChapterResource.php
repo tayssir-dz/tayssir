@@ -106,6 +106,9 @@ class ChapterResource extends Resource implements HasShieldPermissions
                     ->rounded()
                     ->label(__('custom.models.chapter.photo')),
 
+                TextColumn::make("subscriptions.name")
+                    ->badge(),
+
                 TextColumn::make('name')
                     ->label(__('custom.models.chapter.name'))
                     ->sortable()
