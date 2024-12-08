@@ -80,26 +80,26 @@ class ContentSeeder extends Seeder
             $options = $this->generateQuestionOptions($questionType);
 
             if ($questionType === 'true_or_false') {
-                $this->createTrueOrFalseQuestion($chapter);
+                $question = $this->createTrueOrFalseQuestion();
+                $chapter->questions()->attach($question->id);
             } else {
-                Question::create([
+                $question = Question::create([
                     'question' => rtrim($this->arabicFaker->realText(50), '.') . '؟',
                     'question_type' => $questionType,
                     'options' => $options,
                     'points' => rand(1, 5),
                     'hint' => rand(0, 1) ? rtrim($this->arabicFaker->realText(30), '.') : null,
-                    'chapter_id' => $chapter->id,
                 ]);
+                $chapter->questions()->attach($question->id);
             }
         }
     }
 
-    private function createTrueOrFalseQuestion($chapter)
+    private function createTrueOrFalseQuestion()
     {
         $faker = Faker::create('ar_SA');
 
         return Question::create([
-            'chapter_id' => $chapter->id,
             'question' => $faker->sentence() . '؟',
             'question_type' => 'true_or_false',
             'options' => ['correct' => $faker->boolean()],

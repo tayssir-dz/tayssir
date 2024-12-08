@@ -145,6 +145,7 @@ class QuestionsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->reorderable("chapter_question.sort")
             ->recordTitleAttribute('question')
             ->columns([
                 Tables\Columns\TextColumn::make('question')->label(__('custom.models.question.question')),

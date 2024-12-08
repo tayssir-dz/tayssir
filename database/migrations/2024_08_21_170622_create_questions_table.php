@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->integer("points");
             $table->string('hint')->nullable();
             $table->text('explanation')->nullable();
-            $table->foreignId('chapter_id')->constrained()->onDelete('cascade');
+            // $table->foreignId('chapter_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
