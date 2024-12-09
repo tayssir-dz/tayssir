@@ -8,13 +8,13 @@
   ),
   'barryvdh/laravel-debugbar' => 
   array (
-    'providers' => 
-    array (
-      0 => 'Barryvdh\\Debugbar\\ServiceProvider',
-    ),
     'aliases' => 
     array (
       'Debugbar' => 'Barryvdh\\Debugbar\\Facades\\Debugbar',
+    ),
+    'providers' => 
+    array (
+      0 => 'Barryvdh\\Debugbar\\ServiceProvider',
     ),
   ),
   'bezhansalleh/filament-language-switch' => 
@@ -132,13 +132,13 @@
   ),
   'howdu/filament-record-switcher' => 
   array (
-    'providers' => 
-    array (
-      0 => 'Howdu\\FilamentRecordSwitcher\\FilamentRecordSwitcherServiceProvider',
-    ),
     'aliases' => 
     array (
       'FilamentRecordSwitcher' => 'Howdu\\FilamentRecordSwitcher\\Facades\\FilamentRecordSwitcher',
+    ),
+    'providers' => 
+    array (
+      0 => 'Howdu\\FilamentRecordSwitcher\\FilamentRecordSwitcherServiceProvider',
     ),
   ),
   'ichtrojan/laravel-otp' => 
@@ -165,13 +165,13 @@
   ),
   'joaopaulolndev/filament-edit-profile' => 
   array (
-    'providers' => 
-    array (
-      0 => 'Joaopaulolndev\\FilamentEditProfile\\FilamentEditProfileServiceProvider',
-    ),
     'aliases' => 
     array (
       'FilamentEditProfile' => 'Joaopaulolndev\\FilamentEditProfile\\Facades\\FilamentEditProfile',
+    ),
+    'providers' => 
+    array (
+      0 => 'Joaopaulolndev\\FilamentEditProfile\\FilamentEditProfileServiceProvider',
     ),
   ),
   'kirschbaum-development/eloquent-power-joins' => 
@@ -204,13 +204,13 @@
   ),
   'livewire/livewire' => 
   array (
-    'providers' => 
-    array (
-      0 => 'Livewire\\LivewireServiceProvider',
-    ),
     'aliases' => 
     array (
       'Livewire' => 'Livewire\\Livewire',
+    ),
+    'providers' => 
+    array (
+      0 => 'Livewire\\LivewireServiceProvider',
     ),
   ),
   'nesbot/carbon' => 
