@@ -78,7 +78,6 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
             'password' => 'hashed',
         ];
     }
-
     public function subscriptionCards()
     {
         return $this->hasMany(SubscriptionCard::class);

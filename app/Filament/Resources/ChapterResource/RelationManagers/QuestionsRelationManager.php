@@ -14,6 +14,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Log;
 
 class QuestionsRelationManager extends RelationManager
 {
@@ -162,7 +163,12 @@ class QuestionsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                // ->using(function (array $data, string $model): Model {
+                //     $question = $model::create($data);
+                //     $this->getOwnerRecord()->questions()->attach($question);
+                //     return $question;
+                // }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

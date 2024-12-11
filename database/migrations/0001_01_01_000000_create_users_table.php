@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->integer("points")->default(0);
             $table->string('password');
-            $table->unsignedBigInteger('subscription_card_id')->nullable();
+            // $table->unsignedBigInteger('subscription_card_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

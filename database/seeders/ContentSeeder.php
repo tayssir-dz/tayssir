@@ -87,7 +87,7 @@ class ContentSeeder extends Seeder
 
                             // Only generate questions if the chapter was just created
                             if ($chapter->wasRecentlyCreated) {
-                                $this->generateQuestionsForChapter($chapter);
+                                // $this->generateQuestionsForChapter($chapter);
                             }
                         }
                     }
@@ -165,7 +165,6 @@ class ContentSeeder extends Seeder
                     'question' => rtrim($this->arabicFaker->realText(50), '.') . '؟',
                     'question_type' => $questionType,
                     'options' => $options,
-                    'points' => rand(1, 5),
                     'hint' => rand(0, 1) ? rtrim($this->arabicFaker->realText(30), '.') : null,
                 ]);
                 $chapter->questions()->attach($question->id);

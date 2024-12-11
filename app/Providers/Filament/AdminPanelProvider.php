@@ -101,9 +101,10 @@ class AdminPanelProvider extends PanelProvider
                     FilamentRecordSwitcherPlugin::make(),
 
                 ])
-            ->spa()
+            // ->spa()
             // ->darkMode(false)
-            ->renderHook('panels::body.end', fn(): string => Blade::render("@vite('resources/js/app.js')"))
-            ->viteTheme('resources/css/filament/dashboard/theme.css');
+            // ->renderHook('panels::body.end', fn(): string => Blade::render("@vite('resources/js/app.js')"))
+            // ->viteTheme('resources/css/filament/dashboard/theme.css');
+        ;
     }
 }

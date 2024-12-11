@@ -52,12 +52,12 @@ class Chapter extends Model implements HasMedia
     {
         return $this->belongsToMany(Question::class)
             ->withPivot('sort')
-            ->orderBy('chapter_question.sort');
+            ->orderBy('chapter_question.sort')
+            ->orderBy('questions.id');
     }
 
     public function subscriptions()
     {
         return $this->belongsToMany(Subscription::class);
     }
-
 }

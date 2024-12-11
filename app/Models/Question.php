@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\QuestionDifficulty;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -24,7 +25,7 @@ class Question extends Model implements HasMedia
         'question',
         'question_type',
         'options',
-        "points",
+        "difficulty",
         "hint",
     ];
 
@@ -51,11 +52,12 @@ class Question extends Model implements HasMedia
     protected $casts = [
         'options' => 'array',
         'question_type' => QuestionType::class,
+        'difficulty' => QuestionDifficulty::class
     ];
 
     public function chapter()
     {
-        return $this->belongsToMany(Chapter::class)
+        return $this->belongsToMany(related: Chapter::class)
             ->withPivot('sort')  // Add any pivot columns you need
             ->limit(1);  // Ensure only one chapter is returned
     }
