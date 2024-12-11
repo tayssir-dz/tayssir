@@ -58,6 +58,7 @@ class Question extends Model implements HasMedia
     public function chapter()
     {
         return $this->belongsToMany(related: Chapter::class)
+            ->using(ChapterQuestion::class)
             ->withPivot('sort')  // Add any pivot columns you need
             ->limit(1);  // Ensure only one chapter is returned
     }

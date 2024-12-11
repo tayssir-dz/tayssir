@@ -15,11 +15,10 @@ return new class extends Migration {
             $table->string('question');
             $table->enum('question_type', ['multiple_choices', 'fill_in_the_blanks', 'pick_the_intruder', 'true_or_false', 'match_with_arrows']);
             $table->json("options");
-            $table->integer("points");
+            // $table->integer("points");
             $table->enum('difficulty', ['easy', 'medium', 'hard'])->default("medium");
             $table->string('hint')->nullable();
             $table->text('explanation')->nullable();
-            // $table->foreignId('chapter_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

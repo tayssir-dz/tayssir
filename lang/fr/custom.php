@@ -137,6 +137,10 @@ return [
     'models.question.add_option' => 'Ajouter une Option',
     "models.question.add_word" => "Ajouter un Mot",
     'models.question.add_duo' => 'Ajouter une Paire',
+    'models.question.difficulty' => 'Difficulté',
+    'models.question.difficulty.easy' => 'Facile',
+    'models.question.difficulty.medium' => 'Moyen',
+    'models.question.difficulty.hard' => 'Difficile',
 
     // Question translations
     'models.question.fill_blank.answer' => 'Réponse',

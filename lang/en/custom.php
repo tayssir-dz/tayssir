@@ -145,6 +145,11 @@ return [
     'models.question.add_option' => 'Add Option',
     "models.question.add_word" => "Add Word",
     'models.question.add_duo' => 'Add Pair',
+
+    'models.question.difficulty' => 'Difficulty',
+    'models.question.difficulty.easy' => 'Easy',
+    'models.question.difficulty.medium' => 'Medium',
+    'models.question.difficulty.hard' => 'Hard',
     // Card
 
     "models.card.code" => "Code",

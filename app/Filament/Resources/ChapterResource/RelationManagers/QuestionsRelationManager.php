@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ChapterResource\RelationManagers;
 
+use App\Enums\QuestionDifficulty;
 use App\Enums\QuestionType;
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\FillInTheBlanks;
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\MatchWithArrows;
@@ -44,11 +45,11 @@ class QuestionsRelationManager extends RelationManager
                                 Forms\Components\Textarea::make('question')
                                     ->required()
                                     ->label(__('custom.models.question.question')),
-                                Forms\Components\TextInput::make('points')
-                                    ->required()
-                                    ->numeric()
-                                    ->minValue(1)
-                                    ->label(__('custom.models.question.points')),
+                                // Forms\Components\TextInput::make('points')
+                                //     ->required()
+                                //     ->numeric()
+                                //     ->minValue(1)
+                                //     ->label(__('custom.models.question.points')),
                                 Forms\Components\TextInput::make('hint')
                                     ->label(__('custom.models.question.hint')),
                             ]),
@@ -149,26 +150,27 @@ class QuestionsRelationManager extends RelationManager
             ->reorderable("chapter_question.sort")
             ->recordTitleAttribute('question')
             ->columns([
-                Tables\Columns\TextColumn::make('question')->label(__('custom.models.question.question')),
-                Tables\Columns\TextColumn::make('points')->label(__('custom.models.question.points'))
-                    ->badge()
-                    ->color("success"),
+                // Tables\Columns\TextColumn::make('question')->label(__('custom.models.question.question')),
+                // Tables\Columns\TextColumn::make('points')->label(__('custom.models.question.points'))
+                //     ->badge()
+                //     ->color("success"),
                 Tables\Columns\TextColumn::make('question_type')
                     ->label(__('custom.models.question.type'))
                     ->badge()
                     ->formatStateUsing(fn(QuestionType $state) => $state->getLabel())
                     ->color(fn(QuestionType $state) => $state->getColor()),
+                Tables\Columns\TextColumn::make('difficulty')
+                    ->label(__('custom.models.question.difficulty'))
+                    ->badge()
+                    ->formatStateUsing(fn(QuestionDifficulty $state) => $state->getLabel())
+                    ->color(fn(QuestionDifficulty $state) => $state->getColor()),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                // ->using(function (array $data, string $model): Model {
-                //     $question = $model::create($data);
-                //     $this->getOwnerRecord()->questions()->attach($question);
-                //     return $question;
-                // }),
+                    ->after(fn() => $this->getOwnerRecord()->distributeDifficulties())
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

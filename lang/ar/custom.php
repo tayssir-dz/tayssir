@@ -135,7 +135,10 @@ return [
     'models.question.add_option' => 'إضافة خيار',
     "models.question.add_word" => "إضافة كلمة",
     'models.question.add_duo' => 'إضافة زوج',
-
+    'models.question.difficulty' => 'الصعوبة',
+    'models.question.difficulty.easy' => 'سهل',
+    'models.question.difficulty.medium' => 'متوسط',
+    'models.question.difficulty.hard' => 'صعب',
     // Question translations
     'models.question.fill_blank.answer' => 'الإجابة',
     'models.question.fill_blank.answers' => 'الإجابات',
