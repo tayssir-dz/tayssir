@@ -62,4 +62,5 @@ class Question extends Model implements HasMedia
             ->withPivot('sort')  // Add any pivot columns you need
             ->limit(1);  // Ensure only one chapter is returned
     }
+
 }

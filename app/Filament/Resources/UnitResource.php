@@ -60,7 +60,7 @@ class UnitResource extends Resource implements HasShieldPermissions
             ->schema([
                 Section::make()->schema([
                     TextInput::make('name')->required()->minLength(3)->label(__('custom.models.unit.name')),
-                    Select::make('material_id')->relationship('material', 'code')->searchable()->required()->label(__('custom.models.unit.material')),
+                    Select::make('material_units')->relationship('material_units', 'code')->searchable()->preload()->required()->label(__('custom.models.unit.material')),
                     Textarea::make("description")->rows(4)->columnSpan(2)->label(__('custom.models.unit.description')),
                     Select::make('subscriptions')
                         ->multiple()
@@ -96,8 +96,8 @@ class UnitResource extends Resource implements HasShieldPermissions
                     ->colors(['primary']),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('material')->relationship("material", "code")->multiple()->preload()
-                    ->searchable()->label(__('custom.models.materials')),
+                // Tables\Filters\SelectFilter::make('material')->relationship("material", "code")->multiple()->preload()
+                //     ->searchable()->label(__('custom.models.materials')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

@@ -14,6 +14,7 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Model;
 use Log;
 
@@ -147,13 +148,10 @@ class QuestionsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->reorderable("chapter_question.sort")
+            ->reorderable('sort')
             ->recordTitleAttribute('question')
             ->columns([
-                // Tables\Columns\TextColumn::make('question')->label(__('custom.models.question.question')),
-                // Tables\Columns\TextColumn::make('points')->label(__('custom.models.question.points'))
-                //     ->badge()
-                //     ->color("success"),
+                Tables\Columns\TextColumn::make('question')->label(__('custom.models.question.question')),
                 Tables\Columns\TextColumn::make('question_type')
                     ->label(__('custom.models.question.type'))
                     ->badge()
@@ -164,6 +162,12 @@ class QuestionsRelationManager extends RelationManager
                     ->badge()
                     ->formatStateUsing(fn(QuestionDifficulty $state) => $state->getLabel())
                     ->color(fn(QuestionDifficulty $state) => $state->getColor()),
+
+                Tables\Columns\TextColumn::make('points')
+                    ->label(__('custom.models.question.points'))
+                    ->badge()
+                    ->color(fn($record) => $record->difficulty->getColor())
+                    ->getStateUsing(fn($record) => $record->difficulty->points()),
             ])
             ->filters([
                 //
@@ -174,11 +178,13 @@ class QuestionsRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->after(fn() => $this->getOwnerRecord()->distributeDifficulties()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->after(fn() => $this->getOwnerRecord()->distributeDifficulties()),
                 ]),
             ]);
     }

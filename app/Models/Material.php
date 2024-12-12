@@ -39,11 +39,18 @@ class Material extends Model implements HasMedia
     ];
 
     /**
-     * Get the division that owns the material.
+     * Get the divisions for the material.
      */
-    public function division()
+    public function division_materials()
     {
-        return $this->belongsTo(Division::class);
+        return $this->belongsToMany(Division::class)
+            ->withPivot('sort')
+            ->orderBy('division_material.sort');
+    }
+
+    public function getDivisionAttribute()
+    {
+        return $this->division_materials()->first();
     }
 
     /**
@@ -52,6 +59,9 @@ class Material extends Model implements HasMedia
 
     public function units()
     {
-        return $this->hasMany(Unit::class);
+        return $this->belongsToMany(Unit::class)
+            ->withPivot('sort')
+            ->orderBy('material_unit.sort')
+        ;
     }
 }

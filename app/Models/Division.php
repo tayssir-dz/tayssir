@@ -37,6 +37,8 @@ class Division extends Model implements HasMedia
      */
     public function materials()
     {
-        return $this->hasMany(Material::class);
+        return $this->belongsToMany(Material::class)
+            ->withPivot('sort')
+            ->orderBy('division_material.sort');
     }
 }

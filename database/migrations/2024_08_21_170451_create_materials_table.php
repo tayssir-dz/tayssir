@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('color');
             $table->string('secondary_color')->nullable();
             $table->text('description')->nullable();
-            $table->foreignId('division_id')->constrained()->cascadeOnDelete();
+            // $table->foreignId('division_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

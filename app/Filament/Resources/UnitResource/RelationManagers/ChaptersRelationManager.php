@@ -34,6 +34,7 @@ class ChaptersRelationManager extends RelationManager
         return __('custom.models.chapters');
     }
     protected static string $relationship = 'chapters';
+    protected static ?string $recordTitleAttribute = 'name';
 
     public function form(Form $form): Form
     {
@@ -48,7 +49,7 @@ class ChaptersRelationManager extends RelationManager
                     Select::make('subscriptions')
                         ->multiple()
                         ->relationship('subscriptions', 'name')
-                        ->searchable()
+                        // ->searchable()
                         ->preload()
                         ->label(__('custom.models.chapter.subscriptions')),
 
@@ -70,6 +71,7 @@ class ChaptersRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->reorderable('sort')
             ->recordTitleAttribute('name')
             ->columns([
                 SpatieMediaLibraryImageColumn::make('photo')
@@ -79,8 +81,8 @@ class ChaptersRelationManager extends RelationManager
 
                 TextColumn::make('name')
                     ->label(__('custom.models.chapter.name'))
-                    ->sortable()
-                    ->searchable(),
+                    ->sortable(),
+                // ->searchable(),
 
                 TextColumn::make('description')
                     ->limit(30)

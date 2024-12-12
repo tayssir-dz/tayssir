@@ -56,6 +56,7 @@ class UnitsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->reorderable('material_unit.sort')
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('name')

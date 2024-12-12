@@ -42,25 +42,23 @@ class ContentSeeder extends Seeder
                 );
 
                 foreach ($divisionData['materials'] as $materialData) {
-                    $material = Material::create([
+                    $material = new Material([
                         'name' => $materialData['name'],
                         'code' => $materialData['code'],
                         'color' => $materialData['color'],
                         'secondary_color' => $materialData['secondary_color'] ?? null,
                         'description' => $materialData['description'],
-                        'division_id' => $division->id,
                     ]);
 
+                    $division->materials()->save($material);
+
                     foreach ($materialData['units'] as $unitData) {
-                        $unit = Unit::firstOrCreate(
-                            [
-                                'name' => $unitData['name'],
-                                'material_id' => $material->id
-                            ],
-                            [
-                                'description' => $unitData['description']
-                            ]
-                        );
+                        $unit = new Unit([
+                            'name' => $unitData['name'],
+                            'description' => $unitData['description']
+                        ]);
+
+                        $material->units()->save($unit);
 
                         // Attach guest and random subscription to unit
                         $unit->subscriptions()->attach([
@@ -69,15 +67,12 @@ class ContentSeeder extends Seeder
                         ]);
 
                         foreach ($unitData['chapters'] as $chapterData) {
-                            $chapter = Chapter::firstOrCreate(
-                                [
-                                    'name' => $chapterData['name'],
-                                    'unit_id' => $unit->id
-                                ],
-                                [
-                                    'description' => $chapterData['description']
-                                ]
-                            );
+                            $chapter = new Chapter([
+                                'name' => $chapterData['name'],
+                                'description' => $chapterData['description']
+                            ]);
+
+                            $unit->chapters()->save($chapter);
 
                             // Attach guest and random subscription to chapter
                             $chapter->subscriptions()->attach([
@@ -87,7 +82,8 @@ class ContentSeeder extends Seeder
 
                             // Only generate questions if the chapter was just created
                             if ($chapter->wasRecentlyCreated) {
-                                // $this->generateQuestionsForChapter($chapter);
+                                $this->generateQuestionsForChapter($chapter);
+                                $chapter->distributeDifficulties();
                             }
                         }
                     }
@@ -130,7 +126,7 @@ class ContentSeeder extends Seeder
             ],
             [
                 'name' => 'بريميوم',
-                'description' => 'اشتراك مميز مع جمي�� المميزات',
+                'description' => 'اشتراك مميز مع جميع المميزات',
                 'price' => 1299,
                 'ending_date' => now()->addYear(),
             ],
@@ -180,7 +176,6 @@ class ContentSeeder extends Seeder
             'question' => $faker->sentence() . '؟',
             'question_type' => 'true_or_false',
             'options' => ['correct' => $faker->boolean()],
-            'points' => $faker->numberBetween(1, 5),
             'hint' => $faker->optional()->sentence(),
         ]);
     }

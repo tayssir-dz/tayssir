@@ -66,9 +66,10 @@ class ChapterResource extends Resource implements HasShieldPermissions
                         ->minLength(3)
                         ->label(__('custom.models.chapter.name')),
 
-                    Select::make('unit_id')
-                        ->relationship('unit', 'name')
+                    Select::make('chapter_units')
+                        ->relationship('chapter_units', 'name')
                         ->searchable()
+                        ->preload()
                         ->required()
                         ->label(__('custom.models.chapter.unit')),
 

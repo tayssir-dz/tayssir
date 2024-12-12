@@ -34,12 +34,18 @@ class Unit extends Model
 
 
     /**
-     * Get the material that owns the unit.
+     * Get the materials for the unit.
      */
-
-    public function material()
+    public function material_units()
     {
-        return $this->belongsTo(Material::class);
+        return $this->belongsToMany(Material::class)
+            ->withPivot('sort')
+            ->orderBy('material_unit.sort');
+    }
+
+    public function getMaterialAttribute()
+    {
+        return $this->material_units()->first();
     }
 
     /**
@@ -48,7 +54,10 @@ class Unit extends Model
 
     public function chapters()
     {
-        return $this->hasMany(Chapter::class);
+        return $this->belongsToMany(Chapter::class)
+            ->withPivot('sort')
+            ->orderBy('chapter_unit.sort')
+            ->orderBy('chapters.id');
     }
 
     /**

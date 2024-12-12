@@ -36,14 +36,19 @@ class Chapter extends Model implements HasMedia
         'updated_at',
     ];
 
-    /**
-     * Get the unit that owns the chapter.
-     */
-
-    public function unit()
+    public function chapter_units()
     {
-        return $this->belongsTo(Unit::class);
+        return $this->belongsToMany(Unit::class, 'chapter_unit')
+            ->withPivot('sort')
+            ->orderBy('chapter_unit.sort');
     }
+
+    public function getUnitAttribute()
+    {
+        return $this->chapter_units()->first();
+    }
+
+
 
     /**
      * Get the questions for the chapter.
@@ -68,21 +73,38 @@ class Chapter extends Model implements HasMedia
         $questions = $this->questions()->withPivot('sort')->orderBy('chapter_question.sort')->get();
         $totalQuestions = $questions->count();
 
-        $easyCount = (int) ceil($totalQuestions / 3);
-        $mediumCount = (int) ceil($totalQuestions / 3);
-        $hardCount = $totalQuestions - $easyCount - $mediumCount;
+        if ($totalQuestions === 0) {
+            return $this;
+        }
 
-        $questions->each(function ($question, $index) use ($easyCount, $mediumCount) {
-            if ($index < $easyCount) {
-                $difficulty = QuestionDifficulty::EASY;
-            } elseif ($index < ($easyCount + $mediumCount)) {
-                $difficulty = QuestionDifficulty::MEDIUM;
-            } else {
-                $difficulty = QuestionDifficulty::HARD;
-            }
+        if ($totalQuestions <= 3) {
+            $easyCount = 1;
+            $mediumCount = $totalQuestions > 1 ? 1 : 0;
+            $hardCount = $totalQuestions > 2 ? 1 : 0;
+        } else {
+            // Ensure even distribution for more than 3 questions
+            $easyCount = (int) ceil($totalQuestions / 3);
+            $remainingQuestions = $totalQuestions - $easyCount;
+            $mediumCount = (int) ceil($remainingQuestions / 2);
+            $hardCount = $totalQuestions - $easyCount - $mediumCount;
+        }
 
-            $question->update(['difficulty' => $difficulty]);
-        });
+        $currentIndex = 0;
+
+        // Assign easy questions
+        for ($i = 0; $i < $easyCount; $i++) {
+            $questions[$currentIndex++]->update(['difficulty' => QuestionDifficulty::EASY]);
+        }
+
+        // Assign medium questions
+        for ($i = 0; $i < $mediumCount; $i++) {
+            $questions[$currentIndex++]->update(['difficulty' => QuestionDifficulty::MEDIUM]);
+        }
+
+        // Assign hard questions
+        while ($currentIndex < $totalQuestions) {
+            $questions[$currentIndex++]->update(['difficulty' => QuestionDifficulty::HARD]);
+        }
 
         return $this;
     }

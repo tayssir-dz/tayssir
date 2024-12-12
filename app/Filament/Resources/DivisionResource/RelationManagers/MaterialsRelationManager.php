@@ -82,6 +82,7 @@ class MaterialsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->reorderable(column: 'division_material.sort')
             ->recordTitleAttribute('name')
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')
