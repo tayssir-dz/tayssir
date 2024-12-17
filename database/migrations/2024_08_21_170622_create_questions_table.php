@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('question');
             $table->enum('question_type', ['multiple_choices', 'fill_in_the_blanks', 'pick_the_intruder', 'true_or_false', 'match_with_arrows']);
             $table->json("options");
-            // $table->integer("points");
+            $table->enum('scope', ["exercice", "lesson"]);
             $table->enum('difficulty', ['easy', 'medium', 'hard'])->default("medium");
             $table->string('hint')->nullable();
             $table->text('explanation')->nullable();

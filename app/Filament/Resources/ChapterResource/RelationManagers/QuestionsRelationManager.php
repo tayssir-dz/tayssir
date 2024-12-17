@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ChapterResource\RelationManagers;
 
 use App\Enums\QuestionDifficulty;
+use App\Enums\QuestionScope;
 use App\Enums\QuestionType;
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\FillInTheBlanks;
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\MatchWithArrows;
@@ -157,6 +158,12 @@ class QuestionsRelationManager extends RelationManager
                     ->badge()
                     ->formatStateUsing(fn(QuestionType $state) => $state->getLabel())
                     ->color(fn(QuestionType $state) => $state->getColor()),
+                Tables\Columns\TextColumn::make('scope')
+                    ->label(__('custom.models.question.scope'))
+                    ->badge()
+                    ->formatStateUsing(fn(QuestionScope $state) => $state->getLabel())
+                    ->color(fn(QuestionScope $state) => $state->getColor()),
+
                 Tables\Columns\TextColumn::make('difficulty')
                     ->label(__('custom.models.question.difficulty'))
                     ->badge()

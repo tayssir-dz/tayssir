@@ -28,6 +28,7 @@ class MultipleChoice extends QuestionType
                                 ->required()
                                 ->label(trans('custom.models.question.option')),
                             Toggle::make('is_correct')
+                                ->inline(false)
                                 ->label(trans('custom.models.question.option.iscorrect'))
                                 ->default(false),
                         ])
@@ -35,10 +36,11 @@ class MultipleChoice extends QuestionType
                         ->minItems(2)
                         ->maxItems(6)
                         ->columns(2)
-                        ->reorderableWithButtons()
+                        // ->reorderableWithButtons()
                         ->collapsible()
+                        ->collapsed()
                         ->label("")
-                        ->itemLabel(fn(array $state): ?string => $state['option'] ?? null)
+                        ->itemLabel(fn(array $state): ?string => $state['option'] . " " . ($state['is_correct'] ? ("(" . trans('custom.models.question.option.iscorrect') . ')') : null))
                         ->columnSpanFull()
                         ->addActionLabel(trans('custom.models.question.add_option'))
                 ])

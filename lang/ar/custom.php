@@ -128,7 +128,7 @@ return [
     'models.question.option.iscorrect' => 'إجابة صحيحة',
     'models.question.words' => 'الكلمات',
     'models.question.word' => 'كلمة',
-    'models.question.word.is_intruder' => 'هل هي الدخيل',
+    'models.question.word.is_intruder' => 'دخيل',
     'models.question.duos' => 'الأزواج',
     'models.question.duo.first' => 'العنصر الأول',
     'models.question.duo.second' => 'العنصر الثاني',
@@ -152,6 +152,10 @@ return [
     'models.question.fill_blank.placeholder' => 'علامة الفراغ (مثال: [1])',
     'models.question.fill_blank.words' => 'كلمات ملء الفراغات',
     'models.question.fill_blank.add_answer' => 'إضافة إجابة',
+
+    'models.question.scope' => 'نطاق السؤال',
+    'models.question.scope.exercice' => "تمرين",
+    'models.question.scope.lesson' => "درس",
 
     // Card
 

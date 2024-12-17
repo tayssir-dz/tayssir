@@ -32,10 +32,11 @@ class MatchWithArrows extends QuestionType
                 ->minItems(2)
                 ->maxItems(6)
                 ->defaultItems(2)
-                ->reorderableWithButtons()
+                // ->reorderableWithButtons()
                 ->collapsible()
+                ->collapsed()
                 ->label("")
-                ->itemLabel(fn(array $state): ?string => ($state['first'] ?? '') . ' → ' . ($state['second'] ?? ''))
+                ->itemLabel(fn(array $state): ?string => '(' . ($state['first'] ?? '-') . ') → (' . ($state['second'] ?? '-') . ")")
                 ->columnSpanFull()
                 ->addActionLabel(trans('custom.models.question.add_duo'))
         ];

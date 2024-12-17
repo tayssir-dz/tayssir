@@ -49,7 +49,6 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
         'avatar_url',
         'email',
         'password',
-        'points',
         'wilaya_id',
         'commune_id',
     ];

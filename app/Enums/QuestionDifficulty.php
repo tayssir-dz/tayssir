@@ -11,7 +11,6 @@ enum QuestionDifficulty: string implements HasLabel, HasColor, HasIcon
     case EASY = 'easy';
     case MEDIUM = 'medium';
     case HARD = 'hard';
-
     public function points(): int
     {
         return match ($this) {

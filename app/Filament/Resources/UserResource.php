@@ -111,11 +111,11 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->label(__('custom.models.user.password'))
                             ->visibleOn('create'),
 
-                        TextInput::make("points")
-                            ->numeric()
-                            ->required()
-                            ->label(__('custom.models.user.points'))
-                            ->visibleOn('edit')->columnSpan(2),
+                        // TextInput::make("points")
+                        //     ->numeric()
+                        //     ->required()
+                        //     ->label(__('custom.models.user.points'))
+                        //     ->visibleOn('edit')->columnSpan(2),
 
                         Select::make('wilaya_id')
                             ->label(__("custom.models.user.wilaya"))
@@ -225,15 +225,15 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->copyMessage('Phone number copied')
                     ->copyMessageDuration(1500),
 
-                TextColumn::make('points')
-                    ->label(__('custom.models.user.points'))
-                    ->badge()
-                    ->color(fn($state) => $state > 1000 ? 'success' : 'warning')
-                    ->alignCenter()
-                    ->sortable()
-                    ->toggleable()
-                    ->size('sm')
-                    ->numeric(),
+                // TextColumn::make('points')
+                //     ->label(__('custom.models.user.points'))
+                //     ->badge()
+                //     ->color(fn($state) => $state > 1000 ? 'success' : 'warning')
+                //     ->alignCenter()
+                //     ->sortable()
+                //     ->toggleable()
+                //     ->size('sm')
+                //     ->numeric(),
 
                 TextColumn::make('roles.name')
                     ->label(__('custom.models.user.roles'))

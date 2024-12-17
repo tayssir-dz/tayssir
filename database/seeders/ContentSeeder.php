@@ -19,7 +19,7 @@ class ContentSeeder extends Seeder
 
     public function __construct()
     {
-        $this->arabicFaker = Faker::create('ar_SA');
+        $this->arabicFaker = Faker::create('fr_FR');
     }
 
     public function run(): void
@@ -151,15 +151,17 @@ class ContentSeeder extends Seeder
 
         for ($i = 0; $i < $numQuestions; $i++) {
             $questionType = $this->getRandomQuestionType();
+            $questionScope = $this->getRandomQuestionScope();
             $options = $this->generateQuestionOptions($questionType);
 
             if ($questionType === 'true_or_false') {
-                $question = $this->createTrueOrFalseQuestion();
+                $question = $this->createTrueOrFalseQuestion($questionScope);
                 $chapter->questions()->attach($question->id);
             } else {
                 $question = Question::create([
                     'question' => rtrim($this->arabicFaker->realText(50), '.') . '؟',
                     'question_type' => $questionType,
+                    'scope' => $questionScope,
                     'options' => $options,
                     'hint' => rand(0, 1) ? rtrim($this->arabicFaker->realText(30), '.') : null,
                 ]);
@@ -168,16 +170,26 @@ class ContentSeeder extends Seeder
         }
     }
 
-    private function createTrueOrFalseQuestion()
+    private function createTrueOrFalseQuestion(string $questionScope)
     {
         $faker = Faker::create('ar_SA');
 
         return Question::create([
+            'scope' => $questionScope,
             'question' => $faker->sentence() . '؟',
             'question_type' => 'true_or_false',
             'options' => ['correct' => $faker->boolean()],
             'hint' => $faker->optional()->sentence(),
         ]);
+    }
+
+    private function getRandomQuestionScope(): string
+    {
+        $scopes = [
+            "exercice",
+            'lesson'
+        ];
+        return $scopes[array_rand($scopes)];
     }
 
     private function getRandomQuestionType(): string

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\QuestionDifficulty;
+use App\Enums\QuestionScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -23,10 +24,11 @@ class Question extends Model implements HasMedia
 
     protected $fillable = [
         'question',
-        'question_type',
-        'options',
-        "difficulty",
         "hint",
+        'options',
+        'question_type',
+        "difficulty",
+        'scope',
     ];
 
     /**
@@ -52,7 +54,8 @@ class Question extends Model implements HasMedia
     protected $casts = [
         'options' => 'array',
         'question_type' => QuestionType::class,
-        'difficulty' => QuestionDifficulty::class
+        'difficulty' => QuestionDifficulty::class,
+        'scope' => QuestionScope::class,
     ];
 
     public function chapter()

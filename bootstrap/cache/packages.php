@@ -130,6 +130,13 @@
       0 => 'G4T\\Swagger\\SwaggerServiceProvider',
     ),
   ),
+  'hammerstone/fast-paginate' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Hammerstone\\FastPaginate\\FastPaginateProvider',
+    ),
+  ),
   'howdu/filament-record-switcher' => 
   array (
     'aliases' => 

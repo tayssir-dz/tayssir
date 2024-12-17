@@ -154,6 +154,10 @@ return [
     'models.question.true_false.true' => 'Vrai',
     'models.question.true_false.false' => 'Faux',
 
+    'models.question.scope' => 'Portée',
+    'models.question.scope.exercice' => "Exercice",
+    'models.question.scope.lesson' => "Leçon",
+
     // Card
 
     "models.card.code" => "Code",

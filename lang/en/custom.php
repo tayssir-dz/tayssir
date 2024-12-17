@@ -150,6 +150,10 @@ return [
     'models.question.difficulty.easy' => 'Easy',
     'models.question.difficulty.medium' => 'Medium',
     'models.question.difficulty.hard' => 'Hard',
+
+    'models.question.scope' => 'Scope',
+    'models.question.scope.exercice' => "Exercise",
+    'models.question.scope.lesson' => "Lesson",
     // Card
 
     "models.card.code" => "Code",
