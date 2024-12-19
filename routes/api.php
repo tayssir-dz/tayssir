@@ -121,4 +121,8 @@ Route::prefix('v1')->group(function () {
             ->summary("Get user content")
             ->description("This endpoint returns the content associated with the authenticated user.");
     });
+
+    // Route::middleware('auth:sanctum')->group(function () {
+    //     Route::post('/submit-chapter-answers', [ContentController::class, 'submitChapterAnswers']);
+    // });
 });

@@ -44,14 +44,23 @@ class QuestionsRelationManager extends RelationManager
                     ->tabs([
                         Forms\Components\Tabs\Tab::make(__('custom.models.question.tabs.infos'))
                             ->schema([
+
                                 Forms\Components\Textarea::make('question')
                                     ->required()
                                     ->label(__('custom.models.question.question')),
+
+                                Forms\Components\Select::make('scope')
+                                    ->enum(QuestionScope::class)
+                                    ->options(QuestionScope::class)
+                                    ->required()
+                                    ->label(__('custom.models.question.scope')),
+
                                 // Forms\Components\TextInput::make('points')
                                 //     ->required()
                                 //     ->numeric()
                                 //     ->minValue(1)
                                 //     ->label(__('custom.models.question.points')),
+
                                 Forms\Components\TextInput::make('hint')
                                     ->label(__('custom.models.question.hint')),
                             ]),
@@ -149,6 +158,7 @@ class QuestionsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->paginated(false)
             ->reorderable('sort')
             ->recordTitleAttribute('question')
             ->columns([

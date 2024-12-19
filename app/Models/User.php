@@ -4,6 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 // use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+
+use App\Traits\HasWilayaAndCommune;
+use App\Traits\HasProgress;
+use App\Traits\HasSubscriptions;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
@@ -11,22 +15,24 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Kossa\AlgerianCities\Commune;
-use Kossa\AlgerianCities\Wilaya;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
-use Storage;
 use App\Observers\UserObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+
 
 #[ObservedBy([UserObserver::class])]
 class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvatar, FilamentUser
 {
-    use InteractsWithMedia;
     use HasFactory, Notifiable, HasApiTokens;
+    use InteractsWithMedia;
     use HasRoles;
+    use HasWilayaAndCommune;
+    use HasProgress;
+    use HasSubscriptions;
 
     public function canAccessPanel(Panel $panel): bool
     {
@@ -51,6 +57,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
         'password',
         'wilaya_id',
         'commune_id',
+        'division_id', // Add this
     ];
     // protected $with = ['subscriptionCard'];
 
@@ -77,71 +84,12 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
             'password' => 'hashed',
         ];
     }
-    public function subscriptionCards()
+
+    public function division()
     {
-        return $this->hasMany(SubscriptionCard::class);
+        return $this->belongsTo(Division::class);
     }
 
-    public function wilaya()
-    {
-        return $this->belongsTo(Wilaya::class);
-    }
-
-    public function commune()
-    {
-        return $this->belongsTo(Commune::class);
-    }
-
-    public function subscription_cards()
-    {
-        return $this->hasMany(SubscriptionCard::class)
-            ->where('redeemed_at', '!=', null)
-            ->whereHas('subscription', function ($query) {
-                $query->where(function ($q) {
-                    $q->whereNull('ending_date')
-                        ->orWhere('ending_date', '>', now());
-                });
-            })
-            ->with('subscription')
-            ->latest('redeemed_at');
-    }
-
-    public function getSubscriptionsAttribute()
-    {
-        $subscriptions = $this->subscription_cards
-            ->map(fn($card) => $card->subscription)
-            ->filter();
-
-        $guestSubscription = Subscription::find(Subscription::GUEST_ID);
-        if ($guestSubscription && !$subscriptions->contains('id', Subscription::GUEST_ID)) {
-            $subscriptions->push($guestSubscription);
-        }
-
-        return $subscriptions->unique('id')->values();
-    }
-
-    public function getActiveSubscriptionsAttribute()
-    {
-        $subscriptions = $this->subscription_cards
-            ->map(fn($card) => $card->subscription)
-            ->filter();
-
-        if ($subscriptions->isEmpty()) {
-            // If no subscriptions, return guest only
-            return collect([Subscription::find(Subscription::GUEST_ID)])
-                ->filter();
-        }
-
-        // If has subscriptions, return them without guest
-        return $subscriptions->unique('id')->values();
-    }
-
-    public function accessibleUnits()
-    {
-        return Unit::whereHas('subscriptions', function ($query) {
-            $query->where('subscriptions.id', $this->subscription->subscription_id);
-        });
-    }
 }
 
 
