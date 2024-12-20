@@ -145,7 +145,7 @@ class ContentSeeder extends Seeder
         return $this->subscriptionIds[array_rand($this->subscriptionIds)];
     }
 
-    private function generateQuestionsForChapter(Chapter $chapter): void
+    public function generateQuestionsForChapter(Chapter $chapter): void
     {
         $numQuestions = rand(5, 10);
 

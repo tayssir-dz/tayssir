@@ -8,7 +8,7 @@ use App\Models\UserAnswer;
 
 trait HasProgress
 {
-    public function materialProgress($material)
+    public function materialProgress($material): int
     {
         $answers = UserAnswer::where('user_id', $this->id)
             ->where('material_id', $material->id)
@@ -46,5 +46,26 @@ trait HasProgress
         $totalQuestions = $chapter->questions()->count();
 
         return $totalQuestions > 0 ? ($answers / $totalQuestions) * 100 : 0;
+    }
+
+    public function MaterialsProgress()
+    {
+        $materials = $this->division->materials()->with(['units.chapters.questions'])->get();
+
+        return $materials->map(function ($material) {
+            $totalQuestions = $material->units
+                ->flatMap(fn($unit) => $unit->chapters)
+                ->flatMap(fn($chapter) => $chapter->questions)
+                ->count();
+
+            $answers = UserAnswer::where('user_id', $this->id)
+                ->where('material_id', $material->id)
+                ->count();
+
+            return [
+                "material_id" => $material->id,
+                "progress" => $totalQuestions > 0 ? ($answers / $totalQuestions) * 100 : 0
+            ];
+        })->toArray();
     }
 }

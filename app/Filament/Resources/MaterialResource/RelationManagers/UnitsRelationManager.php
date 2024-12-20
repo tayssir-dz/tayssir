@@ -69,10 +69,10 @@ class UnitsRelationManager extends RelationManager
                     ->label(__('custom.models.chapters'))
                     ->counts('chapters')
                     ->colors(['primary']),
-                TextColumn::make('subscriptions_count')
+                TextColumn::make('subscriptions.name')
                     ->badge()
+                    ->default("-")
                     ->label(__('custom.models.subscriptions'))
-                    ->counts('subscriptions')
                     ->colors(['primary']),
             ])
             ->filters([

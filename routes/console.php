@@ -13,6 +13,7 @@ Artisan::command('inspire', function () {
 
 // command otp:clean
 
+
 Artisan::command('otp:clean', function () { })
     ->name("clean otp")
     ->hourly();

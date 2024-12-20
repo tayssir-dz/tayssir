@@ -71,12 +71,11 @@ class ChaptersRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->reorderable('sort')
+            ->reorderable('chapter_unit.sort')
             ->recordTitleAttribute('name')
             ->columns([
                 SpatieMediaLibraryImageColumn::make('photo')
                     ->collection('chapter_photos')
-                    ->rounded()
                     ->label(__('custom.models.chapter.photo')),
 
                 TextColumn::make('name')

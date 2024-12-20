@@ -4,24 +4,15 @@ use App\Mail\welcome;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    // return view('home');
-    $user = \App\Models\User::find(1);
-    $division = \App\Models\Division::find(1);
-    $materials = $division->materials()->get();
 
+    // admin user
+    $user = \App\Models\User::find(1);
 
     dd([
-        "user" => $user->wilaya->name,
-        "division" => [
-            "name" => $division->name,
-            "materials" => $materials->pluck("id")->toArray(),
-            "user_progress" => $materials->map(function ($material) use ($user) {
-                return [
-                    "material_id" => $material->id,
-                    "progress" => $user->materialProgress($material)
-                ];
-            })->toArray()
-        ]
+        "email" => $user->email,
+        "division" => $user->division->name,
+        "subscriptions" => $user->subscriptions->pluck("name")->toArray(),
+        "materials" => $user->accessibleMaterials,
     ]);
 })->name("login");
 

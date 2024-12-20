@@ -5,6 +5,7 @@ namespace App\Traits;
 use App\Models\SubscriptionCard;
 use App\Models\Subscription;
 use App\Models\Unit;
+use App\Models\Material;
 
 trait HasSubscriptions
 {
@@ -56,10 +57,31 @@ trait HasSubscriptions
         return $subscriptions->unique('id')->values();
     }
 
-    public function accessibleUnits()
+    public function getAccessibleUnitsAttribute()
     {
         return Unit::whereHas('subscriptions', function ($query) {
-            $query->where('subscriptions.id', $this->subscription->subscription_id);
-        });
+            $query->whereIn('subscriptions.id', $this->subscriptions->pluck('id'));
+        })->get()->toArray();
+    }
+
+    public function getAccessibleMaterialsAttribute()
+    {
+        return $this->division->materials()
+            ->whereHas('units', function($query) {
+                $query->whereHas('subscriptions', function($subQuery) {
+                    $subQuery->whereIn('subscriptions.id', $this->subscriptions->pluck('id'));
+                });
+            })
+            ->with(['units' => function($query) {
+                $query->whereHas('subscriptions', function($subQuery) {
+                    $subQuery->whereIn('subscriptions.id', $this->subscriptions->pluck('id'));
+                })->with(['chapters' => function($chapterQuery) {
+                    $chapterQuery->whereHas('subscriptions', function($subQuery) {
+                        $subQuery->whereIn('subscriptions.id', $this->subscriptions->pluck('id'));
+                    })->with('questions');
+                }]);
+            }])
+            ->get()
+            ->toArray();
     }
 }

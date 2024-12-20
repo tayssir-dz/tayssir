@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Chapter;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
         $role = Role::firstOrCreate(['name' => 'super_admin']);
 
         $user = User::factory()->create([
@@ -28,7 +29,13 @@ class DatabaseSeeder extends Seeder
             ShieldSeeder::class,
             WilayaCommuneSeeder::class,
             GuestSubscriptionSeeder::class,
-            ContentSeeder::class
+            // ContentSeeder::class
         ]);
+
+        // $chapters = Chapter::all();
+        // $chapters->map(function ($chapter) {
+        //     $seeder = new ContentSeeder();
+        //     $seeder->generateQuestionsForChapter($chapter);
+        // });
     }
 }
