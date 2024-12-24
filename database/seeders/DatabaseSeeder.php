@@ -29,13 +29,14 @@ class DatabaseSeeder extends Seeder
             ShieldSeeder::class,
             WilayaCommuneSeeder::class,
             GuestSubscriptionSeeder::class,
-            // ContentSeeder::class
+            ContentSeeder::class
         ]);
 
-        // $chapters = Chapter::all();
-        // $chapters->map(function ($chapter) {
-        //     $seeder = new ContentSeeder();
-        //     $seeder->generateQuestionsForChapter($chapter);
-        // });
+        $chapters = Chapter::all();
+        $chapters->map(function ($chapter) {
+            $seeder = new ContentSeeder();
+            $seeder->generateQuestionsForChapter($chapter);
+            $chapter->distributeDifficulties();
+        });
     }
 }

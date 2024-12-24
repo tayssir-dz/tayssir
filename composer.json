@@ -20,7 +20,7 @@
         "howdu/filament-record-switcher": "^1.0",
         "ichtrojan/laravel-otp": "^2.0",
         "joaopaulolndev/filament-edit-profile": "^1.0",
-        "kossa/algerian-cities": "^3.0",
+        "kossa/algerian-cities": "^4.1",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
