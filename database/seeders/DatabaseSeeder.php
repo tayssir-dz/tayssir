@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        // User::factory(10)->create();
         $role = Role::firstOrCreate(['name' => 'super_admin']);
 
         $user = User::factory()->create([
@@ -31,12 +31,12 @@ class DatabaseSeeder extends Seeder
             GuestSubscriptionSeeder::class,
             ContentSeeder::class
         ]);
-
-        $chapters = Chapter::all();
-        $chapters->map(function ($chapter) {
-            $seeder = new ContentSeeder();
-            $seeder->generateQuestionsForChapter($chapter);
-            $chapter->distributeDifficulties();
-        });
+        // $seeder = new ContentSeeder();
+        // Chapter::chunk(10, function ($chapters) use ($seeder) {
+        //     foreach ($chapters as $chapter) {
+        //         $seeder->generateQuestionsForChapter($chapter);
+        //         $chapter->distributeDifficulties();
+        //     }
+        // });
     }
 }

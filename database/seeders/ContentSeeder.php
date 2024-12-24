@@ -61,10 +61,15 @@ class ContentSeeder extends Seeder
                         $material->units()->save($unit);
 
                         // Attach guest and random subscription to unit
-                        $unit->subscriptions()->attach([
-                            Subscription::GUEST_ID,
-                            $this->getRandomSubscription()
-                        ]);
+                        if ($this->arabicFaker->boolean(20)) {
+                            $unit->subscriptions()->attach([
+                                Subscription::GUEST_ID,
+                            ]);
+                        } else {
+                            $unit->subscriptions()->attach([
+                                $this->getRandomSubscription()
+                            ]);
+                        }
 
                         foreach ($unitData['chapters'] as $chapterData) {
                             $chapter = new Chapter([
@@ -75,11 +80,15 @@ class ContentSeeder extends Seeder
                             $unit->chapters()->save($chapter);
 
                             // Attach guest and random subscription to chapter
-                            $chapter->subscriptions()->attach([
-                                Subscription::GUEST_ID,
-                                $this->getRandomSubscription()
-                            ]);
-
+                            if ($this->arabicFaker->boolean(20)) {
+                                $chapter->subscriptions()->attach([
+                                    Subscription::GUEST_ID,
+                                ]);
+                            } else {
+                                $chapter->subscriptions()->attach([
+                                    $this->getRandomSubscription()
+                                ]);
+                            }
                             // Only generate questions if the chapter was just created
                             if ($chapter->wasRecentlyCreated) {
                                 $this->generateQuestionsForChapter($chapter);

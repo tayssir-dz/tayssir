@@ -33,6 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('dashboard')
             ->path('dashboard')
             ->login()
+            ->databaseTransactions()
             ->brandLogo(fn() => view('components.brand'))
             ->darkModeBrandLogo(fn() => view('components.brand-dark'))
             ->brandLogoHeight('2rem')
@@ -54,8 +55,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                    // Widgets\FilamentInfoWidget::class,
-                    // Widgets\AccountWidget::class,
+                // Widgets\FilamentInfoWidget::class,
+                // Widgets\AccountWidget::class,
                 UsersCard::class,
             ])
             ->middleware([
@@ -75,36 +76,34 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])->plugins([
-                    \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
-                        ->gridColumns(['default' => 1, 'sm' => 2, 'lg' => 3])
-                        ->sectionColumnSpan(1)
-                        ->checkboxListColumns(['default' => 1])
-                        ->resourceCheckboxListColumns(['default' => 1, 'sm' => 2])
-                    ,
-                    FilamentEditProfilePlugin::make()
-                        ->shouldShowEditProfileForm(true)
-                        ->canAccess(fn() => auth()->user()->can('page_EditProfilePage'))
-                        ->shouldShowSanctumTokens(true)
-                        ->setIcon('heroicon-o-user')
-                        ->shouldShowAvatarForm(
-                            value: true,
-                            directory: 'avatars',
-                            rules: 'mimes:jpeg,png|max:1024'
-                        ),
-                    FilamentDeveloperLoginsPlugin::make()
-                        ->enabled(env("APP_DEBUG") === true)
-                        ->users([
-                            'dev login' => 'admin@admin.dev',
-                            // 'mouayed' => 'm_keziz@estin.dz',
-                            // 'something else' => "somethingelse@something.com"
-                        ]),
-                    FilamentRecordSwitcherPlugin::make(),
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+                    ->gridColumns(['default' => 1, 'sm' => 2, 'lg' => 3])
+                    ->sectionColumnSpan(1)
+                    ->checkboxListColumns(['default' => 1])
+                    ->resourceCheckboxListColumns(['default' => 1, 'sm' => 2]),
+                FilamentEditProfilePlugin::make()
+                    ->shouldShowEditProfileForm(true)
+                    // ->canAccess(fn() => auth()->user()->can('page_EditProfilePage'))
+                    ->shouldShowSanctumTokens(true)
+                    ->setIcon('heroicon-o-user')
+                    ->shouldShowAvatarForm(
+                        value: true,
+                        directory: 'avatars',
+                        rules: 'mimes:jpeg,png|max:1024'
+                    ),
+                FilamentDeveloperLoginsPlugin::make()
+                    ->enabled(env("APP_DEBUG") === true)
+                    ->users([
+                        'dev login' => 'admin@admin.dev',
+                        // 'mouayed' => 'm_keziz@estin.dz',
+                        // 'something else' => "somethingelse@something.com"
+                    ]),
+                FilamentRecordSwitcherPlugin::make(),
 
-                ])
+            ])
             // ->spa()
             // ->darkMode(false)
             ->renderHook('panels::body.end', fn(): string => Blade::render("@vite('resources/js/app.js')"))
-            ->viteTheme('resources/css/filament/dashboard/theme.css');
-        ;
+            ->viteTheme('resources/css/filament/dashboard/theme.css');;
     }
 }
