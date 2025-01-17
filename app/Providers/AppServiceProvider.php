@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Observers\UserObserver;
 use Filament\Support\Facades\FilamentView;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
         Card::observe(CardObserver::class);
         User::observe(UserObserver::class);
         if ($this->app->environment('production')) {
-            \URL::forceScheme('https');
+            URL::forceScheme('https');
         }
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
             $switch

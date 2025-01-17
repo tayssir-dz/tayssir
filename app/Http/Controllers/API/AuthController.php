@@ -14,8 +14,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Validator;
-use Auth;
 use G4T\Swagger\Attributes\SwaggerSection;
+use Illuminate\Support\Facades\Auth;
 
 // #[SwaggerSection('This section manages all authentication-related actions such as user registration, login, logout, and token refresh. It ensures secure authentication processes, handling both token-based and user-based operations for registering and logging users in and out of the system.')]
 class AuthController extends BaseController
@@ -30,8 +30,8 @@ class AuthController extends BaseController
             'name' => $input['name'],
             'phone_number' => $input['phone_number'],
             'password' => $input['password'],
-            'wilaya_id' => $input['wilaya_id'],
-            'commune_id' => $input['commune_id'],
+            // 'wilaya_id' => $input['wilaya_id'], 
+            // 'commune_id' => $input['commune_id'],
         ]);
         $role = Role::firstOrCreate(['name' => 'student']);
         $user->assignRole($role);
@@ -52,6 +52,7 @@ class AuthController extends BaseController
         $input = $request->all();
 
         if (Auth::attempt(['email' => $input["email"], 'password' => $input["password"]])) {
+            /** @var User $user */
             $user = Auth::user();
             $user->tokens()->delete();
 
@@ -66,7 +67,6 @@ class AuthController extends BaseController
                 ],
                 __("response.user_login_successfully")
             );
-
         } else {
             return $this->sendError(__("response.unauthorised"), ['error' => __("response.wrong_email_or_password")]);
         }
