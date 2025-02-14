@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Enums\QuestionType;
+use App\Traits\HasQuestionMedia;
 
 class Question extends Model implements HasMedia
 {
     use InteractsWithMedia;
-
+    use HasQuestionMedia;
     use HasFactory;
 
     /**
@@ -65,5 +66,4 @@ class Question extends Model implements HasMedia
             ->withPivot('sort')  // Add any pivot columns you need
             ->limit(1);  // Ensure only one chapter is returned
     }
-
 }

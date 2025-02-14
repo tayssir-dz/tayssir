@@ -90,19 +90,35 @@ trait InteractsWithContent
      */
     public function transformQuestion($question)
     {
+        $baseStructure = [
+            'id' => $question->id,
+            'type' => $question->question_type,
+            'chapter_id' => $question->chapter->first()->id ?? null,
+            'image' => $question->image,
+            'difficulty' => $question->difficulty,
+            'points' => $question->difficulty->points(),
+            'scope' => $question->scope,
+            'hint' => is_string($question->hint) ? [$question->hint] : $question->hint,
+            'explanationVideo' => $question->explanation_asset,
+            'hintImage' => $question->hint_image,
+        ];
+
         $qType = $question->question_type->value;
+        $specificData = [];
+
         if ($qType === QuestionType::MULTIPLE_CHOICES->value) {
-            return $this->transformMultipleChoices($question);
+            $specificData = $this->transformMultipleChoices($question);
         } elseif ($qType === QuestionType::FILL_IN_THE_BLANKS->value) {
-            return $this->transformFillInTheBlanks($question);
+            $specificData = $this->transformFillInTheBlanks($question);
         } elseif ($qType === QuestionType::PICK_THE_INTRUDER->value) {
-            return $this->transformPickTheIntruder($question);
+            $specificData = $this->transformPickTheIntruder($question);
         } elseif ($qType === QuestionType::TRUE_OR_FALSE->value) {
-            return $this->transformTrueOrFalse($question);
+            $specificData = $this->transformTrueOrFalse($question);
         } elseif ($qType === QuestionType::MATCH_WITH_ARROWS->value) {
-            return $this->transformMatchWithArrows($question);
+            $specificData = $this->transformMatchWithArrows($question);
         }
-        return $question;
+
+        return array_merge($baseStructure, $specificData);
     }
 
     // Transformer for multiple_choices type:

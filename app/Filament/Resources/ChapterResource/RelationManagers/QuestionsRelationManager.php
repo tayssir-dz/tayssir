@@ -68,14 +68,13 @@ class QuestionsRelationManager extends RelationManager
                             ->schema([
                                 Forms\Components\Group::make()->schema([
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('question_image')
-                                        ->collection('question_image')
+                                        ->collection('image')
                                         ->image()
                                         ->label(__('custom.models.question.question_image'))
                                         ->imageEditor(),
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('explaination_asset')
                                         ->collection('explaination_asset')
-                                        ->label(__('custom.models.question.explaination_asset'))
-                                        ->imageEditor(),
+                                        ->label(__('custom.models.question.explaination_asset')),
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('hint_image')
                                         ->collection('hint_image')
                                         ->label(__('custom.models.question.hint_image'))
