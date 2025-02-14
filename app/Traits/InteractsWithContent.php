@@ -107,26 +107,24 @@ trait InteractsWithContent
         $qType = $question->question_type->value;
 
         if ($qType === QuestionType::MULTIPLE_CHOICES->value) {
-            return array_merge($baseStructure, $this->transformMultipleChoices($question->toArray()));
+            return array_merge($baseStructure, $this->transformMultipleChoices($question));
         } elseif ($qType === QuestionType::FILL_IN_THE_BLANKS->value) {
-            return array_merge($baseStructure, $this->transformFillInTheBlanks($question->toArray()));
+            return array_merge($baseStructure, $this->transformFillInTheBlanks($question));
         } elseif ($qType === QuestionType::PICK_THE_INTRUDER->value) {
-            return array_merge($baseStructure, $this->transformPickTheIntruder($question->toArray()));
+            return array_merge($baseStructure, $this->transformPickTheIntruder($question));
         } elseif ($qType === QuestionType::TRUE_OR_FALSE->value) {
-            return array_merge($baseStructure, $this->transformTrueOrFalse($question->toArray()));
+            return array_merge($baseStructure, $this->transformTrueOrFalse($question));
         } elseif ($qType === QuestionType::MATCH_WITH_ARROWS->value) {
-            return array_merge($baseStructure, $this->transformMatchWithArrows($question->toArray()));
+            return array_merge($baseStructure, $this->transformMatchWithArrows($question));
         }
 
         return $baseStructure;
     }
 
-    // Transformer for multiple_choices type:
-    // Desired data: Return question data with options as an array of strings and a correctOptions array with indices.
+    // Update transformer methods to work with Question model instance
     public function transformMultipleChoices($question)
     {
-        $data = $question->toArray();
-        $choices = $data['options']['choices'] ?? [];
+        $choices = $question->options['choices'] ?? [];
         $optionTexts = [];
         $correctOptions = [];
         foreach ($choices as $index => $choice) {
@@ -135,24 +133,15 @@ trait InteractsWithContent
                 $correctOptions[] = $index;
             }
         }
-        $data['options'] = $optionTexts;
-        $data['correctOptions'] = $correctOptions;
-        return $data;
+        return [
+            'options' => $optionTexts,
+            'correctOptions' => $correctOptions,
+        ];
     }
 
-    // Transformer for fill_in_the_blanks type:
-    // Desired data: Return question data as is for now; transformation can be added later.
-    public function transformFillInTheBlanks($question)
-    {
-        return $question;
-    }
-
-    // Transformer for pick_the_intruder type:
-    // Desired data: Return question data with a 'words' array of strings and a 'correctAnomalies' array of indices.
     public function transformPickTheIntruder($question)
     {
-        $data = $question->toArray();
-        $wordsArr = $data['options']['words'] ?? [];
+        $wordsArr = $question->options['words'] ?? [];
         $words = [];
         $correctAnomalies = [];
         foreach ($wordsArr as $index => $item) {
@@ -161,27 +150,27 @@ trait InteractsWithContent
                 $correctAnomalies[] = $index;
             }
         }
-        unset($data['options']);
-        $data['words'] = $words;
-        $data['correctAnomalies'] = $correctAnomalies;
-        return $data;
+        return [
+            'words' => $words,
+            'correctAnomalies' => $correctAnomalies,
+        ];
     }
 
-    // Transformer for true_or_false type:
-    // Desired data: Return question data with a 'correctAnswer' boolean and without 'options'.
     public function transformTrueOrFalse($question)
     {
-        $data = $question->toArray();
-        $options = $data['options'] ?? [];
-        $data['correctAnswer'] = $options['correct'] ?? false;
-        unset($data['options']);
-        return $data;
+        return [
+            'correctAnswer' => $question->options['correct'] ?? false,
+        ];
     }
 
-    // Transformer for match_with_arrows type:
-    // Desired data: Return question data without changes for now.
+    // For these two, return empty arrays for now since they're not fully implemented
+    public function transformFillInTheBlanks($question)
+    {
+        return [];
+    }
+
     public function transformMatchWithArrows($question)
     {
-        return $question;
+        return [];
     }
 }
