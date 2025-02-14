@@ -59,6 +59,17 @@ class Question extends Model implements HasMedia
         'scope' => QuestionScope::class,
     ];
 
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('image')
+            ->singleFile();
+        $this->addMediaCollection('explanation_asset')
+            ->singleFile();
+        $this->addMediaCollection('hint_image')
+            ->singleFile();
+    }
+
+
     public function chapter()
     {
         return $this->belongsToMany(related: Chapter::class)
