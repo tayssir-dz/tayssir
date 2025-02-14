@@ -29,9 +29,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Card::observe(CardObserver::class);
         User::observe(UserObserver::class);
-        // if ($this->app->environment('production')) {
-        //     URL::forceScheme('http');
-        // }
+        if ($this->app->environment('production')) {
+            URL::forceScheme('http');
+        }
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
             $switch
                 ->locales(['ar', 'en', 'fr']) // also accepts a closure

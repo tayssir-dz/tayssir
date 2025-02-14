@@ -37,6 +37,10 @@ trait InteractsWithContent
                 'name' => $material->name,
                 'code' => $material->code,
                 'division_id' => $material->division_id,
+                'color' => $material->color,
+                'secondary_color' => $material->secondary_color,
+                'description' => $material->description,
+                'image' => $material->image,
             ];
 
             foreach ($material->units as $unit) {
@@ -44,6 +48,7 @@ trait InteractsWithContent
                 $units[] = [
                     'id' => $unit->id,
                     'name' => $unit->name,
+                    'description' => $unit->description,
                     'material_id' => $material->id,
                 ];
 
@@ -63,6 +68,7 @@ trait InteractsWithContent
                     $exercices[] = [
                         'id' => $chapter->id,
                         'name' => $chapter->name,
+                        'description' => $chapter->description,
                         'unit_id' => $unit->id,
                         'questions' => array_values($transformedQuestions),
                     ];

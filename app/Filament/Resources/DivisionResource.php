@@ -71,7 +71,7 @@ class DivisionResource extends Resource implements HasShieldPermissions
                 Section::make(__('custom.forms.division.create.section.image'))->schema([
                     SpatieMediaLibraryFileUpload::make('image')
                         ->label("")
-                        ->collection('divisions_image')
+                        ->collection('image')
                         ->imageEditor()
                         ->image()
                 ])->columnSpan(1),
@@ -85,7 +85,7 @@ class DivisionResource extends Resource implements HasShieldPermissions
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')->circular()
                     ->label(__('custom.forms.division.create.section.image'))
-                    ->collection('divisions_image'),
+                    ->collection('image'),
                 TextColumn::make("name")
                     ->label(__('custom.models.division.name'))
                     ->searchable()->sortable(),

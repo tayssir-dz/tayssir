@@ -70,9 +70,9 @@ class MaterialsRelationManager extends RelationManager
 
                 ])->columnSpan(2),
                 Section::make(__('custom.forms.material.create.section.image'))->schema([
-                    SpatieMediaLibraryFileUpload::make('materials-image')
+                    SpatieMediaLibraryFileUpload::make('image')
                         ->label("")
-                        ->collection('materials-image')
+                        ->collection('image')
                         ->image()
                         ->imageEditor(),
                 ])->columnSpan(1),
@@ -87,7 +87,7 @@ class MaterialsRelationManager extends RelationManager
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')
                     ->label(__("custom.forms.material.create.section.image"))
-                    ->collection('materials-image')
+                    ->collection('image')
                     ->rounded(),
                 TextColumn::make("name")->label(__("custom.models.material.name")),
                 TextColumn::make("code")

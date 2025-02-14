@@ -101,9 +101,9 @@ class MaterialResource extends Resource implements HasShieldPermissions
                     ->columns(2),
 
                 Section::make(__('custom.forms.material.create.section.image'))->schema([
-                    SpatieMediaLibraryFileUpload::make('materials-image')
+                    SpatieMediaLibraryFileUpload::make('image')
                         ->label("")
-                        ->collection('materials-image')
+                        ->collection('image')
                         ->image()
                         ->imageEditor(),
 
@@ -118,7 +118,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
                 SpatieMediaLibraryImageColumn::make('image')
                     ->toggleable()
                     ->label(__("custom.forms.material.create.section.image"))
-                    ->collection('materials-image')
+                    ->collection('image')
                     ->rounded(),
 
                 TextColumn::make("name")
@@ -142,8 +142,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
                 ColorColumn::make("secondary_color")
                     ->toggleable()
                     ->label(__("custom.models.material.secondary_color"))
-                    ->default('#000000')
-                ,
+                    ->default('#000000'),
 
                 TextColumn::make("description")
                     ->toggleable()

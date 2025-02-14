@@ -39,6 +39,23 @@ class Material extends Model implements HasMedia
     ];
 
     /**
+     * Register the media collections.
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('image')
+            ->singleFile();
+    }
+
+    /**
+     * Get the image attribute.
+     */
+    public function getImageAttribute()
+    {
+        return $this->getFirstMediaUrl('image') ? $this->getFirstMediaUrl('image') : null;
+    }
+
+    /**
      * Get the divisions for the material.
      */
     public function division_materials()

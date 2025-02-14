@@ -22,6 +22,17 @@ class Division extends Model implements HasMedia
         'description',
     ];
 
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('image')
+            ->singleFile();
+    }
+
+    public function getImageAttribute()
+    {
+        return $this->getFirstMediaUrl('image') ? $this->getFirstMediaUrl('image') : null;
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
