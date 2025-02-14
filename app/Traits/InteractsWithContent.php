@@ -101,24 +101,24 @@ trait InteractsWithContent
             'hint' => is_string($question->hint) ? [$question->hint] : $question->hint,
             'explanationVideo' => $question->explanation_asset,
             'hintImage' => $question->hint_image,
+            'question' => $question->question,
         ];
 
         $qType = $question->question_type->value;
-        $specificData = [];
 
         if ($qType === QuestionType::MULTIPLE_CHOICES->value) {
-            $specificData = $this->transformMultipleChoices($question);
+            return array_merge($baseStructure, $this->transformMultipleChoices($question->toArray()));
         } elseif ($qType === QuestionType::FILL_IN_THE_BLANKS->value) {
-            $specificData = $this->transformFillInTheBlanks($question);
+            return array_merge($baseStructure, $this->transformFillInTheBlanks($question->toArray()));
         } elseif ($qType === QuestionType::PICK_THE_INTRUDER->value) {
-            $specificData = $this->transformPickTheIntruder($question);
+            return array_merge($baseStructure, $this->transformPickTheIntruder($question->toArray()));
         } elseif ($qType === QuestionType::TRUE_OR_FALSE->value) {
-            $specificData = $this->transformTrueOrFalse($question);
+            return array_merge($baseStructure, $this->transformTrueOrFalse($question->toArray()));
         } elseif ($qType === QuestionType::MATCH_WITH_ARROWS->value) {
-            $specificData = $this->transformMatchWithArrows($question);
+            return array_merge($baseStructure, $this->transformMatchWithArrows($question->toArray()));
         }
 
-        return array_merge($baseStructure, $specificData);
+        return $baseStructure;
     }
 
     // Transformer for multiple_choices type:
