@@ -26,13 +26,13 @@
   ),
   'bezhansalleh/filament-shield' => 
   array (
-    'providers' => 
-    array (
-      0 => 'BezhanSalleh\\FilamentShield\\FilamentShieldServiceProvider',
-    ),
     'aliases' => 
     array (
       'FilamentShield' => 'BezhanSalleh\\FilamentShield\\Facades\\FilamentShield',
+    ),
+    'providers' => 
+    array (
+      0 => 'BezhanSalleh\\FilamentShield\\FilamentShieldServiceProvider',
     ),
   ),
   'blade-ui-kit/blade-heroicons' => 

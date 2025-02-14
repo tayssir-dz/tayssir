@@ -21,6 +21,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 use App\Observers\UserObserver;
+use App\Traits\InteractsWithContent;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 
@@ -33,11 +34,11 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
     use HasWilayaAndCommune;
     use HasProgress;
     use HasSubscriptions;
+    use InteractsWithContent;
 
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
-        // return !$this->hasAnyRole(["student"]);
     }
     public function getFilamentAvatarUrl(): ?string
     {
@@ -89,7 +90,4 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
     {
         return $this->belongsTo(Division::class);
     }
-
 }
-
-

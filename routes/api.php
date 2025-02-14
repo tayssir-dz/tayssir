@@ -1,11 +1,13 @@
 <?php
 
+use App\Enums\QuestionType;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ContentController;
 use App\Http\Controllers\API\ForgotPasswordController;
 use App\Http\Controllers\API\EmailVerificationController;
 use App\Http\Controllers\API\SubscriptionController;
 use App\Http\Controllers\API\UserController;
+use App\Models\Question;
 use Illuminate\Support\Facades\Route;
 
 
@@ -125,4 +127,21 @@ Route::prefix('v1')->group(function () {
     // Route::middleware('auth:sanctum')->group(function () {
     //     Route::post('/submit-chapter-answers', [ContentController::class, 'submitChapterAnswers']);
     // });
+
+    Route::get('test', function () {
+        // Use an anonymous class instance that uses the trait.
+        $transformer = new class {
+            use \App\Traits\InteractsWithContent;
+        };
+
+        $result = [];
+        foreach (QuestionType::cases() as $type) {
+            // Retrieve one example question for the current type.
+            $question = Question::where('question_type', $type->value)->first();
+            if ($question) {
+                $result[$type->value] = $transformer->transformQuestion($question);
+            }
+        }
+        return response()->json($result);
+    });
 });

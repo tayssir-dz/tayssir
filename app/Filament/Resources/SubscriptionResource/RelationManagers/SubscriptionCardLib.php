@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Filament\Resources\SubscriptionResourcee\RelationManagers;
+namespace App\Filament\Resources\SubscriptionResource\RelationManagers;
+
 use Exception;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\Action;
@@ -25,7 +26,6 @@ class SubscriptionCardLib
                 'code' => $code,
             ];
         }, $codes));
-
     }
 
     public static function getFilters()
@@ -119,5 +119,4 @@ class SubscriptionCardLib
             ])
         ];
     }
-
 }

@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\SubscriptionResource\RelationManagers;
 
-use App\Filament\Resources\SubscriptionResourcee\RelationManagers\SubscriptionCardLib;
+use App\Filament\Resources\SubscriptionResource\RelationManagers\SubscriptionCardLib;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -72,7 +72,4 @@ class SubscriptionCardsRelationManager extends RelationManager
                 ]),
             ]);
     }
-
-
 }
-

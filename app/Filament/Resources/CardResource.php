@@ -31,6 +31,11 @@ use Pelmered\FilamentMoneyField\Tables\Columns\MoneyColumn;
 
 class CardResource extends Resource implements HasShieldPermissions
 {
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
     public static function getNavigationGroup(): ?string
     {
         return null;
