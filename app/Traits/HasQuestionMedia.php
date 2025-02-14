@@ -2,8 +2,6 @@
 
 namespace App\Traits;
 
-
-
 trait HasQuestionMedia
 {
     public function registerMediaCollections(): void
