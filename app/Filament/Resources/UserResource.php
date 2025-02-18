@@ -72,6 +72,7 @@ class UserResource extends Resource implements HasShieldPermissions
             'delete',
             'delete_any',
             'assign_role',
+            'assign_division',
             'verify_email',
             'view_all',
             'view_students',
@@ -130,7 +131,7 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->options(function (callable $get) {
                                 $wilayaId = $get('wilaya_id');
                                 $field = __("custom.models.user.wilaya.field"); // 'name' or 'arabic_name' based on the language
-                    
+
                                 if ($wilayaId) {
                                     // Query the communes based on the selected wilaya and the dynamic field
                                     $communes = Commune::where('wilaya_id', $wilayaId)
@@ -158,6 +159,15 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->searchable()
                             ->visible(auth()->user()->can("assign_role_user"))
                             ->label(__('role'))
+                            ->columnSpan(2),
+
+                        Select::make('division')
+                            ->label(__('custom.models.user.division'))
+                            ->relationship('division', 'name')
+                            ->preload()
+                            ->searchable()
+                            ->visible(auth()->user()->can("assign_division_user"))
+                            ->label(__('division'))
                             ->columnSpan(2),
 
                         Placeholder::make('active_subscriptions')
