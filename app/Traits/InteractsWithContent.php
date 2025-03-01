@@ -25,9 +25,10 @@ trait InteractsWithContent
             }
         ]);
 
-        // Prepare the three lists
+        // Prepare the four lists
         $modules = [];
         $units = [];
+        $chapters = [];
         $exercices = [];
 
         foreach ($division->materials as $material) {
@@ -53,25 +54,29 @@ trait InteractsWithContent
                 ];
 
                 foreach ($unit->chapters as $chapter) {
-                    // Transform questions
-                    $transformedQuestions = [];
-                    if (isset($chapter->questions)) {
-                        foreach ($chapter->questions as $question) {
-                            $qType = $question->question_type->value;
-                            if (!isset($transformedQuestions[$qType])) {
-                                $transformedQuestions[$qType] = $this->transformQuestion($question);
-                            }
-                        }
-                    }
-
-                    // Add to exercices list
-                    $exercices[] = [
+                    // Add to chapters list (without questions)
+                    $chapters[] = [
                         'id' => $chapter->id,
                         'name' => $chapter->name,
                         'description' => $chapter->description,
                         'unit_id' => $unit->id,
-                        'questions' => array_values($transformedQuestions),
                     ];
+
+                    // Transform questions
+                    $transformedQuestions = [];
+                    if (isset($chapter->questions)) {
+                        foreach ($chapter->questions as $question) {
+                            $transformedQuestions[] = $this->transformQuestion($question);
+                        }
+                    }
+
+                    // Add to exercices list (only questions)
+                    if (!empty($transformedQuestions)) {
+                        $exercices[] = [
+                            'chapter_id' => $chapter->id,
+                            'questions' => $transformedQuestions,
+                        ];
+                    }
                 }
             }
         }
@@ -80,6 +85,7 @@ trait InteractsWithContent
         return [
             'modules' => $modules,
             'units' => $units,
+            'chapters' => $chapters,
             'exercices' => $exercices,
         ];
     }
@@ -99,6 +105,7 @@ trait InteractsWithContent
             'points' => $question->difficulty->points(),
             'scope' => $question->scope,
             'hint' => is_string($question->hint) ? [$question->hint] : $question->hint,
+            'explanation_text' => $question->explanation_text,
             'explanationVideo' => $question->explanation_asset,
             'hintImage' => $question->hint_image,
             'question' => $question->question,
@@ -163,14 +170,44 @@ trait InteractsWithContent
         ];
     }
 
-    // For these two, return empty arrays for now since they're not fully implemented
     public function transformFillInTheBlanks($question)
     {
-        return [];
+        $data = $question->options ?? [];
+        $paragraph = $data['paragraph'] ?? '';
+        $answers = $data['answers'] ?? [];
+        
+        $answerValues = [];
+        $placeholders = [];
+        
+        foreach ($answers as $answer) {
+            $answerValues[] = $answer['word'];
+            $placeholders[] = $answer['placeholder'];
+        }
+        
+        return [
+            'paragraph' => $paragraph,
+            'answers' => $answerValues,
+            'placeholders' => $placeholders,
+        ];
     }
 
     public function transformMatchWithArrows($question)
     {
-        return [];
+        $pairs = $question->options['pairs'] ?? [];
+        $firstColumn = [];
+        $secondColumn = [];
+        $correctMatches = [];
+        
+        foreach ($pairs as $index => $pair) {
+            $firstColumn[] = $pair['first'];
+            $secondColumn[] = $pair['second'];
+            $correctMatches[] = [$index, $index]; // Matching index with index (could be shuffled if needed)
+        }
+        
+        return [
+            'firstColumn' => $firstColumn,
+            'secondColumn' => $secondColumn,
+            'correctMatches' => $correctMatches,
+        ];
     }
 }

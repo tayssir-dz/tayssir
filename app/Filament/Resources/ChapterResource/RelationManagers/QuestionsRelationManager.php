@@ -63,6 +63,9 @@ class QuestionsRelationManager extends RelationManager
 
                                 Forms\Components\TextInput::make('hint')
                                     ->label(__('custom.models.question.hint')),
+                                
+                                Forms\Components\Textarea::make('explanation_text')
+                                    ->label(__('custom.models.question.explanation_text')),
                             ]),
                         Forms\Components\Tabs\Tab::make(__('custom.models.question.tabs.assets'))
                             ->schema([

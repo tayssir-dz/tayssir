@@ -3,6 +3,7 @@
 use App\Enums\QuestionType;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ContentController;
+use App\Http\Controllers\API\DivisionController;
 use App\Http\Controllers\API\ForgotPasswordController;
 use App\Http\Controllers\API\EmailVerificationController;
 use App\Http\Controllers\API\SubscriptionController;
@@ -10,15 +11,23 @@ use App\Http\Controllers\API\UserController;
 use App\Models\Question;
 use Illuminate\Support\Facades\Route;
 
+// Division Routes
+Route::get('divisions', [DivisionController::class, 'index'])
+    ->summary("List all divisions")
+    ->description("This endpoint returns all available divisions");
+
+Route::get('divisions/{id}', [DivisionController::class, 'show'])
+    ->summary("Get division by ID")
+    ->description("This endpoint returns a specific division by its ID");
 
 // MENNADOS PEDADAA
 Route::prefix('v1')->group(function () {
-    Route::get("/", function () {
-        return response()->json([
-            "message" => "Welcome to " . config('app.name') . " API",
-            "version" => "1"
-        ]);
-    });
+    // Route::get("/", function () {
+    //     return response()->json([
+    //         "message" => "Welcome to " . config('app.name') . " API",
+    //         "version" => "1"
+    //     ]);
+    // });
 
 
     Route::prefix('auth')->group(function () {
@@ -128,20 +137,28 @@ Route::prefix('v1')->group(function () {
     //     Route::post('/submit-chapter-answers', [ContentController::class, 'submitChapterAnswers']);
     // });
 
-    Route::get('test', function () {
-        // Use an anonymous class instance that uses the trait.
-        $transformer = new class {
-            use \App\Traits\InteractsWithContent;
-        };
+    // Route::get('test', function () {
+    //     // Use an anonymous class instance that uses the trait.
+    //     $transformer = new class {
+    //         use \App\Traits\InteractsWithContent;
+    //     };
 
-        $result = [];
-        foreach (QuestionType::cases() as $type) {
-            // Retrieve one example question for the current type.
-            $question = Question::where('question_type', $type->value)->first();
-            if ($question) {
-                $result[$type->value] = $transformer->transformQuestion($question);
-            }
-        }
-        return response()->json($result);
-    });
+    //     $result = [];
+    //     foreach (QuestionType::cases() as $type) {
+    //         // Retrieve one example question for the current type.
+    //         $question = Question::where('question_type', $type->value)->first();
+    //         if ($question) {
+    //             $result[$type->value] = $transformer->transformQuestion($question);
+    //         }
+    //     }
+    //     return response()->json($result);
+    // });
 });
+
+
+/*
+fill_in_the_blanks
+match with arrows
+// add explanation text to the questions
+// add chapters to the response (chapters and questions)
+*/

@@ -26,6 +26,7 @@ class Question extends Model implements HasMedia
     protected $fillable = [
         'question',
         "hint",
+        'explanation_text',
         'options',
         'question_type',
         "difficulty",

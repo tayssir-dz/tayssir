@@ -36,7 +36,8 @@ class ResponseController
             "email_verified" => $user->email_verified_at !== null,
             "wilaya" => $user->wilaya ? ResponseController::WilayaRes($user->wilaya) : null,
             "commune" => $user->wilaya && $user->commune ? ResponseController::CommuneRes($user->commune) : null,
-            // "subscriptions" => $subscriptionNames,
+            "division" => $user->division,
+            "subscriptions" => $user->subscriptions,
             // 'subscribed' => $subscriptionCard && $subscriptionCard->subscription && Carbon::now()->lessThan($user->subscriptionCard->subscription->ending_date),
         ];
     }

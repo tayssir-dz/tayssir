@@ -30,8 +30,9 @@ class AuthController extends BaseController
             'name' => $input['name'],
             'phone_number' => $input['phone_number'],
             'password' => $input['password'],
-            // 'wilaya_id' => $input['wilaya_id'], 
-            // 'commune_id' => $input['commune_id'],
+            'wilaya_id' => $input['wilaya_id'] ?? null, 
+            'commune_id' => $input['commune_id'] ?? null,
+            'division_id' => $input['division_id'] ?? null,
         ]);
         $role = Role::firstOrCreate(['name' => 'student']);
         $user->assignRole($role);

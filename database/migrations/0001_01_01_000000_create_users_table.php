@@ -16,9 +16,7 @@ return new class extends Migration {
             $table->string('phone_number')->nullable()->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            // $table->integer("points")->default(0);
             $table->string('password');
-            // $table->unsignedBigInteger('subscription_card_id')->nullable();
             $table->foreignId('division_id')->nullable()->constrained()->onDelete('set null');
             $table->rememberToken();
             $table->timestamps();

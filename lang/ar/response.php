@@ -54,5 +54,9 @@ return [
     'current_password_is_incorrect' => 'كلمة المرور الحالية غير صحيحة',
     'password_updated_successfully' => 'تم تحديث كلمة المرور بنجاح',
 
+    // Divisions
+    'divisions_retrieved_successfully' => 'تم استرجاع الأقسام بنجاح',
+    'division_retrieved_successfully' => 'تم استرجاع القسم بنجاح',
+    'division_not_found' => 'القسم غير موجود',
 
 ];

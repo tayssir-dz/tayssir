@@ -189,6 +189,7 @@ class ContentSeeder extends Seeder
             'question_type' => 'true_or_false',
             'options' => ['correct' => $faker->boolean()],
             'hint' => $faker->optional()->sentence(),
+            'explanation_text' => $faker->optional(0.7)->paragraph(),
         ]);
     }
 
