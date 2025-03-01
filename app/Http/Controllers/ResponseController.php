@@ -30,6 +30,7 @@ class ResponseController
         return [
             'id' => $user->id,
             "name" => $user->name,
+            "age" => $user->age ? $user->age : null,
             "email" => $user->email,
             "image_url" => $user->avatar_url,
             "phone_number" => $user->phone_number,
@@ -41,6 +42,4 @@ class ResponseController
             // 'subscribed' => $subscriptionCard && $subscriptionCard->subscription && Carbon::now()->lessThan($user->subscriptionCard->subscription->ending_date),
         ];
     }
-
-
 }
