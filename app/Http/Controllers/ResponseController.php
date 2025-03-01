@@ -30,8 +30,8 @@ class ResponseController
         return [
             'id' => $user->id,
             "name" => $user->name,
-            "age" => $user->age ? $user->age : null,
             "email" => $user->email,
+            "age" => $user->age ? $user->age : null,
             "image_url" => $user->avatar_url,
             "phone_number" => $user->phone_number,
             "email_verified" => $user->email_verified_at !== null,
