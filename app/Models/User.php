@@ -52,6 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
      */
     protected $fillable = [
         'name',
+        "age",
         'phone_number',
         'avatar_url',
         'email',
