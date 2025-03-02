@@ -194,20 +194,9 @@ trait InteractsWithContent
     public function transformMatchWithArrows($question)
     {
         $pairs = $question->options['pairs'] ?? [];
-        $firstColumn = [];
-        $secondColumn = [];
-        $correctMatches = [];
-        
-        foreach ($pairs as $index => $pair) {
-            $firstColumn[] = $pair['first'];
-            $secondColumn[] = $pair['second'];
-            $correctMatches[] = [$index, $index]; // Matching index with index (could be shuffled if needed)
-        }
         
         return [
-            'firstColumn' => $firstColumn,
-            'secondColumn' => $secondColumn,
-            'correctMatches' => $correctMatches,
+            'pairs' => $pairs
         ];
     }
 }
