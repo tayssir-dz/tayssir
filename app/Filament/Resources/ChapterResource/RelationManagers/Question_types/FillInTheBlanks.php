@@ -8,6 +8,7 @@ use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TagsInput;
 
 class FillInTheBlanks extends QuestionType
 {
@@ -27,15 +28,20 @@ class FillInTheBlanks extends QuestionType
                         ->required()
                         ->helperText(trans('custom.models.question.fill_blank.paragraph_help')),
 
-                    Repeater::make('answers')
+                    TagsInput::make('suggestions')
+                        ->label(trans('custom.models.question.fill_blank.suggestions'))
+                        ->helperText(trans('custom.models.question.fill_blank.suggestions_help'))
+                        ->placeholder(trans('custom.models.question.fill_blank.suggestions_placeholder')),
+
+                    Repeater::make('blanks')
                         ->schema([
-                            TextInput::make('word')
+                            TextInput::make('correct_word')
                                 ->required()
-                                ->label(trans('custom.models.question.fill_blank.word'))
+                                ->label(trans('custom.models.question.fill_blank.correct_word'))
                                 ->maxLength(255),
-                            TextInput::make('placeholder')
+                            TextInput::make('position')
                                 ->required()
-                                ->label(trans('custom.models.question.fill_blank.placeholder'))
+                                ->label(trans('custom.models.question.fill_blank.position'))
                                 ->prefix('[')
                                 ->suffix(']')
                                 ->maxLength(2)
@@ -44,21 +50,34 @@ class FillInTheBlanks extends QuestionType
                                 ->maxValue(10),
                         ])
                         ->live()
-                        ->createItemButtonLabel(trans('custom.models.question.fill_blank.add_answer'))
+                        ->createItemButtonLabel(trans('custom.models.question.fill_blank.add_blank'))
                         ->defaultItems(2)
                         ->minItems(1)
                         ->maxItems(5)
                         ->columns(2)
                         ->reorderable()
-                        // ->reorderableWithButtons()
                         ->collapsible()
                         ->collapsed()
-                        ->label(trans('custom.models.question.fill_blank.answers'))
-                        ->itemLabel(fn(array $state): ?string => isset ($state['word'], $state['placeholder']) ? '[' . $state['placeholder'] . '] ' . $state['word'] : null)
+                        ->label(trans('custom.models.question.fill_blank.blanks'))
+                        ->itemLabel(fn(array $state): ?string => isset ($state['correct_word'], $state['position']) ? '[' . $state['position'] . '] ' . $state['correct_word'] : null)
                         ->columnSpanFull()
-                        ->addActionLabel(trans('custom.models.question.fill_blank.add_answer'))
+                        ->addActionLabel(trans('custom.models.question.fill_blank.add_blank'))
                 ])
                 ->columnSpanFull()
         ];
+    }
+
+    public static function getDefaultOptions(array $data): array
+    {
+        return [
+            'paragraph' => '',
+            'blanks' => [],
+            'suggestions' => []
+        ];
+    }
+
+    public static function saveFormState(mixed $record, array &$data): void
+    {
+        // Any custom logic needed before saving
     }
 }

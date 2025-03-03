@@ -233,7 +233,7 @@ class ContentSeeder extends Seeder
 
             case 'fill_in_the_blanks':
                 $numBlanks = rand(2, 3);
-                $answers = [];
+                $blanks = [];
                 $paragraph = rtrim($this->arabicFaker->realText(100), '.');
                 $words_array = explode(' ', $paragraph);
 
@@ -246,19 +246,33 @@ class ContentSeeder extends Seeder
                     $positions = [$positions];
                 }
 
+                // Generate suggestions (original words plus some additional options)
+                $suggestions = [];
+                
                 foreach ($positions as $index => $pos) {
                     $word = $words_array[$pos];
-                    $placeholder = $index + 1;
-                    $answers[] = [
-                        'word' => $word,
-                        'placeholder' => $placeholder
+                    $position = $index + 1;
+                    $blanks[] = [
+                        'correct_word' => $word,
+                        'position' => $position
                     ];
-                    $words_array[$pos] = "[$placeholder]";
+                    $words_array[$pos] = "[$position]";
+                    $suggestions[] = $word;
                 }
+                
+                // Add some extra suggestions
+                $extraSuggestions = rand(2, 4);
+                for ($i = 0; $i < $extraSuggestions; $i++) {
+                    $suggestions[] = rtrim($this->arabicFaker->word(), '.');
+                }
+                
+                // Shuffle suggestions
+                shuffle($suggestions);
 
                 return [
                     'paragraph' => implode(' ', $words_array),
-                    'answers' => $answers
+                    'blanks' => $blanks,
+                    'suggestions' => $suggestions
                 ];
 
             case 'pick_the_intruder':

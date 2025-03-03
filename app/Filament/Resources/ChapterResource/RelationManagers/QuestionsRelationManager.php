@@ -98,7 +98,8 @@ class QuestionsRelationManager extends RelationManager
                                         } elseif ($state === QuestionType::FILL_IN_THE_BLANKS->value) {
                                             $set('options', [
                                                 'paragraph' => '',
-                                                'answers' => []
+                                                'blanks' => [],
+                                                'suggestions' => []
                                             ]);
                                         } else {
                                             $set('options', null);

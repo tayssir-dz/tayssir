@@ -10,8 +10,11 @@ class ContentController extends BaseController
     public function getUserContent(Request $request)
     {
 
-        // $userSubscriptions = $request->user()->subscriptions->pluck('id');
-        $content = $request->user()->content;
+        $user = $request->user();
+        if (!$user->division) {
+            return $this->sendError(__("response.an_error_occurred"));
+        }
+        $content = $user->content;
 
         return $this->sendResponse($content);
     }

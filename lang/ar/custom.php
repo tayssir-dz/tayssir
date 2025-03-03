@@ -152,6 +152,13 @@ return [
     'models.question.fill_blank.placeholder' => 'علامة الفراغ (مثال: [1])',
     'models.question.fill_blank.words' => 'كلمات ملء الفراغات',
     'models.question.fill_blank.add_answer' => 'إضافة إجابة',
+    'models.question.fill_blank.suggestions' => 'الاقتراحات',
+    'models.question.fill_blank.suggestions_help' => 'أضف كلمات ممكنة ستظهر كاقتراحات',
+    'models.question.fill_blank.suggestions_placeholder' => 'أدخل كلمة اقتراح',
+    'models.question.fill_blank.blanks' => 'الفراغات',
+    'models.question.fill_blank.add_blank' => 'إضافة فراغ',
+    'models.question.fill_blank.correct_word' => 'الكلمة الصحيحة',
+    'models.question.fill_blank.position' => 'الموضع',
 
     'models.question.scope' => 'نطاق السؤال',
     'models.question.scope.exercice' => "تمرين",

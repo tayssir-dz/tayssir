@@ -174,20 +174,22 @@ trait InteractsWithContent
     {
         $data = $question->options ?? [];
         $paragraph = $data['paragraph'] ?? '';
-        $answers = $data['answers'] ?? [];
+        $blanks = $data['blanks'] ?? [];
+        $suggestions = $data['suggestions'] ?? [];
         
-        $answerValues = [];
-        $placeholders = [];
+        $transformedBlanks = [];
         
-        foreach ($answers as $answer) {
-            $answerValues[] = $answer['word'];
-            $placeholders[] = $answer['placeholder'];
+        foreach ($blanks as $blank) {
+            $transformedBlanks[] = [
+                'correct_word' => $blank['correct_word'],
+                'position' => $blank['position'],
+            ];
         }
         
         return [
             'paragraph' => $paragraph,
-            'answers' => $answerValues,
-            'placeholders' => $placeholders,
+            'blanks' => $transformedBlanks,
+            'suggestions' => $suggestions,
         ];
     }
 
