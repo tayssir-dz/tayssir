@@ -67,16 +67,16 @@ trait HasSubscriptions
     public function getAccessibleMaterialsAttribute()
     {
         return $this->division->materials()
-            ->whereHas('units', function($query) {
-                $query->whereHas('subscriptions', function($subQuery) {
+            ->whereHas('units', function ($query) {
+                $query->whereHas('subscriptions', function ($subQuery) {
                     $subQuery->whereIn('subscriptions.id', $this->subscriptions->pluck('id'));
                 });
             })
-            ->with(['units' => function($query) {
-                $query->whereHas('subscriptions', function($subQuery) {
+            ->with(['units' => function ($query) {
+                $query->whereHas('subscriptions', function ($subQuery) {
                     $subQuery->whereIn('subscriptions.id', $this->subscriptions->pluck('id'));
-                })->with(['chapters' => function($chapterQuery) {
-                    $chapterQuery->whereHas('subscriptions', function($subQuery) {
+                })->with(['chapters' => function ($chapterQuery) {
+                    $chapterQuery->whereHas('subscriptions', function ($subQuery) {
                         $subQuery->whereIn('subscriptions.id', $this->subscriptions->pluck('id'));
                     })->with('questions');
                 }]);
