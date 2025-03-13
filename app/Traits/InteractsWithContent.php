@@ -10,6 +10,9 @@ trait InteractsWithContent
     {
         $subscriptionIds = $this->subscriptions->pluck('id');
 
+        // Get all progress data efficiently in a single call
+        $progressData = $this->getAllProgressData();
+
         // Load all data first
         $division = $this->division->load([
             'materials.units' => function ($query) use ($subscriptionIds) {
@@ -32,7 +35,7 @@ trait InteractsWithContent
         $exercices = [];
 
         foreach ($division->materials as $material) {
-            // Add to modules list
+            // Add to modules list with progress
             $modules[] = [
                 'id' => $material->id,
                 'name' => $material->name,
@@ -42,24 +45,30 @@ trait InteractsWithContent
                 'secondary_color' => $material->secondary_color,
                 'description' => $material->description,
                 'image' => $material->image,
+                'progress' => $progressData['materials'][$material->id] ?? 0,
+                'points' => $progressData['points']['materials'][$material->id] ?? 0
             ];
 
             foreach ($material->units as $unit) {
-                // Add to units list
+                // Add to units list with progress
                 $units[] = [
                     'id' => $unit->id,
                     'name' => $unit->name,
                     'description' => $unit->description,
                     'material_id' => $material->id,
+                    'progress' => $progressData['units'][$unit->id] ?? 0,
+                    'points' => $progressData['points']['units'][$unit->id] ?? 0
                 ];
 
                 foreach ($unit->chapters as $chapter) {
-                    // Add to chapters list (without questions)
+                    // Add to chapters list (without questions) but with progress
                     $chapters[] = [
                         'id' => $chapter->id,
                         'name' => $chapter->name,
                         'description' => $chapter->description,
                         'unit_id' => $unit->id,
+                        'progress' => $progressData['chapters'][$chapter->id] ?? 0,
+                        'points' => $progressData['points']['chapters'][$chapter->id] ?? 0
                     ];
 
                     // Transform questions
@@ -81,12 +90,13 @@ trait InteractsWithContent
             }
         }
 
-        // Return structured response
+        // Return structured response with total points
         return [
             'modules' => $modules,
             'units' => $units,
             'chapters' => $chapters,
             'exercices' => $exercices,
+            'total_points' => $progressData['points']['total'] ?? 0
         ];
     }
 
@@ -176,16 +186,16 @@ trait InteractsWithContent
         $paragraph = $data['paragraph'] ?? '';
         $blanks = $data['blanks'] ?? [];
         $suggestions = $data['suggestions'] ?? [];
-        
+
         $transformedBlanks = [];
-        
+
         foreach ($blanks as $blank) {
             $transformedBlanks[] = [
                 'correct_word' => $blank['correct_word'],
                 'position' => $blank['position'],
             ];
         }
-        
+
         return [
             'paragraph' => $paragraph,
             'blanks' => $transformedBlanks,
@@ -196,7 +206,7 @@ trait InteractsWithContent
     public function transformMatchWithArrows($question)
     {
         $pairs = $question->options['pairs'] ?? [];
-        
+
         return [
             'pairs' => $pairs
         ];

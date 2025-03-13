@@ -131,34 +131,12 @@ Route::prefix('v1')->group(function () {
             ->middleware(["auth:sanctum", "access"])
             ->summary("Get user content")
             ->description("This endpoint returns the content associated with the authenticated user.");
+        Route::post("/answer", [ContentController::class, "SubmitChapterAnswers"])
+            ->middleware(["auth:sanctum", "access"])
+            ->summary("Submit chapter answers")
+            ->description("This endpoint submits the answers of a chapter.");
     });
-
     // Route::middleware('auth:sanctum')->group(function () {
     //     Route::post('/submit-chapter-answers', [ContentController::class, 'submitChapterAnswers']);
     // });
-
-    // Route::get('test', function () {
-    //     // Use an anonymous class instance that uses the trait.
-    //     $transformer = new class {
-    //         use \App\Traits\InteractsWithContent;
-    //     };
-
-    //     $result = [];
-    //     foreach (QuestionType::cases() as $type) {
-    //         // Retrieve one example question for the current type.
-    //         $question = Question::where('question_type', $type->value)->first();
-    //         if ($question) {
-    //             $result[$type->value] = $transformer->transformQuestion($question);
-    //         }
-    //     }
-    //     return response()->json($result);
-    // });
 });
-
-
-/*
-fill_in_the_blanks
-match with arrows
-// add explanation text to the questions
-// add chapters to the response (chapters and questions)
-*/

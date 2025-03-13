@@ -18,6 +18,9 @@ return new class extends Migration {
             $table->foreignId('unit_id')->constrained()->onDelete('cascade');
             $table->foreignId('material_id')->constrained()->onDelete('cascade');
             $table->integer('points_earned')->default(0);
+
+            $table->unique(['user_id', 'question_id', 'chapter_id', 'unit_id', 'material_id']);
+            $table->index(['user_id', 'question_id', 'chapter_id', 'unit_id', 'material_id']);
             $table->timestamps();
         });
     }

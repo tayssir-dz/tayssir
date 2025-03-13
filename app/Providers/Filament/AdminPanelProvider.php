@@ -92,7 +92,7 @@ class AdminPanelProvider extends PanelProvider
                         rules: 'mimes:jpeg,png|max:1024'
                     ),
                 FilamentDeveloperLoginsPlugin::make()
-                    ->enabled(env("APP_DEBUG") === true)
+                    ->enabled(true)
                     ->users([
                         'dev login' => 'admin@admin.dev',
                         // 'mouayed' => 'm_keziz@estin.dz',

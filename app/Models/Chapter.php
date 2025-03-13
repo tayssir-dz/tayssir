@@ -21,7 +21,6 @@ class Chapter extends Model implements HasMedia
     protected $fillable = [
         'name',
         'description',
-        'unit_id',
         // 'photo_url',
     ];
 
