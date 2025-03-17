@@ -42,7 +42,7 @@ class UserController extends BaseController
             $user->division_id = $request->division_id;
         }
         if ($request->hasFile('profile_picture')) {
-            $image = $request->file('image');
+            $image = $request->file('profile_picture');
             $path = $image->store('avatars');
             $user->avatar_url = $path;
         }
