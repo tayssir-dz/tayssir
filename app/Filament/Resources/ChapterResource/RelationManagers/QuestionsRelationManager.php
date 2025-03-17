@@ -63,7 +63,7 @@ class QuestionsRelationManager extends RelationManager
 
                                 Forms\Components\TextInput::make('hint')
                                     ->label(__('custom.models.question.hint')),
-                                
+
                                 Forms\Components\Textarea::make('explanation_text')
                                     ->label(__('custom.models.question.explanation_text')),
                             ]),
@@ -165,6 +165,8 @@ class QuestionsRelationManager extends RelationManager
             ->reorderable('sort')
             ->recordTitleAttribute('question')
             ->columns([
+                Tables\Columns\TextColumn::make('id'),
+
                 Tables\Columns\TextColumn::make('question')->label(__('custom.models.question.question')),
                 Tables\Columns\TextColumn::make('question_type')
                     ->label(__('custom.models.question.type'))

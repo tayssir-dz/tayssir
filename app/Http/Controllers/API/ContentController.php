@@ -74,9 +74,35 @@ class ContentController extends BaseController
                 // Bulk insert all answers at once
                 UserAnswer::insert($userAnswersData);
 
+                // Calculate updated progress and points
+                $materialProgress = $user->materialProgress($material);
+                $unitProgress = $user->unitProgress($unit);
+                $chapterProgress = $user->chapterProgress($chapter);
+
+                $materialPoints = $user->materialPoints($material);
+                $unitPoints = $user->unitPoints($unit);
+                $chapterPoints = $user->chapterPoints($chapter);
+
                 return $this->sendResponse([
                     'message' => __('response.answers_submitted_successfully'),
-                    'total_answers' => count($userAnswersData)
+                    'total_answers' => count($userAnswersData),
+                    'progress' => [
+                        'material' => [
+                            'id' => $material->id,
+                            'progress' => $materialProgress,
+                            'points' => $materialPoints
+                        ],
+                        'unit' => [
+                            'id' => $unit->id,
+                            'progress' => $unitProgress,
+                            'points' => $unitPoints
+                        ],
+                        'chapter' => [
+                            'id' => $chapter->id,
+                            'progress' => $chapterProgress,
+                            'points' => $chapterPoints
+                        ]
+                    ]
                 ]);
             });
         } catch (\Exception $e) {

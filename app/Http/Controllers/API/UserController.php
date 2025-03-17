@@ -5,8 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\ResponseController;
 use App\Http\Requests\API\User\UpdateProfileRequest;
 use Illuminate\Http\Request;
-use Validator;
 use G4T\Swagger\Attributes\SwaggerSection;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 // #[SwaggerSection('This section handles all user-related operations such as retrieving user information, updating user details like name, email, and phone number, and allowing users to change their password securely. It enforces proper user authentication and authorization to protect user data.')]
 class UserController extends BaseController
@@ -34,6 +35,12 @@ class UserController extends BaseController
         if ($request->commune_id) {
             $user->commune_id = $request->commune_id;
         }
+        if ($request->age) {
+            $user->age = $request->age;
+        }
+        if ($request->division_id) {
+            $user->division_id = $request->division_id;
+        }
         if ($request->hasFile('profile_picture')) {
             $image = $request->file('image');
             $path = $image->store('avatars');
@@ -56,7 +63,7 @@ class UserController extends BaseController
             return $this->sendValidationError($validator->errors());
         }
         $user = $request->user();
-        if (!\Hash::check($request->current_password, $user->password)) {
+        if (!Hash::check($request->current_password, $user->password)) {
             return $this->sendError(__("response.current_password_is_incorrect"));
         }
         $device_name = $user->currentAccessToken()->name;

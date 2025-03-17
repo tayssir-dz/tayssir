@@ -18,7 +18,6 @@ class SubmitChapterAnswersRequest extends FormRequest
         // Verify the chapter exists and is part of user's subscribed content
         $chapterId = $this->input('chapter_id');
         $chapter = \App\Models\Chapter::find($chapterId);
-
         if (!$chapter) {
             return false;
         }
