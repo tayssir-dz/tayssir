@@ -43,7 +43,7 @@ class UserController extends BaseController
         }
         if ($request->hasFile('profile_picture')) {
             $image = $request->file('profile_picture');
-            $path = $image->store('avatars');
+            $path = $image->store('avatars', 'public');
             $user->avatar_url = $path;
         }
         $user->save();
