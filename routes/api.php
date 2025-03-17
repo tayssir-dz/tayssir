@@ -20,6 +20,15 @@ Route::get('divisions/{id}', [DivisionController::class, 'show'])
     ->summary("Get division by ID")
     ->description("This endpoint returns a specific division by its ID");
 
+// Subscription Routes
+Route::get('subscriptions', [SubscriptionController::class, 'index'])
+    ->summary("List all subscriptions")
+    ->description("This endpoint returns all available subscriptions with their discounts");
+
+Route::get('subscriptions/{id}', [SubscriptionController::class, 'show'])
+    ->summary("Get subscription by ID")
+    ->description("This endpoint returns a specific subscription by its ID with associated discounts");
+
 // MENNADOS PEDADAA
 Route::prefix('v1')->group(function () {
     // Route::get("/", function () {

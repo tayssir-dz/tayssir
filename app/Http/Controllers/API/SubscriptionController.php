@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\Subscription\RedeemRequest;
 use App\Http\Requests\API\Subscription\UnsubscribeRequest;
+use App\Models\Subscription;
 use App\Models\SubscriptionCard;
 use Carbon\Carbon;
 use Exception;
@@ -11,10 +12,89 @@ use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Http\Request;
 use Validator;
 use G4T\Swagger\Attributes\SwaggerSection;
+use Illuminate\Support\Facades\Hash;
 
 // #[SwaggerSection("This section oversees subscription management, allowing users to view their subscriptions, redeem subscription cards, and unsubscribe from active subscriptions. It enforces checks to ensure valid subscriptions and handles user-specific subscription actions securely, including error handling for invalid or already used subscription codes.")]
 class SubscriptionController extends BaseController
 {
+    /**
+     * Display a listing of all subscriptions.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $subscriptions = Subscription::with('discounts')->get();
+        $guestSubscription = Subscription::find(Subscription::GUEST_ID);
+
+        if ($subscriptions->isEmpty() && $guestSubscription) {
+            $subscriptions->push($guestSubscription);
+        } elseif ($subscriptions->count() > 1 && $guestSubscription) {
+            $subscriptions = $subscriptions->filter(function ($subscription) {
+                return $subscription->id !== Subscription::GUEST_ID;
+            });
+        }
+
+        $subscriptions =  $subscriptions->unique('id')->values();
+        $subscriptions = $subscriptions->map(function ($subscription) {
+            return [
+                'id' => $subscription->id,
+                'name' => $subscription->name,
+                'description' => $subscription->description,
+                'price' => $subscription->price,
+                'ending_date' => $subscription->ending_date,
+                'discounts' => $subscription->discounts->map(function ($discount) {
+                    return [
+                        'id' => $discount->id,
+                        'name' => $discount->name,
+                        'description' => $discount->description,
+                        'amount' => $discount->amount,
+                        'percentage' => $discount->percentage,
+                        'from' => $discount->from,
+                        'to' => $discount->to,
+                    ];
+                })
+            ];
+        });
+
+        return $this->sendResponse($subscriptions, __("response.subscriptions_retrieved_successfully"));
+    }
+
+    /**
+     * Display the specified subscription.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $subscription = Subscription::with('discounts')->find($id);
+
+        if (is_null($subscription)) {
+            return $this->sendError(__("response.subscription_not_found"));
+        }
+
+        $result = [
+            'id' => $subscription->id,
+            'name' => $subscription->name,
+            'description' => $subscription->description,
+            'price' => $subscription->price,
+            'ending_date' => $subscription->ending_date,
+            'discounts' => $subscription->discounts->map(function ($discount) {
+                return [
+                    'id' => $discount->id,
+                    'name' => $discount->name,
+                    'description' => $discount->description,
+                    'amount' => $discount->amount,
+                    'percentage' => $discount->percentage,
+                    'from' => $discount->from,
+                    'to' => $discount->to,
+                ];
+            })
+        ];
+
+        return $this->sendResponse($result, __("response.subscription_retrieved_successfully"));
+    }
     public function redeem(RedeemRequest $request)
     {
         $code = $request->input('card_code');
@@ -65,7 +145,7 @@ class SubscriptionController extends BaseController
         $password = $request->input('password');
         $user = $request->user();
 
-        if (!\Hash::check($password, $user->password)) {
+        if (!Hash::check($password, $user->password)) {
             return $this->sendError(__("response.invalid_password"));
         }
 
