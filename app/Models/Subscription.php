@@ -17,6 +17,9 @@ class Subscription extends Model
         "description",
         "price",
         "ending_date",
+        "gradiant_start",
+        "gradiant_end",
+        "bottom_color_at_start",
     ];
 
     // protected $with = ["subscriptionCards"];

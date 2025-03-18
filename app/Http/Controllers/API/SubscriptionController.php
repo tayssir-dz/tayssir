@@ -43,6 +43,9 @@ class SubscriptionController extends BaseController
                 'description' => $subscription->description,
                 'price' => $subscription->price,
                 'ending_date' => $subscription->ending_date,
+                'gradiant_start' => $subscription->gradiant_start,
+                'gradiant_end' => $subscription->gradiant_end,
+                'bottom_color_at_start' => $subscription->bottom_color_at_start,
                 'discounts' => $subscription->discounts->map(function ($discount) {
                     return [
                         'id' => $discount->id,
@@ -80,6 +83,9 @@ class SubscriptionController extends BaseController
             'description' => $subscription->description,
             'price' => $subscription->price,
             'ending_date' => $subscription->ending_date,
+            'gradiant_start' => $subscription->gradiant_start,
+            'gradiant_end' => $subscription->gradiant_end,
+            'bottom_color_at_start' => $subscription->bottom_color_at_start,
             'discounts' => $subscription->discounts->map(function ($discount) {
                 return [
                     'id' => $discount->id,
@@ -132,7 +138,10 @@ class SubscriptionController extends BaseController
                 "id" => $subscription->id,
                 "name" => $subscription->name,
                 "description" => $subscription->description,
-                "ending_date" => $subscription->ending_date
+                "ending_date" => $subscription->ending_date,
+                'gradiant_start' => $subscription->gradiant_start,
+                'gradiant_end' => $subscription->gradiant_end,
+                'bottom_color_at_start' => $subscription->bottom_color_at_start,
             ];
         })->toArray();
 
