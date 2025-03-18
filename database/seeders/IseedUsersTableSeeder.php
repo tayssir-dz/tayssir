@@ -14,13 +14,13 @@ class IseedUsersTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('users')->delete();
-        
-        \DB::table('users')->insert(array (
-            0 => 
-            array (
+
+        \DB::table('users')->insert(array(
+            0 =>
+            array(
                 'id' => 1,
                 'name' => 'admin',
                 'phone_number' => NULL,
@@ -31,13 +31,13 @@ class IseedUsersTableSeeder extends Seeder
                 'remember_token' => '8gJMljpTeJ',
                 'created_at' => '2025-03-13 01:16:37',
                 'updated_at' => '2025-03-17 03:32:25',
-                'avatar_url' => 'avatars/jzOXIZF8Qn9WYLdmfwTwR5kZB3kGTQRRK02CpM8Q.jpg',
+                'avatar_url' => NULL,
                 'wilaya_id' => NULL,
                 'commune_id' => NULL,
                 'age' => NULL,
             ),
-            1 => 
-            array (
+            1 =>
+            array(
                 'id' => 2,
                 'name' => 'keziz mouayed',
                 'phone_number' => '0552525052',
@@ -54,7 +54,5 @@ class IseedUsersTableSeeder extends Seeder
                 'age' => NULL,
             ),
         ));
-        
-        
     }
 }
