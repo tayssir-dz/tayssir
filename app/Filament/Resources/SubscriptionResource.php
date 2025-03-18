@@ -83,8 +83,7 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
                         ->locale(__("custom.currency.local.dzd")),
 
                     DatePicker::make("ending_date")
-                        ->label(__("custom.models.subscription.ending_date"))
-                        ->required(),
+                        ->label(__("custom.models.subscription.ending_date")),
 
                     Select::make('discounts')
                         ->label(__("custom.models.subscription.discounts"))
