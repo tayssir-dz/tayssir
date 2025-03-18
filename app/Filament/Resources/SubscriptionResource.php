@@ -101,7 +101,7 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
                         ->label('Gradient End')
                         ->required(),
 
-                    Forms\Components\ColorPicker::make('bottom_color_at_start')
+                    Forms\Components\Toggle::make('bottom_color_at_start')
                         ->label('Bottom Color At Start')
                         ->required(),
                 ])->columnSpan(2),
