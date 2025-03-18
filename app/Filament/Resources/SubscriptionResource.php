@@ -94,15 +94,15 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
                         ->searchable(),
 
                     Forms\Components\ColorPicker::make('gradiant_start')
-                        ->label(__("custom.models.subscription.gradiant_start"))
+                        ->label('Gradient Start')
                         ->required(),
 
                     Forms\Components\ColorPicker::make('gradiant_end')
-                        ->label(__("custom.models.subscription.gradiant_end"))
+                        ->label('Gradient End')
                         ->required(),
 
                     Forms\Components\ColorPicker::make('bottom_color_at_start')
-                        ->label(__("custom.models.subscription.bottom_color_at_start"))
+                        ->label('Bottom Color At Start')
                         ->required(),
                 ])->columnSpan(2),
             ])->columns(1);
@@ -139,10 +139,10 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
                     ->sortable(),
 
                 Tables\Columns\ColorColumn::make('gradiant_start')
-                    ->label(__("custom.models.subscription.gradiant_start")),
+                    ->label('Gradient Start'),
 
                 Tables\Columns\ColorColumn::make('gradiant_end')
-                    ->label(__("custom.models.subscription.gradiant_end")),
+                    ->label('Gradient End'),
             ])
             ->filters([
                 //
