@@ -91,4 +91,8 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
     {
         return $this->belongsTo(Division::class);
     }
+    public function answers()
+    {
+        return $this->hasMany(UserAnswer::class);
+    }
 }

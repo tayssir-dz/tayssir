@@ -241,6 +241,13 @@
       0 => 'Termwind\\Laravel\\TermwindServiceProvider',
     ),
   ),
+  'orangehill/iseed' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Orangehill\\Iseed\\IseedServiceProvider',
+    ),
+  ),
   'pelmered/filament-money-field' => 
   array (
     'providers' => 

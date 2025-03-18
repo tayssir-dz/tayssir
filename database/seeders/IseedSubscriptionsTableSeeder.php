@@ -1,0 +1,36 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+class IseedSubscriptionsTableSeeder extends Seeder
+{
+
+    /**
+     * Auto generated seed file
+     *
+     * @return void
+     */
+    public function run()
+    {
+        
+
+        \DB::table('subscriptions')->delete();
+        
+        \DB::table('subscriptions')->insert(array (
+            0 => 
+            array (
+                'id' => 1,
+                'name' => 'ضيف',
+                'description' => 'اشتراك ضيف, لا يحتوي على اي مزايا',
+                'price' => 0,
+                'ending_date' => NULL,
+                'created_at' => '2025-03-18 02:02:20',
+                'updated_at' => '2025-03-18 02:02:20',
+            ),
+        ));
+        
+        
+    }
+}

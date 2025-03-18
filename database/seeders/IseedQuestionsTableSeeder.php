@@ -1,0 +1,348 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+class IseedQuestionsTableSeeder extends Seeder
+{
+
+    /**
+     * Auto generated seed file
+     *
+     * @return void
+     */
+    public function run()
+    {
+        
+
+        \DB::table('questions')->delete();
+        
+        \DB::table('questions')->insert(array (
+            0 => 
+            array (
+                'id' => 61,
+                'question' => 'إلى نظر آخر من طريق ثان، فيرى أن أعضاءه، وان؟',
+                'question_type' => 'pick_the_intruder',
+                'options' => '{"words":[{"word":"\\u0627\\u0646\\u0647 \\u0645\\u0646 \\u0627\\u0644\\u0630\\u0648\\u0627\\u062a","is_intruder":false},{"word":"\\u0634\\u064a\\u0626\\u0627\\u064b \\u0625\\u0644\\u0627 \\u0648\\u0647\\u0648","is_intruder":false},{"word":"\\u0644\\u0644\\u062c\\u0633\\u062f \\u0644\\u0627 \\u064a\\u062f\\u0631\\u064a","is_intruder":true},{"word":"\\u0648\\u0644\\u0627 \\u0645\\u062d\\u0627\\u0644\\u0629 \\u0623\\u0646","is_intruder":false},{"word":"\\u0627\\u0644\\u062a\\u064a \\u064a\\u0643\\u0648\\u0646 \\u0644\\u0647","is_intruder":false}]}',
+                'scope' => 'exercice',
+                'difficulty' => 'easy',
+                'hint' => 'القرارة الأولى؛ إلا أنه يظهر',
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            1 => 
+            array (
+                'id' => 62,
+                'question' => 'من الأوقات، فبان له بذلك أن الفلك على اختلاف؟',
+                'question_type' => 'multiple_choices',
+                'options' => '{"choices":[{"option":"\\u0627\\u0644\\u062d\\u0642 \\u0633\\u0631\\u0627\\u064b \\u0648\\u062c\\u0647\\u0627\\u0631\\u0627\\u064b\\u060c","is_correct":false},{"option":"\\u0647\\u0630\\u064a\\u0646 \\u0627\\u0644\\u0648\\u0635\\u0641\\u064a\\u0646 \\u0628\\u0648\\u062c\\u0647\\u060c","is_correct":false},{"option":"\\u0625\\u0630\\u0627 \\u0643\\u0627\\u0646\\u062a \\u0627\\u0644\\u0634\\u0645\\u0633 \\u0639\\u0644\\u0649","is_correct":true},{"option":"\\u0627\\u0644\\u0623\\u062c\\u0633\\u0627\\u0645\\u060c \\u0648\\u0644\\u0627 \\u064a\\u0641\\u0633\\u062f","is_correct":false}]}',
+                'scope' => 'lesson',
+                'difficulty' => 'easy',
+                'hint' => 'لا غير، ولعل تلك الأفعال',
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            2 => 
+            array (
+                'id' => 63,
+                'question' => 'ترفق به و ترحمه وتحمله إلى مواضع فيها شجر مثمر؟',
+                'question_type' => 'match_with_arrows',
+                'options' => '{"pairs":[{"first":"\\u0644\\u0627 \\u062a\\u0641\\u0627\\u0648\\u062a \\u0641\\u064a\\u0647","second":"\\u0627\\u0644\\u062a\\u0635\\u0631\\u064a\\u0641 \\u0628\\u062d\\u0633\\u0628"},{"first":"\\u0639\\u0644\\u064a\\u0647 \\u0628\\u0627\\u0644\\u0630\\u0627\\u062a\\u060c","second":"\\u0630\\u0644\\u0643. \\u0648\\u0631\\u0623\\u0649 \\u0623\\u0646\\u0647"},{"first":"\\u0627\\u0644\\u0623\\u0639\\u0645\\u0627\\u0644 \\u0627\\u0644\\u062a\\u064a","second":"\\u0644\\u0645 \\u064a\\u062e\\u062a\\u0644\\u0641 \\u0625\\u0644\\u0627"}]}',
+                'scope' => 'lesson',
+                'difficulty' => 'easy',
+                'hint' => NULL,
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            3 => 
+            array (
+                'id' => 64,
+                'question' => 'والخفيف، مركبة من معنيين: أحدهما ما يقع فيه؟',
+                'question_type' => 'match_with_arrows',
+                'options' => '{"pairs":[{"first":"\\u0627\\u0644\\u0634\\u064a\\u0621 \\u0647\\u0648 \\u0635\\u0648\\u0631\\u0629","second":"\\u0627\\u0644\\u0638\\u0628\\u064a\\u0629\\u060c \\u0648\\u0643\\u0627\\u0646\\u062a"},{"first":"\\u0627\\u0644\\u0639\\u0636\\u0648 \\u0627\\u0644\\u0648\\u0627\\u062d\\u062f","second":"\\u0648\\u0639\\u0628\\u062f\\u0627 \\u0627\\u0644\\u0644\\u0647 \\u0641\\u064a"}]}',
+                'scope' => 'lesson',
+                'difficulty' => 'easy',
+                'hint' => NULL,
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            4 => 
+            array (
+                'id' => 65,
+                'question' => 'الحرارة إلا الحركة أو ملاقاة الأجسام الحارة؟',
+                'question_type' => 'match_with_arrows',
+                'options' => '{"pairs":[{"first":"\\u0627\\u0644\\u0645\\u062d\\u0636 \\u0627\\u0644\\u0630\\u064a \\u0644\\u0627","second":"\\u0628\\u0647\\u0627 \\u0645\\u0646 \\u0627\\u0644\\u062e\\u0635\\u0628"},{"first":"\\u062a\\u0644\\u062a\\u0626\\u0645 \\u062d\\u0642\\u064a\\u0642\\u062a\\u0647","second":"\\u0645\\u0646 \\u0647\\u0630\\u0627 \\u0623\\u0646 \\u062d\\u0635\\u0644"},{"first":"\\u0625\\u0644\\u0649 \\u0628\\u0639\\u0636\\u060c \\u0644\\u0626\\u0644\\u0627","second":"\\u0627\\u0644\\u0639\\u0627\\u0626\\u0642\\u060c \\u0648\\u0643\\u0630\\u0644\\u0643"}]}',
+                'scope' => 'lesson',
+                'difficulty' => 'medium',
+                'hint' => NULL,
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            5 => 
+            array (
+                'id' => 66,
+                'question' => 'حتى يسر الله عز وجل وملائكته، وصفات الميعاد؟',
+                'question_type' => 'fill_in_the_blanks',
+                'options' => '{"paragraph":"\\u0648\\u0641\\u064a \\u0645\\u062d\\u0643\\u0645 \\u0627\\u0644\\u062a\\u0646\\u0632\\u064a\\u0644: \\"\\u0628\\u0633\\u0645 [1] \\u0627\\u0644\\u0631\\u062d\\u0645\\u0646 [2] \\u064a\\u0639\\u0645\\u0644\\u0648\\u0646 [3] \\u0645\\u0646 \\u0627\\u0644\\u062d\\u064a\\u0627\\u0629 \\u0641\\u064a \\u0639\\u0627\\u0644\\u0645 \\u0627\\u0644\\u0643\\u0648\\u0646 \\u0648\\u0627\\u0644\\u0641\\u0633\\u0627\\u062f \\u0645\\u062a\\u0639\\u0627\\u0642\\u0628\\u0627\\u0646","blanks":[{"correct_word":"\\u0627\\u0644\\u0644\\u0647","position":1},{"correct_word":"\\u0627\\u0644\\u0631\\u062d\\u064a\\u0645\\"","position":2},{"correct_word":"\\u0638\\u0627\\u0647\\u0631\\u0627\\u064b","position":3}],"suggestions":["\\u0627\\u0644\\u0631\\u062d\\u064a\\u0645\\"","quia","\\u0638\\u0627\\u0647\\u0631\\u0627\\u064b","rerum","\\u0627\\u0644\\u0644\\u0647"]}',
+                'scope' => 'exercice',
+                'difficulty' => 'medium',
+                'hint' => 'لا نهاية لها. فأما من يتخلص',
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            6 => 
+            array (
+                'id' => 67,
+                'question' => 'وبكائه. فسمع صوتاً حسناً وحروف منظمة، لم يعهد؟',
+                'question_type' => 'fill_in_the_blanks',
+                'options' => '{"paragraph":"\\u0627\\u0644\\u0622\\u0646 \\u062a\\u062f\\u0631\\u0643 - \\u0648\\u0643\\u0630\\u0644\\u0643 \\u0643\\u0644 \\u0648\\u0627\\u062d\\u062f\\u0629 \\u0645\\u0646 \\u0647\\u0630\\u0647 \\u0627\\u0644\\u0623\\u062c\\u0633\\u0627\\u0645 [1] \\u0644\\u0643\\u0627\\u0646\\u062a \\u0645\\u062b\\u0644\\u0647 \\u0641\\u0643\\u0627\\u0646 \\u064a\\u0646\\u0638\\u0631 \\u0625\\u0644\\u064a\\u0647 [2] \\u0645\\u062c\\u0631\\u062f\\u0627\\u064b \\u0639\\u0646 \\u0647\\u0630\\u0647","blanks":[{"correct_word":"\\u0627\\u0644\\u0622\\u062e\\u0631\\u060c","position":1},{"correct_word":"\\u0628\\u0630\\u0627\\u062a\\u0647","position":2}],"suggestions":["\\u0628\\u0630\\u0627\\u062a\\u0647","\\u0627\\u0644\\u0622\\u062e\\u0631\\u060c","modi","nam","fugit"]}',
+                'scope' => 'lesson',
+                'difficulty' => 'medium',
+                'hint' => 'يسيراً حتى ذوى ذلك الورق وجف',
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            7 => 
+            array (
+                'id' => 68,
+                'question' => 'ذكروا: إن جزيرة قريبة من الجزيرة المعمورة، فقربه؟',
+                'question_type' => 'pick_the_intruder',
+                'options' => '{"words":[{"word":"\\u0645\\u0627 \\u0627\\u0646\\u062a\\u0647\\u0649 \\u0625\\u0644\\u064a\\u0647","is_intruder":false},{"word":"\\u0645\\u0627 \\u0642\\u0636\\u0649 \\u0645\\u0646\\u0647 \\u0643\\u0644","is_intruder":false},{"word":"\\u064a\\u062e\\u062a\\u0635 \\u0628\\u0647\\u0627 \\u0639\\u0636\\u0648","is_intruder":true},{"word":"\\u0628\\u0630\\u0644\\u0643 \\u0642\\u062f\\u0631\\u0647 \\u0639\\u0646\\u062f","is_intruder":false}]}',
+                'scope' => 'lesson',
+                'difficulty' => 'hard',
+                'hint' => 'مجلل بغشاء في غاية القوة',
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            8 => 
+            array (
+                'id' => 69,
+                'question' => 'الجنين في الرحم، لم يغادروا من ذلك فكان ايسر؟',
+                'question_type' => 'pick_the_intruder',
+                'options' => '{"words":[{"word":"\\u062a\\u0641\\u0627\\u062c\\u0623\\u0647 \\u0645\\u0646\\u064a\\u062a\\u0647","is_intruder":false},{"word":"\\u0646\\u0641\\u0633\\u0647 \\u0639\\u0646\\u062f \\u0630\\u0644\\u0643","is_intruder":false},{"word":"\\u064a\\u0633\\u064a\\u0631\\u060c \\u0627\\u062e\\u062a\\u0635 \\u0628\\u0647","is_intruder":false},{"word":"\\u0647\\u0648 \\u0623\\u0642\\u0631\\u0628. \\u062d\\u062a\\u0649","is_intruder":false},{"word":"\\u0627\\u0644\\u062c\\u0632\\u064a\\u0631\\u0629 \\u0648\\u064a\\u0633\\u0628\\u062d","is_intruder":true}]}',
+                'scope' => 'lesson',
+                'difficulty' => 'hard',
+                'hint' => 'غير متناهية، فأما أن نجد',
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            9 => 
+            array (
+                'id' => 70,
+                'question' => 'Eum vel esse deserunt quo eaque omnis accusantium.؟',
+                'question_type' => 'true_or_false',
+                'options' => '{"correct":true}',
+                'scope' => 'exercice',
+                'difficulty' => 'hard',
+                'hint' => NULL,
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => 'Officiis dolore autem rerum laboriosam perferendis repellat consectetur. Illo eaque quis dolorem voluptate sit aspernatur consequatur tenetur. In sed et est aut vero. Maxime saepe natus qui eveniet.',
+            ),
+            10 => 
+            array (
+                'id' => 71,
+                'question' => 'لما كان قد شق عليه من جهة مادته وجود ضعيف لا؟',
+                'question_type' => 'pick_the_intruder',
+                'options' => '{"words":[{"word":"\\u0627\\u0644\\u0645\\u0631\\u0623\\u0629 \\u0645\\u0642\\u0639\\u0631\\u0629","is_intruder":false},{"word":"\\u0627\\u0644\\u0632\\u0647\\u0631 \\u0625\\u0644\\u0649 \\u062c\\u0647\\u0629","is_intruder":false},{"word":"\\u0648\\u0627\\u0644\\u062a\\u0633\\u0644\\u064a\\u0645 \\u0644\\u0647\\u0627\\u060c","is_intruder":false},{"word":"\\u064a\\u062a\\u0641\\u0643\\u0631 \\u0645\\u0627 \\u0627\\u0644\\u0630\\u064a","is_intruder":true}]}',
+                'scope' => 'lesson',
+                'difficulty' => 'easy',
+                'hint' => NULL,
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            11 => 
+            array (
+                'id' => 72,
+                'question' => 'فتعلق به عند ذلك الروح الحيواني الذي لجميع ذلك؟',
+                'question_type' => 'fill_in_the_blanks',
+                'options' => '{"paragraph":"\\u0639\\u0646\\u062f\\u0647\\u0627\\u060c \\u0648\\u0644\\u0627 \\u064a\\u0645\\u0643\\u0646 \\u0625\\u0646 \\u062a\\u0643\\u0648\\u0646 [1] \\u0645\\u062a\\u0639\\u0627\\u062f\\u0644\\u0629 \\u0645\\u062a\\u0643\\u0627\\u0641\\u0626\\u0629\\u060c \\u0641\\u0625\\u0630\\u0646 \\u0644\\u0627 \\u064a\\u0628\\u0637\\u0644 \\u0644\\u0623\\u062d\\u062f\\u0647\\u0645\\u0627 \\u0627\\u0644\\u0622\\u062e\\u0631 [2] \\u0627\\u0644\\u0622\\u062e\\u0631 \\u0628\\u0623\\u0643\\u062b\\u0631 \\u0645\\u0645\\u0627 \\u064a\\u0628\\u0637\\u0644","blanks":[{"correct_word":"\\u0641\\u064a\\u0647","position":1},{"correct_word":"\\u0642\\u0648\\u0629","position":2}],"suggestions":["\\u0642\\u0648\\u0629","\\u0641\\u064a\\u0647","nihil","voluptas"]}',
+                'scope' => 'lesson',
+                'difficulty' => 'easy',
+                'hint' => 'العدو، ويحسن إليها بأعداد',
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            12 => 
+            array (
+                'id' => 73,
+                'question' => 'إذ تأتي له بها ستر عورته واتخاذ العصي التي يدافع؟',
+                'question_type' => 'multiple_choices',
+                'options' => '{"choices":[{"option":"\\u0627\\u0646\\u0647 \\u0631\\u0623\\u0649 \\u0623\\u064a\\u0636\\u0627\\u064b \\u0623\\u0646","is_correct":true},{"option":"\\u0648\\u0628\\u0623\\u0646 \\u0644\\u0647 \\u0627\\u0644\\u0641\\u0631\\u0636 \\u064a\\u062c\\u0628","is_correct":false},{"option":"\\u0628\\u0645\\u0627 \\u0643\\u0627\\u0646 \\u0642\\u062f \\u0627\\u0635\\u0637\\u062d\\u0628\\u0647","is_correct":false}]}',
+                'scope' => 'exercice',
+                'difficulty' => 'easy',
+                'hint' => 'يعهده قبل، فوقف يتعجب منه',
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            13 => 
+            array (
+                'id' => 74,
+                'question' => 'المادة، لا يجب إن يقال انها كثيرة، ولا واحدة،؟',
+                'question_type' => 'multiple_choices',
+                'options' => '{"choices":[{"option":"\\u0641\\u062a\\u0628\\u064a\\u0646 \\u0644\\u0647 \\u0628\\u0630\\u0644\\u0643 \\u0623\\u0639\\u0638\\u0645","is_correct":false},{"option":"\\u0643\\u062b\\u0631\\u0629 \\u0623\\u0634\\u062e\\u0627\\u0635\\u0647 \\u0628\\u0645\\u0646\\u0632\\u0644\\u0629","is_correct":false},{"option":"\\u0648\\u0639\\u0644\\u0642 \\u0627\\u0644\\u062c\\u0646\\u0627\\u062d\\u064a\\u0646 \\u0639\\u0644\\u0649","is_correct":false},{"option":"\\u0633\\u0645\\u0639 \\u0639\\u0646\\u0647\\u061b \\u0641\\u0647\\u0630\\u0627 \\u0625\\u0630\\u0627","is_correct":true}]}',
+                'scope' => 'exercice',
+                'difficulty' => 'easy',
+                'hint' => NULL,
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            14 => 
+            array (
+                'id' => 75,
+                'question' => 'البيت الأيسر فأراه خالياً لاشيء فيه، وما أرى ذلك؟',
+                'question_type' => 'match_with_arrows',
+                'options' => '{"pairs":[{"first":"\\u0633\\u0648\\u0627\\u0621 \\u0643\\u0627\\u0646\\u062a \\u0645\\u0646","second":"\\u0648\\u062e\\u0648\\u0641\\u0627\\u064b \\u0639\\u0644\\u064a\\u0647\\u060c"},{"first":"\\u0641\\u064a\\u0645\\u0627 \\u0627\\u062e\\u062a\\u0635 \\u0647\\u0648","second":"\\u0627\\u0644\\u0627\\u063a\\u064a\\u0627\\u0631 \\u0639\\u0646\\u062f\\u0645\\u0627"}]}',
+                'scope' => 'exercice',
+                'difficulty' => 'medium',
+                'hint' => 'بعداً عن التأويل، وأوقف عن',
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            15 => 
+            array (
+                'id' => 76,
+                'question' => 'تناول ضرورية من هذه الجهة المتناهية، ويمران في؟',
+                'question_type' => 'multiple_choices',
+                'options' => '{"choices":[{"option":"\\u0641\\u0627\\u0644\\u0623\\u0648\\u0644 \\u0645\\u0646\\u0647\\u0645\\u0627 \\u0644\\u0645\\u0627","is_correct":false},{"option":"\\u0628\\u0639\\u0636\\u060c \\u0648\\u0644\\u0627 \\u064a\\u0646\\u0637\\u0642 \\u0641\\u064a","is_correct":false},{"option":"\\u0645\\u0646 \\u062d\\u0627\\u0644\\u0647 \\u062a\\u0644\\u0643 \\u0627\\u0644\\u062a\\u064a","is_correct":true},{"option":"\\u0627\\u0644\\u062a\\u063a\\u064a\\u064a\\u0631\\u061f \\u0648\\u0645\\u0627 \\u0632\\u0627\\u0644","is_correct":false}]}',
+                'scope' => 'lesson',
+                'difficulty' => 'medium',
+                'hint' => 'أهلها الرجلين على الشاطئ',
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            16 => 
+            array (
+                'id' => 77,
+                'question' => 'ويقف عن الامتدادمعه، فيكون متناهياً، فإذا رد؟',
+                'question_type' => 'match_with_arrows',
+                'options' => '{"pairs":[{"first":"\\u062a\\u062b\\u0628\\u062a \\u0642\\u0644\\u064a\\u0644\\u0627\\u064b\\u060c","second":"\\u0645\\u0646 \\u0627\\u0644\\u0623\\u062d\\u0643\\u0627\\u0645 \\u0641\\u064a"},{"first":"\\u0627\\u0644\\u0630\\u064a \\u064a\\u0633\\u0645\\u0639 \\u0628\\u0647","second":"\\u062c\\u0627\\u0646\\u0628 \\u0627\\u0644\\u062a\\u062d\\u0642\\u064a\\u0642\\u060c"},{"first":"\\u0644\\u0647 \\u0633\\u0648\\u0621 \\u0645\\u0627 \\u0635\\u0646\\u0639","second":"\\u0627\\u0644\\u062a\\u064a \\u0623\\u0634\\u0628\\u0647 \\u0628\\u0647\\u0627"}]}',
+                'scope' => 'lesson',
+                'difficulty' => 'medium',
+                'hint' => 'المذكورة تفنن في هذه الحال',
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            17 => 
+            array (
+                'id' => 78,
+                'question' => 'فوصف له الصلاة والزكاة، والصيام والحج، وما؟',
+                'question_type' => 'pick_the_intruder',
+                'options' => '{"words":[{"word":"\\u0644\\u0647 \\u0623\\u0646 \\u0627\\u0644\\u0645\\u062f\\u0631\\u0639\\u0629","is_intruder":false},{"word":"\\u0641\\u064a \\u0647\\u0630\\u0627 \\u0627\\u0644\\u0645\\u0648\\u0636\\u0639","is_intruder":false},{"word":"\\u0627\\u0644\\u0648\\u0627\\u062d\\u062f \\u0627\\u0644\\u062d\\u0642\\u060c","is_intruder":false},{"word":"\\u064a\\u062f\\u0631\\u0623 \\u0627\\u0644\\u0648\\u0633\\u0648\\u0627\\u0633\\u060c","is_intruder":true}]}',
+                'scope' => 'exercice',
+                'difficulty' => 'hard',
+                'hint' => NULL,
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            18 => 
+            array (
+                'id' => 79,
+                'question' => 'الصور. وهذا الشيء العارف، أمر رباني الهي يستحيل؟',
+                'question_type' => 'multiple_choices',
+                'options' => '{"choices":[{"option":"\\u0648\\u0644\\u0639\\u062f\\u0645 \\u0627\\u0644\\u0639\\u0627\\u0644\\u0645 \\u0627\\u0644\\u062d\\u0633\\u064a","is_correct":false},{"option":"\\u0648\\u0644\\u0645 \\u064a\\u0633\\u0628\\u0642\\u0647\\u0627 \\u0627\\u0644\\u0639\\u062f\\u0645","is_correct":false},{"option":"\\u0627\\u0644\\u0631\\u0627\\u0628\\u0639\\u060c \\u0641\\u0627\\u0646 \\u0643\\u0627\\u0646\\u0648\\u0627","is_correct":false},{"option":"\\u0648\\u0647\\u0630\\u0627 \\u0627\\u0644\\u0642\\u0648\\u0644 \\u064a\\u062d\\u062a\\u0627\\u062c","is_correct":true}]}',
+                'scope' => 'exercice',
+                'difficulty' => 'hard',
+                'hint' => 'ذلك بمنزلة ماء واحد مقسوم',
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            19 => 
+            array (
+                'id' => 80,
+                'question' => 'تكون الحرارة في حد خروج الجنين من البطن،؟',
+                'question_type' => 'fill_in_the_blanks',
+                'options' => '{"paragraph":"\\u0645\\u0646 \\u0643\\u0648\\u0627\\u0643\\u0628 [1] \\u0644\\u0623\\u0646\\u0647\\u0627 \\u0645\\u0645\\u062a\\u062f\\u0629 \\u0641\\u064a \\u0627\\u0644\\u0623\\u0642\\u0637\\u0627\\u0631 \\u0627\\u0644\\u062b\\u0644\\u0627\\u062b\\u0629: [2] \\u0648\\u0627\\u0644\\u0639\\u0631\\u0636\\u060c \\u0648\\u0627\\u0644\\u0639\\u0645\\u0642\\u061b \\u0644\\u0627 \\u064a\\u0646\\u0641\\u0643 \\u0634\\u064a\\u0621 \\u0645\\u0646\\u0647\\u0627 \\u0639\\u0646 \\u0647\\u0630\\u0647","blanks":[{"correct_word":"\\u0627\\u0644\\u0623\\u062c\\u0633\\u0627\\u0645\\u060c","position":1},{"correct_word":"\\u0627\\u0644\\u0637\\u0648\\u0644\\u060c","position":2}],"suggestions":["\\u0627\\u0644\\u0623\\u062c\\u0633\\u0627\\u0645\\u060c","iste","\\u0627\\u0644\\u0637\\u0648\\u0644\\u060c","voluptas"]}',
+                'scope' => 'lesson',
+                'difficulty' => 'hard',
+                'hint' => 'الأجسام المحتاجة إليها. ولو',
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:02:21',
+                'updated_at' => '2025-03-18 02:02:21',
+                'explanation_text' => NULL,
+            ),
+            20 => 
+            array (
+                'id' => 81,
+                'question' => 'hello world',
+                'question_type' => 'true_or_false',
+                'options' => '{"correct":true}',
+                'scope' => 'exercice',
+                'difficulty' => 'easy',
+                'hint' => NULL,
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:18:35',
+                'updated_at' => '2025-03-18 02:18:35',
+                'explanation_text' => NULL,
+            ),
+            21 => 
+            array (
+                'id' => 82,
+                'question' => 'world hello',
+                'question_type' => 'match_with_arrows',
+                'options' => '{"pairs":[{"first":"1","second":"11"},{"first":"2","second":"22"},{"first":"3","second":"33"}]}',
+                'scope' => 'lesson',
+                'difficulty' => 'medium',
+                'hint' => 'adzazd',
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:19:19',
+                'updated_at' => '2025-03-18 02:19:19',
+                'explanation_text' => 'qsdqsd',
+            ),
+            22 => 
+            array (
+                'id' => 83,
+                'question' => 'test',
+                'question_type' => 'true_or_false',
+                'options' => '{"correct":true}',
+                'scope' => 'exercice',
+                'difficulty' => 'easy',
+                'hint' => NULL,
+                'explanation' => NULL,
+                'created_at' => '2025-03-18 02:24:13',
+                'updated_at' => '2025-03-18 02:24:13',
+                'explanation_text' => NULL,
+            ),
+        ));
+        
+        
+    }
+}

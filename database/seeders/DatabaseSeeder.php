@@ -10,33 +10,40 @@ use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
-        $role = Role::firstOrCreate(['name' => 'super_admin']);
+        //
+        // 0. Seed geography data first (Wilaya and Commune)
+        $this->call(WilayaCommuneSeeder::class);
 
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.dev',
-            'password' => bcrypt('admin'),
-        ]);
-        $user->assignRole($role);
+        // 1. Seed roles and permissions first
+        $this->call(IseedRolesTableSeeder::class);
+        $this->call(IseedPermissionsTableSeeder::class);
+        $this->call(IseedRoleHasPermissionsTableSeeder::class);
 
-        $this->call([
-            ShieldSeeder::class,
-            WilayaCommuneSeeder::class,
-            GuestSubscriptionSeeder::class,
-            ContentSeeder::class
-        ]);
-        // $seeder = new ContentSeeder();
-        // Chapter::chunk(10, function ($chapters) use ($seeder) {
-        //     foreach ($chapters as $chapter) {
-        //         $seeder->generateQuestionsForChapter($chapter);
-        //         $chapter->distributeDifficulties();
-        //     }
-        // });
+        // 2. Seed base entities in proper order
+        $this->call(IseedDivisionsTableSeeder::class);  // Users depend on divisions
+        $this->call(IseedUsersTableSeeder::class);      // Moved after divisions
+        $this->call(IseedMaterialsTableSeeder::class);
+        $this->call(IseedUnitsTableSeeder::class);
+        $this->call(IseedChaptersTableSeeder::class);
+        $this->call(IseedQuestionsTableSeeder::class);
+        $this->call(IseedDiscountsTableSeeder::class);
+        $this->call(IseedSubscriptionsTableSeeder::class);
+
+        // 3. Seed relationship tables
+        $this->call(IseedModelHasRolesTableSeeder::class);
+        $this->call(IseedModelHasPermissionsTableSeeder::class);
+        $this->call(IseedDivisionMaterialTableSeeder::class);
+        $this->call(IseedMaterialUnitTableSeeder::class);
+        $this->call(IseedChapterUnitTableSeeder::class);
+        $this->call(IseedSubscriptionUnitTableSeeder::class);
+        $this->call(IseedChapterSubscriptionTableSeeder::class);
+        $this->call(IseedDiscountSubscriptionTableSeeder::class);
+
+        // 4. Seed tables with multiple dependencies
+        $this->call(IseedChapterQuestionTableSeeder::class);
+        $this->call(IseedUserAnswersTableSeeder::class);
+        $this->call(IseedSubscriptionCardsTableSeeder::class);
     }
 }

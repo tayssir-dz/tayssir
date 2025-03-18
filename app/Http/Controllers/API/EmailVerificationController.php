@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Mail;
 use Validator;
 use G4T\Swagger\Attributes\SwaggerSection;
+use Illuminate\Support\Facades\DB;
 
 // #[SwaggerSection("This section is responsible for managing user email verification processes. It includes sending verification emails, verifying the user's email based on a code, and providing testing functionality to unverify emails. It helps maintain a verified email system, ensuring only verified users access specific features.")]
 class EmailVerificationController extends BaseController
@@ -22,7 +23,6 @@ class EmailVerificationController extends BaseController
     public function sendVerificationMail(SendVerificationMailRequest $request)
     {
         $user = User::where('email', $request->email)->first();
-
         if ($user->email_verified_at !== null) {
             return $this->sendError(__('response.email_already_verified'));
         }
@@ -67,7 +67,7 @@ class EmailVerificationController extends BaseController
 
     public function verifyOtp(VerifyOtpRequest $request)
     {
-        $otpRecord = \DB::table('otps')
+        $otpRecord = DB::table('otps')
             ->where('identifier', $request->email)
             ->where('token', $request->otp)
             ->where('valid', 1)
