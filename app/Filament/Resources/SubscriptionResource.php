@@ -91,7 +91,19 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
                         ->relationship('discounts', 'name')
                         ->multiple()
                         ->preload()
-                        ->searchable()
+                        ->searchable(),
+
+                    Forms\Components\ColorPicker::make('gradiant_start')
+                        ->label(__("custom.models.subscription.gradiant_start"))
+                        ->required(),
+
+                    Forms\Components\ColorPicker::make('gradiant_end')
+                        ->label(__("custom.models.subscription.gradiant_end"))
+                        ->required(),
+
+                    Forms\Components\ColorPicker::make('bottom_color_at_start')
+                        ->label(__("custom.models.subscription.bottom_color_at_start"))
+                        ->required(),
                 ])->columnSpan(2),
             ])->columns(1);
     }
@@ -124,7 +136,13 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
                 TextColumn::make("ending_date")
                     ->default("N/A")
                     ->label(__("custom.models.subscription.ending_date"))
-                    ->sortable()
+                    ->sortable(),
+
+                Tables\Columns\ColorColumn::make('gradiant_start')
+                    ->label(__("custom.models.subscription.gradiant_start")),
+
+                Tables\Columns\ColorColumn::make('gradiant_end')
+                    ->label(__("custom.models.subscription.gradiant_end")),
             ])
             ->filters([
                 //
