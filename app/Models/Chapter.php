@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ContentDirection;
 use App\Enums\QuestionDifficulty;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +22,7 @@ class Chapter extends Model implements HasMedia
     protected $fillable = [
         'name',
         'description',
+        'direction',
         // 'photo_url',
     ];
 
@@ -35,6 +37,20 @@ class Chapter extends Model implements HasMedia
         'updated_at',
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'direction' => ContentDirection::class,
+    ];
+
+    public function getImageAttribute()
+    {
+        return $this->getFirstMediaUrl('chapter_photos') ? $this->getFirstMediaUrl('chapter_photos') : null;
+    }
+
     public function chapter_units()
     {
         return $this->belongsToMany(Unit::class, 'chapter_unit')
@@ -46,8 +62,6 @@ class Chapter extends Model implements HasMedia
     {
         return $this->chapter_units()->first();
     }
-
-
 
     /**
      * Get the questions for the chapter.
@@ -65,6 +79,33 @@ class Chapter extends Model implements HasMedia
     public function subscriptions()
     {
         return $this->belongsToMany(Subscription::class);
+    }
+
+    /**
+     * Get the effective direction based on inheritance rules.
+     */
+    public function getEffectiveDirection(): ContentDirection
+    {
+        if ($this->direction !== ContentDirection::INHERIT) {
+            return $this->direction;
+        }
+
+        // Inherit from parent (Unit)
+        $unit = $this->getUnitAttribute();
+
+        if ($unit) {
+            return $unit->getEffectiveDirection();
+        }
+
+        return ContentDirection::RTL;
+    }
+
+    /**
+     * Get the rtl attribute for backward compatibility.
+     */
+    public function getRtlAttribute()
+    {
+        return $this->getEffectiveDirection() === ContentDirection::RTL;
     }
 
     public function distributeDifficulties()

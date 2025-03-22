@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\UnitResource\RelationManagers;
 
+use App\Enums\ContentDirection;
 use App\Filament\Resources\ChapterResource;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
@@ -46,6 +47,12 @@ class ChaptersRelationManager extends RelationManager
                         ->minLength(3)
                         ->label(__('custom.models.chapter.name')),
 
+                    Select::make('direction')
+                        ->options(ContentDirection::class)
+                        ->enum(ContentDirection::class)
+                        ->required()
+                        ->label(__('custom.direction.label')),
+
                     Select::make('subscriptions')
                         ->multiple()
                         ->relationship('subscriptions', 'name')
@@ -61,6 +68,7 @@ class ChaptersRelationManager extends RelationManager
                 Section::make(__('custom.forms.chapter.create.section.image'))->schema([
                     SpatieMediaLibraryFileUpload::make('photo')
                         ->label("")
+                        ->multiple(false)
                         ->collection('chapter_photos')
                         ->image()
                         ->imageEditor(),

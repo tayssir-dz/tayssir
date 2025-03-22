@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\ContentDirection;
 use App\Filament\Resources\UnitResource\Pages;
 use App\Filament\Resources\UnitResource\RelationManagers;
 use App\Filament\Resources\UnitResource\RelationManagers\ChaptersRelationManager;
@@ -20,6 +21,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\IconColumn;
 
 class UnitResource extends Resource implements HasShieldPermissions
 {
@@ -61,6 +63,13 @@ class UnitResource extends Resource implements HasShieldPermissions
                 Section::make()->schema([
                     TextInput::make('name')->required()->minLength(3)->label(__('custom.models.unit.name')),
                     Select::make('material_units')->relationship('material_units', 'code')->searchable()->preload()->required()->label(__('custom.models.unit.material')),
+
+                    Select::make('direction')
+                        ->options(ContentDirection::class)
+                        ->enum(ContentDirection::class)
+                        ->required()
+                        ->label(__('custom.direction.label')),
+
                     Textarea::make("description")->rows(4)->columnSpan(2)->label(__('custom.models.unit.description')),
                     Select::make('subscriptions')
                         ->multiple()

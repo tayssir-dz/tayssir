@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ChapterResource\RelationManagers;
 
+use App\Enums\ContentDirection;
 use App\Enums\QuestionDifficulty;
 use App\Enums\QuestionScope;
 use App\Enums\QuestionType;
@@ -49,17 +50,17 @@ class QuestionsRelationManager extends RelationManager
                                     ->required()
                                     ->label(__('custom.models.question.question')),
 
+                                Forms\Components\Select::make('direction')
+                                    ->options(ContentDirection::class)
+                                    ->enum(ContentDirection::class)
+                                    ->required()
+                                    ->label(__('custom.direction.label')),
+
                                 Forms\Components\Select::make('scope')
                                     ->enum(QuestionScope::class)
                                     ->options(QuestionScope::class)
                                     ->required()
                                     ->label(__('custom.models.question.scope')),
-
-                                // Forms\Components\TextInput::make('points')
-                                //     ->required()
-                                //     ->numeric()
-                                //     ->minValue(1)
-                                //     ->label(__('custom.models.question.points')),
 
                                 Forms\Components\TextInput::make('hint')
                                     ->label(__('custom.models.question.hint')),
@@ -72,14 +73,17 @@ class QuestionsRelationManager extends RelationManager
                                 Forms\Components\Group::make()->schema([
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('question_image')
                                         ->collection('image')
+                                        ->multiple(false)
                                         ->image()
                                         ->label(__('custom.models.question.question_image'))
                                         ->imageEditor(),
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('explaination_asset')
                                         ->collection('explaination_asset')
+                                        ->multiple(false)
                                         ->label(__('custom.models.question.explaination_asset')),
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('hint_image')
                                         ->collection('hint_image')
+                                        ->multiple(false)
                                         ->label(__('custom.models.question.hint_image'))
                                         ->imageEditor(),
                                 ]),
@@ -165,6 +169,8 @@ class QuestionsRelationManager extends RelationManager
             ->reorderable('sort')
             ->recordTitleAttribute('question')
             ->columns([
+                Tables\Columns\IconColumn::make('Rtl')->boolean(),
+
                 Tables\Columns\TextColumn::make('id'),
 
                 Tables\Columns\TextColumn::make('question')->label(__('custom.models.question.question')),

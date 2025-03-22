@@ -116,6 +116,7 @@ return [
     'models.question.hint' => 'Hint',
     'models.question.question_image' => 'Question Image',
     'models.question.explaination_asset' => 'Explanation Asset',
+    'models.question.explanation_text' => 'Explanation Text',
     'models.question.hint_image' => 'Hint Image',
     'models.question.type' => 'Question Type',
     'models.question.types.multiple_choices' => 'Multiple Choices',
@@ -239,4 +240,9 @@ return [
     # Stats
     "stats.users.new" => 'New users',
     "stats.users.last30Days" => 'Last 30 days',
+
+    "direction.label" =>  'Text direction',
+    "direction.rtl" =>  "From right to left (rtl)",
+    "direction.ltr" =>   "From left to right (ltr)",
+    "direction.inherit" =>  "Use the parent direction (inherit)",
 ];

@@ -70,6 +70,7 @@ class DivisionResource extends Resource implements HasShieldPermissions
                 ])->columnSpan(2),
                 Section::make(__('custom.forms.division.create.section.image'))->schema([
                     SpatieMediaLibraryFileUpload::make('image')
+                        ->multiple(false)
                         ->label("")
                         ->collection('image')
                         ->imageEditor()

@@ -116,6 +116,7 @@ return [
     'models.question.hint' => 'التلميح',
     'models.question.question_image' => 'صورة السؤال',
     'models.question.explaination_asset' => 'وسائط الشرح',
+    'models.question.explanation_text' => 'نص الشرح',
     'models.question.hint_image' => 'صورة التلميح',
     'models.question.type' => 'نوع السؤال',
     'models.question.types.multiple_choices' => 'اختيارات متعددة',
@@ -242,4 +243,9 @@ return [
     # Stats
     "stats.users.new" => 'المستخدمين الجدد',
     "stats.users.last30Days" => 'خلال الـ 30 يوما',
+
+    "direction.label" => "إتجاه النص",
+    "direction.rtl" => '(rtl) من اليمين لليسار',
+    "direction.ltr" =>   '(ltr) من اليسار لليمين',
+    "direction.inherit" =>   '(inherit) من العنصر الأب',
 ];

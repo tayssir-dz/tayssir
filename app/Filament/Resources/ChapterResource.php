@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\ContentDirection;
 use App\Filament\Resources\ChapterResource\Pages;
 use App\Filament\Resources\ChapterResource\RelationManagers;
 use App\Filament\Resources\ChapterResource\RelationManagers\QuestionsRelationManager;
@@ -73,6 +74,12 @@ class ChapterResource extends Resource implements HasShieldPermissions
                         ->required()
                         ->label(__('custom.models.chapter.unit')),
 
+                    Select::make('direction')
+                        ->options(ContentDirection::class)
+                        ->enum(ContentDirection::class)
+                        ->required()
+                        ->label(__('custom.direction.label')),
+
                     Select::make('subscriptions')
                         ->multiple()
                         ->relationship('subscriptions', 'name')
@@ -90,6 +97,7 @@ class ChapterResource extends Resource implements HasShieldPermissions
 
                 Section::make(__('custom.forms.chapter.create.section.image'))->schema([
                     SpatieMediaLibraryFileUpload::make('photo')
+                        ->multiple(false)
                         ->collection('chapter_photos')
                         ->image()
                         ->imageEditor()

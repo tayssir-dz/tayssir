@@ -118,6 +118,7 @@ return [
     'models.question.hint' => 'Indice',
     'models.question.question_image' => 'Image de la Question',
     'models.question.explaination_asset' => 'Ressource d\'Explication',
+    'models.question.explanation_text' => 'Texte d\'Explication',
     'models.question.hint_image' => 'Image d\'Indice',
     'models.question.type' => 'Type de Question',
     'models.question.types.multiple_choices' => 'Choix Multiples',
@@ -243,4 +244,9 @@ return [
     # Stats
     "stats.users.new" => 'Nouveaux utilisateurs',
     "stats.users.last30Days" => 'Les 30 derniers jours',
+
+    "direction.label" => 'Direction du texte',
+    "direction.rtl" => "De droite à gauche (rtl)",
+    "direction.ltr" => "De gauche à droite (ltr)",
+    "direction.inherit" => "Utiliser la direction du parent (inherit)",
 ];

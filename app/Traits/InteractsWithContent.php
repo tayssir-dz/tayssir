@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Enums\ContentDirection;
 use App\Enums\QuestionType;
 
 trait InteractsWithContent
@@ -40,6 +41,7 @@ trait InteractsWithContent
                 'id' => $material->id,
                 'name' => $material->name,
                 'code' => $material->code,
+                'direction' => $material->direction->value,
                 'division_id' => $material->division_id,
                 'color' => $material->color,
                 'secondary_color' => $material->secondary_color,
@@ -55,6 +57,7 @@ trait InteractsWithContent
                     'id' => $unit->id,
                     'name' => $unit->name,
                     'description' => $unit->description,
+                    'direction' => $unit->getEffectiveDirection()->value,
                     'material_id' => $material->id,
                     'progress' => $progressData['units'][$unit->id] ?? 0,
                     'points' => $progressData['points']['units'][$unit->id] ?? 0
@@ -65,7 +68,9 @@ trait InteractsWithContent
                     $chapters[] = [
                         'id' => $chapter->id,
                         'name' => $chapter->name,
+                        'direction' => $chapter->getEffectiveDirection()->value,
                         'description' => $chapter->description,
+                        "image" => $chapter->image,
                         'unit_id' => $unit->id,
                         'progress' => $progressData['chapters'][$chapter->id] ?? 0,
                         'points' => $progressData['points']['chapters'][$chapter->id] ?? 0
@@ -119,6 +124,7 @@ trait InteractsWithContent
             'explanationVideo' => $question->explanation_asset,
             'hintImage' => $question->hint_image,
             'question' => $question->question,
+            'direction' => $question->getEffectiveDirection()->value,
         ];
 
         $qType = $question->question_type->value;

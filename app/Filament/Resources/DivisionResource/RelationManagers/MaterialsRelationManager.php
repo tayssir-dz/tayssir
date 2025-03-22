@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\DivisionResource\RelationManagers;
 
+use App\Enums\ContentDirection;
 use App\Filament\Resources\MaterialResource;
 use Filament\Forms;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -64,6 +66,14 @@ class MaterialsRelationManager extends RelationManager
                     ColorPicker::make("secondary_color")
                         ->label(__('custom.models.material.secondary_color')),
 
+                    Select::make('direction')
+                        ->options([
+                            ContentDirection::RTL->value => ContentDirection::RTL->getLabel(),
+                            ContentDirection::LTR->value => ContentDirection::LTR->getLabel(),
+                        ])
+                        ->required()
+                        ->label(__('custom.direction.label')),
+
                     Textarea::make("description")
                         ->rows(4)
                         ->label(__('custom.models.material.description')),
@@ -72,6 +82,7 @@ class MaterialsRelationManager extends RelationManager
                 Section::make(__('custom.forms.material.create.section.image'))->schema([
                     SpatieMediaLibraryFileUpload::make('image')
                         ->label("")
+                        ->multiple(false)
                         ->collection('image')
                         ->image()
                         ->imageEditor(),

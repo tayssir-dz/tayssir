@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\MaterialResource\RelationManagers;
 
+use App\Enums\ContentDirection;
 use App\Filament\Resources\UnitResource;
 use Filament\Forms;
 use Filament\Forms\Components\Textarea;
@@ -41,6 +42,13 @@ class UnitsRelationManager extends RelationManager
                     ->required()
                     ->label(__('custom.models.unit.name'))
                     ->minLength(3),
+
+                Select::make('direction')
+                    ->options(ContentDirection::class)
+                    ->enum(ContentDirection::class)
+                    ->required()
+                    ->label(__('custom.direction.label')),
+
                 Textarea::make("description")
                     ->rows(4)
                     ->label(__('custom.models.unit.description')),

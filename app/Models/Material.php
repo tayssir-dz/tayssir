@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ContentDirection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -25,6 +26,7 @@ class Material extends Model implements HasMedia
         'secondary_color',
         'description',
         'division_id',
+        'direction',
     ];
 
     /**
@@ -36,6 +38,15 @@ class Material extends Model implements HasMedia
     protected $hidden = [
         'created_at',
         'updated_at',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'direction' => ContentDirection::class,
     ];
 
     /**
@@ -80,5 +91,13 @@ class Material extends Model implements HasMedia
             ->withPivot('sort')
             ->orderBy('material_unit.sort')
         ;
+    }
+
+    /**
+     * Get the rtl attribute for backward compatibility.
+     */
+    public function getRtlAttribute()
+    {
+        return $this->direction === ContentDirection::RTL;
     }
 }

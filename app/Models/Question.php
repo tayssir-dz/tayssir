@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ContentDirection;
 use App\Enums\QuestionDifficulty;
 use App\Enums\QuestionScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,6 +32,7 @@ class Question extends Model implements HasMedia
         'question_type',
         "difficulty",
         'scope',
+        'direction',
     ];
 
     /**
@@ -58,6 +60,7 @@ class Question extends Model implements HasMedia
         'question_type' => QuestionType::class,
         'difficulty' => QuestionDifficulty::class,
         'scope' => QuestionScope::class,
+        'direction' => ContentDirection::class,
     ];
 
     public function registerMediaCollections(): void
@@ -77,5 +80,32 @@ class Question extends Model implements HasMedia
             ->using(ChapterQuestion::class)
             ->withPivot('sort')  // Add any pivot columns you need
             ->limit(1);  // Ensure only one chapter is returned
+    }
+
+    /**
+     * Get the effective direction based on inheritance rules.
+     */
+    public function getEffectiveDirection(): ContentDirection
+    {
+        if ($this->direction !== ContentDirection::INHERIT) {
+            return $this->direction;
+        }
+
+        // Inherit from parent (Chapter)
+        $chapter = $this->chapter()->first();
+
+        if ($chapter) {
+            return $chapter->getEffectiveDirection();
+        }
+
+        return ContentDirection::RTL;
+    }
+
+    /**
+     * Get the rtl attribute for backward compatibility.
+     */
+    public function getRtlAttribute()
+    {
+        return $this->getEffectiveDirection() === ContentDirection::RTL;
     }
 }

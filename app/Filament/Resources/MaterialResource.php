@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\ContentDirection;
 use App\Filament\Resources\MaterialResource\Pages;
 use App\Filament\Resources\MaterialResource\RelationManagers;
 use App\Filament\Resources\MaterialResource\RelationManagers\UnitsRelationManager;
@@ -88,9 +89,20 @@ class MaterialResource extends Resource implements HasShieldPermissions
 
                     Select::make('division_materials')
                         ->relationship('division_materials', 'name')
+                        ->multiple()
                         ->required()
                         ->preload()
                         ->label(__('custom.models.material.division')),
+
+                    // Forms\Components\Toggle::make('rtl')
+                    //     ->label('rtl'),
+                    Select::make('direction')
+                        ->options([
+                            ContentDirection::RTL->value => ContentDirection::RTL->getLabel(),
+                            ContentDirection::LTR->value => ContentDirection::LTR->getLabel(),
+                        ])
+                        ->required()
+                        ->label(__('custom.direction.label')),
 
                     Textarea::make("description")
                         ->rows(4)
@@ -102,6 +114,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
 
                 Section::make(__('custom.forms.material.create.section.image'))->schema([
                     SpatieMediaLibraryFileUpload::make('image')
+                        ->multiple(false)
                         ->label("")
                         ->collection('image')
                         ->image()
