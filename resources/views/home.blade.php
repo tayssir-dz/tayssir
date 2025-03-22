@@ -21,7 +21,7 @@
     <div class="flex items-center justify-center h-screen w-full max-w-4xl mx-auto px-3">
         <div class="flex flex-col gap-6 justify-center items-center card card-body card-bordered bg-base-200">
             <x-logo />
-            {{-- <p class="text-center">This app provides a comprehensive
+            <p class="text-center">This app provides a comprehensive
                 platform
                 for
                 baccalaureate students to practice quizzes
@@ -34,7 +34,7 @@
                 exam
                 preparation with our interactive quizzes!
                 <span class="font-bold">(the previous text is auto generated)</span>
-            </p> --}}
+            </p>
             <div class="w-full flex justify-end items-center gap-4">
                 <a href="/swagger/documentation" class="btn btn-primary">
                     go to swagger
