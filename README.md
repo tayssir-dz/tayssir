@@ -20,8 +20,8 @@ preparation with our interactive quizzes!
 
 // add latex field (boolean) to question hint ,explanation_text ,question to make them act like text and as latex at the same time
 // points (complicated)
-// add rtl ltr to material unit chater question (add inherit)
 
+// add rtl ltr to material unit chater question (add inherit)
 // price in subscription, and discounts should be a number field instead of a money field
 // many to many division-material (material can belong to multiple divisions)
 // add image to chapter response

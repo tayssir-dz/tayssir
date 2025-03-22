@@ -12,10 +12,10 @@ use App\Models\User;
 use Carbon\Carbon;
 use Ichtrojan\Otp\Otp;
 use Illuminate\Http\Request;
-use Mail;
 use Validator;
 use G4T\Swagger\Attributes\SwaggerSection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 // #[SwaggerSection("This section is responsible for managing user email verification processes. It includes sending verification emails, verifying the user's email based on a code, and providing testing functionality to unverify emails. It helps maintain a verified email system, ensuring only verified users access specific features.")]
 class EmailVerificationController extends BaseController
@@ -30,13 +30,11 @@ class EmailVerificationController extends BaseController
         if (!$verification_otp->status) {
             return $this->sendError(__("response.failed_to_generate_otp"));
         }
-        // Mail::to($user->email)->send(new EmailVerificationMail([
-        //     'otp' => $verification_otp->token,
-        //     'name' => $user->name
-        // ]));
-        return $this->sendResponse([
-            "otp" => $verification_otp->token,
-        ], __("response.email_sent_successfully"));
+        Mail::to($user->email)->send(new EmailVerificationMail([
+            'otp' => $verification_otp->token,
+            'name' => $user->name
+        ]));
+        return $this->sendResponse(message: __("response.email_sent_successfully"));
     }
 
     public function verifyEmail(VerifyEmailRequest $request)
