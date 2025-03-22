@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 
 <head>
-    <title>{{ env('APP_NAME') }} - Email Verification</title>
+    <title>{{ env('APP_NAME') }} - تحقق من البريد الإلكتروني</title>
+    <meta charset="UTF-8">
 </head>
 
-<body>
-    <h1>Email Verification</h1>
-    <p>Dear {{ $mailData['name'] }},</p>
-    <p>Thank you for signing up with {{ env('APP_NAME') }}. To complete your registration, please enter the One-Time
-        Password (OTP)
-        provided below:</p>
+<body style="text-align: right; font-family: Arial, sans-serif;">
+    <h1>تحقق من البريد الإلكتروني</h1>
+    <p>عزيزي {{ $mailData['name'] }}،</p>
+    <p>شكرًا لتسجيلك في {{ env('APP_NAME') }}. لإكمال تسجيلك، يرجى إدخال كلمة المرور لمرة واحدة (OTP) المقدمة أدناه:</p>
     <h2>{{ $mailData['otp'] }}</h2>
-    <p>If you did not request this verification, please ignore this email.</p>
+    <p>إذا لم تطلب هذا التحقق، يرجى تجاهل هذا البريد الإلكتروني.</p>
     <br />
-    <p>Best regards,</p>
-    <p>The {{ env('APP_NAME') }} Team</p>
+    <p>مع أطيب التحيات،</p>
+    <p>فريق {{ env('APP_NAME') }}</p>
 </body>
 
 </html>
