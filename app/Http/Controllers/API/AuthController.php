@@ -9,6 +9,7 @@ use App\Http\Requests\API\Auth\CheckEmailRequest;
 use App\Http\Requests\API\Auth\CheckPhoneNumberRequest;
 use App\Http\Requests\API\Auth\LoginRequest;
 use App\Http\Requests\API\Auth\RegisterRequest;
+use App\Mail\WelcomeMail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -16,6 +17,7 @@ use Spatie\Permission\Models\Role;
 use Validator;
 use G4T\Swagger\Attributes\SwaggerSection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 // #[SwaggerSection('This section manages all authentication-related actions such as user registration, login, logout, and token refresh. It ensures secure authentication processes, handling both token-based and user-based operations for registering and logging users in and out of the system.')]
 class AuthController extends BaseController
@@ -38,6 +40,10 @@ class AuthController extends BaseController
         $role = Role::firstOrCreate(['name' => 'student']);
         $user->assignRole($role);
 
+        // Send welcome email
+        Mail::to($user->email)->send(new WelcomeMail([
+            'name' => $user->name
+        ]));
 
         // $token = $user->createToken($input["device_name"])->plainTextToken;
         $accessToken = $user->createToken('access_token', [TokenAbility::ACCESS_API->value], Carbon::now()->addMinutes(config('sanctum.access_token_expiration')));

@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ForgotPasswordMail extends Mailable
+class WelcomeMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $mailData;
@@ -27,7 +27,7 @@ class ForgotPasswordMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: env('APP_NAME') . ' Forgot Password',
+            subject: "Welcome to " . env('APP_NAME')
         );
     }
 
@@ -37,7 +37,7 @@ class ForgotPasswordMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.forgot-password-mail',
+            view: 'emails.welcome-mail',
         );
     }
 
