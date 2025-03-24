@@ -116,7 +116,7 @@ return [
     'models.question.hint' => 'التلميح',
     'models.question.question_image' => 'صورة السؤال',
     'models.question.explaination_asset' => 'وسائط الشرح',
-    'models.question.explanation_text' => 'نص الشرح',
+    'models.question.explanation_text' => 'نص التعليل',
     'models.question.hint_image' => 'صورة التلميح',
     'models.question.type' => 'نوع السؤال',
     'models.question.types.multiple_choices' => 'اختيارات متعددة',

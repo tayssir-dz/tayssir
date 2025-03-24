@@ -119,10 +119,12 @@ trait InteractsWithContent
             'difficulty' => $question->difficulty,
             'points' => $question->difficulty->points(),
             'scope' => $question->scope,
-            'hint' => [
-                'value' => !empty($question->hint) ? (is_string($question->hint) ? $question->hint : null) : null,
-                'is_latex' => $question->hint_is_latex ?? false,
-            ],
+            'hint' => !empty($question->hint) ? [
+                [
+                    'value' => is_string($question->hint) ? $question->hint : null,
+                    'is_latex' => $question->hint_is_latex ?? false,
+                ]
+            ] : [],
             'explanation_text' => [
                 'value' => !empty($question->explanation_text) ? $question->explanation_text : null,
                 'is_latex' => $question->explanation_text_is_latex ?? false,
