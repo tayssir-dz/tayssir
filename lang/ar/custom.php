@@ -164,6 +164,7 @@ return [
     'models.question.scope' => 'نطاق السؤال',
     'models.question.scope.exercice' => "تمرين",
     'models.question.scope.lesson' => "درس",
+    'models.question.is_latex' => 'نص LaTeX',
 
     // Card
 

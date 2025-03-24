@@ -119,11 +119,20 @@ trait InteractsWithContent
             'difficulty' => $question->difficulty,
             'points' => $question->difficulty->points(),
             'scope' => $question->scope,
-            'hint' => is_string($question->hint) ? [$question->hint] : $question->hint,
-            'explanation_text' => $question->explanation_text,
+            'hint' => [
+                'value' => !empty($question->hint) ? (is_string($question->hint) ? $question->hint : null) : null,
+                'is_latex' => $question->hint_is_latex ?? false,
+            ],
+            'explanation_text' => [
+                'value' => !empty($question->explanation_text) ? $question->explanation_text : null,
+                'is_latex' => $question->explanation_text_is_latex ?? false,
+            ],
             'explanationVideo' => $question->explanation_asset,
             'hintImage' => $question->hint_image,
-            'question' => $question->question,
+            'question' => [
+                'value' => !empty($question->question) ? $question->question : null,
+                'is_latex' => $question->question_is_latex ?? false,
+            ],
             'direction' => $question->getEffectiveDirection()->value,
         ];
 
@@ -148,16 +157,22 @@ trait InteractsWithContent
     public function transformMultipleChoices($question)
     {
         $choices = $question->options['choices'] ?? [];
-        $optionTexts = [];
+        $options = [];
         $correctOptions = [];
+
         foreach ($choices as $index => $choice) {
-            $optionTexts[] = $choice['option'];
+            $options[] = [
+                'value' => !empty($choice['option']) ? $choice['option'] : null,
+                'is_latex' => $choice['option_is_latex'] ?? false,
+            ];
+
             if (!empty($choice['is_correct'])) {
                 $correctOptions[] = $index;
             }
         }
+
         return [
-            'options' => $optionTexts,
+            'options' => $options,
             'correctOptions' => $correctOptions,
         ];
     }
@@ -167,12 +182,18 @@ trait InteractsWithContent
         $wordsArr = $question->options['words'] ?? [];
         $words = [];
         $correctAnomalies = [];
+
         foreach ($wordsArr as $index => $item) {
-            $words[] = $item['word'];
+            $words[] = [
+                'value' => !empty($item['word']) ? $item['word'] : null,
+                'is_latex' => $item['word_is_latex'] ?? false,
+            ];
+
             if (!empty($item['is_intruder'])) {
                 $correctAnomalies[] = $index;
             }
         }
+
         return [
             'words' => $words,
             'correctAnomalies' => $correctAnomalies,
@@ -211,7 +232,21 @@ trait InteractsWithContent
 
     public function transformMatchWithArrows($question)
     {
-        $pairs = $question->options['pairs'] ?? [];
+        $pairsData = $question->options['pairs'] ?? [];
+        $pairs = [];
+
+        foreach ($pairsData as $pair) {
+            $pairs[] = [
+                'first' => [
+                    'value' => !empty($pair['first']) ? $pair['first'] : null,
+                    'is_latex' => $pair['first_is_latex'] ?? false,
+                ],
+                'second' => [
+                    'value' => !empty($pair['second']) ? $pair['second'] : null,
+                    'is_latex' => $pair['second_is_latex'] ?? false
+                ]
+            ];
+        }
 
         return [
             'pairs' => $pairs

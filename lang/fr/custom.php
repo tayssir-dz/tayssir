@@ -142,6 +142,7 @@ return [
     'models.question.difficulty.easy' => 'Facile',
     'models.question.difficulty.medium' => 'Moyen',
     'models.question.difficulty.hard' => 'Difficile',
+    'models.question.is_latex' => 'Est LaTeX',
 
     // Question translations
     'models.question.fill_blank.answer' => 'Réponse',

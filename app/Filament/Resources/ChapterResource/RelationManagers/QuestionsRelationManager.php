@@ -45,10 +45,20 @@ class QuestionsRelationManager extends RelationManager
                     ->tabs([
                         Forms\Components\Tabs\Tab::make(__('custom.models.question.tabs.infos'))
                             ->schema([
-
-                                Forms\Components\Textarea::make('question')
-                                    ->required()
-                                    ->label(__('custom.models.question.question')),
+                                Forms\Components\Group::make()
+                                    ->schema([
+                                        Forms\Components\Textarea::make('question')
+                                            ->rows(4)
+                                            ->required()
+                                            ->columnSpan(8)
+                                            ->label(__('custom.models.question.question')),
+                                        Forms\Components\Toggle::make('question_is_latex')
+                                            ->label(__('custom.models.question.is_latex'))
+                                            ->inline(false)
+                                            ->columnSpan(2)
+                                            ->default(false),
+                                    ])
+                                    ->columns(10),
 
                                 Forms\Components\Select::make('direction')
                                     ->options(ContentDirection::class)
@@ -62,11 +72,33 @@ class QuestionsRelationManager extends RelationManager
                                     ->required()
                                     ->label(__('custom.models.question.scope')),
 
-                                Forms\Components\TextInput::make('hint')
-                                    ->label(__('custom.models.question.hint')),
+                                Forms\Components\Group::make()
+                                    ->schema([
+                                        Forms\Components\Textarea::make('hint')
+                                            ->rows(4)
+                                            ->columnSpan(8)
+                                            ->label(__('custom.models.question.hint')),
+                                        Forms\Components\Toggle::make('hint_is_latex')
+                                            ->label(__('custom.models.question.is_latex'))
+                                            ->inline(false)
+                                            ->columnSpan(2)
+                                            ->default(false),
+                                    ])
+                                    ->columns(10),
 
-                                Forms\Components\Textarea::make('explanation_text')
-                                    ->label(__('custom.models.question.explanation_text')),
+                                Forms\Components\Group::make()
+                                    ->schema([
+                                        Forms\Components\Textarea::make('explanation_text')
+                                            ->rows(4)
+                                            ->columnSpan(8)
+                                            ->label(__('custom.models.question.explanation_text')),
+                                        Forms\Components\Toggle::make('explanation_text_is_latex')
+                                            ->label(__('custom.models.question.is_latex'))
+                                            ->inline(false)
+                                            ->columnSpan(2)
+                                            ->default(false),
+                                    ])
+                                    ->columns(10),
                             ]),
                         Forms\Components\Tabs\Tab::make(__('custom.models.question.tabs.assets'))
                             ->schema([

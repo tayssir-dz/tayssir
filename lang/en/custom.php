@@ -163,6 +163,7 @@ return [
     'models.question.scope' => 'Scope',
     'models.question.scope.exercice' => "Exercise",
     'models.question.scope.lesson' => "Lesson",
+    'models.question.is_latex' => 'Is LaTeX',
     // Card
 
     "models.card.code" => "Code",
