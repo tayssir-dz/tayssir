@@ -71,6 +71,7 @@ class MaterialsRelationManager extends RelationManager
                             ContentDirection::RTL->value => ContentDirection::RTL->getLabel(),
                             ContentDirection::LTR->value => ContentDirection::LTR->getLabel(),
                         ])
+                        ->default(ContentDirection::RTL)
                         ->required()
                         ->label(__('custom.direction.label')),
 

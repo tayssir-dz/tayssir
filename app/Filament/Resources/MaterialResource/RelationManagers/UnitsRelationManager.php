@@ -46,6 +46,7 @@ class UnitsRelationManager extends RelationManager
                 Select::make('direction')
                     ->options(ContentDirection::class)
                     ->enum(ContentDirection::class)
+                    ->default(ContentDirection::INHERIT)
                     ->required()
                     ->label(__('custom.direction.label')),
 

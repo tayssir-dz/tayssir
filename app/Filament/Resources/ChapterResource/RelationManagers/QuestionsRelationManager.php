@@ -63,6 +63,7 @@ class QuestionsRelationManager extends RelationManager
                                 Forms\Components\Select::make('direction')
                                     ->options(ContentDirection::class)
                                     ->enum(ContentDirection::class)
+                                    ->default(ContentDirection::INHERIT)
                                     ->required()
                                     ->label(__('custom.direction.label')),
 

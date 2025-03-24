@@ -101,6 +101,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
                             ContentDirection::RTL->value => ContentDirection::RTL->getLabel(),
                             ContentDirection::LTR->value => ContentDirection::LTR->getLabel(),
                         ])
+                        ->default(ContentDirection::RTL->value)
                         ->required()
                         ->label(__('custom.direction.label')),
 
