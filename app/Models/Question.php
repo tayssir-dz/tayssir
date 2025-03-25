@@ -31,6 +31,9 @@ class Question extends Model implements HasMedia
         'question_type',
         'scope',
         'direction',
+        'question_is_latex',
+        'hint_is_latex',
+        'explanation_text_is_latex',
     ];
 
     /**

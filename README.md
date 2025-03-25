@@ -18,7 +18,10 @@ preparation with our interactive quizzes!
 
 
 
-// points (complicated)
+// points // mazal submission and my points
+// chapter should inherit the subscription if not selected
+// update email
+// new model, years on top of divisions (year has many divisions)
 // hint must be array
 
 // add latex field (boolean) to question hint ,explanation_text ,question to make them act like text and as latex at the same time
