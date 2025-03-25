@@ -24,7 +24,7 @@ class PickTheIntruder extends QuestionType
                 ->schema([
                     Group::make()->schema([
                         Textarea::make('word')
-                            ->rows(2)
+                            ->rows(1)
                             ->required()
                             ->columnSpan(8)
                             ->minLength(1)

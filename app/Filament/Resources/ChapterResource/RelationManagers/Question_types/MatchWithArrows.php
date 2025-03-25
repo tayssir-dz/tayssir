@@ -24,7 +24,7 @@ class MatchWithArrows extends QuestionType
                 ->schema([
                     Group::make()->schema([
                         Textarea::make('first')
-                            ->rows(2)
+                            ->rows(1)
                             ->required()
                             ->columnSpan(8)
                             ->minLength(1)
@@ -37,7 +37,7 @@ class MatchWithArrows extends QuestionType
                     ])->columns(10),
                     Group::make()->schema([
                         Textarea::make('second')
-                            ->rows(2)
+                            ->rows(1)
                             ->required()
                             ->columnSpan(8)
                             ->minLength(1)
