@@ -91,13 +91,13 @@ class AdminPanelProvider extends PanelProvider
                         directory: 'avatars',
                         rules: 'mimes:jpeg,png|max:1024'
                     ),
-                // FilamentDeveloperLoginsPlugin::make()
-                //     ->enabled(true)
-                //     ->users([
-                //         'dev login' => 'admin@admin.dev',
-                //         // 'mouayed' => 'm_keziz@estin.dz',
-                //         // 'something else' => "somethingelse@something.com"
-                //     ]),
+                FilamentDeveloperLoginsPlugin::make()
+                    ->enabled(true)
+                    ->users([
+                        'dev login' => 'admin@admin.dev',
+                        // 'mouayed' => 'm_keziz@estin.dz',
+                        // 'something else' => "somethingelse@something.com"
+                    ]),
                 FilamentRecordSwitcherPlugin::make(),
 
             ])
