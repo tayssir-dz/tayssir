@@ -6,6 +6,7 @@ return [
     'nav.section.platform' => 'Plateforme',
     'nav.section.content' => 'Contenu',
     'nav.section.management' => 'Gestion',
+    'nav.section.points' => "Points",
 
     'models.cards' => 'Cartes (ancien)',
     'models.card' => 'Carte',
@@ -250,4 +251,13 @@ return [
     "direction.rtl" => "De droite à gauche (rtl)",
     "direction.ltr" => "De gauche à droite (ltr)",
     "direction.inherit" => "Utiliser la direction du parent (inherit)",
+
+    'models.chapter_levels' => 'Niveaux de Chapitre',
+    'models.chapter_level' => 'Niveau de Chapitre',
+    'models.chapter_level.name' => 'Nom du Niveau',
+    'models.chapter_level.exercice_points' => 'Points d\'Exercice',
+    'models.chapter_level.lesson_points' => 'Points de Leçon',
+    'models.chapter_level.bonus' => 'Bonus',
+    'forms.chapter_level.create.section.infos' => 'Informations du Niveau',
+    'models.chapter.level' => 'Niveau',
 ];

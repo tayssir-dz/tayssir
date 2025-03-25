@@ -58,7 +58,7 @@ class DivisionResource extends Resource implements HasShieldPermissions
     protected static ?string $model = Division::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
-    protected static ?int $navigationSort = 7;
+    protected static ?int $navigationSort = 9;
 
     public static function form(Form $form): Form
     {

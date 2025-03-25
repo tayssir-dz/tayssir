@@ -47,7 +47,30 @@ class ChaptersRelationManager extends RelationManager
                         ->minLength(3)
                         ->label(__('custom.models.chapter.name')),
 
-                    Select::make('direction')
+
+                    Select::make('chapter_level_id')
+                        ->relationship('chapter_level', 'name')
+                        ->createOptionForm([
+                            TextInput::make('name')
+                                ->required()
+                                ->label(__('custom.models.chapter_level.name')),
+                            TextInput::make('exercice_points')
+                                ->numeric()
+                                ->minValue(0)
+                                ->required()
+                                ->label(__('custom.models.chapter_level.exercice_points')),
+                            TextInput::make('lesson_points')
+                                ->numeric()
+                                ->minValue(0)
+                                ->required()
+                                ->label(__('custom.models.chapter_level.lesson_points')),
+                        ])
+                        ->searchable()
+                        ->preload()
+                        ->required()
+                        ->label(__('custom.models.chapter.level')),
+
+                    Select::make('direction')->native(false)
                         ->options(ContentDirection::class)
                         ->enum(ContentDirection::class)
                         ->default(ContentDirection::INHERIT)

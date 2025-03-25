@@ -66,7 +66,7 @@ class MaterialsRelationManager extends RelationManager
                     ColorPicker::make("secondary_color")
                         ->label(__('custom.models.material.secondary_color')),
 
-                    Select::make('direction')
+                    Select::make('direction')->native(false)
                         ->options([
                             ContentDirection::RTL->value => ContentDirection::RTL->getLabel(),
                             ContentDirection::LTR->value => ContentDirection::LTR->getLabel(),

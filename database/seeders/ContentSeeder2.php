@@ -77,7 +77,6 @@ class ContentSeeder2 extends Seeder
                             // Only generate questions if the chapter was just created
                             if ($chapter->wasRecentlyCreated) {
                                 $this->generateQuestionsForChapter($chapter, 10); // Exactly 10 questions per chapter
-                                $chapter->distributeDifficulties();
                             }
                         }
                     }

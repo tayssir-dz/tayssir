@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\ChapterResource\RelationManagers;
 
 use App\Enums\ContentDirection;
-use App\Enums\QuestionDifficulty;
 use App\Enums\QuestionScope;
 use App\Enums\QuestionType;
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\FillInTheBlanks;
@@ -60,7 +59,7 @@ class QuestionsRelationManager extends RelationManager
                                     ])
                                     ->columns(10),
 
-                                Forms\Components\Select::make('direction')
+                                Forms\Components\Select::make('direction')->native(false)
                                     ->options(ContentDirection::class)
                                     ->enum(ContentDirection::class)
                                     ->default(ContentDirection::INHERIT)
@@ -218,34 +217,23 @@ class QuestionsRelationManager extends RelationManager
                     ->formatStateUsing(fn(QuestionScope $state) => $state->getLabel())
                     ->color(fn(QuestionScope $state) => $state->getColor()),
 
-                Tables\Columns\TextColumn::make('difficulty')
-                    ->label(__('custom.models.question.difficulty'))
-                    ->badge()
-                    ->formatStateUsing(fn(QuestionDifficulty $state) => $state->getLabel())
-                    ->color(fn(QuestionDifficulty $state) => $state->getColor()),
-
                 Tables\Columns\TextColumn::make('points')
                     ->label(__('custom.models.question.points'))
-                    ->badge()
-                    ->color(fn($record) => $record->difficulty->getColor())
-                    ->getStateUsing(fn($record) => $record->difficulty->points()),
+                    ->badge(),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                    ->after(fn() => $this->getOwnerRecord()->distributeDifficulties())
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
-                    ->after(fn() => $this->getOwnerRecord()->distributeDifficulties()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()
-                        ->after(fn() => $this->getOwnerRecord()->distributeDifficulties()),
                 ]),
             ]);
     }

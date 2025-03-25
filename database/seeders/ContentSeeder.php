@@ -92,7 +92,6 @@ class ContentSeeder extends Seeder
                             // Only generate questions if the chapter was just created
                             if ($chapter->wasRecentlyCreated) {
                                 $this->generateQuestionsForChapter($chapter);
-                                $chapter->distributeDifficulties();
                             }
                         }
                     }
@@ -248,7 +247,7 @@ class ContentSeeder extends Seeder
 
                 // Generate suggestions (original words plus some additional options)
                 $suggestions = [];
-                
+
                 foreach ($positions as $index => $pos) {
                     $word = $words_array[$pos];
                     $position = $index + 1;
@@ -259,13 +258,13 @@ class ContentSeeder extends Seeder
                     $words_array[$pos] = "[$position]";
                     $suggestions[] = $word;
                 }
-                
+
                 // Add some extra suggestions
                 $extraSuggestions = rand(2, 4);
                 for ($i = 0; $i < $extraSuggestions; $i++) {
                     $suggestions[] = rtrim($this->arabicFaker->word(), '.');
                 }
-                
+
                 // Shuffle suggestions
                 shuffle($suggestions);
 

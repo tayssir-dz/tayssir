@@ -62,7 +62,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
     protected static ?string $model = Material::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
-    protected static ?int $navigationSort = 8;
+    protected static ?int $navigationSort = 10;
 
     public static function form(Form $form): Form
     {
@@ -96,7 +96,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
 
                     // Forms\Components\Toggle::make('rtl')
                     //     ->label('rtl'),
-                    Select::make('direction')
+                    Select::make('direction')->native(false)
                         ->options([
                             ContentDirection::RTL->value => ContentDirection::RTL->getLabel(),
                             ContentDirection::LTR->value => ContentDirection::LTR->getLabel(),

@@ -72,6 +72,7 @@ trait InteractsWithContent
                         'description' => $chapter->description,
                         "image" => $chapter->image,
                         'unit_id' => $unit->id,
+                        'bonus_points' => $chapter->chapter_level->bonus,
                         'progress' => $progressData['chapters'][$chapter->id] ?? 0,
                         'points' => $progressData['points']['chapters'][$chapter->id] ?? 0
                     ];
@@ -116,8 +117,8 @@ trait InteractsWithContent
             'type' => $question->question_type,
             'chapter_id' => $question->chapter->first()->id ?? null,
             'image' => $question->image,
-            'difficulty' => $question->difficulty,
-            'points' => $question->difficulty->points(),
+            'difficulty' => "medium", // TODO: remove this cuz its not used anymore, its here so that the mobile client will not crash
+            'points' => $question->points,
             'scope' => $question->scope,
             'hint' => !empty($question->hint) ? [
                 [

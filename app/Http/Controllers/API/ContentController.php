@@ -57,7 +57,7 @@ class ContentController extends BaseController
                     }
 
                     $question = $questionsMap[$questionId];
-                    $points = $answer['answered_correctly'] ? $question->difficulty->points() : 0;
+                    $points = $answer['answered_correctly'] ? $question->points : 0;
 
                     $userAnswersData[] = [
                         'user_id' => $user->id,

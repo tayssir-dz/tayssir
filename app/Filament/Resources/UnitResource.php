@@ -55,7 +55,7 @@ class UnitResource extends Resource implements HasShieldPermissions
     protected static ?string $model = Unit::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
-    protected static ?int $navigationSort = 9;
+    protected static ?int $navigationSort = 11;
     public static function form(Form $form): Form
     {
         return $form
@@ -64,7 +64,7 @@ class UnitResource extends Resource implements HasShieldPermissions
                     TextInput::make('name')->required()->minLength(3)->label(__('custom.models.unit.name')),
                     Select::make('material_units')->relationship('material_units', 'code')->searchable()->preload()->required()->label(__('custom.models.unit.material')),
 
-                    Select::make('direction')
+                    Select::make('direction')->native(false)
                         ->options(ContentDirection::class)
                         ->enum(ContentDirection::class)
                         ->default(ContentDirection::INHERIT)

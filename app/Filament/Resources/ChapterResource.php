@@ -56,7 +56,7 @@ class ChapterResource extends Resource implements HasShieldPermissions
     protected static ?string $model = Chapter::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?int $navigationSort = 10;
+    protected static ?int $navigationSort = 12;
     public static function form(Form $form): Form
     {
         return $form
@@ -74,7 +74,34 @@ class ChapterResource extends Resource implements HasShieldPermissions
                         ->required()
                         ->label(__('custom.models.chapter.unit')),
 
-                    Select::make('direction')
+                    Select::make('chapter_level_id')
+                        ->relationship('chapter_level', 'name')
+                        ->createOptionForm([
+                            TextInput::make('name')
+                                ->required()
+                                ->label(__('custom.models.chapter_level.name')),
+                            TextInput::make('exercice_points')
+                                ->numeric()
+                                ->minValue(0)
+                                ->required()
+                                ->label(__('custom.models.chapter_level.exercice_points')),
+                            TextInput::make('lesson_points')
+                                ->numeric()
+                                ->minValue(0)
+                                ->required()
+                                ->label(__('custom.models.chapter_level.lesson_points')),
+                            TextInput::make('bonus')
+                                ->numeric()
+                                ->minValue(0)
+                                ->required()
+                                ->label(__('custom.models.chapter_level.bonus')),
+                        ])
+                        ->searchable()
+                        ->preload()
+                        ->required()
+                        ->label(__('custom.models.chapter.level')),
+
+                    Select::make('direction')->native(false)
                         ->options(ContentDirection::class)
                         ->enum(ContentDirection::class)
                         ->default(ContentDirection::INHERIT)

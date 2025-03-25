@@ -6,6 +6,7 @@ return [
     'nav.section.platform' => 'Platform',
     'nav.section.content' => 'Content',
     'nav.section.management' => 'Management',
+    'nav.section.points' =>  'Points',
 
     'models.cards' => 'Cards (old)',
     'models.card' => 'Card',
@@ -106,6 +107,15 @@ return [
     'models.chapter.photo' => 'Photo',
     'models.chapter.action.details' => 'Chapter details',
     "models.chapter.subscriptions" => "Subscriptions",
+
+    'models.chapter_levels' => 'Chapter Levels',
+    'models.chapter_level' => 'Chapter Level',
+    'models.chapter_level.name' => 'Level Name',
+    'models.chapter_level.exercice_points' => 'Exercise Points',
+    'models.chapter_level.lesson_points' => 'Lesson Points',
+    'models.chapter_level.bonus' =>  'Bonus',
+    'forms.chapter_level.create.section.infos' => 'Level Information',
+    'models.chapter.level' => 'Level',
 
     // # Question
     'models.question.tabs.infos' => 'Information',

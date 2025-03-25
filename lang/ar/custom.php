@@ -5,6 +5,7 @@ return [
     'nav.section.platform' => 'المنصة',
     'nav.section.content' => 'المحتوى',
     'nav.section.management' => 'الإدارة',
+    'nav.section.points' => 'النقاط',
 
 
     'models.cards' => 'البطاقات (قديم)',
@@ -249,4 +250,13 @@ return [
     "direction.rtl" => '(rtl) من اليمين لليسار',
     "direction.ltr" =>   '(ltr) من اليسار لليمين',
     "direction.inherit" =>   '(inherit) من العنصر الأب',
+
+    'models.chapter_levels' => 'مستويات الفصول',
+    'models.chapter_level' => 'مستوى الفصل',
+    'models.chapter_level.name' => 'اسم المستوى',
+    'models.chapter_level.exercice_points' => 'نقاط التمارين',
+    'models.chapter_level.lesson_points' => 'نقاط الدروس',
+    'models.chapter_level.bonus' =>  'نقاط المكافأة',
+    'forms.chapter_level.create.section.infos' => 'معلومات المستوى',
+    'models.chapter.level' => 'المستوى',
 ];

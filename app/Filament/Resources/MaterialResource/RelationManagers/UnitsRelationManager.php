@@ -43,7 +43,7 @@ class UnitsRelationManager extends RelationManager
                     ->label(__('custom.models.unit.name'))
                     ->minLength(3),
 
-                Select::make('direction')
+                Select::make('direction')->native(false)
                     ->options(ContentDirection::class)
                     ->enum(ContentDirection::class)
                     ->default(ContentDirection::INHERIT)

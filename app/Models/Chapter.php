@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\ContentDirection;
-use App\Enums\QuestionDifficulty;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -23,7 +22,7 @@ class Chapter extends Model implements HasMedia
         'name',
         'description',
         'direction',
-        // 'photo_url',
+        'chapter_level_id',
     ];
 
     /**
@@ -108,44 +107,8 @@ class Chapter extends Model implements HasMedia
         return $this->getEffectiveDirection() === ContentDirection::RTL;
     }
 
-    public function distributeDifficulties()
+    public function chapter_level()
     {
-        $questions = $this->questions()->withPivot('sort')->orderBy('chapter_question.sort')->get();
-        $totalQuestions = $questions->count();
-
-        if ($totalQuestions === 0) {
-            return $this;
-        }
-
-        if ($totalQuestions <= 3) {
-            $easyCount = 1;
-            $mediumCount = $totalQuestions > 1 ? 1 : 0;
-            $hardCount = $totalQuestions > 2 ? 1 : 0;
-        } else {
-            // Ensure even distribution for more than 3 questions
-            $easyCount = (int) ceil($totalQuestions / 3);
-            $remainingQuestions = $totalQuestions - $easyCount;
-            $mediumCount = (int) ceil($remainingQuestions / 2);
-            $hardCount = $totalQuestions - $easyCount - $mediumCount;
-        }
-
-        $currentIndex = 0;
-
-        // Assign easy questions
-        for ($i = 0; $i < $easyCount; $i++) {
-            $questions[$currentIndex++]->update(['difficulty' => QuestionDifficulty::EASY]);
-        }
-
-        // Assign medium questions
-        for ($i = 0; $i < $mediumCount; $i++) {
-            $questions[$currentIndex++]->update(['difficulty' => QuestionDifficulty::MEDIUM]);
-        }
-
-        // Assign hard questions
-        while ($currentIndex < $totalQuestions) {
-            $questions[$currentIndex++]->update(['difficulty' => QuestionDifficulty::HARD]);
-        }
-
-        return $this;
+        return $this->belongsTo(ChapterLevel::class);
     }
 }

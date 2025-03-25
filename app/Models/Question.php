@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\ContentDirection;
-use App\Enums\QuestionDifficulty;
 use App\Enums\QuestionScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,7 +29,6 @@ class Question extends Model implements HasMedia
         'explanation_text',
         'options',
         'question_type',
-        "difficulty",
         'scope',
         'direction',
     ];
@@ -58,7 +56,6 @@ class Question extends Model implements HasMedia
     protected $casts = [
         'options' => 'array',
         'question_type' => QuestionType::class,
-        'difficulty' => QuestionDifficulty::class,
         'scope' => QuestionScope::class,
         'direction' => ContentDirection::class,
     ];
@@ -107,5 +104,18 @@ class Question extends Model implements HasMedia
     public function getRtlAttribute()
     {
         return $this->getEffectiveDirection() === ContentDirection::RTL;
+    }
+
+    public function getPointsAttribute()
+    {
+        $chapter = $this->chapter()->first();
+        if (!$chapter || !$chapter->chapter_level) {
+            return 0;
+        }
+
+        return match ($this->scope) {
+            QuestionScope::EXERCICE => $chapter->chapter_level->exercice_points,
+            QuestionScope::LESSON => $chapter->chapter_level->lesson_points,
+        };
     }
 }
