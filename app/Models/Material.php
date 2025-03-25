@@ -76,6 +76,15 @@ class Material extends Model implements HasMedia
             ->orderBy('division_material.sort');
     }
 
+    /**
+     * Get the divisions for the material.
+     * Alias for division_materials() for better naming consistency.
+     */
+    public function divisions()
+    {
+        return $this->division_materials();
+    }
+
     public function getDivisionAttribute()
     {
         return $this->division_materials()->first();

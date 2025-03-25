@@ -123,23 +123,26 @@ class MaterialsRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
-                // Tables\actions\AttachAction::make(),
+                Tables\Actions\AttachAction::make(),
             ])
             ->actions([
                 ActionGroup::make([
-
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\LinkAction::make('Details')
                         ->label(__('custom.models.material.action.details'))
                         ->icon('heroicon-o-eye')
                         ->color('secondary')
                         ->url(fn($record) => MaterialResource::getUrl("edit", ['record' => $record])),
+                    Tables\Actions\DetachAction::make()
+                        ->icon('heroicon-o-x-mark')
                 ])
                 // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DetachBulkAction::make()
+                        ->icon('heroicon-o-x-mark')
                 ]),
             ]);
     }
