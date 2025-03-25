@@ -61,6 +61,9 @@ class Question extends Model implements HasMedia
         'question_type' => QuestionType::class,
         'scope' => QuestionScope::class,
         'direction' => ContentDirection::class,
+        'question_is_latex' => 'boolean',
+        'hint_is_latex' => 'boolean',
+        'explanation_text_is_latex' => 'boolean',
     ];
 
     public function registerMediaCollections(): void
