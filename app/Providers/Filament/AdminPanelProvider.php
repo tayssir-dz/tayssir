@@ -39,8 +39,8 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogoHeight('2rem')
             ->colors(
                 [
-                    'primary' => Color::hex("#00C4F6"),
-                    // 'primary' => Color::Purple,
+                    // 'primary' => Color::hex("#00C4F6"),
+                    'primary' => Color::Purple,
                     'success' => Color::hex("#12D18E"),
                     'error' => Color::hex("#F85556"),
                     'warning' => Color::hex("#FF9500"),
