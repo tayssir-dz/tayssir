@@ -66,6 +66,7 @@ class DiscountResource extends Resource implements HasShieldPermissions
                     Tab::make(__('custom.models.discount.tabs.informations'))
                         ->schema([
                             TextInput::make("name")
+                                ->unique()
                                 ->label(__("custom.models.discount.name"))
                                 ->required()
                                 ->columnSpan(2),

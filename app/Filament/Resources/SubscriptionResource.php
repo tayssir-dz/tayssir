@@ -70,6 +70,7 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
                 Section::make()->schema([
                     TextInput::make("name")
                         ->label(__("custom.models.subscription.name"))
+                        ->unique()
                         ->required(),
 
                     Textarea::make("description")

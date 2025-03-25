@@ -65,7 +65,7 @@ class DivisionResource extends Resource implements HasShieldPermissions
         return $form
             ->schema([
                 Section::make(__('custom.forms.division.create.section.infos'))->schema([
-                    TextInput::make("name")->required()->minLength(3)->label(__('custom.models.division.name')),
+                    TextInput::make("name")->required()->minLength(3)->label(__('custom.models.division.name'))->unique(),
                     Textarea::make("description")->rows(4)->columnSpan(2)->label(__('custom.models.division.description')),
                 ])->columnSpan(2),
                 Section::make(__('custom.forms.division.create.section.image'))->schema([
