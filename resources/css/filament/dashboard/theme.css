@@ -36,6 +36,6 @@
     @apply divide-x divide-gray-200 dark:divide-white/5;
 } */
 
-.fi-ta-table>tbody {
+/* .fi-ta-table>tbody {
     @apply divide-none;
-}
+} */
