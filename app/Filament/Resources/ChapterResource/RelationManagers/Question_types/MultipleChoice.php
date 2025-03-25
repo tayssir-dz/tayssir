@@ -27,7 +27,7 @@ class MultipleChoice extends QuestionType
                         ->schema([
                             Group::make()->schema([
                                 Textarea::make('option')
-                                    ->rows(4)
+                                    ->rows(2)
                                     ->required()
                                     ->columnSpan(8)
                                     ->label(trans('custom.models.question.option')),

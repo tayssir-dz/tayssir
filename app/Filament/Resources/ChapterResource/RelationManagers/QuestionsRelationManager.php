@@ -47,7 +47,7 @@ class QuestionsRelationManager extends RelationManager
                                 Forms\Components\Group::make()
                                     ->schema([
                                         Forms\Components\Textarea::make('question')
-                                            ->rows(4)
+                                            ->rows(2)
                                             ->required()
                                             ->columnSpan(8)
                                             ->label(__('custom.models.question.question')),
@@ -75,7 +75,7 @@ class QuestionsRelationManager extends RelationManager
                                 Forms\Components\Group::make()
                                     ->schema([
                                         Forms\Components\Textarea::make('hint')
-                                            ->rows(4)
+                                            ->rows(2)
                                             ->columnSpan(8)
                                             ->label(__('custom.models.question.hint')),
                                         Forms\Components\Toggle::make('hint_is_latex')
@@ -89,7 +89,7 @@ class QuestionsRelationManager extends RelationManager
                                 Forms\Components\Group::make()
                                     ->schema([
                                         Forms\Components\Textarea::make('explanation_text')
-                                            ->rows(4)
+                                            ->rows(2)
                                             ->columnSpan(8)
                                             ->label(__('custom.models.question.explanation_text')),
                                         Forms\Components\Toggle::make('explanation_text_is_latex')
