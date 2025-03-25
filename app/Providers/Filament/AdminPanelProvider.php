@@ -37,6 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(fn() => view('components.brand'))
             ->darkModeBrandLogo(fn() => view('components.brand-dark'))
             ->brandLogoHeight('2rem')
+            ->favicon(asset(("favicon.svg")))
             ->colors(
                 [
                     'primary' => Color::hex("#00C4F6"),
