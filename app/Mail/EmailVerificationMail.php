@@ -27,7 +27,7 @@ class EmailVerificationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: env('APP_NAME') . ' Email Verification',
+            subject: config("app.name") . ' Email Verification',
         );
     }
 
