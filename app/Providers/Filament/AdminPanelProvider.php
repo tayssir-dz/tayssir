@@ -84,7 +84,7 @@ class AdminPanelProvider extends PanelProvider
                 FilamentEditProfilePlugin::make()
                     ->shouldShowEditProfileForm(true)
                     // ->canAccess(fn() => auth()->user()->can('page_EditProfilePage'))
-                    ->shouldShowSanctumTokens(true)
+                    // ->shouldShowSanctumTokens(true)
                     ->setIcon('heroicon-o-user')
                     ->shouldShowAvatarForm(
                         value: true,
