@@ -28,14 +28,14 @@
 }
 
 
-.fi-ta-table>thead>tr {
+/* .fi-ta-table>thead>tr {
     @apply divide-x divide-gray-200 dark:divide-white/5;
 }
 
 .fi-ta-row {
     @apply divide-x divide-gray-200 dark:divide-white/5;
-}
-
-/* .fi-ta-table>tbody {
-    @apply divide-none;
 } */
+
+.fi-ta-table>tbody {
+    @apply divide-none;
+}
