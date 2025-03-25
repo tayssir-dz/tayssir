@@ -72,7 +72,7 @@ trait InteractsWithContent
                         'description' => $chapter->description,
                         "image" => $chapter->image,
                         'unit_id' => $unit->id,
-                        'bonus_points' => $chapter->chapter_level->bonus,
+                        'bonus_points' => $chapter->chapter_level ? $chapter->chapter_level->bonus : 0,
                         'progress' => $progressData['chapters'][$chapter->id] ?? 0,
                         'points' => $progressData['points']['chapters'][$chapter->id] ?? 0
                     ];
