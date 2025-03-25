@@ -88,8 +88,6 @@ class UnitResource extends Resource implements HasShieldPermissions
         return $table
             ->columns([
                 TextColumn::make('name')->label(__('custom.models.unit.name'))->sortable()->searchable(),
-                TextColumn::make("subscriptions.name")
-                    ->badge(),
                 TextColumn::make('description')->limit(30)->label(__('custom.models.unit.description')),
                 TextColumn::make('material.code')->badge()->label(__('custom.models.unit.material'))->sortable()->searchable()->sortable(),
                 TextColumn::make('chapters_count')
@@ -98,12 +96,15 @@ class UnitResource extends Resource implements HasShieldPermissions
                     ->counts('chapters')
                     ->sortable()
                     ->colors(['primary']),
-                TextColumn::make('subscriptions_count')
-                    ->badge()
+                TextColumn::make("subscriptions.name")
                     ->label(__('custom.models.subscriptions'))
-                    ->counts('subscriptions')
-                    ->sortable()
-                    ->colors(['primary']),
+                    ->badge(),
+                // TextColumn::make('subscriptions_count')
+                //     ->badge()
+                //     ->label(__('custom.models.subscriptions'))
+                //     ->counts('subscriptions')
+                //     ->sortable()
+                //     ->colors(['primary']),
             ])
             ->filters([
                 // Tables\Filters\SelectFilter::make('material')->relationship("material", "code")->multiple()->preload()

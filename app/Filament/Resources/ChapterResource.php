@@ -140,10 +140,12 @@ class ChapterResource extends Resource implements HasShieldPermissions
             ->columns([
                 SpatieMediaLibraryImageColumn::make('photo')
                     ->collection('chapter_photos')
+                    ->placeholder(__("custom.table.image.empty"))
                     ->rounded()
                     ->label(__('custom.models.chapter.photo')),
 
                 TextColumn::make("subscriptions.name")
+                    ->label(__("custom.models.subscriptions"))
                     ->badge(),
 
                 TextColumn::make('name')

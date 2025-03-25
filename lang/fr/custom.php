@@ -260,4 +260,6 @@ return [
     'models.chapter_level.bonus' => 'Bonus',
     'forms.chapter_level.create.section.infos' => 'Informations du Niveau',
     'models.chapter.level' => 'Niveau',
+
+    'table.image.empty' => "Image non téléchargée",
 ];

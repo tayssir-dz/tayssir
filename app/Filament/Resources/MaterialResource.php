@@ -131,6 +131,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')
                     ->toggleable()
+                    ->placeholder(__("custom.table.image.empty"))
                     ->label(__("custom.forms.material.create.section.image"))
                     ->collection('image')
                     ->rounded(),

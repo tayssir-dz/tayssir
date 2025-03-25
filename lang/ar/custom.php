@@ -259,4 +259,7 @@ return [
     'models.chapter_level.bonus' =>  'نقاط المكافأة',
     'forms.chapter_level.create.section.infos' => 'معلومات المستوى',
     'models.chapter.level' => 'المستوى',
+
+
+    'table.image.empty' => "لم يتم رفع صورة",
 ];

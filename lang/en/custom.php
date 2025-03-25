@@ -256,4 +256,6 @@ return [
     "direction.rtl" =>  "From right to left (rtl)",
     "direction.ltr" =>   "From left to right (ltr)",
     "direction.inherit" =>  "Use the parent direction (inherit)",
+
+    'table.image.empty' => "Image not uploaded",
 ];

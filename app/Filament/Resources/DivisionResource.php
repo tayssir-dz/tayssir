@@ -86,7 +86,7 @@ class DivisionResource extends Resource implements HasShieldPermissions
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')->circular()
                     ->label(__('custom.forms.division.create.section.image'))
-                    ->placeholder("-")
+                    ->placeholder(__("custom.table.image.empty"))
                     ->collection('image'),
                 TextColumn::make("name")
                     ->label(__('custom.models.division.name'))
