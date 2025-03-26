@@ -57,6 +57,7 @@ trait InteractsWithContent
                     'id' => $unit->id,
                     'name' => $unit->name,
                     'description' => $unit->description,
+                    'image' => $unit->image,
                     'direction' => $unit->getEffectiveDirection()->value,
                     'material_id' => $material->id,
                     'progress' => $progressData['units'][$unit->id] ?? 0,
