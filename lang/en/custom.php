@@ -64,6 +64,9 @@ return [
     'models.unit.material' => 'Material',
     'models.unit.action.details' => 'Unit details',
     'models.unit.subscriptions' => 'Subscriptions',
+    'models.unit.image' => 'Unit image',
+    "forms.unit.create.section.infos" => "Unit information",
+    "forms.unit.create.section.image" => "Unit image",
 
     // # User
     'models.user.name' => 'Name',

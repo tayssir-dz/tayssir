@@ -125,6 +125,10 @@ class ChaptersRelationManager extends RelationManager
                     ->label(__('custom.models.questions'))
                     ->counts('questions')
                     ->colors(['primary']),
+
+                TextColumn::make("subscriptions.name")
+                    ->label(__("custom.models.subscriptions"))
+                    ->badge(),
             ])
             ->filters([
                 //

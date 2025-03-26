@@ -5,10 +5,13 @@ namespace App\Models;
 use App\Enums\ContentDirection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Unit extends Model
+class Unit extends Model implements HasMedia
 {
     use HasFactory;
+    use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -42,6 +45,23 @@ class Unit extends Model
     protected $casts = [
         'direction' => ContentDirection::class,
     ];
+
+    /**
+     * Register the media collections.
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('image')
+            ->singleFile();
+    }
+
+    /**
+     * Get the image attribute.
+     */
+    public function getImageAttribute()
+    {
+        return $this->getFirstMediaUrl('image') ? $this->getFirstMediaUrl('image') : null;
+    }
 
     /**
      * Get the materials for the unit.

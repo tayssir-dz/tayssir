@@ -144,10 +144,6 @@ class ChapterResource extends Resource implements HasShieldPermissions
                     ->rounded()
                     ->label(__('custom.models.chapter.photo')),
 
-                TextColumn::make("subscriptions.name")
-                    ->label(__("custom.models.subscriptions"))
-                    ->badge(),
-
                 TextColumn::make('name')
                     ->label(__('custom.models.chapter.name'))
                     ->sortable()
@@ -168,6 +164,10 @@ class ChapterResource extends Resource implements HasShieldPermissions
                     ->counts('questions')
                     ->sortable()
                     ->colors(['primary']),
+
+                TextColumn::make("subscriptions.name")
+                    ->label(__("custom.models.subscriptions"))
+                    ->badge(),
             ])
             ->filters([
                 //

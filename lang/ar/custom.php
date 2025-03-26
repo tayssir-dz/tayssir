@@ -64,6 +64,9 @@ return [
     'models.unit.material' => 'المادة',
     'models.unit.action.details' => 'تفاصيل الوحدة',
     'models.unit.subscriptions' => 'الاشتراكات',
+    'models.unit.image' => 'صورة الوحدة',
+    "forms.unit.create.section.infos" => "معلومات الوحدة",
+    "forms.unit.create.section.image" => "صورة الوحدة",
 
     // # User
     'models.user.name' => 'الاسم',
