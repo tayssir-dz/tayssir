@@ -25,14 +25,13 @@ class Question extends Model implements HasMedia
 
     protected $fillable = [
         'question',
-        "hint",
+        'hint',
         'explanation_text',
         'options',
         'question_type',
         'scope',
         'direction',
         'question_is_latex',
-        'hint_is_latex',
         'explanation_text_is_latex',
     ];
 
@@ -58,11 +57,11 @@ class Question extends Model implements HasMedia
      */
     protected $casts = [
         'options' => 'array',
+        'hint' => 'array',
         'question_type' => QuestionType::class,
         'scope' => QuestionScope::class,
         'direction' => ContentDirection::class,
         'question_is_latex' => 'boolean',
-        'hint_is_latex' => 'boolean',
         'explanation_text_is_latex' => 'boolean',
     ];
 

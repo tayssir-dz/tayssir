@@ -121,12 +121,7 @@ trait InteractsWithContent
             'difficulty' => "medium", // TODO: remove this cuz its not used anymore, its here so that the mobile client will not crash
             'points' => $question->points,
             'scope' => $question->scope,
-            'hint' => !empty($question->hint) ? [
-                [
-                    'value' => is_string($question->hint) ? $question->hint : null,
-                    'is_latex' => $question->hint_is_latex ?? false,
-                ]
-            ] : [],
+            'hint' => $question->hint ?? [],
             'explanation_text' => [
                 'value' => !empty($question->explanation_text) ? $question->explanation_text : null,
                 'is_latex' => $question->explanation_text_is_latex ?? false,

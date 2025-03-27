@@ -18,12 +18,12 @@ preparation with our interactive quizzes!
 
 
 
-// points // mazal submission and my points
 // chapter should inherit the subscription if not selected
+// points // mazal submission and my points
 // update email
 // new model, years on top of divisions (year has many divisions)
-// hint must be array
 
+// hint must be array
 // add latex field (boolean) to question hint ,explanation_text ,question to make them act like text and as latex at the same time
 // add rtl ltr to material unit chater question (add inherit)
 // price in subscription, and discounts should be a number field instead of a money field

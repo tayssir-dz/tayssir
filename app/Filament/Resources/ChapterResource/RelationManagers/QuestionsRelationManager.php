@@ -72,19 +72,24 @@ class QuestionsRelationManager extends RelationManager
                                     ->required()
                                     ->label(__('custom.models.question.scope')),
 
-                                Forms\Components\Group::make()
+                                Forms\Components\Repeater::make('hint')
                                     ->schema([
-                                        Forms\Components\Textarea::make('hint')
-                                            ->rows(1)
-                                            ->columnSpan(8)
-                                            ->label(__('custom.models.question.hint')),
-                                        Forms\Components\Toggle::make('hint_is_latex')
-                                            ->label(__('custom.models.question.is_latex'))
-                                            ->inline(false)
-                                            ->columnSpan(2)
-                                            ->default(false),
+                                        Forms\Components\Group::make()
+                                            ->schema([
+                                                Forms\Components\Textarea::make('value')
+                                                    ->rows(1)
+                                                    ->columnSpan(8)
+                                                    ->label(__('custom.models.question.hint')),
+                                                Forms\Components\Toggle::make('is_latex')
+                                                    ->label(__('custom.models.question.is_latex'))
+                                                    ->inline(false)
+                                                    ->columnSpan(2)
+                                                    ->default(false),
+                                            ])
+                                            ->columns(10),
                                     ])
-                                    ->columns(10),
+                                    ->defaultItems(0)
+                                    ->label(__('custom.models.question.hint')),
 
                                 Forms\Components\Group::make()
                                     ->schema([
