@@ -6,6 +6,7 @@ use App\Http\Controllers\API\ContentController;
 use App\Http\Controllers\API\DivisionController;
 use App\Http\Controllers\API\ForgotPasswordController;
 use App\Http\Controllers\API\EmailVerificationController;
+use App\Http\Controllers\API\ChangeEmailController;
 use App\Http\Controllers\API\SubscriptionController;
 use App\Http\Controllers\API\UserController;
 use App\Models\Question;
@@ -86,6 +87,16 @@ Route::prefix('v1')->group(function () {
             ->middleware(["auth:sanctum", "access"])
             ->summary("Unverify user email (testing)")
             ->description("this endpoint unverifies the user email (testing)");
+
+        Route::post("change", [ChangeEmailController::class, "changeEmail"])
+            ->middleware(["auth:sanctum", "access"])
+            ->summary("Request email change")
+            ->description("This endpoint takes a new email address and sends a verification OTP to it");
+
+        Route::post("verify-change", [ChangeEmailController::class, "verifyChangeEmail"])
+            ->middleware(["auth:sanctum", "access"])
+            ->summary("Verify email change")
+            ->description("This endpoint verifies the OTP sent to the new email and completes the email change process");
     });
 
     Route::prefix("user")->group(function () {
