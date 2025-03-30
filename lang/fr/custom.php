@@ -48,7 +48,7 @@ return [
 
     // # Material
     "forms.material.create.section.infos" => "Informations de la matière",
-    "forms.material.create.section.image" => "Image de la matière",
+    "forms.material.create.section.image" => "Médias de la matière",
 
     'models.material.name' => 'Nom de la matière',
     'models.material.description' => 'Description de la matière',
@@ -58,7 +58,8 @@ return [
     'models.material.secondary_color' => 'Couleur secondaire',
     'models.material.division' => 'Filière',
     'models.material.action.details' => 'Détails de la matière',
-
+    'models.material.image' => 'Liste d\'images de la matière',
+    'models.material.image_grid' => 'Image grille de la matière',
     // # Unit
     'models.unit.name' => 'Nom de l\'unité',
     'models.unit.description' => 'Description de l\'unité',

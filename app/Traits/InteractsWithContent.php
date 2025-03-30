@@ -47,6 +47,7 @@ trait InteractsWithContent
                 'secondary_color' => $material->secondary_color,
                 'description' => $material->description,
                 'image' => $material->image,
+                'image_grid' => $material->image_grid,
                 'progress' => $progressData['materials'][$material->id] ?? 0,
                 'points' => $progressData['points']['materials'][$material->id] ?? 0
             ];

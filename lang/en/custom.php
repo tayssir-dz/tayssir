@@ -47,7 +47,7 @@ return [
 
     // # Material
     "forms.material.create.section.infos" => "Material informations",
-    "forms.material.create.section.image" => "Material image",
+    "forms.material.create.section.image" => "Material media",
 
     'models.material.name' => 'Material name',
     'models.material.description' => 'Material description',
@@ -57,6 +57,8 @@ return [
     'models.material.secondary_color' => 'Secondary color',
     'models.material.division' => 'Division',
     'models.material.action.details' => 'Material details',
+    'models.material.image' => 'Material image list',
+    'models.material.image_grid' => 'Material grid image',
 
     // # Unit
     'models.unit.name' => 'Unit name',

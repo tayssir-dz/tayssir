@@ -56,6 +56,9 @@ class Material extends Model implements HasMedia
     {
         $this->addMediaCollection('image')
             ->singleFile();
+
+        $this->addMediaCollection('image_grid')
+            ->singleFile();
     }
 
     /**
@@ -64,6 +67,14 @@ class Material extends Model implements HasMedia
     public function getImageAttribute()
     {
         return $this->getFirstMediaUrl('image') ? $this->getFirstMediaUrl('image') : null;
+    }
+
+    /**
+     * Get the image_grid attribute.
+     */
+    public function getImageGridAttribute()
+    {
+        return $this->getFirstMediaUrl('image_grid') ? $this->getFirstMediaUrl('image_grid') : null;
     }
 
     /**

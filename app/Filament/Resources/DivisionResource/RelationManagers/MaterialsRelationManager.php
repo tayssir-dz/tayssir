@@ -87,6 +87,13 @@ class MaterialsRelationManager extends RelationManager
                         ->collection('image')
                         ->image()
                         ->imageEditor(),
+
+                    SpatieMediaLibraryFileUpload::make('image_grid')
+                        ->label(__('custom.models.material.image_grid'))
+                        ->multiple(false)
+                        ->collection('image_grid')
+                        ->image()
+                        ->imageEditor(),
                 ])->columnSpan(1),
             ])->columns(3);
     }

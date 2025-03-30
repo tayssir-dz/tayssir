@@ -47,7 +47,7 @@ return [
 
     // # Material
     "forms.material.create.section.infos" => "معلومات المادة",
-    "forms.material.create.section.image" => "صورة المادة",
+    "forms.material.create.section.image" => "وسائط المادة",
 
     'models.material.name' => 'اسم المادة',
     'models.material.description' => 'وصف المادة',
@@ -57,7 +57,8 @@ return [
     'models.material.secondary_color' => 'اللون الثانوي',
     'models.material.division' => 'القسم',
     'models.material.action.details' => 'تفاصيل المادة',
-
+    'models.material.image' => 'قائمة صور المادة',
+    'models.material.image_grid' => 'صورة شبكة المادة',
     // # Unit
     'models.unit.name' => 'اسم الوحدة',
     'models.unit.description' => 'وصف الوحدة',
