@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Enums\ContentDirection;
+use App\Models\Pivot\ChapterUnit;
+use App\Models\Pivot\MaterialUnit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -69,8 +71,9 @@ class Unit extends Model implements HasMedia
     public function material_units()
     {
         return $this->belongsToMany(Material::class)
+            ->using(MaterialUnit::class)
             ->withPivot('sort')
-            ->orderBy('material_unit.sort');
+            ->orderByPivot('sort');
     }
 
     public function getMaterialAttribute()
@@ -81,10 +84,10 @@ class Unit extends Model implements HasMedia
     /**
      * Get the chapters for the unit.
      */
-
     public function chapters()
     {
         return $this->belongsToMany(Chapter::class)
+            ->using(ChapterUnit::class)
             ->withPivot('sort')
             ->orderBy('chapter_unit.sort')
             ->orderBy('chapters.id');
@@ -93,7 +96,6 @@ class Unit extends Model implements HasMedia
     /**
      * Get the subscriptions for the unit.
      */
-
     public function subscriptions()
     {
         return $this->belongsToMany(Subscription::class);

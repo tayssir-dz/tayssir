@@ -80,7 +80,8 @@ class UnitsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->reorderable('material_unit.sort')
+            ->paginated(true)
+            ->reorderable('sort')
             ->recordTitleAttribute('name')
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')

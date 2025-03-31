@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Enums\ContentDirection;
+use App\Models\Pivot\DivisionMaterial;
+use App\Models\Pivot\MaterialUnit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -83,6 +85,7 @@ class Material extends Model implements HasMedia
     public function division_materials()
     {
         return $this->belongsToMany(Division::class)
+            ->using(DivisionMaterial::class)
             ->withPivot('sort')
             ->orderBy('division_material.sort');
     }
@@ -104,10 +107,10 @@ class Material extends Model implements HasMedia
     /**
      * Get the units for the material.
      */
-
     public function units()
     {
         return $this->belongsToMany(Unit::class)
+            ->using(MaterialUnit::class)
             ->withPivot('sort')
             ->orderBy('material_unit.sort')
         ;

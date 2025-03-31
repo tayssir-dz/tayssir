@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Enums\ContentDirection;
+use App\Models\Pivot\ChapterQuestion;
+use App\Models\Pivot\ChapterUnit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -53,6 +55,7 @@ class Chapter extends Model implements HasMedia
     public function chapter_units()
     {
         return $this->belongsToMany(Unit::class, 'chapter_unit')
+            ->using(ChapterUnit::class)
             ->withPivot('sort')
             ->orderBy('chapter_unit.sort');
     }
@@ -65,14 +68,12 @@ class Chapter extends Model implements HasMedia
     /**
      * Get the questions for the chapter.
      */
-
     public function questions()
     {
         return $this->belongsToMany(Question::class)
             ->using(ChapterQuestion::class)
             ->withPivot('sort')
-            ->orderBy('chapter_question.sort')
-            ->orderBy('questions.id');
+            ->orderBy('chapter_question.sort');
     }
 
     public function subscriptions()

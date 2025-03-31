@@ -103,7 +103,8 @@ class ChaptersRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->reorderable('chapter_unit.sort')
+            ->paginated(false)
+            ->reorderable('sort')
             ->recordTitleAttribute('name')
             ->columns([
                 SpatieMediaLibraryImageColumn::make('photo')
@@ -135,7 +136,7 @@ class ChaptersRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
-                Tables\Actions\AttachAction::make(),
+                // Tables\Actions\AttachAction::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

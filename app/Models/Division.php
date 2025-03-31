@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Models\Pivot\DivisionMaterial;
 
 class Division extends Model implements HasMedia
 {
@@ -49,6 +50,7 @@ class Division extends Model implements HasMedia
     public function materials()
     {
         return $this->belongsToMany(Material::class)
+            ->using(DivisionMaterial::class)
             ->withPivot('sort')
             ->orderBy('division_material.sort');
     }
