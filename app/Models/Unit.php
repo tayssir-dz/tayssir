@@ -107,7 +107,7 @@ class Unit extends Model implements HasMedia
         }
 
         // Inherit from parent (Material)
-        $material = $this->material;
+        $material = $this->material()->first();
         return $material ? $material->direction : ContentDirection::RTL;
     }
 

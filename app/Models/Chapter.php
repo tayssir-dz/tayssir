@@ -88,7 +88,7 @@ class Chapter extends Model implements HasMedia
         }
 
         // Inherit from parent (Unit)
-        $unit = $this->getUnitAttribute();
+        $unit = $this->unit()->first();
 
         if ($unit) {
             return $unit->getEffectiveDirection();
