@@ -32,14 +32,14 @@ class ContentController extends BaseController
             // Use a transaction to ensure all database operations complete or none do
             return DB::transaction(function () use ($user, $chapterId, $answers) {
                 // Get chapter with related data in a single query
-                $chapter = Chapter::with(['chapter_units.material_units', 'questions' => function ($query) use ($answers) {
+                $chapter = Chapter::with(['unit', 'questions' => function ($query) use ($answers) {
                     // Only fetch questions that are being answered
                     $questionIds = array_column($answers, 'question_id');
                     $query->whereIn('questions.id', $questionIds);
                 }])->findOrFail($chapterId);
 
-                $unit = $chapter->chapter_units()->first();
-                $material = $unit->material_units()->first();
+                $unit = $chapter->unit()->first();
+                $material = $unit->material()->first();
 
                 // Create a mapping of questions for quick lookup
                 $questionsMap = $chapter->questions->keyBy('id');

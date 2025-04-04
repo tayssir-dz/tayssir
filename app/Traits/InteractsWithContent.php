@@ -117,7 +117,7 @@ trait InteractsWithContent
         $baseStructure = [
             'id' => $question->id,
             'type' => $question->question_type,
-            'chapter_id' => $question->chapter->first()->id ?? null,
+            'chapter_id' => $question->chapter()->first()->id ?? null,
             'image' => $question->image,
             'difficulty' => "medium", // TODO: remove this cuz its not used anymore, its here so that the mobile client will not crash
             'points' => $question->points,

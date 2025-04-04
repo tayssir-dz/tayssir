@@ -21,7 +21,7 @@ class SubmitChapterAnswersRequest extends FormRequest
         if (!$chapter) {
             return false;
         }
-        $unit = $chapter->unit;
+        $unit = $chapter->unit()->first();
         if (!$unit) {
             return false;
         }
