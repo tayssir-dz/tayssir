@@ -55,6 +55,7 @@ class ContentController extends BaseController
                 // Track correct answers to calculate bonus eligibility
                 $totalSubmittedQuestions = count($answers);
                 $correctAnswers = 0;
+                $earnedPointsInThisSubmission = 0;
 
                 // Prepare bulk insert/update data
                 $userAnswersData = [];
@@ -80,6 +81,12 @@ class ContentController extends BaseController
                     // If an existing answer has more points, keep it
                     if (isset($existingAnswers[$questionId]) && $existingAnswers[$questionId]->points_earned > $points) {
                         continue;
+                    }
+
+                    // Add to earned points if this is a new correct answer or an improvement
+                    if ($isCorrect) {
+                        $previousPoints = isset($existingAnswers[$questionId]) ? $existingAnswers[$questionId]->points_earned : 0;
+                        $earnedPointsInThisSubmission += max(0, $points - $previousPoints);
                     }
 
                     // Delete existing answer if present
@@ -109,6 +116,7 @@ class ContentController extends BaseController
 
                 // Check for bonus eligibility (≥50% correct answers)
                 $correctPercentage = ($correctAnswers / $totalSubmittedQuestions) * 100;
+                $earnedBonusPointsInThisSubmission = 0;
 
                 // Only award bonus if user submitted all questions in the chapter
                 $allQuestionsSubmitted = $totalSubmittedQuestions === $chapter->questions()->count();
@@ -128,6 +136,9 @@ class ContentController extends BaseController
                             'chapter_id' => $chapterId,
                             'bonus_points' => $bonusPoints
                         ]);
+
+                        // Track the newly earned bonus points
+                        $earnedBonusPointsInThisSubmission = $bonusPoints;
                     }
                 }
 
@@ -163,7 +174,9 @@ class ContentController extends BaseController
                             'id' => $chapter->id,
                             'progress' => $chapterProgress,
                             'points' => $chapterPoints,
-                            'bonus_points' => $chapterBonusPoints
+                            'bonus_points' => $chapterBonusPoints,
+                            'earned_points' => $earnedPointsInThisSubmission,
+                            'earned_bonus_points' => $earnedBonusPointsInThisSubmission
                         ]
                     ]
                 ]);
