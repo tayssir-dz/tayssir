@@ -31,6 +31,8 @@ class SubmitChapterAnswersRequest extends FormRequest
             ->subscriptions()
             ->whereIn('subscriptions.id', $user->subscriptions->pluck('id'))
             ->exists();
+
+        // Note: we've removed any checks for existing answers to allow resubmissions
     }
 
     public function rules(): array
@@ -38,7 +40,13 @@ class SubmitChapterAnswersRequest extends FormRequest
         return [
             'chapter_id' => ['required', 'integer', 'exists:chapters,id'],
             'answers' => ['required', 'array'],
-            'answers.*.question_id' => ['required', 'integer', 'exists:questions,id', Rule::exists('chapter_question', 'question_id')->where('chapter_id', $this->input('chapter_id'))],
+            'answers.*.question_id' => [
+                'required',
+                'integer',
+                'exists:questions,id',
+                // Validate that each question belongs to the chapter
+                Rule::exists('chapter_question', 'question_id')->where('chapter_id', $this->input('chapter_id'))
+            ],
             'answers.*.answered_correctly' => ['required', 'boolean'],
         ];
     }

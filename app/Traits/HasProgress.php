@@ -2,11 +2,13 @@
 
 namespace App\Traits;
 
+use App\Enums\ChapterVisibility;
 use App\Models\Chapter;
 use App\Models\Material;
 use App\Models\Question;
 use App\Models\Unit;
 use App\Models\UserAnswer;
+use App\Models\UserChapterBonus;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -22,8 +24,10 @@ trait HasProgress
             ->count();
 
         $totalQuestions = Question::whereHas('chapter', function ($q) use ($material) {
-            $q->whereHas('chapter_units.material_units', function ($q) use ($material) {
-                $q->where('materials.id', $material->id);
+            $q->whereHas('unit', function ($q) use ($material) {
+                $q->whereHas('material', function ($q) use ($material) {
+                    $q->where('materials.id', $material->id);
+                });
             });
         })->count();
 
@@ -39,10 +43,11 @@ trait HasProgress
             ->where('unit_id', $unit->id)
             ->count();
 
-        $totalQuestions = Question::whereHas(
-            'chapter.chapter_units',
-            fn($q) => $q->where('units.id', $unit->id)
-        )->count();
+        $totalQuestions = Question::whereHas('chapter', function ($q) use ($unit) {
+            $q->whereHas('unit', function ($q) use ($unit) {
+                $q->where('units.id', $unit->id);
+            });
+        })->count();
 
         return $totalQuestions > 0 ? ($answers / $totalQuestions) * 100 : 0;
     }
@@ -215,7 +220,7 @@ trait HasProgress
     }
 
     /**
-     * Calculate all points earned by the user efficiently
+     * Calculate all points earned by the user efficiently, including bonus points
      * 
      * @return array
      */
@@ -257,6 +262,18 @@ trait HasProgress
             ->groupBy('material_id', 'unit_id', 'chapter_id')
             ->get();
 
+        // Get bonus points in a single query
+        $bonusPoints = UserChapterBonus::select('chapter_id', 'bonus_points')
+            ->where('user_id', $this->id)
+            ->whereIn('chapter_id', $chapterIds)
+            ->get();
+
+        // Create a map of bonus points by chapter
+        $bonusPointsByChapter = [];
+        foreach ($bonusPoints as $bonus) {
+            $bonusPointsByChapter[$bonus->chapter_id] = $bonus->bonus_points;
+        }
+
         // Calculate points by material, unit, and chapter
         $materialPoints = [];
         $unitPoints = [];
@@ -288,23 +305,68 @@ trait HasProgress
             }
         }
 
+        // Add bonus points to the respective chapter, unit, and material
+        $bonusTotal = 0;
+        foreach ($bonusPointsByChapter as $chapterId => $bonus) {
+            if ($bonus > 0) {
+                $bonusTotal += $bonus;
+
+                // Add bonus to chapter points
+                if (!isset($chapterPoints[$chapterId])) {
+                    $chapterPoints[$chapterId] = 0;
+                }
+                $chapterPoints[$chapterId] += $bonus;
+
+                // Find the related unit and material for this chapter
+                $chapterInfo = null;
+                foreach ($materials as $material) {
+                    foreach ($material->units as $unit) {
+                        foreach ($unit->chapters as $chapter) {
+                            if ($chapter->id == $chapterId) {
+                                // Add bonus to unit points
+                                if (!isset($unitPoints[$unit->id])) {
+                                    $unitPoints[$unit->id] = 0;
+                                }
+                                $unitPoints[$unit->id] += $bonus;
+
+                                // Add bonus to material points
+                                if (!isset($materialPoints[$material->id])) {
+                                    $materialPoints[$material->id] = 0;
+                                }
+                                $materialPoints[$material->id] += $bonus;
+                                break 3;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        $totalPoints += $bonusTotal;
+
         return [
             'total' => $totalPoints,
             'materials' => $materialPoints,
             'units' => $unitPoints,
-            'chapters' => $chapterPoints
+            'chapters' => $chapterPoints,
+            'bonuses' => $bonusPointsByChapter
         ];
     }
 
     /**
-     * Get the total points earned by the user
+     * Get the total points earned by the user, including bonus points
      *
      * @return int
      */
     public function points(): int
     {
-        return UserAnswer::where('user_id', $this->id)
+        $answerPoints = UserAnswer::where('user_id', $this->id)
             ->sum('points_earned');
+
+        $bonusPoints = UserChapterBonus::where('user_id', $this->id)
+            ->sum('bonus_points');
+
+        return $answerPoints + $bonusPoints;
     }
 
     /**
@@ -334,15 +396,79 @@ trait HasProgress
     }
 
     /**
-     * Get the points earned by the user for a specific chapter
+     * Get the points earned by the user for a specific chapter, including bonus
      *
      * @param mixed $chapter
      * @return int
      */
     public function chapterPoints($chapter): int
     {
-        return UserAnswer::where('user_id', $this->id)
+        $answerPoints = UserAnswer::where('user_id', $this->id)
             ->where('chapter_id', $chapter->id)
             ->sum('points_earned');
+
+        $bonusPoints = UserChapterBonus::where('user_id', $this->id)
+            ->where('chapter_id', $chapter->id)
+            ->value('bonus_points') ?? 0;
+
+        return $answerPoints + $bonusPoints;
+    }
+
+    /**
+     * Get the chapter visibility status for a specific unit
+     * 
+     * @param int $unitId
+     * @return array
+     */
+    public function getChapterVisibility(int $unitId): array
+    {
+        // Get all chapters in the unit in their proper sequence
+        $chapters = Chapter::whereHas('unit', function ($query) use ($unitId) {
+            $query->where('units.id', $unitId);
+        })
+            ->get()
+            ->sortBy(function ($chapter) {
+                return $chapter->unit()->first()->pivot->sort;
+            });
+
+        if ($chapters->isEmpty()) {
+            return [];
+        }
+
+        // Get user answers for these chapters
+        $userAnswers = UserAnswer::where('user_id', $this->id)
+            ->whereIn('chapter_id', $chapters->pluck('id'))
+            ->select('chapter_id')
+            ->distinct()
+            ->get()
+            ->pluck('chapter_id')
+            ->toArray();
+
+        $result = [];
+        $foundCurrent = false;
+
+        foreach ($chapters as $chapter) {
+            $status = ChapterVisibility::LOCKED;
+
+            // If the chapter has answers, it's DONE
+            if (in_array($chapter->id, $userAnswers)) {
+                $status = ChapterVisibility::DONE;
+            }
+            // If we haven't found the current chapter yet and this one is not DONE, it's CURRENT
+            elseif (!$foundCurrent) {
+                $status = ChapterVisibility::CURRENT;
+                $foundCurrent = true;
+            }
+
+            $result[$chapter->id] = $status->value;
+        }
+
+        // If no CURRENT chapter was set and it's the first chapter, make it CURRENT
+        if (!$foundCurrent && !empty($result)) {
+            $firstChapterId = $chapters->first()->id;
+            $result[$firstChapterId] = ChapterVisibility::CURRENT->value;
+        }
+
+        return $result;
     }
 }

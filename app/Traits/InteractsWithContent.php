@@ -53,6 +53,9 @@ trait InteractsWithContent
             ];
 
             foreach ($material->units as $unit) {
+                // Get chapter visibility for this unit
+                $chapterVisibility = $this->getChapterVisibility($unit->id);
+
                 // Add to units list with progress
                 $units[] = [
                     'id' => $unit->id,
@@ -66,6 +69,9 @@ trait InteractsWithContent
                 ];
 
                 foreach ($unit->chapters as $chapter) {
+                    // Get bonus points for this chapter
+                    $bonusPoints = $progressData['points']['bonuses'][$chapter->id] ?? 0;
+
                     // Add to chapters list (without questions) but with progress
                     $chapters[] = [
                         'id' => $chapter->id,
@@ -75,8 +81,10 @@ trait InteractsWithContent
                         "image" => $chapter->image,
                         'unit_id' => $unit->id,
                         'bonus_points' => $chapter->chapter_level ? $chapter->chapter_level->bonus : 0,
+                        'earned_bonus' => $bonusPoints,
                         'progress' => $progressData['chapters'][$chapter->id] ?? 0,
-                        'points' => $progressData['points']['chapters'][$chapter->id] ?? 0
+                        'points' => $progressData['points']['chapters'][$chapter->id] ?? 0,
+                        'visibility' => $chapterVisibility[$chapter->id] ?? \App\Enums\ChapterVisibility::LOCKED->value
                     ];
 
                     // Transform questions

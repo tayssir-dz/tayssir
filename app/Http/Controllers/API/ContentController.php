@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Enums\ChapterVisibility;
 use App\Http\Requests\API\SubmitChapterAnswersRequest;
 use App\Models\Division;
 use App\Models\Chapter;
 use App\Models\Question;
 use App\Models\UserAnswer;
+use App\Models\UserChapterBonus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -36,7 +38,7 @@ class ContentController extends BaseController
                     // Only fetch questions that are being answered
                     $questionIds = array_column($answers, 'question_id');
                     $query->whereIn('questions.id', $questionIds);
-                }])->findOrFail($chapterId);
+                }, 'chapter_level'])->findOrFail($chapterId);
 
                 $unit = $chapter->unit()->first();
                 $material = $unit->material()->first();
@@ -44,7 +46,17 @@ class ContentController extends BaseController
                 // Create a mapping of questions for quick lookup
                 $questionsMap = $chapter->questions->keyBy('id');
 
-                // Prepare bulk insert data
+                // Get existing answers for this user and chapter
+                $existingAnswers = UserAnswer::where('user_id', $user->id)
+                    ->where('chapter_id', $chapterId)
+                    ->get()
+                    ->keyBy('question_id');
+
+                // Track correct answers to calculate bonus eligibility
+                $totalSubmittedQuestions = count($answers);
+                $correctAnswers = 0;
+
+                // Prepare bulk insert/update data
                 $userAnswersData = [];
                 $now = now();
 
@@ -57,22 +69,67 @@ class ContentController extends BaseController
                     }
 
                     $question = $questionsMap[$questionId];
-                    $points = $answer['answered_correctly'] ? $question->points : 0;
+                    // Only count if the answer is correct
+                    $isCorrect = $answer['answered_correctly'];
+                    if ($isCorrect) {
+                        $correctAnswers++;
+                    }
 
-                    $userAnswersData[] = [
-                        'user_id' => $user->id,
-                        'question_id' => $questionId,
-                        'chapter_id' => $chapterId,
-                        'unit_id' => $unit->id,
-                        'material_id' => $material->id,
-                        'points_earned' => $points,
-                        'created_at' => $now,
-                        'updated_at' => $now,
-                    ];
+                    $points = $isCorrect ? $question->points : 0;
+
+                    // If an existing answer has more points, keep it
+                    if (isset($existingAnswers[$questionId]) && $existingAnswers[$questionId]->points_earned > $points) {
+                        continue;
+                    }
+
+                    // Delete existing answer if present
+                    if (isset($existingAnswers[$questionId])) {
+                        $existingAnswers[$questionId]->delete();
+                    }
+
+                    // Only add to user answers if correct
+                    if ($isCorrect) {
+                        $userAnswersData[] = [
+                            'user_id' => $user->id,
+                            'question_id' => $questionId,
+                            'chapter_id' => $chapterId,
+                            'unit_id' => $unit->id,
+                            'material_id' => $material->id,
+                            'points_earned' => $points,
+                            'created_at' => $now,
+                            'updated_at' => $now,
+                        ];
+                    }
                 }
 
-                // Bulk insert all answers at once
-                UserAnswer::insert($userAnswersData);
+                // Insert new answers if any
+                if (!empty($userAnswersData)) {
+                    UserAnswer::insert($userAnswersData);
+                }
+
+                // Check for bonus eligibility (≥50% correct answers)
+                $correctPercentage = ($correctAnswers / $totalSubmittedQuestions) * 100;
+
+                // Only award bonus if user submitted all questions in the chapter
+                $allQuestionsSubmitted = $totalSubmittedQuestions === $chapter->questions()->count();
+
+                if ($allQuestionsSubmitted && $correctPercentage >= 50 && $chapter->chapter_level) {
+                    $bonusPoints = $chapter->chapter_level->bonus;
+
+                    // Check if user already has a bonus for this chapter
+                    $existingBonus = UserChapterBonus::where('user_id', $user->id)
+                        ->where('chapter_id', $chapterId)
+                        ->first();
+
+                    if (!$existingBonus && $bonusPoints > 0) {
+                        // Create new bonus record
+                        UserChapterBonus::create([
+                            'user_id' => $user->id,
+                            'chapter_id' => $chapterId,
+                            'bonus_points' => $bonusPoints
+                        ]);
+                    }
+                }
 
                 // Calculate updated progress and points
                 $materialProgress = $user->materialProgress($material);
@@ -82,6 +139,11 @@ class ContentController extends BaseController
                 $materialPoints = $user->materialPoints($material);
                 $unitPoints = $user->unitPoints($unit);
                 $chapterPoints = $user->chapterPoints($chapter);
+
+                // Get bonus points for this chapter
+                $chapterBonusPoints = UserChapterBonus::where('user_id', $user->id)
+                    ->where('chapter_id', $chapterId)
+                    ->value('bonus_points') ?? 0;
 
                 return $this->sendResponse([
                     'message' => __('response.answers_submitted_successfully'),
@@ -100,14 +162,19 @@ class ContentController extends BaseController
                         'chapter' => [
                             'id' => $chapter->id,
                             'progress' => $chapterProgress,
-                            'points' => $chapterPoints
+                            'points' => $chapterPoints,
+                            'bonus_points' => $chapterBonusPoints
                         ]
                     ]
                 ]);
             });
         } catch (\Exception $e) {
             Log::error('Error submitting answers: ' . $e->getMessage());
-            return $this->sendError(__('response.an_error_occurred'));
+            return $this->sendError(__('response.an_error_occurred'), [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'error' => $e
+            ]);
         }
     }
 }
