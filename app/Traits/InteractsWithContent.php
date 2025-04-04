@@ -19,15 +19,22 @@ trait InteractsWithContent
             'materials.units' => function ($query) use ($subscriptionIds) {
                 $query->whereHas('subscriptions', function ($subQuery) use ($subscriptionIds) {
                     $subQuery->whereIn('subscriptions.id', $subscriptionIds);
-                })->with([
-                    'chapters' => function ($q) use ($subscriptionIds) {
-                        $q->whereHas('subscriptions', function ($sub) use ($subscriptionIds) {
-                            $sub->whereIn('subscriptions.id', $subscriptionIds);
-                        })->with('questions');
-                    }
-                ]);
+                })
+                    ->where('active', true)
+                    ->with([
+                        'chapters' => function ($q) use ($subscriptionIds) {
+                            $q->whereHas('subscriptions', function ($sub) use ($subscriptionIds) {
+                                $sub->whereIn('subscriptions.id', $subscriptionIds);
+                            })
+                                ->where('active', true)
+                                ->with('questions');
+                        }
+                    ]);
             }
         ]);
+
+        // Filter out inactive materials
+        $materials = $division->materials->where('active', true);
 
         // Prepare the four lists
         $modules = [];
@@ -35,7 +42,7 @@ trait InteractsWithContent
         $chapters = [];
         $exercices = [];
 
-        foreach ($division->materials as $material) {
+        foreach ($materials as $material) {
             // Add to modules list with progress
             $modules[] = [
                 'id' => $material->id,

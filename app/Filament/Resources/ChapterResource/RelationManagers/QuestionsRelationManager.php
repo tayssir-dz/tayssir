@@ -70,6 +70,7 @@ class QuestionsRelationManager extends RelationManager
                                     ->enum(QuestionScope::class)
                                     ->options(QuestionScope::class)
                                     ->required()
+                                    ->default(QuestionScope::LESSON)
                                     ->label(__('custom.models.question.scope')),
 
                                 Forms\Components\Repeater::make('hint')

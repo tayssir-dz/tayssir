@@ -26,6 +26,7 @@ class Unit extends Model implements HasMedia
         'description',
         'material_id',
         'direction',
+        'active',
     ];
 
     /**
@@ -117,5 +118,13 @@ class Unit extends Model implements HasMedia
     public function getRtlAttribute()
     {
         return $this->getEffectiveDirection() === ContentDirection::RTL;
+    }
+
+    /**
+     * Scope a query to only include active units.
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('active', true);
     }
 }

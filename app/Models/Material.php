@@ -29,6 +29,7 @@ class Material extends Model implements HasMedia
         'description',
         'division_id',
         'direction',
+        'active',
     ];
 
     /**
@@ -105,5 +106,13 @@ class Material extends Model implements HasMedia
     public function getRtlAttribute()
     {
         return $this->direction === ContentDirection::RTL;
+    }
+
+    /**
+     * Scope a query to only include active materials.
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('active', true);
     }
 }

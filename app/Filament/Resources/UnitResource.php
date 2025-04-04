@@ -94,6 +94,10 @@ class UnitResource extends Resource implements HasShieldPermissions
                         ->preload()
                         ->label(__('custom.models.unit.subscriptions'))
                         ->columnSpan(2),
+
+                    Forms\Components\Toggle::make('active')
+                        ->label(__('custom.models.active'))
+                        ->default(true),
                 ])->columns(2)
                     ->columnSpan(2),
 
@@ -145,6 +149,11 @@ class UnitResource extends Resource implements HasShieldPermissions
                 TextColumn::make("subscriptions.name")
                     ->label(__('custom.models.subscriptions'))
                     ->badge(),
+
+                Tables\Columns\ToggleColumn::make('active')
+                    ->label(__('custom.models.active'))
+                    ->sortable()
+                    ->toggleable(),
             ])
             ->filters([
                 // Tables\Filters\SelectFilter::make('material')->relationship("material", "code")->multiple()->preload()

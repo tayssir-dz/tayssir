@@ -110,6 +110,10 @@ class MaterialResource extends Resource implements HasShieldPermissions
                         ->columnSpan(2)
                         ->label(__('custom.models.material.description')),
 
+                    Forms\Components\Toggle::make('active')
+                        ->label(__('custom.models.active'))
+                        ->default(false),
+
                 ])->columnSpan(2)
                     ->columns(2),
 
@@ -194,6 +198,11 @@ class MaterialResource extends Resource implements HasShieldPermissions
                     ->toggleable()
                     ->colors(['primary'])
                     ->sortable(),
+
+                Tables\Columns\ToggleColumn::make('active')
+                    ->label(__('custom.models.active'))
+                    ->sortable()
+                    ->toggleable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('divisions.name')

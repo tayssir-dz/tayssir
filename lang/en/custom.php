@@ -249,6 +249,11 @@ return [
     'models.subscriptionCard.unactivated_cards' => "Unactivated cards",
     'models.subscriptionCard.code_copied' => "Code copied",
 
+    // # Active field
+    'models.active' => 'Active',
+    'models.active.true' => 'Active',
+    'models.active.false' => 'Inactive',
+
     # Currency
 
     "currency.local.dzd" => env('MONEY_DEFAULT_LOCALE_en', 'EN_DZ'),

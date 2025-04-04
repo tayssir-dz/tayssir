@@ -25,6 +25,7 @@ class Chapter extends Model implements HasMedia
         'description',
         'direction',
         'chapter_level_id',
+        'active',
     ];
 
     /**
@@ -108,5 +109,13 @@ class Chapter extends Model implements HasMedia
     public function chapter_level()
     {
         return $this->belongsTo(ChapterLevel::class);
+    }
+
+    /**
+     * Scope a query to only include active chapters.
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('active', true);
     }
 }

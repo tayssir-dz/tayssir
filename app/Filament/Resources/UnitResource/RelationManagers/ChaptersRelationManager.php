@@ -88,6 +88,10 @@ class ChaptersRelationManager extends RelationManager
                         ->rows(4)
                         ->label(__('custom.models.chapter.description')),
 
+                    Forms\Components\Toggle::make('active')
+                        ->label(__('custom.models.active'))
+                        ->default(true),
+
                 ])->columnSpan(2),
                 Section::make(__('custom.forms.chapter.create.section.image'))->schema([
                     SpatieMediaLibraryFileUpload::make('photo')
@@ -131,6 +135,10 @@ class ChaptersRelationManager extends RelationManager
                 TextColumn::make("subscriptions.name")
                     ->label(__("custom.models.subscriptions"))
                     ->badge(),
+
+                Tables\Columns\ToggleColumn::make('active')
+                    ->label(__('custom.models.active'))
+                    ->sortable(),
             ])
             ->filters([
                 //

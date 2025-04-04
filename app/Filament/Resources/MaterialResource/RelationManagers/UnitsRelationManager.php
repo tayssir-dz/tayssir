@@ -64,6 +64,10 @@ class UnitsRelationManager extends RelationManager
                         ->searchable()
                         ->preload()
                         ->label(__('custom.models.unit.subscriptions')),
+
+                    Forms\Components\Toggle::make('active')
+                        ->label(__('custom.models.active'))
+                        ->default(true),
                 ])->columnSpan(2),
 
                 Section::make(__('custom.forms.unit.create.section.image'))->schema([
@@ -109,6 +113,10 @@ class UnitsRelationManager extends RelationManager
                     ->default("-")
                     ->label(__('custom.models.subscriptions'))
                     ->colors(['primary']),
+
+                Tables\Columns\ToggleColumn::make('active')
+                    ->label(__('custom.models.active'))
+                    ->sortable(),
             ])
             ->filters([
                 //

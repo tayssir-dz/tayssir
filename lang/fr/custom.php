@@ -266,4 +266,9 @@ return [
     'models.chapter.level' => 'Niveau',
 
     'table.image.empty' => "Image non téléchargée",
+
+    // # Active field
+    'models.active' => 'Actif',
+    'models.active.true' => 'Actif',
+    'models.active.false' => 'Inactif',
 ];

@@ -264,6 +264,10 @@ return [
     'forms.chapter_level.create.section.infos' => 'معلومات المستوى',
     'models.chapter.level' => 'المستوى',
 
+    // # Active field
+    'models.active' => 'نشط',
+    'models.active.true' => 'نشط',
+    'models.active.false' => 'غير نشط',
 
     'table.image.empty' => "لم يتم رفع صورة",
 ];

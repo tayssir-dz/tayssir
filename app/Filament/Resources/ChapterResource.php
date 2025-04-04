@@ -120,6 +120,10 @@ class ChapterResource extends Resource implements HasShieldPermissions
                         ->rows(4)
                         ->columnSpan(2)
                         ->label(__('custom.models.chapter.description')),
+
+                    Forms\Components\Toggle::make('active')
+                        ->label(__('custom.models.active'))
+                        ->default(true),
                 ])->columnSpan(2)
                     ->columns(2),
 
@@ -168,6 +172,11 @@ class ChapterResource extends Resource implements HasShieldPermissions
                 TextColumn::make("subscriptions.name")
                     ->label(__("custom.models.subscriptions"))
                     ->badge(),
+
+                Tables\Columns\ToggleColumn::make('active')
+                    ->label(__('custom.models.active'))
+                    ->sortable()
+                    ->toggleable(),
             ])
             ->filters([
                 //
