@@ -68,18 +68,15 @@ class Unit extends Model implements HasMedia
     /**
      * Get the materials for the unit.
      */
-    public function material_units()
+    public function material()
     {
         return $this->belongsToMany(Material::class)
             ->using(MaterialUnit::class)
             ->withPivot('sort')
-            ->orderByPivot('sort');
+            ->limit(1);
     }
 
-    public function getMaterialAttribute()
-    {
-        return $this->material_units()->first();
-    }
+
 
     /**
      * Get the chapters for the unit.
@@ -89,8 +86,7 @@ class Unit extends Model implements HasMedia
         return $this->belongsToMany(Chapter::class)
             ->using(ChapterUnit::class)
             ->withPivot('sort')
-            ->orderBy('chapter_unit.sort')
-            ->orderBy('chapters.id');
+            ->orderBy('chapter_unit.sort');
     }
 
     /**

@@ -209,7 +209,7 @@ class QuestionsRelationManager extends RelationManager
                 // Tables\Columns\IconColumn::make('Rtl')->boolean(),
 
                 // Tables\Columns\TextColumn::make('id'),
-
+                Tables\Columns\TextColumn::make('sort'),
                 Tables\Columns\TextColumn::make('question')->label(__('custom.models.question.question')),
                 Tables\Columns\TextColumn::make('question_type')
                     ->label(__('custom.models.question.type'))

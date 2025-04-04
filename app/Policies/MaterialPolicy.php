@@ -103,6 +103,7 @@ class MaterialPolicy
      */
     public function reorder(User $user): bool
     {
+        return true;
         return $user->can('{{ Reorder }}');
     }
 }

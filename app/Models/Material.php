@@ -82,38 +82,21 @@ class Material extends Model implements HasMedia
     /**
      * Get the divisions for the material.
      */
-    public function division_materials()
+    public function divisions()
     {
         return $this->belongsToMany(Division::class)
             ->using(DivisionMaterial::class)
-            ->withPivot('sort')
-            ->orderBy('division_material.sort');
+            ->withPivot('sort');
     }
 
-    /**
-     * Get the divisions for the material.
-     * Alias for division_materials() for better naming consistency.
-     */
-    public function divisions()
-    {
-        return $this->division_materials();
-    }
 
-    public function getDivisionAttribute()
-    {
-        return $this->division_materials()->first();
-    }
 
-    /**
-     * Get the units for the material.
-     */
     public function units()
     {
         return $this->belongsToMany(Unit::class)
             ->using(MaterialUnit::class)
             ->withPivot('sort')
-            ->orderBy('material_unit.sort')
-        ;
+            ->orderBy('material_unit.sort');
     }
 
     /**

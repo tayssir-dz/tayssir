@@ -16,7 +16,9 @@ class EditUnit extends EditRecord
         return [
             Actions\DeleteAction::make(),
             // Action to navigate to a specific link (/ for example)
-            Actions\Action::make("view_material")->url(fn($record) => MaterialResource::getUrl("edit", ['record' => $record->material]))->label(fn($record) => __("custom.models.material.action.details") . "'" . $record->material->name . "'"),
+            Actions\Action::make("view_material")
+                ->url(fn($record) => MaterialResource::getUrl("edit", ['record' => $record->material->first()]))
+                ->label(fn($record) => __("custom.models.material.action.details") . " '" . ($record->material->first()->name ?? 'N/A') . "'"),
         ];
     }
 }

@@ -68,8 +68,8 @@ class UnitResource extends Resource implements HasShieldPermissions
                         ->minLength(3)
                         ->label(__('custom.models.unit.name')),
 
-                    Select::make('material_units')
-                        ->relationship('material_units', 'code')
+                    Select::make('material')
+                        ->relationship('material', 'code')
                         ->searchable()
                         ->preload()
                         ->required()

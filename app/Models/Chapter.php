@@ -52,18 +52,15 @@ class Chapter extends Model implements HasMedia
         return $this->getFirstMediaUrl('chapter_photos') ? $this->getFirstMediaUrl('chapter_photos') : null;
     }
 
-    public function chapter_units()
+    public function unit()
     {
         return $this->belongsToMany(Unit::class, 'chapter_unit')
             ->using(ChapterUnit::class)
             ->withPivot('sort')
-            ->orderBy('chapter_unit.sort');
+            ->limit(1);
     }
 
-    public function getUnitAttribute()
-    {
-        return $this->chapter_units()->first();
-    }
+
 
     /**
      * Get the questions for the chapter.

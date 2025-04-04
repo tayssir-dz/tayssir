@@ -87,8 +87,8 @@ class MaterialResource extends Resource implements HasShieldPermissions
                     ColorPicker::make('secondary_color')
                         ->label(__('custom.models.material.secondary_color')),
 
-                    Select::make('division_materials')
-                        ->relationship('division_materials', 'name')
+                    Select::make('divisions.name')
+                        ->relationship('divisions', 'name')
                         ->multiple()
                         ->required()
                         ->preload()
@@ -178,7 +178,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
                     ->label(__("custom.models.material.description"))
                     ->limit(30),
 
-                TextColumn::make('division.name')
+                TextColumn::make('divisions.name')
                     ->toggleable()
                     ->label(__("custom.models.material.division"))
                     ->badge()
@@ -196,8 +196,8 @@ class MaterialResource extends Resource implements HasShieldPermissions
                     ->sortable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('division_materials')
-                    ->relationship("division_materials", "name")
+                Tables\Filters\SelectFilter::make('divisions.name')
+                    ->relationship("divisions", "name")
                     ->multiple()
                     ->preload()
                     ->searchable()
