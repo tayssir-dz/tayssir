@@ -271,4 +271,25 @@ return [
     'models.active' => 'Actif',
     'models.active.true' => 'Actif',
     'models.active.false' => 'Inactif',
+
+    // # Json Column
+    'models.json_column.viewer_tab' => 'Visualiseur',
+    'models.json_column.editor_tab' => 'Éditeur',
+
+    // # JSON Upload
+    'models.question.json_upload.button' => 'Importer JSON',
+    'models.question.json_upload.modal_heading' => 'Importer des questions depuis JSON',
+    'models.question.json_upload.modal_description' => 'Collez un tableau JSON de questions. Chaque question doit avoir les champs requis.',
+    'models.question.json_upload.submit_button' => 'Importer et Valider',
+    'models.question.json_upload.json_data_label' => 'Données JSON',
+    'models.question.json_upload.helper_text' => 'Collez votre tableau JSON de questions ici. Utilisez l\'éditeur pour modifier facilement vos données JSON.',
+    'models.question.json_upload.invalid_json' => 'JSON Invalide',
+    'models.question.json_upload.invalid_json_message' => 'Veuillez fournir des données JSON valides : :error',
+    'models.question.json_upload.invalid_format' => 'Format Invalide',
+    'models.question.json_upload.invalid_format_message' => 'Les données JSON doivent être un objet ou un tableau d\'objets de questions.',
+    'models.question.json_upload.success_title' => 'Questions Importées',
+    'models.question.json_upload.success_message' => ':count question(s) importée(s) avec succès.',
+    'models.question.json_upload.errors_title' => 'Certaines Questions ont Échoué',
+    'models.question.json_upload.upload_failed' => 'Échec de l\'Import',
+    'models.question.json_upload.error_message' => 'Une erreur est survenue : :error',
 ];

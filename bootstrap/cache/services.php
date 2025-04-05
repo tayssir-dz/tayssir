@@ -60,9 +60,10 @@
     56 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
     57 => 'Spatie\\MediaLibrary\\MediaLibraryServiceProvider',
     58 => 'Spatie\\Permission\\PermissionServiceProvider',
-    59 => 'Ysfkaya\\FilamentPhoneInput\\FilamentPhoneInputServiceProvider',
-    60 => 'App\\Providers\\AppServiceProvider',
-    61 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    59 => 'ValentinMorice\\FilamentJsonColumn\\FilamentJsonColumnServiceProvider',
+    60 => 'Ysfkaya\\FilamentPhoneInput\\FilamentPhoneInputServiceProvider',
+    61 => 'App\\Providers\\AppServiceProvider',
+    62 => 'App\\Providers\\Filament\\AdminPanelProvider',
   ),
   'eager' => 
   array (
@@ -111,9 +112,10 @@
     42 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
     43 => 'Spatie\\MediaLibrary\\MediaLibraryServiceProvider',
     44 => 'Spatie\\Permission\\PermissionServiceProvider',
-    45 => 'Ysfkaya\\FilamentPhoneInput\\FilamentPhoneInputServiceProvider',
-    46 => 'App\\Providers\\AppServiceProvider',
-    47 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    45 => 'ValentinMorice\\FilamentJsonColumn\\FilamentJsonColumnServiceProvider',
+    46 => 'Ysfkaya\\FilamentPhoneInput\\FilamentPhoneInputServiceProvider',
+    47 => 'App\\Providers\\AppServiceProvider',
+    48 => 'App\\Providers\\Filament\\AdminPanelProvider',
   ),
   'deferred' => 
   array (

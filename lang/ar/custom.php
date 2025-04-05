@@ -270,4 +270,25 @@ return [
     'models.active.false' => 'غير نشط',
 
     'table.image.empty' => "لم يتم رفع صورة",
+
+    // # Json Column
+    'models.json_column.viewer_tab' => 'العارض',
+    'models.json_column.editor_tab' => 'المحرر',
+
+    // # JSON Upload
+    'models.question.json_upload.button' => 'رفع ملف JSON',
+    'models.question.json_upload.modal_heading' => 'رفع الأسئلة من ملف JSON',
+    'models.question.json_upload.modal_description' => 'الصق مصفوفة JSON من الأسئلة. يجب أن يحتوي كل سؤال على الحقول المطلوبة.',
+    'models.question.json_upload.submit_button' => 'رفع والتحقق',
+    'models.question.json_upload.json_data_label' => 'بيانات JSON',
+    'models.question.json_upload.helper_text' => 'الصق مصفوفة JSON الخاصة بك هنا. استخدم المحرر لتعديل بيانات JSON بسهولة.',
+    'models.question.json_upload.invalid_json' => 'JSON غير صالح',
+    'models.question.json_upload.invalid_json_message' => 'يرجى تقديم بيانات JSON صالحة: :error',
+    'models.question.json_upload.invalid_format' => 'تنسيق غير صالح',
+    'models.question.json_upload.invalid_format_message' => 'يجب أن تكون بيانات JSON كائنًا أو مصفوفة من كائنات الأسئلة.',
+    'models.question.json_upload.success_title' => 'تم رفع الأسئلة',
+    'models.question.json_upload.success_message' => 'تم رفع :count سؤال (أسئلة) بنجاح.',
+    'models.question.json_upload.errors_title' => 'فشل بعض الأسئلة',
+    'models.question.json_upload.upload_failed' => 'فشل الرفع',
+    'models.question.json_upload.error_message' => 'حدث خطأ: :error',
 ];

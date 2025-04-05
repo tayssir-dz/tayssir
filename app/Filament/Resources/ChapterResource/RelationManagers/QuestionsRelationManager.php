@@ -10,6 +10,7 @@ use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\Match
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\MultipleChoice;
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\PickTheIntruder;
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\TrueOrFalse;
+use App\Filament\Resources\ChapterResource\RelationManagers\QuestionJsonUploadAction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -210,7 +211,7 @@ class QuestionsRelationManager extends RelationManager
                 // Tables\Columns\IconColumn::make('Rtl')->boolean(),
 
                 // Tables\Columns\TextColumn::make('id'),
-                Tables\Columns\TextColumn::make('sort'),
+                // Tables\Columns\TextColumn::make('sort'),
                 Tables\Columns\TextColumn::make('question')->label(__('custom.models.question.question')),
                 Tables\Columns\TextColumn::make('question_type')
                     ->label(__('custom.models.question.type'))
@@ -231,6 +232,7 @@ class QuestionsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
+                QuestionJsonUploadAction::make(),
                 Tables\Actions\CreateAction::make()
             ])
             ->actions([

@@ -294,6 +294,17 @@
       0 => 'Spatie\\Permission\\PermissionServiceProvider',
     ),
   ),
+  'valentin-morice/filament-json-column' => 
+  array (
+    'aliases' => 
+    array (
+      'FilamentJsonColumn' => 'ValentinMorice\\FilamentJsonColumn\\Facades\\FilamentJsonColumn',
+    ),
+    'providers' => 
+    array (
+      0 => 'ValentinMorice\\FilamentJsonColumn\\FilamentJsonColumnServiceProvider',
+    ),
+  ),
   'ysfkaya/filament-phone-input' => 
   array (
     'providers' => 

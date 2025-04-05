@@ -179,6 +179,24 @@ return [
     'models.question.scope.exercice' => "Exercise",
     'models.question.scope.lesson' => "Lesson",
     'models.question.is_latex' => 'Is LaTeX',
+
+    // # JSON Upload
+    'models.question.json_upload.button' => 'Upload JSON',
+    'models.question.json_upload.modal_heading' => 'Upload Questions from JSON',
+    'models.question.json_upload.modal_description' => 'Paste a JSON array of questions. Each question should have the required fields.',
+    'models.question.json_upload.submit_button' => 'Upload and Validate',
+    'models.question.json_upload.json_data_label' => 'JSON Data',
+    'models.question.json_upload.helper_text' => 'Paste your JSON array of questions here. Use the editor to easily modify your JSON data.',
+    'models.question.json_upload.invalid_json' => 'Invalid JSON',
+    'models.question.json_upload.invalid_json_message' => 'Please provide valid JSON data: :error',
+    'models.question.json_upload.invalid_format' => 'Invalid Format',
+    'models.question.json_upload.invalid_format_message' => 'JSON data must be an object or array of question objects.',
+    'models.question.json_upload.success_title' => 'Questions Uploaded',
+    'models.question.json_upload.success_message' => 'Successfully uploaded :count question(s).',
+    'models.question.json_upload.errors_title' => 'Some Questions Failed',
+    'models.question.json_upload.upload_failed' => 'Upload Failed',
+    'models.question.json_upload.error_message' => 'An error occurred: :error',
+
     // Card
 
     "models.card.code" => "Code",
@@ -268,4 +286,8 @@ return [
     "direction.inherit" =>  "Use the parent direction (inherit)",
 
     'table.image.empty' => "Image not uploaded",
+
+    // # Json Column
+    'models.json_column.viewer_tab' => 'Viewer',
+    'models.json_column.editor_tab' => 'Editor',
 ];
