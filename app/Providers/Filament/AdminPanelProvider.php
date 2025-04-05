@@ -45,7 +45,7 @@ class AdminPanelProvider extends PanelProvider
                     'success' => Color::hex("#12D18E"),
                     'error' => Color::hex("#F85556"),
                     'warning' => Color::hex("#FF9500"),
-                    'info' => Color::hex("#5ACD76"),
+                    'info' => Color::hex("#F037A5"),
                     'neutral' => Color::hex("#E5E7EB"),
                 ]
             )->font("Poppins")

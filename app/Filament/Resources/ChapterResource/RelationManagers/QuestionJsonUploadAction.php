@@ -23,19 +23,21 @@ class QuestionJsonUploadAction
         return Action::make('upload_json')
             ->label(__('custom.models.question.json_upload.button'))
             ->icon('heroicon-o-arrow-up-tray')
-            ->color(Color::Amber)
+            ->color('info')
             ->modalHeading(__('custom.models.question.json_upload.modal_heading'))
             ->modalDescription(__('custom.models.question.json_upload.modal_description'))
             ->modalSubmitActionLabel(__('custom.models.question.json_upload.submit_button'))
+            ->modalSubmitButtonColor('info')
             ->form([
                 FilamentJsonColumn::make('json_data')
                     ->label(__('custom.models.question.json_upload.json_data_label'))
                     ->required()
                     ->columnSpanFull()
                     ->helperText(__('custom.models.question.json_upload.helper_text'))
-                    ->accent('#1a73e8')
+                    ->accent('#F037A5')
                     ->viewerHeight(400)
                     ->editorHeight(400)
+                    ->default([])
             ])
             ->action(function (array $data, $livewire) {
                 try {
