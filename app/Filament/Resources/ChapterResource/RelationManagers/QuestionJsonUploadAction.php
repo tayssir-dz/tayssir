@@ -27,7 +27,6 @@ class QuestionJsonUploadAction
             ->modalHeading(__('custom.models.question.json_upload.modal_heading'))
             ->modalDescription(__('custom.models.question.json_upload.modal_description'))
             ->modalSubmitActionLabel(__('custom.models.question.json_upload.submit_button'))
-            ->modalSubmitButtonColor('info')
             ->form([
                 FilamentJsonColumn::make('json_data')
                     ->label(__('custom.models.question.json_upload.json_data_label'))
