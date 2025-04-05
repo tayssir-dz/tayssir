@@ -36,7 +36,7 @@ class QuestionJsonUploadAction
                     ->accent('#F037A5')
                     ->viewerHeight(400)
                     ->editorHeight(400)
-                    ->default('')
+                    ->default('{}')
             ])
             ->action(function (array $data, $livewire) {
                 try {
