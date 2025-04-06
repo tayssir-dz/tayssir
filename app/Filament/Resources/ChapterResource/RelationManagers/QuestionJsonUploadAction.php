@@ -223,7 +223,7 @@ class QuestionJsonUploadAction
             });
     }
 
-    protected static function validateQuestionData(array $data): \Illuminate\Validation\Validator
+    public static function validateQuestionData(array $data): \Illuminate\Validation\Validator
     {
         // Handle the direction field case - ContentDirection enum uses uppercase
         if (isset($data['direction']) && is_string($data['direction'])) {

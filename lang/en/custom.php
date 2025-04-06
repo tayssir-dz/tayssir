@@ -197,6 +197,22 @@ return [
     'models.question.json_upload.upload_failed' => 'Upload Failed',
     'models.question.json_upload.error_message' => 'An error occurred: :error',
 
+    // # JSON Edit
+    'models.question.json_edit.button' => 'Edit JSON',
+    'models.question.json_edit.modal_heading' => 'Edit Question JSON',
+    'models.question.json_edit.modal_description' => 'Edit the question data in JSON format.',
+    'models.question.json_edit.submit_button' => 'Update Question',
+    'models.question.json_edit.json_data_label' => 'Question JSON Data',
+    'models.question.json_edit.helper_text' => 'Edit the JSON data for this question. Make sure to maintain the required structure.',
+    'models.question.json_edit.success_title' => 'Question Updated',
+    'models.question.json_edit.success_message' => 'Successfully updated the question.',
+    'models.question.json_edit.invalid_json' => 'Invalid JSON',
+    'models.question.json_edit.invalid_json_message' => 'Please provide valid JSON data: :error',
+    'models.question.json_edit.invalid_format' => 'Invalid Format',
+    'models.question.json_edit.invalid_format_message' => 'JSON data must be a valid question object.',
+    'models.question.json_edit.update_failed' => 'Update Failed',
+    'models.question.json_edit.error_message' => 'An error occurred while updating: :error',
+
     // Card
 
     "models.card.code" => "Code",

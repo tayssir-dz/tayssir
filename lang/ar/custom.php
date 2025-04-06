@@ -291,4 +291,20 @@ return [
     'models.question.json_upload.errors_title' => 'فشل بعض الأسئلة',
     'models.question.json_upload.upload_failed' => 'فشل الرفع',
     'models.question.json_upload.error_message' => 'حدث خطأ: :error',
+
+    // # JSON Edit
+    'models.question.json_edit.button' => 'تحرير JSON',
+    'models.question.json_edit.modal_heading' => 'تحرير سؤال بصيغة JSON',
+    'models.question.json_edit.modal_description' => 'قم بتعديل بيانات السؤال بتنسيق JSON.',
+    'models.question.json_edit.submit_button' => 'تحديث السؤال',
+    'models.question.json_edit.json_data_label' => 'بيانات السؤال بصيغة JSON',
+    'models.question.json_edit.helper_text' => 'قم بتعديل بيانات JSON لهذا السؤال. تأكد من الحفاظ على البنية المطلوبة.',
+    'models.question.json_edit.success_title' => 'تم تحديث السؤال',
+    'models.question.json_edit.success_message' => 'تم تحديث السؤال بنجاح.',
+    'models.question.json_edit.invalid_json' => 'JSON غير صالح',
+    'models.question.json_edit.invalid_json_message' => 'يرجى تقديم بيانات JSON صالحة: :error',
+    'models.question.json_edit.invalid_format' => 'تنسيق غير صالح',
+    'models.question.json_edit.invalid_format_message' => 'يجب أن تكون بيانات JSON عبارة عن كائن سؤال صالح.',
+    'models.question.json_edit.update_failed' => 'فشل التحديث',
+    'models.question.json_edit.error_message' => 'حدث خطأ أثناء التحديث: :error',
 ];

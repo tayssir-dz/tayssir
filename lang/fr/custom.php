@@ -292,4 +292,20 @@ return [
     'models.question.json_upload.errors_title' => 'Certaines Questions ont Échoué',
     'models.question.json_upload.upload_failed' => 'Échec de l\'Import',
     'models.question.json_upload.error_message' => 'Une erreur est survenue : :error',
+
+    // # JSON Edit
+    'models.question.json_edit.button' => 'Éditer JSON',
+    'models.question.json_edit.modal_heading' => 'Éditer Question JSON',
+    'models.question.json_edit.modal_description' => 'Modifiez les données de la question au format JSON.',
+    'models.question.json_edit.submit_button' => 'Mettre à jour la Question',
+    'models.question.json_edit.json_data_label' => 'Données JSON de la Question',
+    'models.question.json_edit.helper_text' => 'Modifiez les données JSON pour cette question. Assurez-vous de maintenir la structure requise.',
+    'models.question.json_edit.success_title' => 'Question Mise à Jour',
+    'models.question.json_edit.success_message' => 'La question a été mise à jour avec succès.',
+    'models.question.json_edit.invalid_json' => 'JSON Invalide',
+    'models.question.json_edit.invalid_json_message' => 'Veuillez fournir des données JSON valides : :error',
+    'models.question.json_edit.invalid_format' => 'Format Invalide',
+    'models.question.json_edit.invalid_format_message' => 'Les données JSON doivent être un objet de question valide.',
+    'models.question.json_edit.update_failed' => 'Échec de la Mise à Jour',
+    'models.question.json_edit.error_message' => 'Une erreur est survenue lors de la mise à jour : :error',
 ];

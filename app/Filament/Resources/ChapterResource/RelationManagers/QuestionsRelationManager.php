@@ -11,6 +11,7 @@ use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\Multi
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\PickTheIntruder;
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\TrueOrFalse;
 use App\Filament\Resources\ChapterResource\RelationManagers\QuestionJsonUploadAction;
+use App\Filament\Resources\ChapterResource\RelationManagers\QuestionJsonEditAction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -236,6 +237,7 @@ class QuestionsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make()
             ])
             ->actions([
+                QuestionJsonEditAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
             ])
