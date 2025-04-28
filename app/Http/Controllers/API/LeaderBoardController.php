@@ -35,10 +35,7 @@ class LeaderBoardController extends BaseController
             'current_page' => $currentPage,
             'data' => $leaderboardData
         ];
-        $users = User::all();
-        foreach ($users as $user) {
-            $points = $user->points();
-        }
+
         // Return the data and the pagination metadata
         return $this->sendResponse($result);
     }

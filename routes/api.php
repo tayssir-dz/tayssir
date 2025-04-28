@@ -11,6 +11,7 @@ use App\Http\Controllers\API\LeaderBoardController;
 use App\Http\Controllers\API\SubscriptionController;
 use App\Http\Controllers\API\UserController;
 use App\Models\Question;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 // Division Routes
@@ -155,4 +156,12 @@ Route::prefix('v1')->group(function () {
             ->summary("leader board")
             ->description("This endpoint returns a list of users paginated with query param 'page' and 'per_page', the list of users contains name, image, points.");
     });
+});
+
+Route::get("keziz", function () {
+    $users = User::all();
+    foreach ($users as $user) {
+        $points = $user->points();
+    }
+    return $users;
 });
