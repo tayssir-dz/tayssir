@@ -157,11 +157,3 @@ Route::prefix('v1')->group(function () {
             ->description("This endpoint returns a list of users paginated with query param 'page' and 'per_page', the list of users contains name, image, points.");
     });
 });
-
-Route::get("keziz", function () {
-    $users = User::all();
-    foreach ($users as $user) {
-        $points = $user->points();
-    }
-    return $users;
-});
