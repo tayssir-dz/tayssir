@@ -51,6 +51,8 @@ class ChapterResource extends Resource implements HasShieldPermissions
             'update',
             'delete',
             'delete_any',
+            'upload_json',
+            'edit_json'
         ];
     }
     protected static ?string $model = Chapter::class;

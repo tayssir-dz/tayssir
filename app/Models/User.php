@@ -100,4 +100,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
     {
         return $this->hasMany(UserChapterBonus::class);
     }
+
+    public function leaderboard()
+    {
+        return $this->hasOne(LeaderBoard::class);
+    }
 }

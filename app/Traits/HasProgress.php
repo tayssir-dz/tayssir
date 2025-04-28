@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Enums\ChapterVisibility;
 use App\Models\Chapter;
+use App\Models\LeaderBoard;
 use App\Models\Material;
 use App\Models\Question;
 use App\Models\Unit;
@@ -366,6 +367,15 @@ trait HasProgress
         $bonusPoints = UserChapterBonus::where('user_id', $this->id)
             ->sum('bonus_points');
 
+        // create or update the leader board of this user with ['user_id', 'points', 'last_updated_at']
+        // and save it
+        LeaderBoard::updateOrCreate(
+            ['user_id' => $this->id],
+            [
+                'points' => $answerPoints + $bonusPoints,
+                'last_updated_at' => now()
+            ]
+        );
         return $answerPoints + $bonusPoints;
     }
 

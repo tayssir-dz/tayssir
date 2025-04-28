@@ -7,6 +7,7 @@ use App\Http\Controllers\API\DivisionController;
 use App\Http\Controllers\API\ForgotPasswordController;
 use App\Http\Controllers\API\EmailVerificationController;
 use App\Http\Controllers\API\ChangeEmailController;
+use App\Http\Controllers\API\LeaderBoardController;
 use App\Http\Controllers\API\SubscriptionController;
 use App\Http\Controllers\API\UserController;
 use App\Models\Question;
@@ -32,14 +33,6 @@ Route::get('subscriptions/{id}', [SubscriptionController::class, 'show'])
 
 // MENNADOS PEDADAA
 Route::prefix('v1')->group(function () {
-    // Route::get("/", function () {
-    //     return response()->json([
-    //         "message" => "Welcome to " . config('app.name') . " API",
-    //         "version" => "1"
-    //     ]);
-    // });
-
-
     Route::prefix('auth')->group(function () {
         Route::post("register", [AuthController::class, 'register'])
             ->summary("Register a new user")
@@ -156,7 +149,10 @@ Route::prefix('v1')->group(function () {
             ->summary("Submit chapter answers")
             ->description("This endpoint submits the answers of a chapter.");
     });
-    // Route::middleware('auth:sanctum')->group(function () {
-    //     Route::post('/submit-chapter-answers', [ContentController::class, 'submitChapterAnswers']);
-    // });
+    Route::prefix("leaderboard")->group(function () {
+        Route::get("/", [LeaderBoardController::class, "index"])
+            ->middleware(["auth:sanctum", "access"])
+            ->summary("leader board")
+            ->description("This endpoint returns a list of users paginated with query param 'page' and 'per_page', the list of users contains name, image, points.");
+    });
 });
