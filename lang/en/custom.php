@@ -296,6 +296,12 @@ return [
     "stats.users.new" => 'New users',
     "stats.users.last30Days" => 'Last 30 days',
 
+    // # LeaderBoard
+    'models.leaderboard' => 'Leaderboard',
+    'models.leaderboards' => 'Leaderboards',
+    'models.leaderboard.points' => 'Points',
+    'models.leaderboard.user' => 'User',
+
     "direction.label" =>  'Text direction',
     "direction.rtl" =>  "From right to left (rtl)",
     "direction.ltr" =>   "From left to right (ltr)",

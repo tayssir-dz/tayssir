@@ -155,7 +155,7 @@ class ContentController extends BaseController
                 $chapterBonusPoints = UserChapterBonus::where('user_id', $user->id)
                     ->where('chapter_id', $chapterId)
                     ->value('bonus_points') ?? 0;
-
+                $updatedPoints = $user->points();
                 return $this->sendResponse([
                     'message' => __('response.answers_submitted_successfully'),
                     'total_answers' => count($userAnswersData),

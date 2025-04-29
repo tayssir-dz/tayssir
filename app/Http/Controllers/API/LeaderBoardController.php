@@ -22,7 +22,7 @@ class LeaderBoardController extends BaseController
         foreach ($leaderBoard as $item) {
             $leaderboardData[] = [
                 'name' => $item->user->name,
-                'avatar_url' => $item->user->avatar_url,
+                'avatar_url' => config('app.url') . "/storage/" . $item->user->avatar_url,
                 'points' => $item->points,
             ];
         }

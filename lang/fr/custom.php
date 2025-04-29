@@ -251,6 +251,12 @@ return [
     "stats.users.new" => 'Nouveaux utilisateurs',
     "stats.users.last30Days" => 'Les 30 derniers jours',
 
+    // # LeaderBoard
+    'models.leaderboard' => 'Classement',
+    'models.leaderboards' => 'Classements',
+    'models.leaderboard.points' => 'Points',
+    'models.leaderboard.user' => 'Utilisateur',
+
     "direction.label" => 'Direction du texte',
     "direction.rtl" => "De droite à gauche (rtl)",
     "direction.ltr" => "De gauche à droite (ltr)",

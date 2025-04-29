@@ -264,6 +264,12 @@ return [
     'forms.chapter_level.create.section.infos' => 'معلومات المستوى',
     'models.chapter.level' => 'المستوى',
 
+    // # LeaderBoard
+    'models.leaderboard' => 'لوحة الصدارة',
+    'models.leaderboards' => 'لوحات الصدارة',
+    'models.leaderboard.points' => 'النقاط',
+    'models.leaderboard.user' => 'المستخدم',
+
     // # Active field
     'models.active' => 'نشط',
     'models.active.true' => 'نشط',
