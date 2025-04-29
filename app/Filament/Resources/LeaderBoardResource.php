@@ -57,6 +57,7 @@ class LeaderBoardResource extends Resource implements HasShieldPermissions
     {
         return $table
             ->defaultSort("points", 'desc')
+            ->striped()
             ->columns([
                 Tables\Columns\TextColumn::make('index')->label("")
                     ->rowIndex(),
