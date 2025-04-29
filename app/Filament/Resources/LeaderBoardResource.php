@@ -69,6 +69,8 @@ class LeaderBoardResource extends Resource implements HasShieldPermissions
                         'avatar_url' => $record->user->avatar_url,
                     ])->render()),
                 Tables\Columns\TextColumn::make("points")
+                    ->badge()
+                    ->color("primary")
                     ->label(__('custom.models.leaderboard.points'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make("user.name")
