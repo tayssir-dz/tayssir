@@ -69,15 +69,15 @@ class LeaderBoardResource extends Resource implements HasShieldPermissions
                         'name' => $record->user->name,
                         'avatar_url' => $record->user->avatar_url,
                     ])->render()),
+                Tables\Columns\TextColumn::make("user.name")
+                    ->label(__('custom.models.leaderboard.user'))
+                    ->url(fn($record) => UserResource::getUrl('edit', ['record' => $record->user_id]))
+                    ->searchable(),
                 Tables\Columns\TextColumn::make("points")
                     ->badge()
                     ->color("primary")
                     ->label(__('custom.models.leaderboard.points'))
                     ->sortable(),
-                Tables\Columns\TextColumn::make("user.name")
-                    ->label(__('custom.models.leaderboard.user'))
-                    ->url(fn($record) => UserResource::getUrl('edit', ['record' => $record->user_id]))
-                    ->searchable(),
             ])
             ->filters([
                 //
