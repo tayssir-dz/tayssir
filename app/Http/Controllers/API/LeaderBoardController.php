@@ -14,16 +14,21 @@ class LeaderBoardController extends BaseController
         $perPage = $request->input('per_page', 10);
         $currentPage = $request->input('page', 1);
 
-        $leaderBoard = LeaderBoard::with('user:name,avatar_url,id')
+        $leaderBoard = LeaderBoard::with(['user' => function ($query) {
+            $query->with(['wilaya', 'commune']);
+        }])
             ->orderBy('points', 'desc')
             ->paginate($perPage, page: $currentPage);
 
         $leaderboardData = [];
         foreach ($leaderBoard as $item) {
             $leaderboardData[] = [
+                'id' => $item->user->id,
                 'name' => $item->user->name,
                 'avatar_url' => config('app.url') . "/storage/" . $item->user->avatar_url,
                 'points' => $item->points,
+                'wilaya' => $item->user->wilaya ? $item->user->wilaya->arabic_name : null,
+                'commune' => $item->user->commune ? $item->user->commune->arabic_name : null,
             ];
         }
         // Extract pagination metadata

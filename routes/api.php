@@ -152,7 +152,7 @@ Route::prefix('v1')->group(function () {
     });
     Route::prefix("leaderboard")->group(function () {
         Route::get("/", [LeaderBoardController::class, "index"])
-            ->middleware(["auth:sanctum", "access"])
+            // ->middleware(["auth:sanctum", "access"])
             ->summary("leader board")
             ->description("This endpoint returns a list of users paginated with query param 'page' and 'per_page', the list of users contains name, image, points.");
     });
