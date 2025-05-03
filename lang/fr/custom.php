@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     // ------------------------ CUSTOM --------------------------
     'nav.section.platform' => 'Plateforme',
     'nav.section.content' => 'Contenu',
@@ -314,4 +313,12 @@ return [
     'models.question.json_edit.invalid_format_message' => 'Les données JSON doivent être un objet de question valide.',
     'models.question.json_edit.update_failed' => 'Échec de la Mise à Jour',
     'models.question.json_edit.error_message' => 'Une erreur est survenue lors de la mise à jour : :error',
+
+    // # App Settings
+    'settings.app.title' => 'Paramètres de l\'Application',
+    'settings.app.section.information' => 'Informations de l\'Application',
+    'settings.app.version' => 'Version de l\'Application',
+    'settings.app.resumes' => 'CV Actifs',
+    'settings.app.bac_solutions' => 'Solutions BAC Actives',
+    'settings.app.cards_tools' => 'Outils de Cartes Actifs',
 ];

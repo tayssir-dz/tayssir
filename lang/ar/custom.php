@@ -313,4 +313,12 @@ return [
     'models.question.json_edit.invalid_format_message' => 'يجب أن تكون بيانات JSON عبارة عن كائن سؤال صالح.',
     'models.question.json_edit.update_failed' => 'فشل التحديث',
     'models.question.json_edit.error_message' => 'حدث خطأ أثناء التحديث: :error',
+
+    // # App Settings
+    'settings.app.title' => 'إعدادات التطبيق',
+    'settings.app.section.information' => 'معلومات التطبيق',
+    'settings.app.version' => 'إصدار التطبيق',
+    'settings.app.resumes' => 'السير الذاتية نشطة',
+    'settings.app.bac_solutions' => 'حلول البكالوريا نشطة',
+    'settings.app.cards_tools' => 'أدوات البطاقات نشطة',
 ];

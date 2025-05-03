@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     // ------------------------ CUSTOM --------------------------
     'nav.section.platform' => 'Platform',
     'nav.section.content' => 'Content',
@@ -312,4 +311,12 @@ return [
     // # Json Column
     'models.json_column.viewer_tab' => 'Viewer',
     'models.json_column.editor_tab' => 'Editor',
+
+    // # App Settings
+    'settings.app.title' => 'Application Settings',
+    'settings.app.section.information' => 'App Information',
+    'settings.app.version' => 'App Version',
+    'settings.app.resumes' => 'Resumes Active',
+    'settings.app.bac_solutions' => 'BAC Solutions Active',
+    'settings.app.cards_tools' => 'Cards Tools Active',
 ];
