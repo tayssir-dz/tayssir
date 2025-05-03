@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\QuestionType;
+use App\Http\Controllers\API\AppSettingsController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ContentController;
 use App\Http\Controllers\API\DivisionController;
@@ -155,5 +156,11 @@ Route::prefix('v1')->group(function () {
             ->middleware(["auth:sanctum", "access"])
             ->summary("leader board")
             ->description("This endpoint returns a list of users paginated with query param 'page' and 'per_page', the list of users contains name, image, points.");
+    });
+    Route::prefix("settings")->group(function () {
+        Route::get("/", [AppSettingsController::class, "index"])
+            // ->middleware(["auth:sanctum", "access"])
+            ->summary("app settings")
+            ->description("This endpoint returns an object containing app settings.");
     });
 });
