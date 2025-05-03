@@ -10,9 +10,12 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
 use Illuminate\Support\Facades\Lang;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 
 class ManageAppSettings extends SettingsPage
 {
+    use HasPageShield;
+
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
 
     protected static ?string $title = null;
