@@ -71,6 +71,7 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
                     TextInput::make("name")
                         ->label(__("custom.models.subscription.name"))
                         ->unique()
+                        ->unique(table: 'subscriptions', ignorable: fn($record) => $record)
                         ->required(),
 
                     Textarea::make("description")
