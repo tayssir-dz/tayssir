@@ -105,4 +105,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
     {
         return $this->hasOne(LeaderBoard::class);
     }
+
+    public function getRecordTitleAttribute()
+    {
+        return $this->name . ' (' . $this->email . ')';
+    }
 }

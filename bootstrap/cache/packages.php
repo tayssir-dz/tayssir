@@ -49,6 +49,13 @@
       0 => 'BladeUI\\Icons\\BladeIconsServiceProvider',
     ),
   ),
+  'charrafimed/global-search-modal' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'CharrafiMed\\GlobalSearchModal\\GlobalSearchModalServiceProvider',
+    ),
+  ),
   'dutchcodingcompany/filament-developer-logins' => 
   array (
     'providers' => 

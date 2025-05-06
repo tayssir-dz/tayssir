@@ -36,10 +36,18 @@ use Filament\Tables\Table;  // Add this line
 use Filament\Forms\Components\CheckboxList; // Add this to use statements
 use Filament\Forms\Components\Placeholder;
 use Illuminate\Support\HtmlString;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Database\Eloquent\Model;
 
 class UserResource extends Resource implements HasShieldPermissions
 {
-    protected static ?string $recordTitleAttribute = 'email';
+    protected static ?string $recordTitleAttribute = 'recordTitle';
+    public static function getGlobalSearchResultTitle(Model $record): string | Htmlable
+    {
+        return $record->name . ' (' . $record->email . ')';
+    }
+
+
     public static function getNavigationGroup(): ?string
     {
         return Utils::isResourceNavigationGroupEnabled()
@@ -85,6 +93,12 @@ class UserResource extends Resource implements HasShieldPermissions
     protected static ?int $navigationSort = 3;
 
     protected static bool $isGloballySearchable = true;
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'phone_number', 'email', 'new_email', 'wilaya.arabic_name', 'commune.arabic_name'];
+    }
+
+
     public static function form(Form $form): Form
     {
         return $form
