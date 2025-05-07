@@ -228,17 +228,23 @@ class UserResource extends Resource implements HasShieldPermissions
                         'name' => $record->name,
                         'avatar_url' => $record->avatar_url,
                     ])->render()),
-                TextColumn::make('email')->hidden(true)->searchable(),
+                TextColumn::make('email')
+                    ->label(__('custom.models.user.email'))
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable()
+                    ->weight(FontWeight::Bold)
+                    ->size('sm'),
                 TextColumn::make('name')
                     ->label(__('custom.models.user.name'))
                     ->searchable()
                     ->sortable()
                     ->toggleable()
                     ->weight(FontWeight::Bold)
-                    ->size('sm')
-                    ->description(fn($record) => view('components.small-text')->with([
-                        'text' => $record->email
-                    ])),
+                    ->size('sm'),
+                // ->description(fn($record) => view('components.small-text')->with([
+                //     'text' => $record->email
+                // ])),
 
                 PhoneColumn::make('phone_number')
                     ->label(__('custom.models.user.phone'))
