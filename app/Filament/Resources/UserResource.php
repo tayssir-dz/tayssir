@@ -228,7 +228,7 @@ class UserResource extends Resource implements HasShieldPermissions
                         'name' => $record->name,
                         'avatar_url' => $record->avatar_url,
                     ])->render()),
-                TextColumn::make('email')->visible(false)->searchable(),
+                TextColumn::make('email')->hidden(true)->searchable(),
                 TextColumn::make('name')
                     ->label(__('custom.models.user.name'))
                     ->searchable()
