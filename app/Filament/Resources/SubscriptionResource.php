@@ -61,6 +61,9 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
     protected static ?int $navigationSort = 5;
     protected static ?string $model = Subscription::class;
 
+    protected static bool $isGloballySearchable = true;
+    protected static ?string $recordTitleAttribute = 'name';
+
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
     public static function form(Form $form): Form

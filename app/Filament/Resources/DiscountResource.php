@@ -56,6 +56,9 @@ class DiscountResource extends Resource implements HasShieldPermissions
     }
     protected static ?string $model = Discount::class;
 
+    protected static bool $isGloballySearchable = true;
+    protected static ?string $recordTitleAttribute = 'name';
+
     protected static ?string $navigationIcon = 'heroicon-o-percent-badge';
 
     public static function form(Form $form): Form
