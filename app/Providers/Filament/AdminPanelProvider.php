@@ -78,7 +78,8 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])->plugins([
-                GlobalSearchModalPlugin::make(),
+                GlobalSearchModalPlugin::make()
+                    ->slideOver(),
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
                     ->gridColumns(['default' => 1, 'sm' => 2, 'lg' => 3])
                     ->sectionColumnSpan(1)
