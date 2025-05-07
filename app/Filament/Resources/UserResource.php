@@ -117,7 +117,7 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->email()
                             ->label(__('custom.models.user.email')),
 
-                        PhoneInput::make('phone_number')
+                        TextInput::make('phone_number')
                             ->disabledOn("edit")
                             ->label(__('custom.models.user.phone')),
 
