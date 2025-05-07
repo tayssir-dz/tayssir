@@ -56,7 +56,8 @@ class ChapterResource extends Resource implements HasShieldPermissions
         ];
     }
     protected static ?string $model = Chapter::class;
-
+    protected static ?string $recordTitleAttribute = 'name';
+    protected static bool $isGloballySearchable = true;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?int $navigationSort = 12;
     public static function form(Form $form): Form

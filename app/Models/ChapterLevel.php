@@ -20,4 +20,9 @@ class ChapterLevel extends Model
     {
         return $this->hasMany(Chapter::class);
     }
+
+    public function getRecordTitleAttribute()
+    {
+        return $this->name;
+    }
 }

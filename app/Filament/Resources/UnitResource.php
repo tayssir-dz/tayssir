@@ -55,7 +55,8 @@ class UnitResource extends Resource implements HasShieldPermissions
         ];
     }
     protected static ?string $model = Unit::class;
-
+    protected static ?string $recordTitleAttribute = 'name';
+    protected static bool $isGloballySearchable = true;
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
     protected static ?int $navigationSort = 11;
     public static function form(Form $form): Form

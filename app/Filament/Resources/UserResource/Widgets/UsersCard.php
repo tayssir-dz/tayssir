@@ -138,22 +138,7 @@ class UsersCard extends BaseWidget
                 ->descriptionIcon('heroicon-o-building-library')
                 ->color('info'),
 
-            // Card statistics
-            MoneyStat::make(Card::class)
-                ->last30Days()
-                ->dailySum('price')
-                ->label(__('stats.cards.revenue'))
-                ->description(__('stats.cards.revenue_desc'))
-                ->descriptionIcon('heroicon-o-banknotes')
-                ->color('success'),
 
-            SimpleStat::make(Card::class)
-                ->last30Days()
-                ->dailyCount()
-                ->label(__('stats.cards.created'))
-                ->description(__('stats.cards.created_desc'))
-                ->descriptionIcon('heroicon-o-document-plus')
-                ->color('warning'),
         ];
     }
 }

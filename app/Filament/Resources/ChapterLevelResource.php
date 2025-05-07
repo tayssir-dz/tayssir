@@ -20,7 +20,8 @@ class ChapterLevelResource extends Resource implements HasShieldPermissions
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?int $navigationSort = 7;
-
+    protected static bool $isGloballySearchable = true;
+    protected static ?string $recordTitleAttribute = 'recordTitle';
     public static function getPermissionPrefixes(): array
     {
         return [

@@ -63,6 +63,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
     protected static ?int $navigationSort = 10;
+    protected static bool $isGloballySearchable = true;
 
     public static function form(Form $form): Form
     {
