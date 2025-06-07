@@ -86,9 +86,9 @@ class LeaderBoardResource extends Resource implements HasShieldPermissions
                 Tables\Columns\TextColumn::make("progress")
                     ->badge()
                     ->color(fn($state) => match (true) {
-                        $state >= 90 => 'success',
-                        $state >= 70 => 'warning',
-                        $state >= 50 => 'info',
+                        $state >= 80 => 'success',
+                        $state >= 50 => 'warning',
+                        $state < 20 => 'danger',
                         default => 'gray',
                     })
                     ->label(__('custom.models.leaderboard.progress'))
