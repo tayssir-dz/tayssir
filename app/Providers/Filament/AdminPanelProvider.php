@@ -96,7 +96,7 @@ class AdminPanelProvider extends PanelProvider
                         rules: 'mimes:jpeg,png|max:1024'
                     ),
                 FilamentDeveloperLoginsPlugin::make()
-                    ->enabled(false)
+                    ->enabled(config('app.debug', false))
                     ->users([
                         'TAYSSIR ADMIN' => 'admin@tayssir-bac.com',
                         'TAYSSIR PROF' => 'Tayssir_Prof@tayssir-bac.com',

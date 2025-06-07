@@ -78,6 +78,11 @@ class LeaderBoardResource extends Resource implements HasShieldPermissions
                     ->color("primary")
                     ->label(__('custom.models.leaderboard.points'))
                     ->sortable(),
+                Tables\Columns\TextColumn::make("max")
+                    ->badge()
+                    ->color("primary")
+                    ->label(__('custom.models.leaderboard.max'))
+                    ->sortable(),
             ])
             ->filters([
                 //

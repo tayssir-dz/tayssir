@@ -254,6 +254,7 @@ return [
     'models.leaderboard' => 'Classement',
     'models.leaderboards' => 'Classements',
     'models.leaderboard.points' => 'Points',
+    'models.leaderboard.max' => 'Points Max',
     'models.leaderboard.user' => 'Utilisateur',
 
     "direction.label" => 'Direction du texte',

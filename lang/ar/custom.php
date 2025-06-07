@@ -268,6 +268,7 @@ return [
     'models.leaderboard' => 'لوحة الصدارة',
     'models.leaderboards' => 'لوحات الصدارة',
     'models.leaderboard.points' => 'النقاط',
+    'models.leaderboard.max' => 'الحد الأقصى للنقاط',
     'models.leaderboard.user' => 'المستخدم',
 
     // # Active field

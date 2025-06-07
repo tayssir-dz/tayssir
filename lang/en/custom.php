@@ -299,6 +299,7 @@ return [
     'models.leaderboard' => 'Leaderboard',
     'models.leaderboards' => 'Leaderboards',
     'models.leaderboard.points' => 'Points',
+    'models.leaderboard.max' => 'Max Points',
     'models.leaderboard.user' => 'User',
 
     "direction.label" =>  'Text direction',

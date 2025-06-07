@@ -369,13 +369,20 @@ trait HasProgress
 
         // create or update the leader board of this user with ['user_id', 'points', 'last_updated_at']
         // and save it
-        LeaderBoard::updateOrCreate(
+        $leaderboard = LeaderBoard::updateOrCreate(
             ['user_id' => $this->id],
             [
                 'points' => $answerPoints + $bonusPoints,
                 'last_updated_at' => now()
             ]
         );
+
+        // Update max_points if it's empty or if subscriptions might have changed
+        if (!$leaderboard->max_points || $leaderboard->wasRecentlyCreated) {
+            $leaderboard->max_points = $this->maxPoints();
+            $leaderboard->save();
+        }
+
         return $answerPoints + $bonusPoints;
     }
 
@@ -422,6 +429,56 @@ trait HasProgress
             ->value('bonus_points') ?? 0;
 
         return $answerPoints + $bonusPoints;
+    }
+
+    /**
+     * Get the maximum points a user can earn based on their subscriptions
+     * This includes all question points + all bonus points from accessible chapters
+     *
+     * @return int
+     */
+    public function maxPoints(): int
+    {
+        $subscriptionIds = $this->subscriptions->pluck('id');
+
+        // Get all accessible materials with their units and chapters
+        $materials = $this->division->materials()
+            ->where('active', true)
+            ->whereHas('units', function ($query) use ($subscriptionIds) {
+                $query->whereHas('subscriptions', function ($subQuery) use ($subscriptionIds) {
+                    $subQuery->whereIn('subscriptions.id', $subscriptionIds);
+                });
+            })
+            ->with(['units' => function ($query) use ($subscriptionIds) {
+                $query->whereHas('subscriptions', function ($subQuery) use ($subscriptionIds) {
+                    $subQuery->whereIn('subscriptions.id', $subscriptionIds);
+                })->with(['chapters' => function ($chapterQuery) use ($subscriptionIds) {
+                    $chapterQuery->whereHas('subscriptions', function ($subQuery) use ($subscriptionIds) {
+                        $subQuery->whereIn('subscriptions.id', $subscriptionIds);
+                    })->with(['questions', 'chapter_level']);
+                }]);
+            }])
+            ->get();
+
+        $maxQuestionPoints = 0;
+        $maxBonusPoints = 0;
+
+        foreach ($materials as $material) {
+            foreach ($material->units as $unit) {
+                foreach ($unit->chapters as $chapter) {
+                    // Sum all question points in this chapter
+                    $chapterQuestionPoints = $chapter->questions->sum('points');
+                    $maxQuestionPoints += $chapterQuestionPoints;
+
+                    // Add bonus points if chapter has a level defined
+                    if ($chapter->chapter_level) {
+                        $maxBonusPoints += $chapter->chapter_level->bonus ?? 0;
+                    }
+                }
+            }
+        }
+
+        return $maxQuestionPoints + $maxBonusPoints;
     }
 
     /**

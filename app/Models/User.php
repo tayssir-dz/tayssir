@@ -110,4 +110,15 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
     {
         return $this->name . ' (' . $this->email . ')';
     }
+
+
+    public function getProgressPercentageAttribute(): float
+    {
+        $leaderboard = $this->leaderboard;
+        if (!$leaderboard || !$leaderboard->max_points) {
+            return 0.0;
+        }
+
+        return ($leaderboard->points / $leaderboard->max_points) * 100;
+    }
 }
