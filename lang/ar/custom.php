@@ -265,11 +265,11 @@ return [
     'models.chapter.level' => 'المستوى',
 
     // # LeaderBoard
-    'models.leaderboard' => 'لوحة الصدارة',
-    'models.leaderboards' => 'لوحات الصدارة',
-    'models.leaderboard.points' => 'النقاط',
-    'models.leaderboard.max' => 'الحد الأقصى للنقاط',
+    'models.leaderboard' => 'لوحة المتصدرين',
     'models.leaderboard.user' => 'المستخدم',
+    'models.leaderboard.points' => 'النقاط',
+    'models.leaderboard.max' => 'النقاط القصوى',
+    'models.leaderboard.progress' => 'التقدم',
 
     // # Active field
     'models.active' => 'نشط',

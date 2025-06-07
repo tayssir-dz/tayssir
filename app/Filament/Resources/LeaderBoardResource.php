@@ -83,6 +83,16 @@ class LeaderBoardResource extends Resource implements HasShieldPermissions
                     ->color("primary")
                     ->label(__('custom.models.leaderboard.max'))
                     ->sortable(),
+                Tables\Columns\TextColumn::make("progress")
+                    ->badge()
+                    ->color(fn($state) => match (true) {
+                        $state >= 90 => 'success',
+                        $state >= 70 => 'warning',
+                        $state >= 50 => 'info',
+                        default => 'gray',
+                    })
+                    ->label(__('custom.models.leaderboard.progress'))
+                    ->getStateUsing(fn($record) => number_format($record->user->progress_percentage, 1) . '%')
             ])
             ->filters([
                 //

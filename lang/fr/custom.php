@@ -256,6 +256,7 @@ return [
     'models.leaderboard.points' => 'Points',
     'models.leaderboard.max' => 'Points Max',
     'models.leaderboard.user' => 'Utilisateur',
+    'models.leaderboard.progress' => 'Progrès',
 
     "direction.label" => 'Direction du texte',
     "direction.rtl" => "De droite à gauche (rtl)",
