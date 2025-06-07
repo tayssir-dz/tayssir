@@ -65,6 +65,8 @@ class LeaderBoardResource extends Resource implements HasShieldPermissions
                     ->toggleable()
                     ->label(__('custom.models.user.avatar'))
                     ->html()
+                    ->width('60px')
+                    ->alignment('center')
                     ->getStateUsing(fn($record) => view('components.filament-ui.avatar', [
                         'name' => $record->user->name,
                         'avatar_url' => $record->user->avatar_url,
