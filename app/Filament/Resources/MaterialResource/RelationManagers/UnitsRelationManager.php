@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UnitsRelationManager extends RelationManager
 {
+    protected static ?string $icon = 'heroicon-o-document-duplicate';
+
     public static function getModelLabel(): string
     {
         return __('custom.models.unit');

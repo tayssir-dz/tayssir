@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SummariesRelationManager extends RelationManager
 {
+    protected static ?string $icon = "heroicon-o-folder-arrow-down";
+
     public static function getModelLabel(): string
     {
         return __('custom.models.summary');
