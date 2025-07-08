@@ -38,6 +38,34 @@ return [
     'models.subscriptionCards' => "Cartes d'abonnement",
     'models.subscriptionCard' => "Carte d'abonnement",
 
+    'models.banners' => 'Bannières',
+    'models.banner' => 'Bannière',
+
+    // # Banner
+    'forms.banner.create.section.infos' => 'Informations de la bannière',
+    'forms.banner.create.section.image' => 'Image de la bannière',
+    'forms.banner.create.section.styling' => 'Style de la bannière',
+    'models.banner.title' => 'Titre',
+    'models.banner.description' => 'Description',
+    'models.banner.action_url' => 'URL d\'action',
+    'models.banner.action_label' => 'Libellé d\'action',
+    'models.banner.gradient_start' => 'Couleur de début du dégradé',
+    'models.banner.gradient_end' => 'Couleur de fin du dégradé',
+    'models.banner.image' => 'Image de la bannière',
+    'models.banner.is_active' => 'Actif',
+
+    'models.summaries' => 'Résumés',
+    'models.summary' => 'Résumé',
+
+    // # Summary
+    'forms.summary.create.section.infos' => 'Informations du résumé',
+    'forms.summary.create.section.file' => 'Fichier PDF du résumé',
+    'models.summary.title' => 'Titre',
+    'models.summary.description' => 'Description',
+    'models.summary.material' => 'Matière',
+    'models.summary.pdf' => 'Fichier PDF',
+    'models.summary.is_active' => 'Actif',
+
     // # Division
     "forms.division.create.section.infos" => "Informations de la filière",
     "forms.division.create.section.image" => "Image de la filière",

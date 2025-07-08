@@ -37,6 +37,34 @@ return [
     'models.subscriptionCards' => "Subscription cards",
     'models.subscriptionCard' => "Subscription card",
 
+    'models.banners' => 'Banners',
+    'models.banner' => 'Banner',
+
+    // # Banner
+    'forms.banner.create.section.infos' => 'Banner Information',
+    'forms.banner.create.section.image' => 'Banner Image',
+    'forms.banner.create.section.styling' => 'Banner Styling',
+    'models.banner.title' => 'Title',
+    'models.banner.description' => 'Description',
+    'models.banner.action_url' => 'Action URL',
+    'models.banner.action_label' => 'Action Label',
+    'models.banner.gradient_start' => 'Gradient Start Color',
+    'models.banner.gradient_end' => 'Gradient End Color',
+    'models.banner.image' => 'Banner Image',
+    'models.banner.is_active' => 'Active',
+
+    'models.summaries' => 'Summaries',
+    'models.summary' => 'Summary',
+
+    // # Summary
+    'forms.summary.create.section.infos' => 'Summary Information',
+    'forms.summary.create.section.file' => 'Summary PDF File',
+    'models.summary.title' => 'Title',
+    'models.summary.description' => 'Description',
+    'models.summary.material' => 'Material',
+    'models.summary.pdf' => 'PDF File',
+    'models.summary.is_active' => 'Active',
+
     // # Division
     "forms.division.create.section.infos" => "Division informations",
     "forms.division.create.section.image" => "Division image",

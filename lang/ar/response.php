@@ -14,6 +14,16 @@ return [
     */
 
     "user_register_successfully" => "تم تسجيل المستخدم بنجاح.",
+
+    // Banners
+    'banners_retrieved_successfully' => 'تم استرجاع البانرات بنجاح',
+    'banner_retrieved_successfully' => 'تم استرجاع البانر بنجاح',
+    'banner_not_found' => 'البانر غير موجود',
+
+    // Summaries
+    'summaries_retrieved_successfully' => 'تم استرجاع الملخصات بنجاح',
+    'summary_retrieved_successfully' => 'تم استرجاع الملخص بنجاح',
+    'summary_not_found' => 'الملخص غير موجود',
     "user_login_successfully" => "تم تسجيل الدخول بنجاح.",
 
     'unauthorised' => 'غير مصرح.',

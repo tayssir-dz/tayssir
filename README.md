@@ -14,4 +14,19 @@ preparation with our interactive quizzes!
 
 ---
 
+new model FlashCardGroup
+material has many FlashCardGroups
+each FlashCardGroup has many FlashCards
+new model FlashCard
 
+model flashcardgroup has title and description
+model flashcard belongs to flashcardgroup, has title and description
+
+
+new model Summary, material has many summaries, the summary has title description and spatie media library mecia collection single file pdf meme type
+
+
+(all descriptions are nullable)
+
+
+new model Banner, has title and description, action url (optional), action label (optional), gradient start (color) and gradient end (color), we gna use the filament color picker on those, image optional (image with spatie media library)

@@ -37,6 +37,34 @@ return [
     'models.subscriptionCards' => "بطاقات الاشتراك",
     'models.subscriptionCard' => "بطاقة الاشتراك",
 
+    'models.banners' => 'البانرات',
+    'models.banner' => 'بانر',
+
+    // # Banner
+    'forms.banner.create.section.infos' => 'معلومات البانر',
+    'forms.banner.create.section.image' => 'صورة البانر',
+    'forms.banner.create.section.styling' => 'تصميم البانر',
+    'models.banner.title' => 'العنوان',
+    'models.banner.description' => 'الوصف',
+    'models.banner.action_url' => 'رابط الإجراء',
+    'models.banner.action_label' => 'تسمية الإجراء',
+    'models.banner.gradient_start' => 'لون بداية التدرج',
+    'models.banner.gradient_end' => 'لون نهاية التدرج',
+    'models.banner.image' => 'صورة البانر',
+    'models.banner.is_active' => 'نشط',
+
+    'models.summaries' => 'الملخصات',
+    'models.summary' => 'ملخص',
+
+    // # Summary
+    'forms.summary.create.section.infos' => 'معلومات الملخص',
+    'forms.summary.create.section.file' => 'ملف الملخص PDF',
+    'models.summary.title' => 'العنوان',
+    'models.summary.description' => 'الوصف',
+    'models.summary.material' => 'المادة',
+    'models.summary.pdf' => 'ملف PDF',
+    'models.summary.is_active' => 'نشط',
+
 
     // # Division
     "forms.division.create.section.infos" => "معلومات الشعبة",

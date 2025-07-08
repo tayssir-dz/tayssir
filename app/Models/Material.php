@@ -101,6 +101,14 @@ class Material extends Model implements HasMedia
     }
 
     /**
+     * Get the summaries for the material.
+     */
+    public function summaries()
+    {
+        return $this->hasMany(Summary::class);
+    }
+
+    /**
      * Get the rtl attribute for backward compatibility.
      */
     public function getRtlAttribute()

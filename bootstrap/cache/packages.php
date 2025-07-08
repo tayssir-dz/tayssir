@@ -56,6 +56,13 @@
       0 => 'CharrafiMed\\GlobalSearchModal\\GlobalSearchModalServiceProvider',
     ),
   ),
+  'designthebox/barcode-field' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'DesignTheBox\\BarcodeField\\FilamentBarcodeScannerFieldServiceProvider',
+    ),
+  ),
   'dutchcodingcompany/filament-developer-logins' => 
   array (
     'providers' => 

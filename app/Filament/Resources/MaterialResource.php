@@ -6,6 +6,7 @@ use App\Enums\ContentDirection;
 use App\Filament\Resources\MaterialResource\Pages;
 use App\Filament\Resources\MaterialResource\RelationManagers;
 use App\Filament\Resources\MaterialResource\RelationManagers\UnitsRelationManager;
+use App\Filament\Resources\MaterialResource\RelationManagers\SummariesRelationManager;
 use App\Models\Material;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use BezhanSalleh\FilamentShield\Support\Utils;
@@ -226,7 +227,8 @@ class MaterialResource extends Resource implements HasShieldPermissions
     public static function getRelations(): array
     {
         return [
-            UnitsRelationManager::class
+            UnitsRelationManager::class,
+            SummariesRelationManager::class,
         ];
     }
 

@@ -3,6 +3,7 @@
 use App\Enums\QuestionType;
 use App\Http\Controllers\API\AppSettingsController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\BannerController;
 use App\Http\Controllers\API\ContentController;
 use App\Http\Controllers\API\DivisionController;
 use App\Http\Controllers\API\ForgotPasswordController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\API\EmailVerificationController;
 use App\Http\Controllers\API\ChangeEmailController;
 use App\Http\Controllers\API\LeaderBoardController;
 use App\Http\Controllers\API\SubscriptionController;
+use App\Http\Controllers\API\SummaryController;
 use App\Http\Controllers\API\UserController;
 use App\Models\Question;
 use App\Models\User;
@@ -23,6 +25,8 @@ Route::get('divisions', [DivisionController::class, 'index'])
 Route::get('divisions/{id}', [DivisionController::class, 'show'])
     ->summary("Get division by ID")
     ->description("This endpoint returns a specific division by its ID");
+
+
 
 // Subscription Routes
 Route::get('subscriptions', [SubscriptionController::class, 'index'])
@@ -163,4 +167,26 @@ Route::prefix('v1')->group(function () {
             ->summary("app settings")
             ->description("This endpoint returns an object containing app settings.");
     });
+
+    // Banner Routes
+    Route::get('banners', [BannerController::class, 'index'])
+        ->middleware(["auth:sanctum", "access"])
+        ->summary("List all active banners")
+        ->description("This endpoint returns all active banners");
+
+    Route::get('banners/{id}', [BannerController::class, 'show'])
+        ->middleware(["auth:sanctum", "access"])
+        ->summary("Get banner by ID")
+        ->description("This endpoint returns a specific active banner by its ID");
+
+    // Summary Routes
+    Route::get('summaries', [SummaryController::class, 'index'])
+        ->middleware(["auth:sanctum", "access"])
+        ->summary("List all active summaries grouped by materials")
+        ->description("This endpoint returns all active summaries grouped by materials with optional material filtering and pagination, simple example `/api/v1/summaries?per_page=20&page=1`, filter materials : `/api/v1/summaries?materials[]=1&materials[]=3`, note that the material ids must exist in the db");
+
+    Route::get('summaries/{id}', [SummaryController::class, 'show'])
+        ->middleware(["auth:sanctum", "access"])
+        ->summary("Get summary by ID")
+        ->description("This endpoint returns a specific active summary by its ID");
 });
