@@ -117,6 +117,14 @@ class Material extends Model implements HasMedia
     }
 
     /**
+     * Get the flashcard groups for the material.
+     */
+    public function flashcardGroups()
+    {
+        return $this->hasMany(FlashcardGroup::class);
+    }
+
+    /**
      * Get the rtl attribute for backward compatibility.
      */
     public function getRtlAttribute()

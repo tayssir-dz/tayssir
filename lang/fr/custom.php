@@ -78,6 +78,23 @@ return [
     'models.bac.pdf' => 'Fichier PDF',
     'models.bac.is_active' => 'Actif',
 
+    'models.flashcard_groups' => 'Groupes de cartes mémoire',
+    'models.flashcard_group' => 'Groupe de cartes mémoire',
+
+    // # Flashcard Group
+    'forms.flashcard_group.create.section.infos' => 'Informations du groupe de cartes mémoire',
+    'models.flashcard_group.title' => 'Titre',
+    'models.flashcard_group.description' => 'Description',
+    'models.flashcard_group.action.details' => 'Détails du groupe de cartes mémoire',
+
+    'models.flashcards' => 'Cartes mémoire',
+    'models.flashcard' => 'Carte mémoire',
+
+    // # Flashcard
+    'forms.flashcard.create.section.infos' => 'Informations de la carte mémoire',
+    'models.flashcard.title' => 'Titre',
+    'models.flashcard.description' => 'Description',
+
     // # Division
     "forms.division.create.section.infos" => "Informations de la filière",
     "forms.division.create.section.image" => "Image de la filière",

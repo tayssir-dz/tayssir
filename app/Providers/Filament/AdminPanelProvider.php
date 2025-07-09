@@ -98,9 +98,7 @@ class AdminPanelProvider extends PanelProvider
                 FilamentDeveloperLoginsPlugin::make()
                     ->enabled(config('app.debug', false))
                     ->users([
-                        'TAYSSIR ADMIN' => 'admin@tayssir-bac.com',
-                        'TAYSSIR PROF' => 'Tayssir_Prof@tayssir-bac.com',
-                        // 'something else' => "somethingelse@something.com"
+                        'ADMIN' => 'admin@admin.dev',
                     ]),
                 FilamentRecordSwitcherPlugin::make(),
 

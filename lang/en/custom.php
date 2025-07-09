@@ -77,6 +77,23 @@ return [
     'models.bac.pdf' => 'PDF File',
     'models.bac.is_active' => 'Active',
 
+    'models.flashcard_groups' => 'Flashcard Groups',
+    'models.flashcard_group' => 'Flashcard Group',
+
+    // # Flashcard Group
+    'forms.flashcard_group.create.section.infos' => 'Flashcard Group Information',
+    'models.flashcard_group.title' => 'Title',
+    'models.flashcard_group.description' => 'Description',
+    'models.flashcard_group.action.details' => 'Flashcard Group Details',
+
+    'models.flashcards' => 'Flashcards',
+    'models.flashcard' => 'Flashcard',
+
+    // # Flashcard
+    'forms.flashcard.create.section.infos' => 'Flashcard Information',
+    'models.flashcard.title' => 'Title',
+    'models.flashcard.description' => 'Description',
+
     // # Division
     "forms.division.create.section.infos" => "Division informations",
     "forms.division.create.section.image" => "Division image",

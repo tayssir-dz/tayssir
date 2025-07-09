@@ -77,6 +77,23 @@ return [
     'models.bac.pdf' => 'ملف PDF',
     'models.bac.is_active' => 'نشط',
 
+    'models.flashcard_groups' => 'مجموعات البطاقات التعليمية',
+    'models.flashcard_group' => 'مجموعة بطاقات تعليمية',
+
+    // # Flashcard Group
+    'forms.flashcard_group.create.section.infos' => 'معلومات مجموعة البطاقات التعليمية',
+    'models.flashcard_group.title' => 'العنوان',
+    'models.flashcard_group.description' => 'الوصف',
+    'models.flashcard_group.action.details' => 'تفاصيل مجموعة البطاقات التعليمية',
+
+    'models.flashcards' => 'البطاقات التعليمية',
+    'models.flashcard' => 'بطاقة تعليمية',
+
+    // # Flashcard
+    'forms.flashcard.create.section.infos' => 'معلومات البطاقة التعليمية',
+    'models.flashcard.title' => 'العنوان',
+    'models.flashcard.description' => 'الوصف',
+
 
     // # Division
     "forms.division.create.section.infos" => "معلومات الشعبة",
