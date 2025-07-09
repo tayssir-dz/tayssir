@@ -19,6 +19,12 @@ return [
     'bac_retrieved_successfully' => 'Baccalauréat récupéré avec succès',
     'bac_not_found' => 'Baccalauréat non trouvé',
 
+    // Flashcards
+    'materials_with_flashcard_groups_retrieved_successfully' => 'Matières avec groupes de cartes mémoire récupérées avec succès',
+    'flashcards_retrieved_successfully' => 'Cartes mémoire récupérées avec succès',
+    'flashcard_retrieved_successfully' => 'Carte mémoire récupérée avec succès',
+    'flashcard_not_found' => 'Carte mémoire non trouvée',
+
     // Auth
     'user_register_successfully' => 'Utilisateur enregistré avec succès',
     'user_login_successfully' => 'Utilisateur connecté avec succès',

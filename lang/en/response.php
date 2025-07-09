@@ -19,6 +19,12 @@ return [
     'bac_retrieved_successfully' => 'Bac retrieved successfully',
     'bac_not_found' => 'Bac not found',
 
+    // Flashcards
+    'materials_with_flashcard_groups_retrieved_successfully' => 'Materials with flashcard groups retrieved successfully',
+    'flashcards_retrieved_successfully' => 'Flashcards retrieved successfully',
+    'flashcard_retrieved_successfully' => 'Flashcard retrieved successfully',
+    'flashcard_not_found' => 'Flashcard not found',
+
     // Auth
     'user_register_successfully' => 'User registered successfully',
     'user_login_successfully' => 'User logged in successfully',

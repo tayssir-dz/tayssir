@@ -29,6 +29,12 @@ return [
     'bacs_retrieved_successfully' => 'تم استرجاع امتحانات البكالوريا بنجاح',
     'bac_retrieved_successfully' => 'تم استرجاع امتحان البكالوريا بنجاح',
     'bac_not_found' => 'امتحان البكالوريا غير موجود',
+
+    // Flashcards
+    'materials_with_flashcard_groups_retrieved_successfully' => 'تم استرجاع المواد مع مجموعات البطاقات التعليمية بنجاح',
+    'flashcards_retrieved_successfully' => 'تم استرجاع البطاقات التعليمية بنجاح',
+    'flashcard_retrieved_successfully' => 'تم استرجاع البطاقة التعليمية بنجاح',
+    'flashcard_not_found' => 'البطاقة التعليمية غير موجودة',
     "user_login_successfully" => "تم تسجيل الدخول بنجاح.",
 
     'unauthorised' => 'غير مصرح.',
