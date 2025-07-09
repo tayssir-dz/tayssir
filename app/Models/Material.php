@@ -109,6 +109,14 @@ class Material extends Model implements HasMedia
     }
 
     /**
+     * Get the bacs for the material.
+     */
+    public function bacs()
+    {
+        return $this->hasMany(Bac::class);
+    }
+
+    /**
      * Get the rtl attribute for backward compatibility.
      */
     public function getRtlAttribute()

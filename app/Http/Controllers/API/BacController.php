@@ -1,0 +1,117 @@
+<?php
+
+namespace App\Http\Controllers\API;
+
+use App\Http\Controllers\API\BaseController;
+use App\Models\Bac;
+use Illuminate\Http\Request;
+
+class BacController extends BaseController
+{
+    /**
+     * Display a listing of the active bacs grouped by materials with optional material filtering.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        // Validate the request parameters
+        $request->validate([
+            'materials' => 'sometimes|array',
+            'materials.*' => 'integer|exists:materials,id',
+            'material_id' => 'sometimes|integer|exists:materials,id',
+            'per_page' => 'sometimes|integer|min:1|max:100',
+            'page' => 'sometimes|integer|min:1',
+        ]);
+
+        $query = Bac::with('material')
+            ->where('is_active', true);
+
+        // Filter by materials if provided
+        if ($request->has('materials') && is_array($request->materials)) {
+            $query->whereIn('material_id', $request->materials);
+        } elseif ($request->has('material_id')) {
+            $query->where('material_id', $request->material_id);
+        }
+
+        // Set pagination parameters
+        $perPage = $request->get('per_page', 15);
+        $perPage = min($perPage, 100); // Cap at 100 items per page
+
+        // Get paginated results
+        $bacs = $query->orderBy('created_at', 'desc')
+            ->paginate($perPage);
+
+        // Group bacs by material
+        $groupedBacs = $bacs->groupBy('material_id')->map(function ($materialBacs, $materialId) {
+            $material = $materialBacs->first()->material;
+
+            return [
+                'material' => [
+                    'id' => $material->id,
+                    'name' => $material->name,
+                    'code' => $material->code,
+                    'color' => $material->color,
+                    'description' => $material->description,
+                ],
+                'bacs' => $materialBacs->map(function ($bac) {
+                    return [
+                        'id' => $bac->id,
+                        'title' => $bac->title,
+                        'description' => $bac->description,
+                        'pdf_url' => $bac->pdf,
+                        'created_at' => $bac->created_at,
+                    ];
+                })->values()
+            ];
+        })->values();
+
+        return $this->sendResponse([
+            'materials_with_bacs' => $groupedBacs,
+            'pagination' => [
+                'current_page' => $bacs->currentPage(),
+                'last_page' => $bacs->lastPage(),
+                'per_page' => $bacs->perPage(),
+                'total' => $bacs->total(),
+                'from' => $bacs->firstItem(),
+                'to' => $bacs->lastItem(),
+            ]
+        ], __("response.bacs_retrieved_successfully"));
+    }
+
+    /**
+     * Display the specified bac.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $bac = Bac::with('material')
+            ->where('is_active', true)
+            ->find($id);
+
+        if (is_null($bac)) {
+            return $this->sendError(__("response.bac_not_found"));
+        }
+
+        $bacData = [
+            'id' => $bac->id,
+            'title' => $bac->title,
+            'description' => $bac->description,
+            'pdf_url' => $bac->pdf,
+            'material' => [
+                'id' => $bac->material->id,
+                'name' => $bac->material->name,
+                'code' => $bac->material->code,
+                'color' => $bac->material->color,
+                'description' => $bac->material->description,
+            ],
+            'created_at' => $bac->created_at,
+            'updated_at' => $bac->updated_at,
+        ];
+
+        return $this->sendResponse($bacData, __("response.bac_retrieved_successfully"));
+    }
+}

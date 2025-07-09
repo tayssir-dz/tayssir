@@ -7,6 +7,7 @@ use App\Filament\Resources\MaterialResource\Pages;
 use App\Filament\Resources\MaterialResource\RelationManagers;
 use App\Filament\Resources\MaterialResource\RelationManagers\UnitsRelationManager;
 use App\Filament\Resources\MaterialResource\RelationManagers\SummariesRelationManager;
+use App\Filament\Resources\MaterialResource\RelationManagers\BacsRelationManager;
 use App\Models\Material;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use BezhanSalleh\FilamentShield\Support\Utils;
@@ -229,6 +230,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
         return [
             UnitsRelationManager::class,
             SummariesRelationManager::class,
+            BacsRelationManager::class,
         ];
     }
 

@@ -12,6 +12,7 @@ use App\Http\Controllers\API\ChangeEmailController;
 use App\Http\Controllers\API\LeaderBoardController;
 use App\Http\Controllers\API\SubscriptionController;
 use App\Http\Controllers\API\SummaryController;
+use App\Http\Controllers\API\BacController;
 use App\Http\Controllers\API\UserController;
 use App\Models\Question;
 use App\Models\User;
@@ -189,4 +190,15 @@ Route::prefix('v1')->group(function () {
         ->middleware(["auth:sanctum", "access"])
         ->summary("Get summary by ID")
         ->description("This endpoint returns a specific active summary by its ID");
+
+    // Bac Routes
+    Route::get('bacs', [BacController::class, 'index'])
+        ->middleware(["auth:sanctum", "access"])
+        ->summary("List all active bacs grouped by materials")
+        ->description("This endpoint returns all active bacs grouped by materials with optional material filtering and pagination. Examples: `/api/v1/bacs?per_page=20&page=1` for pagination, `/api/v1/bacs?material_id=1` for single material filter, `/api/v1/bacs?materials[]=1&materials[]=3` for multiple materials filter. Note that the material IDs must exist in the database.");
+
+    Route::get('bacs/{id}', [BacController::class, 'show'])
+        ->middleware(["auth:sanctum", "access"])
+        ->summary("Get bac by ID")
+        ->description("This endpoint returns a specific active bac by its ID");
 });

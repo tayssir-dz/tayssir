@@ -14,6 +14,11 @@ return [
     'summary_retrieved_successfully' => 'Summary retrieved successfully',
     'summary_not_found' => 'Summary not found',
 
+    // Bacs
+    'bacs_retrieved_successfully' => 'Bacs retrieved successfully',
+    'bac_retrieved_successfully' => 'Bac retrieved successfully',
+    'bac_not_found' => 'Bac not found',
+
     // Auth
     'user_register_successfully' => 'User registered successfully',
     'user_login_successfully' => 'User logged in successfully',

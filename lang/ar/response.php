@@ -24,6 +24,11 @@ return [
     'summaries_retrieved_successfully' => 'تم استرجاع الملخصات بنجاح',
     'summary_retrieved_successfully' => 'تم استرجاع الملخص بنجاح',
     'summary_not_found' => 'الملخص غير موجود',
+
+    // Bacs
+    'bacs_retrieved_successfully' => 'تم استرجاع امتحانات البكالوريا بنجاح',
+    'bac_retrieved_successfully' => 'تم استرجاع امتحان البكالوريا بنجاح',
+    'bac_not_found' => 'امتحان البكالوريا غير موجود',
     "user_login_successfully" => "تم تسجيل الدخول بنجاح.",
 
     'unauthorised' => 'غير مصرح.',

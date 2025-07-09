@@ -65,6 +65,18 @@ return [
     'models.summary.pdf' => 'ملف PDF',
     'models.summary.is_active' => 'نشط',
 
+    'models.bacs' => 'بكالوريات',
+    'models.bac' => 'بكالوريا',
+
+    // # Bac
+    'forms.bac.create.section.infos' => 'معلومات البكالوريا',
+    'forms.bac.create.section.file' => 'ملف البكالوريا PDF',
+    'models.bac.title' => 'العنوان',
+    'models.bac.description' => 'الوصف',
+    'models.bac.material' => 'المادة',
+    'models.bac.pdf' => 'ملف PDF',
+    'models.bac.is_active' => 'نشط',
+
 
     // # Division
     "forms.division.create.section.infos" => "معلومات الشعبة",

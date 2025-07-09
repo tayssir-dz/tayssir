@@ -14,6 +14,11 @@ return [
     'summary_retrieved_successfully' => 'Résumé récupéré avec succès',
     'summary_not_found' => 'Résumé non trouvé',
 
+    // Bacs
+    'bacs_retrieved_successfully' => 'Baccalauréats récupérés avec succès',
+    'bac_retrieved_successfully' => 'Baccalauréat récupéré avec succès',
+    'bac_not_found' => 'Baccalauréat non trouvé',
+
     // Auth
     'user_register_successfully' => 'Utilisateur enregistré avec succès',
     'user_login_successfully' => 'Utilisateur connecté avec succès',

@@ -65,6 +65,18 @@ return [
     'models.summary.pdf' => 'PDF File',
     'models.summary.is_active' => 'Active',
 
+    'models.bacs' => 'Bacs',
+    'models.bac' => 'Bac',
+
+    // # Bac
+    'forms.bac.create.section.infos' => 'Bac Information',
+    'forms.bac.create.section.file' => 'Bac PDF File',
+    'models.bac.title' => 'Title',
+    'models.bac.description' => 'Description',
+    'models.bac.material' => 'Material',
+    'models.bac.pdf' => 'PDF File',
+    'models.bac.is_active' => 'Active',
+
     // # Division
     "forms.division.create.section.infos" => "Division informations",
     "forms.division.create.section.image" => "Division image",

@@ -66,6 +66,18 @@ return [
     'models.summary.pdf' => 'Fichier PDF',
     'models.summary.is_active' => 'Actif',
 
+    'models.bacs' => 'Bacs',
+    'models.bac' => 'Bac',
+
+    // # Bac
+    'forms.bac.create.section.infos' => 'Informations du baccalauréat',
+    'forms.bac.create.section.file' => 'Fichier PDF du baccalauréat',
+    'models.bac.title' => 'Titre',
+    'models.bac.description' => 'Description',
+    'models.bac.material' => 'Matière',
+    'models.bac.pdf' => 'Fichier PDF',
+    'models.bac.is_active' => 'Actif',
+
     // # Division
     "forms.division.create.section.infos" => "Informations de la filière",
     "forms.division.create.section.image" => "Image de la filière",
