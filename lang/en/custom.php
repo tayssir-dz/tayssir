@@ -253,6 +253,23 @@ return [
     'models.question.json_upload.upload_failed' => 'Upload Failed',
     'models.question.json_upload.error_message' => 'An error occurred: :error',
 
+    // # Flashcard JSON Upload
+    'models.flashcard.json_upload.button' => 'Upload JSON',
+    'models.flashcard.json_upload.modal_heading' => 'Upload Flashcards from JSON',
+    'models.flashcard.json_upload.modal_description' => 'Paste a JSON array of flashcards. Each flashcard should have the required fields.',
+    'models.flashcard.json_upload.submit_button' => 'Upload and Validate',
+    'models.flashcard.json_upload.json_data_label' => 'JSON Data',
+    'models.flashcard.json_upload.helper_text' => 'Paste your JSON array of flashcards here. Use the editor to easily modify your JSON data.',
+    'models.flashcard.json_upload.invalid_json' => 'Invalid JSON',
+    'models.flashcard.json_upload.invalid_json_message' => 'Please provide valid JSON data: :error',
+    'models.flashcard.json_upload.invalid_format' => 'Invalid Format',
+    'models.flashcard.json_upload.invalid_format_message' => 'JSON data must be an object or array of flashcard objects.',
+    'models.flashcard.json_upload.success_title' => 'Flashcards Uploaded',
+    'models.flashcard.json_upload.success_message' => 'Successfully uploaded :count flashcard(s).',
+    'models.flashcard.json_upload.errors_title' => 'Some Flashcards Failed',
+    'models.flashcard.json_upload.upload_failed' => 'Upload Failed',
+    'models.flashcard.json_upload.error_message' => 'An error occurred: :error',
+
     // # JSON Edit
     'models.question.json_edit.button' => 'Edit JSON',
     'models.question.json_edit.modal_heading' => 'Edit Question JSON',

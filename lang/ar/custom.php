@@ -356,6 +356,23 @@ return [
     'models.question.json_upload.upload_failed' => 'فشل الرفع',
     'models.question.json_upload.error_message' => 'حدث خطأ: :error',
 
+    // # Flashcard JSON Upload
+    'models.flashcard.json_upload.button' => 'رفع JSON',
+    'models.flashcard.json_upload.modal_heading' => 'رفع البطاقات التعليمية من JSON',
+    'models.flashcard.json_upload.modal_description' => 'الصق مصفوفة JSON للبطاقات التعليمية. يجب أن تحتوي كل بطاقة تعليمية على الحقول المطلوبة.',
+    'models.flashcard.json_upload.submit_button' => 'رفع والتحقق',
+    'models.flashcard.json_upload.json_data_label' => 'بيانات JSON',
+    'models.flashcard.json_upload.helper_text' => 'الصق مصفوفة JSON للبطاقات التعليمية هنا. استخدم المحرر لتعديل بيانات JSON بسهولة.',
+    'models.flashcard.json_upload.invalid_json' => 'JSON غير صالح',
+    'models.flashcard.json_upload.invalid_json_message' => 'يرجى تقديم بيانات JSON صالحة: :error',
+    'models.flashcard.json_upload.invalid_format' => 'تنسيق غير صالح',
+    'models.flashcard.json_upload.invalid_format_message' => 'يجب أن تكون بيانات JSON عبارة عن كائن أو مصفوفة من كائنات البطاقات التعليمية.',
+    'models.flashcard.json_upload.success_title' => 'تم رفع البطاقات التعليمية',
+    'models.flashcard.json_upload.success_message' => 'تم رفع :count بطاقة تعليمية بنجاح.',
+    'models.flashcard.json_upload.errors_title' => 'فشل بعض البطاقات التعليمية',
+    'models.flashcard.json_upload.upload_failed' => 'فشل الرفع',
+    'models.flashcard.json_upload.error_message' => 'حدث خطأ: :error',
+
     // # JSON Edit
     'models.question.json_edit.button' => 'تحرير JSON',
     'models.question.json_edit.modal_heading' => 'تحرير سؤال بصيغة JSON',

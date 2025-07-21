@@ -357,6 +357,23 @@ return [
     'models.question.json_upload.upload_failed' => 'Échec de l\'Import',
     'models.question.json_upload.error_message' => 'Une erreur est survenue : :error',
 
+    // # Flashcard JSON Upload
+    'models.flashcard.json_upload.button' => 'Importer JSON',
+    'models.flashcard.json_upload.modal_heading' => 'Importer des cartes mémoire depuis JSON',
+    'models.flashcard.json_upload.modal_description' => 'Collez un tableau JSON de cartes mémoire. Chaque carte mémoire doit avoir les champs requis.',
+    'models.flashcard.json_upload.submit_button' => 'Importer et Valider',
+    'models.flashcard.json_upload.json_data_label' => 'Données JSON',
+    'models.flashcard.json_upload.helper_text' => 'Collez votre tableau JSON de cartes mémoire ici. Utilisez l\'éditeur pour modifier facilement vos données JSON.',
+    'models.flashcard.json_upload.invalid_json' => 'JSON Invalide',
+    'models.flashcard.json_upload.invalid_json_message' => 'Veuillez fournir des données JSON valides : :error',
+    'models.flashcard.json_upload.invalid_format' => 'Format Invalide',
+    'models.flashcard.json_upload.invalid_format_message' => 'Les données JSON doivent être un objet ou un tableau d\'objets de cartes mémoire.',
+    'models.flashcard.json_upload.success_title' => 'Cartes Mémoire Importées',
+    'models.flashcard.json_upload.success_message' => ':count carte(s) mémoire importée(s) avec succès.',
+    'models.flashcard.json_upload.errors_title' => 'Certaines Cartes Mémoire ont Échoué',
+    'models.flashcard.json_upload.upload_failed' => 'Échec de l\'Import',
+    'models.flashcard.json_upload.error_message' => 'Une erreur est survenue : :error',
+
     // # JSON Edit
     'models.question.json_edit.button' => 'Éditer JSON',
     'models.question.json_edit.modal_heading' => 'Éditer Question JSON',

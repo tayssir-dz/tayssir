@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\FlashcardGroupResource\RelationManagers;
 
+use App\Filament\Resources\FlashcardGroupResource\RelationManagers\FlashcardJsonUploadAction;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
@@ -64,6 +65,9 @@ class FlashcardsRelationManager extends RelationManager
 
                 TextColumn::make('description')
                     ->limit(50)
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->wrap()
+                    ->searchable()
                     ->label(__('custom.models.flashcard.description')),
 
                 TextColumn::make('created_at')
@@ -80,6 +84,7 @@ class FlashcardsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
+                FlashcardJsonUploadAction::make(),
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
