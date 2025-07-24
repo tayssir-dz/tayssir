@@ -7,12 +7,10 @@ namespace App\Models;
 
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
-use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -25,6 +23,7 @@ use App\Traits\User\HasWilayaAndCommune;
 use App\Traits\User\HasProgress;
 use App\Traits\User\HasSubscriptions;
 use App\Traits\User\InteractsWithContent;
+use App\Traits\User\IsPanelUser;
 
 #[ObservedBy([UserObserver::class])]
 class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvatar, FilamentUser
@@ -38,15 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
     use HasProgress;
     use HasSubscriptions;
     use InteractsWithContent;
-
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return true;
-    }
-    public function getFilamentAvatarUrl(): ?string
-    {
-        return $this->avatar_url ? Storage::url($this->avatar_url) : null;
-    }
+    use IsPanelUser;
 
     protected $fillable = [
         'name',

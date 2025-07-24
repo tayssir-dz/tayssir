@@ -74,7 +74,7 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
                     TextInput::make("name")
                         ->label(__("custom.models.subscription.name"))
                         ->unique()
-                        ->unique(table: 'subscriptions', ignorable: fn($record) => $record)
+                        ->unique(ignoreRecord: true)
                         ->required(),
 
                     Textarea::make("description")
@@ -86,7 +86,6 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
                         ->label(__("custom.models.subscription.price"))
                         ->default(0)
                         ->locale(__("custom.currency.local.dzd")),
-
                     DatePicker::make("ending_date")
                         ->label(__("custom.models.subscription.ending_date")),
 
@@ -137,10 +136,13 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
                     ->color("success")
                     ->locale(__("custom.currency.local.dzd")),
 
-                TextColumn::make("ending_date")
-                    ->default("N/A")
-                    ->label(__("custom.models.subscription.ending_date"))
-                    ->sortable(),
+                MoneyColumn::make("price_after_discount")->badge()->color("success"),
+                // MoneyColumn::make("discount_amount")->badge()->color("success"),
+                // TextColumn::make("discount_percentage")->badge()->color("success"),
+                // TextColumn::make("ending_date")
+                //     ->default("N/A")
+                //     ->label(__("custom.models.subscription.ending_date"))
+                //     ->sortable(),
 
                 Tables\Columns\ColorColumn::make('gradiant_start')
                     ->label('Gradient Start'),

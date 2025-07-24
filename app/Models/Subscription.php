@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Subscription\HasDiscounts;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Subscription extends Model
 {
     use HasFactory;
+    use HasDiscounts;
 
     public const GUEST_ID = 1;
 
@@ -66,66 +68,5 @@ class Subscription extends Model
     public function units()
     {
         return $this->belongsToMany(Unit::class);
-    }
-
-    /**
-     * Get the price after applying the best available discount
-     */
-    public function getPriceAfterDiscountAttribute()
-    {
-        $originalPrice = $this->price;
-
-        // Get active discounts (within date range)
-        $activeDiscounts = $this->discounts()
-            ->where(function ($query) {
-                $query->where('from', '<=', now())
-                    ->where('to', '>=', now());
-            })
-            ->get();
-
-        if ($activeDiscounts->isEmpty()) {
-            return $originalPrice;
-        }
-
-        $bestPrice = $originalPrice;
-
-        foreach ($activeDiscounts as $discount) {
-            $discountedPrice = $originalPrice;
-
-            // Apply percentage discount
-            if ($discount->percentage) {
-                $discountedPrice = $originalPrice * (1 - ($discount->percentage / 100));
-            }
-
-            // Apply fixed amount discount
-            if ($discount->amount) {
-                $discountedPrice = max(0, $originalPrice - $discount->amount);
-            }
-
-            // Keep the best (lowest) price
-            $bestPrice = min($bestPrice, $discountedPrice);
-        }
-
-        return $bestPrice;
-    }
-
-    /**
-     * Get the discount amount applied
-     */
-    public function getDiscountAmountAttribute()
-    {
-        return $this->price - $this->price_after_discount;
-    }
-
-    /**
-     * Get the discount percentage applied
-     */
-    public function getDiscountPercentageAttribute()
-    {
-        if ($this->price == 0) {
-            return 0;
-        }
-
-        return (($this->price - $this->price_after_discount) / $this->price) * 100;
     }
 }
