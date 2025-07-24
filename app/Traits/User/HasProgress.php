@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Traits\User;
 
 use App\Enums\ChapterVisibility;
 use App\Models\Chapter;

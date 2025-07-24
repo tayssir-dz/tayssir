@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Traits\User;
 
 use Kossa\AlgerianCities\Commune;
 use Kossa\AlgerianCities\Wilaya;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Traits\User;
 
 use App\Models\SubscriptionCard;
 use App\Models\Subscription;

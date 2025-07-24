@@ -5,9 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 // use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 
-use App\Traits\HasWilayaAndCommune;
-use App\Traits\HasProgress;
-use App\Traits\HasSubscriptions;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
@@ -19,16 +16,22 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Permission\Traits\HasRoles;
-use App\Observers\UserObserver;
-use App\Traits\InteractsWithContent;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
+use App\Observers\UserObserver;
+
+use Spatie\Permission\Traits\HasRoles;
+use App\Traits\User\HasWilayaAndCommune;
+use App\Traits\User\HasProgress;
+use App\Traits\User\HasSubscriptions;
+use App\Traits\User\InteractsWithContent;
 
 #[ObservedBy([UserObserver::class])]
 class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvatar, FilamentUser
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use HasApiTokens;
     use InteractsWithMedia;
     use HasRoles;
     use HasWilayaAndCommune;
