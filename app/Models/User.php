@@ -45,11 +45,6 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
         return $this->avatar_url ? Storage::url($this->avatar_url) : null;
     }
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         "age",
@@ -60,26 +55,15 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
         'password',
         'wilaya_id',
         'commune_id',
-        'division_id', // Add this
+        'division_id',
     ];
     // protected $with = ['subscriptionCard'];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
