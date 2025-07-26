@@ -49,7 +49,7 @@ class PromoCodesRelationManager extends RelationManager
                             ->maxLength(255)
                             ->columnSpan(2)
                             ->placeholder('PROMO2025')
-                            ->helperText('Enter a unique promo code for identification'),
+                            ->helperText(__('custom.forms.promoCode.helper.code')),
                     ])
                     ->columns(2),
 
@@ -85,7 +85,7 @@ class PromoCodesRelationManager extends RelationManager
                             ->step(0.01)
                             ->suffix('%')
                             ->columnSpan(1)
-                            ->helperText('Percentage discount for students (0-100%)'),
+                            ->helperText(__('custom.forms.promoCode.helper.student_discount')),
 
                         TextInput::make('promoter_margin')
                             ->label(__('custom.models.promoCode.promoter_margin'))
@@ -97,7 +97,7 @@ class PromoCodesRelationManager extends RelationManager
                             ->step(0.01)
                             ->suffix('%')
                             ->columnSpan(1)
-                            ->helperText('Percentage margin for promoter (0-100%)'),
+                            ->helperText(__('custom.forms.promoCode.helper.promoter_margin')),
                     ])
                     ->columns(2),
             ]);

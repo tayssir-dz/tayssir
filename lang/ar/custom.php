@@ -72,6 +72,9 @@ return [
     'forms.promoCode.create.section.infos' => 'معلومات رمز الترويج',
     'forms.promoCode.create.section.dates' => 'فترة الصلاحية',
     'forms.promoCode.create.section.discounts' => 'معلومات الخصم',
+    'forms.promoCode.helper.code' => 'أدخل رمز ترويج فريد للتعريف',
+    'forms.promoCode.helper.student_discount' => 'نسبة خصم للطلاب (0-100%)',
+    'forms.promoCode.helper.promoter_margin' => 'نسبة هامش للمروج (0-100%)',
 
     'models.banners' => 'البانرات',
     'models.banner' => 'بانر',

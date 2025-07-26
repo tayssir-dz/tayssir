@@ -73,6 +73,9 @@ return [
     'forms.promoCode.create.section.infos' => 'Informations du code promo',
     'forms.promoCode.create.section.dates' => 'Période de validité',
     'forms.promoCode.create.section.discounts' => 'Informations de remise',
+    'forms.promoCode.helper.code' => 'Entrez un code promo unique pour l\'identification',
+    'forms.promoCode.helper.student_discount' => 'Pourcentage de remise pour les étudiants (0-100%)',
+    'forms.promoCode.helper.promoter_margin' => 'Pourcentage de marge pour le promoteur (0-100%)',
 
     'models.banners' => 'Bannières',
     'models.banner' => 'Bannière',

@@ -75,6 +75,9 @@ return [
     'forms.promoCode.create.section.infos' => 'Promo Code Information',
     'forms.promoCode.create.section.dates' => 'Validity Period',
     'forms.promoCode.create.section.discounts' => 'Discount Information',
+    'forms.promoCode.helper.code' => 'Enter a unique promo code for identification',
+    'forms.promoCode.helper.student_discount' => 'Percentage discount for students (0-100%)',
+    'forms.promoCode.helper.promoter_margin' => 'Percentage margin for promoter (0-100%)',
 
     // # Banner
     'forms.banner.create.section.infos' => 'Banner Information',
