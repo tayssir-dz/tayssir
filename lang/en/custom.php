@@ -40,6 +40,9 @@ return [
     'models.banners' => 'Banners',
     'models.banner' => 'Banner',
 
+    'models.promoters' => 'Promoters',
+    'models.promoter' => 'Promoter',
+
     // # Banner
     'forms.banner.create.section.infos' => 'Banner Information',
     'forms.banner.create.section.image' => 'Banner Image',

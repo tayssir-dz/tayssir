@@ -6,7 +6,6 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use Date;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
@@ -38,6 +37,8 @@ use Filament\Forms\Components\Placeholder;
 use Illuminate\Support\HtmlString;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 
 class UserResource extends Resource implements HasShieldPermissions
 {
@@ -95,7 +96,7 @@ class UserResource extends Resource implements HasShieldPermissions
     protected static bool $isGloballySearchable = true;
     public static function getGloballySearchableAttributes(): array
     {
-        return ['name', 'phone_number', 'email', 'new_email', 'wilaya.arabic_name', 'commune.arabic_name'];
+        return ['name', 'phone_number', 'email', 'new_email', 'wilaya.arabic_name', 'commune.arabic_name', 'wilaya.name', 'commune.name'];
     }
 
 
@@ -172,7 +173,7 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->multiple()
                             ->preload()
                             ->searchable()
-                            ->visible(auth()->user()->can("assign_role_user"))
+                            ->visible(Auth::user()->can("assign_role_user"))
                             ->label(__('role'))
                             ->columnSpan(2),
 
@@ -181,7 +182,7 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->relationship('division', 'name')
                             ->preload()
                             ->searchable()
-                            ->visible(auth()->user()->can("assign_division_user"))
+                            ->visible(Auth::user()->can("assign_division_user"))
                             ->label(__('division'))
                             ->columnSpan(2),
 
