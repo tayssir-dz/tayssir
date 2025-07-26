@@ -37,6 +37,26 @@ return [
     'models.subscriptionCards' => "بطاقات الاشتراك",
     'models.subscriptionCard' => "بطاقة الاشتراك",
 
+    'models.promoters' => 'المروجين',
+    'models.promoter' => 'مروج',
+
+    // # Promoter
+    'models.promoter.name' => 'الاسم',
+    'models.promoter.avatar' => 'الصورة الشخصية',
+    'models.promoter.email' => 'البريد الإلكتروني',
+    'models.promoter.password' => 'كلمة المرور',
+    'models.promoter.phone' => 'رقم الهاتف',
+    'models.promoter.phone.empty' => 'لا يوجد رقم هاتف',
+    'models.promoter.wilaya' => 'الولاية',
+    'models.promoter.wilayas' => 'الولايات',
+    'models.promoter.wilaya.empty' => 'لم يتم اختيار الولاية',
+    'models.promoter.wilaya.field' => "arabic_name",
+    'models.promoter.commune' => 'البلدية',
+    'models.promoter.communes' => 'البلديات',
+    'models.promoter.commune.empty' => 'لم يتم اختيار البلدية',
+    'models.promoter.commune.field' => "arabic_name",
+    'models.promoter.personal_info' => 'المعلومات الشخصية',
+
     'models.banners' => 'البانرات',
     'models.banner' => 'بانر',
 

@@ -68,44 +68,44 @@ class PromoterResource extends Resource implements HasShieldPermissions
     {
         return $form
             ->schema([
-                Section::make(__('custom.models.user.perfonal_info'))
+                Section::make(__('custom.models.promoter.personal_info'))
                     ->schema([
                         TextInput::make("name")
                             ->required()
                             ->columnSpan(2)
-                            ->label(__('custom.models.user.name')),
+                            ->label(__('custom.models.promoter.name')),
 
                         TextInput::make("email")
                             ->disabledOn("edit")
                             ->required()
                             ->unique(ignoreRecord: true)
                             ->email()
-                            ->label(__('custom.models.user.email')),
+                            ->label(__('custom.models.promoter.email')),
 
                         TextInput::make('phone_number')
                             ->disabledOn("edit")
-                            ->label(__('custom.models.user.phone')),
+                            ->label(__('custom.models.promoter.phone')),
 
                         TextInput::make("password")
                             ->password()
                             ->required()
-                            ->label(__('custom.models.user.password'))
+                            ->label(__('custom.models.promoter.password'))
                             ->visibleOn('create'),
 
 
                         Select::make('wilaya_id')
-                            ->label(__("custom.models.user.wilaya"))
-                            ->relationship(name: 'wilaya', titleAttribute: __("custom.models.user.wilaya.field"))  // Select field for wilaya
+                            ->label(__("custom.models.promoter.wilaya"))
+                            ->relationship(name: 'wilaya', titleAttribute: __("custom.models.promoter.wilaya.field"))  // Select field for wilaya
                             ->searchable()
                             ->preload()
                             ->reactive()  // Makes it reactive to changes
                             ->afterStateUpdated(fn(callable $set) => $set('commune_id', null)),  // Clear commune when wilaya changes
 
                         Select::make('commune_id')
-                            ->label(__("custom.models.user.commune"))
+                            ->label(__("custom.models.promoter.commune"))
                             ->options(function (callable $get) {
                                 $wilayaId = $get('wilaya_id');
-                                $field = __("custom.models.user.wilaya.field"); // 'name' or 'arabic_name' based on the language
+                                $field = __("custom.models.promoter.wilaya.field"); // 'name' or 'arabic_name' based on the language
 
                                 if ($wilayaId) {
                                     // Query the communes based on the selected wilaya and the dynamic field
@@ -128,7 +128,7 @@ class PromoterResource extends Resource implements HasShieldPermissions
                             })
                     ])->columnSpan(2)->columns(2),
                 Group::make()->schema([
-                    Section::make(__('custom.models.user.avatar'))->schema([
+                    Section::make(__('custom.models.promoter.avatar'))->schema([
                         SpatieMediaLibraryFileUpload::make("avatar_url")
                             ->image()
                             ->imageEditor()
@@ -147,24 +147,24 @@ class PromoterResource extends Resource implements HasShieldPermissions
                 Tables\Columns\ImageColumn::make("avatar")
                     ->circular()
                     ->toggleable()
-                    ->label(__('custom.models.user.avatar')),
+                    ->label(__('custom.models.promoter.avatar')),
                 TextColumn::make('email')
-                    ->label(__('custom.models.user.email'))
+                    ->label(__('custom.models.promoter.email'))
                     ->searchable()
                     ->sortable()
                     ->toggleable()
                     ->weight(FontWeight::Bold)
                     ->size('sm'),
                 TextColumn::make('name')
-                    ->label(__('custom.models.user.name'))
+                    ->label(__('custom.models.promoter.name'))
                     ->searchable()
                     ->sortable()
                     ->toggleable()
                     ->weight(FontWeight::Bold)
                     ->size('sm'),
                 PhoneColumn::make('phone_number')
-                    ->label(__('custom.models.user.phone'))
-                    ->default(__("custom.models.user.phone.empty"))
+                    ->label(__('custom.models.promoter.phone'))
+                    ->default(__("custom.models.promoter.phone.empty"))
                     ->searchable()
                     ->toggleable()
                     ->copyable()

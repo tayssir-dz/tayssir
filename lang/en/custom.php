@@ -43,6 +43,23 @@ return [
     'models.promoters' => 'Promoters',
     'models.promoter' => 'Promoter',
 
+    // # Promoter
+    'models.promoter.name' => 'Name',
+    'models.promoter.avatar' => "Profile picture",
+    'models.promoter.email' => 'Email',
+    'models.promoter.password' => 'Password',
+    'models.promoter.phone' => 'Phone',
+    'models.promoter.phone.empty' => 'No phone number',
+    'models.promoter.wilaya' => 'Wilaya',
+    'models.promoter.wilayas' => 'Wilayas',
+    'models.promoter.wilaya.empty' => 'No wilaya selected',
+    'models.promoter.wilaya.field' => "name",
+    'models.promoter.commune' => 'Commune',
+    'models.promoter.communes' => 'Communes',
+    'models.promoter.commune.empty' => 'No commune selected',
+    'models.promoter.commune.field' => "name",
+    'models.promoter.personal_info' => 'Personal informations',
+
     // # Banner
     'forms.banner.create.section.infos' => 'Banner Information',
     'forms.banner.create.section.image' => 'Banner Image',

@@ -38,6 +38,26 @@ return [
     'models.subscriptionCards' => "Cartes d'abonnement",
     'models.subscriptionCard' => "Carte d'abonnement",
 
+    'models.promoters' => 'Promoteurs',
+    'models.promoter' => 'Promoteur',
+
+    // # Promoter
+    'models.promoter.name' => 'Nom',
+    'models.promoter.avatar' => 'Photo de profil',
+    'models.promoter.email' => 'Email',
+    'models.promoter.password' => 'Mot de passe',
+    'models.promoter.phone' => 'Téléphone',
+    'models.promoter.phone.empty' => 'Pas de numéro de téléphone',
+    'models.promoter.wilaya' => 'Wilaya',
+    'models.promoter.wilayas' => 'Wilayas',
+    'models.promoter.wilaya.empty' => 'Aucune wilaya sélectionnée',
+    'models.promoter.wilaya.field' => "name",
+    'models.promoter.commune' => 'Commune',
+    'models.promoter.communes' => 'Communes',
+    'models.promoter.commune.empty' => 'Aucune commune sélectionnée',
+    'models.promoter.commune.field' => "name",
+    'models.promoter.personal_info' => 'Informations personnelles',
+
     'models.banners' => 'Bannières',
     'models.banner' => 'Bannière',
 
