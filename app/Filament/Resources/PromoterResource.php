@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PromoterResource\Pages;
 use App\Filament\Resources\PromoterResource\RelationManagers;
+use App\Filament\Resources\PromoterResource\RelationManagers\PromoCodesRelationManager;
 use App\Models\Promoter;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use BezhanSalleh\FilamentShield\Support\Utils;
@@ -188,7 +189,7 @@ class PromoterResource extends Resource implements HasShieldPermissions
     public static function getRelations(): array
     {
         return [
-            //
+            PromoCodesRelationManager::class
         ];
     }
 
