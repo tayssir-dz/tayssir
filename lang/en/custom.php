@@ -43,6 +43,9 @@ return [
     'models.promoters' => 'Promoters',
     'models.promoter' => 'Promoter',
 
+    'models.promoCodes' => 'Promo Codes',
+    'models.promoCode' => 'Promo Code',
+
     // # Promoter
     'models.promoter.name' => 'Name',
     'models.promoter.avatar' => "Profile picture",
@@ -59,6 +62,19 @@ return [
     'models.promoter.commune.empty' => 'No commune selected',
     'models.promoter.commune.field' => "name",
     'models.promoter.personal_info' => 'Personal informations',
+
+    // # Promo Code
+    'models.promoCode.code' => 'Code',
+    'models.promoCode.start_date' => 'Start Date',
+    'models.promoCode.end_date' => 'End Date',
+    'models.promoCode.student_discount' => 'Student Discount (%)',
+    'models.promoCode.promoter_margin' => 'Promoter Margin (%)',
+    'models.promoCode.is_active' => 'Active',
+    'models.promoCode.validity_period' => 'Validity Period',
+    'models.promoCode.discount_info' => 'Discount Information',
+    'forms.promoCode.create.section.infos' => 'Promo Code Information',
+    'forms.promoCode.create.section.dates' => 'Validity Period',
+    'forms.promoCode.create.section.discounts' => 'Discount Information',
 
     // # Banner
     'forms.banner.create.section.infos' => 'Banner Information',

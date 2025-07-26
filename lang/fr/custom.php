@@ -41,6 +41,9 @@ return [
     'models.promoters' => 'Promoteurs',
     'models.promoter' => 'Promoteur',
 
+    'models.promoCodes' => 'Codes Promo',
+    'models.promoCode' => 'Code Promo',
+
     // # Promoter
     'models.promoter.name' => 'Nom',
     'models.promoter.avatar' => 'Photo de profil',
@@ -57,6 +60,19 @@ return [
     'models.promoter.commune.empty' => 'Aucune commune sélectionnée',
     'models.promoter.commune.field' => "name",
     'models.promoter.personal_info' => 'Informations personnelles',
+
+    // # Promo Code
+    'models.promoCode.code' => 'Code',
+    'models.promoCode.start_date' => 'Date de début',
+    'models.promoCode.end_date' => 'Date de fin',
+    'models.promoCode.student_discount' => 'Remise étudiant (%)',
+    'models.promoCode.promoter_margin' => 'Marge promoteur (%)',
+    'models.promoCode.is_active' => 'Actif',
+    'models.promoCode.validity_period' => 'Période de validité',
+    'models.promoCode.discount_info' => 'Informations de remise',
+    'forms.promoCode.create.section.infos' => 'Informations du code promo',
+    'forms.promoCode.create.section.dates' => 'Période de validité',
+    'forms.promoCode.create.section.discounts' => 'Informations de remise',
 
     'models.banners' => 'Bannières',
     'models.banner' => 'Bannière',

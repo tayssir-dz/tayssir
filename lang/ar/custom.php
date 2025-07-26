@@ -40,6 +40,9 @@ return [
     'models.promoters' => 'المروجين',
     'models.promoter' => 'مروج',
 
+    'models.promoCodes' => 'رموز الترويج',
+    'models.promoCode' => 'رمز ترويج',
+
     // # Promoter
     'models.promoter.name' => 'الاسم',
     'models.promoter.avatar' => 'الصورة الشخصية',
@@ -56,6 +59,19 @@ return [
     'models.promoter.commune.empty' => 'لم يتم اختيار البلدية',
     'models.promoter.commune.field' => "arabic_name",
     'models.promoter.personal_info' => 'المعلومات الشخصية',
+
+    // # Promo Code
+    'models.promoCode.code' => 'الرمز',
+    'models.promoCode.start_date' => 'تاريخ البداية',
+    'models.promoCode.end_date' => 'تاريخ النهاية',
+    'models.promoCode.student_discount' => 'خصم الطالب (%)',
+    'models.promoCode.promoter_margin' => 'هامش المروج (%)',
+    'models.promoCode.is_active' => 'نشط',
+    'models.promoCode.validity_period' => 'فترة الصلاحية',
+    'models.promoCode.discount_info' => 'معلومات الخصم',
+    'forms.promoCode.create.section.infos' => 'معلومات رمز الترويج',
+    'forms.promoCode.create.section.dates' => 'فترة الصلاحية',
+    'forms.promoCode.create.section.discounts' => 'معلومات الخصم',
 
     'models.banners' => 'البانرات',
     'models.banner' => 'بانر',

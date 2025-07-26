@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Chapter;
+use App\Models\PromoCode;
 use App\Models\Promoter;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,6 +17,9 @@ class DatabaseSeeder extends Seeder
         // $this->call(WilayaCommuneSeeder::class);
         // $this->call(IseedSeeder::class);
 
-        Promoter::factory(10)->create();
+        Promoter::truncate();
+        Promoter::factory(10)
+            ->has(PromoCode::factory(2), 'promoCodes')
+            ->create();
     }
 }
