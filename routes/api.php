@@ -15,6 +15,7 @@ use App\Http\Controllers\API\SummaryController;
 use App\Http\Controllers\API\BacController;
 use App\Http\Controllers\API\FlashCardsController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\ContentWebController;
 use App\Models\Question;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -218,4 +219,30 @@ Route::prefix('v1')->group(function () {
         ->middleware(["auth:sanctum", "access"])
         ->summary("Get flashcard by ID")
         ->description("This endpoint returns a specific flashcard by its ID, including detailed information about the flashcard content, its parent flashcard group, and the associated material.");
+
+    // Web-optimized content routes
+    Route::prefix('web')->middleware(['auth:sanctum', 'access'])->group(function () {
+        Route::get('content', [ContentWebController::class, 'content'])
+            ->summary('Web content snapshot')
+            ->description('Lightweight content tree for the authenticated user. Includes paginated materials only. Use query params per_page (1-100, default 15) and page to paginate results.');
+
+        Route::get('materials', [ContentWebController::class, 'materials'])
+            ->summary('List my materials (paginated)')
+            ->description('Returns the user-accessible materials for the current division, filtered by active subscriptions. Supports pagination via per_page (1-100, default 15) and page.');
+
+        Route::get('materials/{materialId}/units', [ContentWebController::class, 'units'])
+            ->whereNumber('materialId')
+            ->summary('List units by material (paginated)')
+            ->description('Returns units for the specified material if accessible to the user. Supports pagination via per_page (1-100, default 15) and page.');
+
+        Route::get('units/{unitId}/chapters', [ContentWebController::class, 'chapters'])
+            ->whereNumber('unitId')
+            ->summary('List chapters by unit (paginated)')
+            ->description('Returns chapters for the specified unit if accessible to the user. Includes progress, points and visibility. Supports pagination via per_page (1-100, default 15) and page.');
+
+        Route::get('chapters/{chapterId}/questions', [ContentWebController::class, 'questions'])
+            ->whereNumber('chapterId')
+            ->summary('List questions by chapter (paginated)')
+            ->description('Returns transformed questions for the specified chapter. Supports pagination via per_page (1-100, default 15) and page.');
+    });
 });
