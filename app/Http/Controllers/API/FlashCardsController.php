@@ -10,51 +10,8 @@ use Illuminate\Http\Request;
 
 class FlashCardsController extends BaseController
 {
-    /**
-     * Display a listing of materials with their flashcard groups and card counts.
-     *
-     * This endpoint returns all materials that have flashcard groups, along with
-     * the flashcard groups for each material and the count of cards in each group.
-     * You can optionally filter by specific materials.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     * 
-     * @queryParam materials[] integer[] Optional. Array of material IDs to filter by. Example: [1, 2, 3]
-     * @queryParam material_id integer Optional. Single material ID to filter by. Example: 1
-     * 
-     * @response {
-     *   "success": true,
-     *   "data": {
-     *     "materials_with_flashcard_groups": [
-     *       {
-     *         "material": {
-     *           "id": 1,
-     *           "name": "Mathematics",
-     *           "code": "MATH",
-     *           "color": "#FF5733",
-     *           "description": "Mathematics subject",
-     *           "flashcard_groups_count": 3,
-     *           "total_flashcards_count": 25
-     *         },
-     *         "flashcard_groups": [
-     *           {
-     *             "id": 1,
-     *             "title": "Basic Algebra",
-     *             "description": "Introduction to algebraic concepts",
-     *             "flashcards_count": 10,
-     *             "created_at": "2024-01-01T00:00:00.000000Z"
-     *           }
-     *         ]
-     *       }
-     *     ]
-     *   },
-     *   "message": "Materials with flashcard groups retrieved successfully"
-     * }
-     */
     public function materialsWithFlashcardGroups(Request $request)
     {
-        // Validate the request parameters
         $request->validate([
             'materials' => 'sometimes|array',
             'materials.*' => 'integer|exists:materials,id',
@@ -69,7 +26,6 @@ class FlashCardsController extends BaseController
                 $query->join('flashcards', 'flashcard_groups.id', '=', 'flashcards.flashcard_group_id');
             }]);
 
-        // Filter by materials if provided
         if ($request->has('materials') && is_array($request->materials)) {
             $query->whereIn('id', $request->materials);
         } elseif ($request->has('material_id')) {
@@ -106,62 +62,8 @@ class FlashCardsController extends BaseController
         ], __("response.materials_with_flashcard_groups_retrieved_successfully"));
     }
 
-    /**
-     * Display a paginated listing of flashcards with optional filtering.
-     *
-     * This endpoint returns flashcards with pagination support. You can filter by
-     * multiple materials and/or multiple flashcard groups. The results include
-     * flashcard details along with their parent group and material information.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     * 
-     * @queryParam materials[] integer[] Optional. Array of material IDs to filter by. Example: [1, 2, 3]
-     * @queryParam material_id integer Optional. Single material ID to filter by. Example: 1
-     * @queryParam flashcard_groups[] integer[] Optional. Array of flashcard group IDs to filter by. Example: [1, 2, 3]
-     * @queryParam flashcard_group_id integer Optional. Single flashcard group ID to filter by. Example: 1
-     * @queryParam per_page integer Optional. Number of items per page (1-100). Default: 15. Example: 20
-     * @queryParam page integer Optional. Page number. Default: 1. Example: 2
-     * 
-     * @response {
-     *   "success": true,
-     *   "data": {
-     *     "flashcards": [
-     *       {
-     *         "id": 1,
-     *         "title": "What is algebra?",
-     *         "description": "Define algebra and its basic concepts",
-     *         "flashcard_group": {
-     *           "id": 1,
-     *           "title": "Basic Algebra",
-     *           "description": "Introduction to algebraic concepts"
-     *         },
-     *         "material": {
-     *           "id": 1,
-     *           "name": "Mathematics",
-     *           "code": "MATH",
-     *           "color": "#FF5733",
-     *           "description": "Mathematics subject"
-     *         },
-     *         "created_at": "2024-01-01T00:00:00.000000Z",
-     *         "updated_at": "2024-01-01T00:00:00.000000Z"
-     *       }
-     *     ],
-     *     "pagination": {
-     *       "current_page": 1,
-     *       "last_page": 5,
-     *       "per_page": 15,
-     *       "total": 75,
-     *       "from": 1,
-     *       "to": 15
-     *     }
-     *   },
-     *   "message": "Flashcards retrieved successfully"
-     * }
-     */
     public function index(Request $request)
     {
-        // Validate the request parameters
         $request->validate([
             'materials' => 'sometimes|array',
             'materials.*' => 'integer|exists:materials,id',
@@ -175,7 +77,6 @@ class FlashCardsController extends BaseController
 
         $query = Flashcard::with(['flashcardGroup', 'flashcardGroup.material']);
 
-        // Filter by materials if provided
         if ($request->has('materials') && is_array($request->materials)) {
             $query->whereHas('flashcardGroup', function ($q) use ($request) {
                 $q->whereIn('material_id', $request->materials);
@@ -186,22 +87,18 @@ class FlashCardsController extends BaseController
             });
         }
 
-        // Filter by flashcard groups if provided
         if ($request->has('flashcard_groups') && is_array($request->flashcard_groups)) {
             $query->whereIn('flashcard_group_id', $request->flashcard_groups);
         } elseif ($request->has('flashcard_group_id')) {
             $query->where('flashcard_group_id', $request->flashcard_group_id);
         }
 
-        // Set pagination parameters
         $perPage = $request->get('per_page', 15);
-        $perPage = min($perPage, 100); // Cap at 100 items per page
+        $perPage = min($perPage, 100);
 
-        // Get paginated results
         $flashcards = $query->orderBy('created_at', 'desc')
             ->paginate($perPage);
 
-        // Transform the flashcards data
         $flashcardsData = $flashcards->getCollection()->map(function ($flashcard) {
             return [
                 'id' => $flashcard->id,
@@ -237,41 +134,6 @@ class FlashCardsController extends BaseController
         ], __("response.flashcards_retrieved_successfully"));
     }
 
-    /**
-     * Display the specified flashcard.
-     *
-     * This endpoint returns detailed information about a specific flashcard,
-     * including its parent group and material information.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * 
-     * @urlParam id integer required The ID of the flashcard. Example: 1
-     * 
-     * @response {
-     *   "success": true,
-     *   "data": {
-     *     "id": 1,
-     *     "title": "What is algebra?",
-     *     "description": "Define algebra and its basic concepts",
-     *     "flashcard_group": {
-     *       "id": 1,
-     *       "title": "Basic Algebra",
-     *       "description": "Introduction to algebraic concepts"
-     *     },
-     *     "material": {
-     *       "id": 1,
-     *       "name": "Mathematics",
-     *       "code": "MATH",
-     *       "color": "#FF5733",
-     *       "description": "Mathematics subject"
-     *     },
-     *     "created_at": "2024-01-01T00:00:00.000000Z",
-     *     "updated_at": "2024-01-01T00:00:00.000000Z"
-     *   },
-     *   "message": "Flashcard retrieved successfully"
-     * }
-     */
     public function show($id)
     {
         $flashcard = Flashcard::with(['flashcardGroup', 'flashcardGroup.material'])
@@ -302,5 +164,49 @@ class FlashCardsController extends BaseController
         ];
 
         return $this->sendResponse($flashcardData, __("response.flashcard_retrieved_successfully"));
+    }
+
+    public function content(Request $request)
+    {
+        $user = $request->user();
+        $materials = $user?->division?->materials()->with(['flashcardGroups.flashcards'])->get() ?? collect();
+
+        $topics = $materials->map(function ($m) {
+            return [
+                'id' => $m->id,
+                'name' => $m->name,
+                'color' => $m->color,
+                'secondary_color' => $m->secondary_color,
+            ];
+        })->values();
+
+        $categories = $materials->flatMap(function ($m) {
+            return $m->flashcardGroups->map(function ($g) use ($m) {
+                return [
+                    'id' => $g->id,
+                    'topic_id' => $m->id,
+                    'name' => $g->title,
+                ];
+            });
+        })->values();
+
+        $cards = $materials->flatMap(function ($m) {
+            return $m->flashcardGroups->flatMap(function ($g) {
+                return $g->flashcards->map(function ($c) use ($g) {
+                    return [
+                        'id' => $c->id,
+                        'category_id' => $g->id,
+                        'name' => $c->title,
+                        'description' => $c->description,
+                    ];
+                });
+            });
+        })->values();
+
+        return $this->sendResponse([
+            'topics' => $topics,
+            'categories' => $categories,
+            'cards' => $cards,
+        ], __('response.flashcards_retrieved_successfully'));
     }
 }

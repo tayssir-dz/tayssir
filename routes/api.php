@@ -188,10 +188,15 @@ Route::prefix('v1')->group(function () {
         ->summary("List all active summaries grouped by materials")
         ->description("This endpoint returns all active summaries grouped by materials with optional material filtering and pagination, simple example `/api/v1/summaries?per_page=20&page=1`, filter materials : `/api/v1/summaries?materials[]=1&materials[]=3`, note that the material ids must exist in the db");
 
-    Route::get('summaries/{id}', [SummaryController::class, 'show'])
+    Route::get('summaries/{id}', [SummaryController::class, 'show'])->whereNumber('id')
         ->middleware(["auth:sanctum", "access"])
         ->summary("Get summary by ID")
         ->description("This endpoint returns a specific active summary by its ID");
+
+    Route::get('summaries/content', [SummaryController::class, 'content'])
+        ->middleware(["auth:sanctum", "access"])
+        ->summary("Summaries content")
+        ->description("Returns division materials and all active summaries as units.");
 
     // Bac Routes
     Route::get('bacs', [BacController::class, 'index'])
@@ -199,10 +204,15 @@ Route::prefix('v1')->group(function () {
         ->summary("List all active bacs grouped by materials")
         ->description("This endpoint returns all active bacs grouped by materials with optional material filtering and pagination. Examples: `/api/v1/bacs?per_page=20&page=1` for pagination, `/api/v1/bacs?material_id=1` for single material filter, `/api/v1/bacs?materials[]=1&materials[]=3` for multiple materials filter. Note that the material IDs must exist in the database.");
 
-    Route::get('bacs/{id}', [BacController::class, 'show'])
+    Route::get('bacs/{id}', [BacController::class, 'show'])->whereNumber('id')
         ->middleware(["auth:sanctum", "access"])
         ->summary("Get bac by ID")
         ->description("This endpoint returns a specific active bac by its ID");
+
+    Route::get('bacs/content', [BacController::class, 'content'])
+        ->middleware(["auth:sanctum", "access"])
+        ->summary("Bacs content")
+        ->description("Returns division materials and all active bacs as units.");
 
     // Flashcard Routes
     Route::get('flashcards/materials', [FlashCardsController::class, 'materialsWithFlashcardGroups'])
@@ -215,10 +225,15 @@ Route::prefix('v1')->group(function () {
         ->summary("List all flashcards with advanced filtering and pagination")
         ->description("This endpoint returns flashcards with comprehensive filtering and pagination support. You can filter by multiple materials using `materials[]=1&materials[]=2` or single material with `material_id=1`. You can also filter by multiple flashcard groups using `flashcard_groups[]=1&flashcard_groups[]=2` or single group with `flashcard_group_id=1`. Pagination is controlled with `per_page` (1-100, default 15) and `page` parameters. Examples: `/api/v1/flashcards?per_page=20&page=1` for pagination, `/api/v1/flashcards?materials[]=1&flashcard_groups[]=2&flashcard_groups[]=3` for advanced filtering. Each flashcard includes its content, parent group information, and associated material details.");
 
-    Route::get('flashcards/{id}', [FlashCardsController::class, 'show'])
+    Route::get('flashcards/{id}', [FlashCardsController::class, 'show'])->whereNumber('id')
         ->middleware(["auth:sanctum", "access"])
         ->summary("Get flashcard by ID")
         ->description("This endpoint returns a specific flashcard by its ID, including detailed information about the flashcard content, its parent flashcard group, and the associated material.");
+
+    Route::get('flashcards/content', [FlashCardsController::class, 'content'])
+        ->middleware(["auth:sanctum", "access"])
+        ->summary("Flashcards content")
+        ->description("Returns topics (materials), categories (flashcard groups), and cards (flashcards) for the user's division.");
 
     // Web-optimized content routes
     Route::prefix('web')->middleware(['auth:sanctum', 'access'])->group(function () {

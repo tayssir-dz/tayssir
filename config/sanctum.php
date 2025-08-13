@@ -50,7 +50,7 @@ return [
     // 'expiration' => 10000,
     'expiration' => null,    // default laravel expiration set as null
     'access_token_expiration' => 60,              // One hour
-    'refresh_token_expiration' => 7 * 24 * 60,  // 7 Days
+    'refresh_token_expiration' => 30 * 24 * 60,  // 7 Days
     /*
     |--------------------------------------------------------------------------
     | Token Prefix

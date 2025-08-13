@@ -8,15 +8,8 @@ use Illuminate\Http\Request;
 
 class BacController extends BaseController
 {
-    /**
-     * Display a listing of the active bacs grouped by materials with optional material filtering.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
-        // Validate the request parameters
         $request->validate([
             'materials' => 'sometimes|array',
             'materials.*' => 'integer|exists:materials,id',
@@ -28,22 +21,18 @@ class BacController extends BaseController
         $query = Bac::with('material')
             ->where('is_active', true);
 
-        // Filter by materials if provided
         if ($request->has('materials') && is_array($request->materials)) {
             $query->whereIn('material_id', $request->materials);
         } elseif ($request->has('material_id')) {
             $query->where('material_id', $request->material_id);
         }
 
-        // Set pagination parameters
         $perPage = $request->get('per_page', 15);
-        $perPage = min($perPage, 100); // Cap at 100 items per page
+        $perPage = min($perPage, 100);
 
-        // Get paginated results
         $bacs = $query->orderBy('created_at', 'desc')
             ->paginate($perPage);
 
-        // Group bacs by material
         $groupedBacs = $bacs->groupBy('material_id')->map(function ($materialBacs, $materialId) {
             $material = $materialBacs->first()->material;
 
@@ -80,12 +69,6 @@ class BacController extends BaseController
         ], __("response.bacs_retrieved_successfully"));
     }
 
-    /**
-     * Display the specified bac.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $bac = Bac::with('material')
@@ -113,5 +96,35 @@ class BacController extends BaseController
         ];
 
         return $this->sendResponse($bacData, __("response.bac_retrieved_successfully"));
+    }
+
+    public function content(Request $request)
+    {
+        $user = $request->user();
+        $materials = $user?->division?->materials()->with(['bacs'])->get() ?? collect();
+
+        $materialsArray = $materials->map(function ($m) {
+            return [
+                'id' => $m->id,
+                'name' => $m->name,
+                'colors' => array_values(array_filter([$m->color, $m->secondary_color])),
+            ];
+        })->values();
+
+        $unitsArray = $materials->flatMap(function ($m) {
+            return $m->bacs->map(function ($b) use ($m) {
+                return [
+                    'id' => $b->id,
+                    'name' => $b->title,
+                    'materialId' => $m->id,
+                    'pdf' => $b->pdf,
+                ];
+            });
+        })->values();
+
+        return $this->sendResponse([
+            'materials' => $materialsArray,
+            'units' => $unitsArray,
+        ], __('response.bacs_retrieved_successfully'));
     }
 }
