@@ -107,6 +107,7 @@ class SummaryController extends BaseController
                 return [
                     'id' => $s->id,
                     'name' => $s->title,
+                    'description' => $s->description,
                     'materialId' => $m->id,
                     'pdf' => $s->pdf,
                 ];

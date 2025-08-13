@@ -186,6 +186,7 @@ class FlashCardsController extends BaseController
                     'id' => $g->id,
                     'topic_id' => $m->id,
                     'name' => $g->title,
+                    'description' => $g->description,
                 ];
             });
         })->values();

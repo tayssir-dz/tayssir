@@ -116,6 +116,7 @@ class BacController extends BaseController
                 return [
                     'id' => $b->id,
                     'name' => $b->title,
+                    'description' => $b->description,
                     'materialId' => $m->id,
                     'pdf' => $b->pdf,
                 ];
