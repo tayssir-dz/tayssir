@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
         Card::observe(CardObserver::class);
         User::observe(UserObserver::class);
         if ($this->app->environment('production')) {
-            URL::forceScheme('http');
+            URL::forceScheme('https');
         }
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
             $switch
