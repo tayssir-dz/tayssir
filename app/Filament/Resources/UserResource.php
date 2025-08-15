@@ -174,17 +174,24 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->preload()
                             ->searchable()
                             ->visible(Auth::user()->can("assign_role_user"))
-                            ->label(__('role'))
                             ->columnSpan(2),
 
                         Select::make('division')
-                            ->label(__('custom.models.user.division'))
+                            ->label(__('custom.models.division'))
                             ->relationship('division', 'name')
                             ->preload()
                             ->searchable()
                             ->visible(Auth::user()->can("assign_division_user"))
-                            ->label(__('division'))
                             ->columnSpan(2),
+
+                        Select::make('referral_source_id')
+                            ->label(__('custom.models.referral_source'))
+                            ->relationship('referralSource', 'name')
+                            ->preload()
+                            ->searchable()
+                            ->columnSpan(2),
+
+
 
                         Placeholder::make('active_subscriptions')
                             ->label(__('custom.models.user.subscribtion'))
