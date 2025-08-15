@@ -128,6 +128,16 @@ return [
     'models.flashcards' => 'البطاقات التعليمية',
     'models.flashcard' => 'بطاقة تعليمية',
 
+    // Referral Sources
+    'models.referral_sources' => 'مصادر الإحالة',
+    'models.referral_source' => 'مصدر إحالة',
+    'models.referral_source.name' => 'الاسم',
+    'models.referral_source.icon' => 'الأيقونة (SVG)',
+    'models.referral_source.users_count' => 'عدد المستخدمين',
+
+    // Table generic
+    'table.created_at' => 'تاريخ الإنشاء',
+
     // # Flashcard
     'forms.flashcard.create.section.infos' => 'معلومات البطاقة التعليمية',
     'models.flashcard.title' => 'العنوان',
@@ -345,6 +355,14 @@ return [
     # Stats
     "stats.users.new" => 'المستخدمين الجدد',
     "stats.users.last30Days" => 'خلال الـ 30 يوما',
+    // Referral Sources Widget
+    'stats.referral_sources.widget.title' => 'المستخدمون حسب مصدر الإحالة',
+    'stats.referral_sources.filter.today' => 'اليوم',
+    'stats.referral_sources.filter.week' => 'هذا الأسبوع',
+    'stats.referral_sources.filter.month' => 'هذا الشهر',
+    'stats.referral_sources.filter.year' => 'هذه السنة',
+    'stats.referral_sources.filter.all' => 'كل الوقت',
+    'stats.referral_sources.dataset.users' => 'المستخدمون',
 
     "direction.label" => "إتجاه النص",
     "direction.rtl" => '(rtl) من اليمين لليسار',

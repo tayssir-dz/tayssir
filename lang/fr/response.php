@@ -25,6 +25,9 @@ return [
     'flashcard_retrieved_successfully' => 'Carte mémoire récupérée avec succès',
     'flashcard_not_found' => 'Carte mémoire non trouvée',
 
+    // Referral Sources
+    'referral_sources_retrieved_successfully' => 'Sources de référence récupérées avec succès',
+
     // Auth
     'user_register_successfully' => 'Utilisateur enregistré avec succès',
     'user_login_successfully' => 'Utilisateur connecté avec succès',

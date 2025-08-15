@@ -35,6 +35,8 @@ return [
     'flashcards_retrieved_successfully' => 'تم استرجاع البطاقات التعليمية بنجاح',
     'flashcard_retrieved_successfully' => 'تم استرجاع البطاقة التعليمية بنجاح',
     'flashcard_not_found' => 'البطاقة التعليمية غير موجودة',
+    // Referral Sources
+    'referral_sources_retrieved_successfully' => 'تم استرجاع مصادر الإحالة بنجاح',
     "user_login_successfully" => "تم تسجيل الدخول بنجاح.",
 
     'unauthorised' => 'غير مصرح.',

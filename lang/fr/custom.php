@@ -129,6 +129,16 @@ return [
     'models.flashcards' => 'Cartes mémoire',
     'models.flashcard' => 'Carte mémoire',
 
+    // Referral Sources
+    'models.referral_sources' => 'Sources de Référence',
+    'models.referral_source' => 'Source de Référence',
+    'models.referral_source.name' => 'Nom',
+    'models.referral_source.icon' => 'Icône (SVG)',
+    'models.referral_source.users_count' => 'Nombre d\'utilisateurs',
+
+    // Table generic
+    'table.created_at' => 'Créé le',
+
     // # Flashcard
     'forms.flashcard.create.section.infos' => 'Informations de la carte mémoire',
     'models.flashcard.title' => 'Titre',
@@ -345,6 +355,14 @@ return [
     # Stats
     "stats.users.new" => 'Nouveaux utilisateurs',
     "stats.users.last30Days" => 'Les 30 derniers jours',
+    // Referral Sources Widget
+    'stats.referral_sources.widget.title' => 'Utilisateurs par Source de Référence',
+    'stats.referral_sources.filter.today' => 'Aujourd\'hui',
+    'stats.referral_sources.filter.week' => 'Cette semaine',
+    'stats.referral_sources.filter.month' => 'Ce mois',
+    'stats.referral_sources.filter.year' => 'Cette année',
+    'stats.referral_sources.filter.all' => 'Depuis le début',
+    'stats.referral_sources.dataset.users' => 'Utilisateurs',
 
     // # LeaderBoard
     'models.leaderboard' => 'Classement',

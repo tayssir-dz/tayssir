@@ -31,6 +31,7 @@ class RegisterRequest extends FormRequest
             'wilaya_id' => 'sometimes|nullable|numeric|exists:wilayas,id',
             'commune_id' => 'sometimes|nullable|numeric|exists:communes,id|exists:communes,id,wilaya_id,' . $this->wilaya_id,
             'division_id' => 'required|numeric|exists:divisions,id',
+            'referral_source_id' => 'sometimes|nullable|numeric|exists:referral_sources,id',
         ];
     }
 }

@@ -25,6 +25,9 @@ return [
     'flashcard_retrieved_successfully' => 'Flashcard retrieved successfully',
     'flashcard_not_found' => 'Flashcard not found',
 
+    // Referral Sources
+    'referral_sources_retrieved_successfully' => 'Referral sources retrieved successfully',
+
     // Auth
     'user_register_successfully' => 'User registered successfully',
     'user_login_successfully' => 'User logged in successfully',

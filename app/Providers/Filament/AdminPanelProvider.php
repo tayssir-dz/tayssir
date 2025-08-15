@@ -60,6 +60,7 @@ class AdminPanelProvider extends PanelProvider
                 // Widgets\FilamentInfoWidget::class,
                 // Widgets\AccountWidget::class,
                 UsersCard::class,
+                \App\Filament\Widgets\ReferralSourcesBarChart::class,
             ])
             ->middleware([
                 EncryptCookies::class,

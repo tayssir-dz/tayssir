@@ -128,6 +128,16 @@ return [
     'models.flashcards' => 'Flashcards',
     'models.flashcard' => 'Flashcard',
 
+    // Referral Sources
+    'models.referral_sources' => 'Referral Sources',
+    'models.referral_source' => 'Referral Source',
+    'models.referral_source.name' => 'Name',
+    'models.referral_source.icon' => 'Icon (SVG)',
+    'models.referral_source.users_count' => 'Users Count',
+
+    // Table generic
+    'table.created_at' => 'Created At',
+
     // # Flashcard
     'forms.flashcard.create.section.infos' => 'Flashcard Information',
     'models.flashcard.title' => 'Title',
@@ -407,6 +417,14 @@ return [
     # Stats
     "stats.users.new" => 'New users',
     "stats.users.last30Days" => 'Last 30 days',
+    // Referral Sources Widget
+    'stats.referral_sources.widget.title' => 'Users by Referral Source',
+    'stats.referral_sources.filter.today' => 'Today',
+    'stats.referral_sources.filter.week' => 'This Week',
+    'stats.referral_sources.filter.month' => 'This Month',
+    'stats.referral_sources.filter.year' => 'This Year',
+    'stats.referral_sources.filter.all' => 'All Time',
+    'stats.referral_sources.dataset.users' => 'Users',
 
     // # LeaderBoard
     'models.leaderboard' => 'Leaderboard',

@@ -16,6 +16,7 @@ use App\Http\Controllers\API\BacController;
 use App\Http\Controllers\API\FlashCardsController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\ContentWebController;
+use App\Http\Controllers\API\ReferralSourceController;
 use App\Models\Question;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -234,6 +235,11 @@ Route::prefix('v1')->group(function () {
         ->middleware(["auth:sanctum", "access"])
         ->summary("Flashcards content")
         ->description("Returns topics (materials), categories (flashcard groups), and cards (flashcards) for the user's division.");
+
+    // Referral Sources
+    Route::get('referral-sources', [ReferralSourceController::class, 'index'])
+        ->summary('List referral sources')
+        ->description('Returns all referral sources with id, name, icon, and users_count.');
 
     // Web-optimized content routes
     Route::prefix('web')->middleware(['auth:sanctum', 'access'])->group(function () {

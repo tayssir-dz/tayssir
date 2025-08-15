@@ -50,6 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
         'wilaya_id',
         'commune_id',
         'division_id',
+        'referral_source_id',
     ];
     // protected $with = ['subscriptionCard'];
 
@@ -64,6 +65,14 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * The referral source (if any) associated with the user.
+     */
+    public function referralSource()
+    {
+        return $this->belongsTo(ReferralSource::class);
     }
 
     public function division()

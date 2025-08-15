@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Chapter;
 use App\Models\PromoCode;
 use App\Models\Promoter;
+use App\Models\ReferralSource;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,9 +18,19 @@ class DatabaseSeeder extends Seeder
         // $this->call(WilayaCommuneSeeder::class);
         // $this->call(IseedSeeder::class);
 
-        Promoter::truncate();
-        Promoter::factory(10)
-            ->has(PromoCode::factory(2), 'promoCodes')
-            ->create();
+        // Promoter::truncate();
+        // Promoter::factory(10)
+        //     ->has(PromoCode::factory(2), 'promoCodes')
+        //     ->create();
+
+
+        // Create random number of users for each referral source
+        $referralSources = ReferralSource::all();
+        foreach ($referralSources as $source) {
+            $randomCount = rand(5, 15);
+            User::factory($randomCount)->create([
+                'referral_source_id' => $source->id
+            ]);
+        }
     }
 }

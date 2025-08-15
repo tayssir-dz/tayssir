@@ -36,6 +36,7 @@ class AuthController extends BaseController
             'commune_id' => $input['commune_id'] ?? null,
             'division_id' => $input['division_id'] ?? null,
             'age' => $input['age'] ?? null,
+            'referral_source_id' => $input['referral_source_id'] ?? null,
         ]);
         $role = Role::firstOrCreate(['name' => 'student']);
         $user->assignRole($role);
