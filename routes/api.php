@@ -41,6 +41,13 @@ Route::get('subscriptions/{id}', [SubscriptionController::class, 'show'])
     ->summary("Get subscription by ID")
     ->description("This endpoint returns a specific subscription by its ID with associated discounts");
 
+// Referral Sources
+Route::get('referral-sources', [ReferralSourceController::class, 'index'])
+    ->summary('List referral sources')
+    ->description('Returns all referral sources with id, name, icon, and users_count.');
+
+
+
 // MENNADOS PEDADAA
 Route::prefix('v1')->group(function () {
     Route::prefix('auth')->group(function () {
@@ -235,11 +242,6 @@ Route::prefix('v1')->group(function () {
         ->middleware(["auth:sanctum", "access"])
         ->summary("Flashcards content")
         ->description("Returns topics (materials), categories (flashcard groups), and cards (flashcards) for the user's division.");
-
-    // Referral Sources
-    Route::get('referral-sources', [ReferralSourceController::class, 'index'])
-        ->summary('List referral sources')
-        ->description('Returns all referral sources with id, name, icon, and users_count.');
 
     // Web-optimized content routes
     Route::prefix('web')->middleware(['auth:sanctum', 'access'])->group(function () {
