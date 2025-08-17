@@ -59,6 +59,8 @@ return [
     'email_not_exists' => 'البريد الإلكتروني غير موجود',
     'phone_exists' => 'رقم الهاتف موجود بالفعل',
     'phone_not_exists' => 'رقم الهاتف غير موجود',
+    'account_already_exists' => 'الحساب موجود بالفعل، الرجاء تسجيل الدخول',
+    'account_not_registered' => 'الحساب غير مسجل، الرجاء التسجيل أولاً',
     'password_reset_successfully' => 'تمت إعادة تعيين كلمة المرور بنجاح',
 
     'user_already_has_subscription_card' => 'المستخدم لديه بطاقة اشتراك بالفعل',

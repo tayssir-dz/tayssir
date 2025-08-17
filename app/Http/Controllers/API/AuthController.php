@@ -34,32 +34,26 @@ class AuthController extends BaseController
         if (! $googleEmail || ! $googleId) {
             return $this->sendError(__('response.unauthorised'), ['error' => 'Google token missing email or sub'], 401);
         }
-
-        // If user already exists with that email, attach google_id if empty and proceed (idempotent)
-        $user = User::where('email', $googleEmail)->first();
-        if ($user) {
-            if (! $user->google_id) {
-                $user->google_id = $googleId;
-            }
-            // Update user profile data from provided request every time (except email)
-            $user->fill(collect($request->validated())->except(['id_token'])->toArray());
-            $user->save();
-        } else {
-            $data = $request->validated();
-            $user = User::create([
-                'email' => $googleEmail,
-                'google_id' => $googleId,
-                'name' => $data['name'],
-                'phone_number' => $data['phone_number'] ?? null,
-                'wilaya_id' => $data['wilaya_id'] ?? null,
-                'commune_id' => $data['commune_id'] ?? null,
-                'division_id' => $data['division_id'] ?? null,
-                'age' => $data['age'] ?? null,
-                'referral_source_id' => $data['referral_source_id'] ?? null,
-            ]);
-            $role = Role::firstOrCreate(['name' => 'student']);
-            $user->assignRole($role);
+        // If user already exists (with or without a google_id) we do NOT override – ask user to login instead
+        $existing = User::where('email', $googleEmail)->orWhere('google_id', $googleId)->first();
+        if ($existing) {
+            return $this->sendError(__('response.account_already_exists'), [], 409);
         }
+
+        $data = $request->validated();
+        $user = User::create([
+            'email' => $googleEmail,
+            'google_id' => $googleId,
+            'name' => $data['name'],
+            'phone_number' => $data['phone_number'] ?? null,
+            'wilaya_id' => $data['wilaya_id'] ?? null,
+            'commune_id' => $data['commune_id'] ?? null,
+            'division_id' => $data['division_id'] ?? null,
+            'age' => $data['age'] ?? null,
+            'referral_source_id' => $data['referral_source_id'] ?? null,
+        ]);
+        $role = Role::firstOrCreate(['name' => 'student']);
+        $user->assignRole($role);
 
         $user->tokens()->delete();
         $accessToken = $user->createToken('access_token', [TokenAbility::ACCESS_API->value], Carbon::now()->addMinutes(config('sanctum.access_token_expiration')));
@@ -85,7 +79,7 @@ class AuthController extends BaseController
 
         $user = User::where('google_id', $googleId)->orWhere('email', $googleEmail)->first();
         if (! $user) {
-            return $this->sendError(__('response.unauthorised'), ['error' => 'Account not registered. Please register first.'], 401);
+            return $this->sendError(__('response.account_not_registered'), [], 401);
         }
         // Ensure google_id is set and refresh profile info from Google basic claims (name, picture) if present.
         $user->google_id = $googleId;

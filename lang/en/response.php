@@ -39,4 +39,6 @@ return [
     'email_not_exists' => 'Email does not exist',
     'phone_exists' => 'Phone number already exists',
     'phone_not_exists' => 'Phone number does not exist',
+    'account_already_exists' => 'Account already exists, please login instead',
+    'account_not_registered' => 'Account not registered, please register first',
 ];
