@@ -3,10 +3,10 @@
 namespace App\Enums;
 
 use Filament\Support\Contracts\HasColor;
-use Filament\Support\Contracts\HasLabel;
 use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasLabel;
 
-enum QuestionType: string implements HasLabel, HasColor, HasIcon
+enum QuestionType: string implements HasColor, HasIcon, HasLabel
 {
     case MULTIPLE_CHOICES = 'multiple_choices';
     case FILL_IN_THE_BLANKS = 'fill_in_the_blanks';
@@ -47,4 +47,3 @@ enum QuestionType: string implements HasLabel, HasColor, HasIcon
         };
     }
 }
-

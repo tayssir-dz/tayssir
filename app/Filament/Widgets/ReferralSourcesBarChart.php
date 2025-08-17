@@ -7,14 +7,15 @@ use App\Models\User;
 use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
 
 class ReferralSourcesBarChart extends ChartWidget
 {
     use HasWidgetShield;
 
     protected static ?string $maxHeight = '300px';
-    protected int | string | array $columnSpan = 'full';
+
+    protected int|string|array $columnSpan = 'full';
+
     public ?string $filter = 'year';
 
     protected function getType(): string
@@ -104,7 +105,7 @@ class ReferralSourcesBarChart extends ChartWidget
             '#ec4899',
             '#14b8a6',
             '#0ea5e9',
-            '#84cc16'
+            '#84cc16',
         ];
         $colors = [];
         $countLabels = count($labels);

@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 
 class IseedDiscountsTableSeeder extends Seeder
 {
-
     /**
      * Auto generated seed file
      *
@@ -14,11 +13,8 @@ class IseedDiscountsTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
         \DB::table('discounts')->delete();
-        
-        
-        
+
     }
 }

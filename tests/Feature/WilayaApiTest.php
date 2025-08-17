@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 describe('Wilaya API Endpoints', function () {
 
     it('returns a successful response for wilayas list', function () {

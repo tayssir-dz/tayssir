@@ -3,14 +3,13 @@
 namespace App\Filament\Pages;
 
 use App\Settings\AppSettings;
-use Filament\Forms;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
 use Illuminate\Support\Facades\Lang;
-use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 
 class ManageAppSettings extends SettingsPage
 {
@@ -40,15 +39,15 @@ class ManageAppSettings extends SettingsPage
             ->schema([
                 Section::make(Lang::get('custom.settings.app.section.information'))
                     ->schema([
-                        TextInput::make("app_version")
+                        TextInput::make('app_version')
                             ->label(Lang::get('custom.settings.app.version')),
-                        Toggle::make("resumes_active")
+                        Toggle::make('resumes_active')
                             ->label(Lang::get('custom.settings.app.resumes')),
-                        Toggle::make("bac_solutions_active")
+                        Toggle::make('bac_solutions_active')
                             ->label(Lang::get('custom.settings.app.bac_solutions')),
-                        Toggle::make("cards_tools_active")
+                        Toggle::make('cards_tools_active')
                             ->label(Lang::get('custom.settings.app.cards_tools')),
-                    ])
+                    ]),
             ]);
     }
 }

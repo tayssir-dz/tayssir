@@ -5,46 +5,45 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 // use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 
+use App\Observers\UserObserver;
+use App\Traits\User\HasProgress;
+use App\Traits\User\HasSubscriptions;
+use App\Traits\User\HasWilayaAndCommune;
+use App\Traits\User\InteractsWithContent;
+use App\Traits\User\IsPanelUser;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
-
-use App\Observers\UserObserver;
-
 use Spatie\Permission\Traits\HasRoles;
-use App\Traits\User\HasWilayaAndCommune;
-use App\Traits\User\HasProgress;
-use App\Traits\User\HasSubscriptions;
-use App\Traits\User\InteractsWithContent;
-use App\Traits\User\IsPanelUser;
 
 #[ObservedBy([UserObserver::class])]
-class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvatar, FilamentUser
+class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia, MustVerifyEmail
 {
-    use HasFactory;
-    use Notifiable;
     use HasApiTokens;
-    use InteractsWithMedia;
-    use HasRoles;
-    use HasWilayaAndCommune;
+    use HasFactory;
     use HasProgress;
+    use HasRoles;
     use HasSubscriptions;
+    use HasWilayaAndCommune;
     use InteractsWithContent;
+    use InteractsWithMedia;
     use IsPanelUser;
+    use Notifiable;
 
     protected $fillable = [
         'name',
-        "age",
+        'age',
         'phone_number',
         'avatar_url',
         'email',
+        'google_id',
         'new_email',
         'password',
         'wilaya_id',
@@ -79,10 +78,12 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
     {
         return $this->belongsTo(Division::class);
     }
+
     public function answers()
     {
         return $this->hasMany(UserAnswer::class);
     }
+
     public function chapterBonuses()
     {
         return $this->hasMany(UserChapterBonus::class);
@@ -98,11 +99,10 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, HasAvat
         return $this->name . ' (' . $this->email . ')';
     }
 
-
     public function getProgressPercentageAttribute(): float
     {
         $leaderboard = $this->leaderboard;
-        if (!$leaderboard || !$leaderboard->max_points) {
+        if (! $leaderboard || ! $leaderboard->max_points) {
             return 0.0;
         }
 

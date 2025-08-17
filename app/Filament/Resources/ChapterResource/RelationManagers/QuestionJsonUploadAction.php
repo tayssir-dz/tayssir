@@ -6,15 +6,11 @@ use App\Enums\ContentDirection;
 use App\Enums\QuestionScope;
 use App\Enums\QuestionType;
 use App\Models\Question;
-use Filament\Forms;
 use Filament\Notifications\Notification;
-use Filament\Support\Colors\Color;
 use Filament\Tables\Actions\Action;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use ValentinMorice\FilamentJsonColumn\FilamentJsonColumn;
-use ValentinMorice\FilamentJsonColumn\JsonColumn;
 
 class QuestionJsonUploadAction
 {
@@ -36,7 +32,7 @@ class QuestionJsonUploadAction
                     ->accent('#F037A5')
                     ->viewerHeight(400)
                     ->editorHeight(400)
-                    ->default('{}')
+                    ->default('{}'),
             ])
             ->action(function (array $data, $livewire) {
                 try {
@@ -50,16 +46,18 @@ class QuestionJsonUploadAction
                             ->body(__('custom.models.question.json_upload.invalid_json_message', ['error' => json_last_error_msg()]))
                             ->danger()
                             ->send();
+
                         return;
                     }
 
                     // Ensure we have an array of questions
-                    if (!is_array($jsonData)) {
+                    if (! is_array($jsonData)) {
                         Notification::make()
                             ->title(__('custom.models.question.json_upload.invalid_format'))
                             ->body(__('custom.models.question.json_upload.invalid_format_message'))
                             ->danger()
                             ->send();
+
                         return;
                     }
 
@@ -78,9 +76,10 @@ class QuestionJsonUploadAction
                     foreach ($jsonData as $index => $questionData) {
                         try {
                             // Ensure questionData is an array
-                            if (!is_array($questionData)) {
+                            if (! is_array($questionData)) {
                                 $errorCount++;
                                 $errors[] = "Question #{$index}: Question data must be an object/array";
+
                                 continue;
                             }
 
@@ -89,21 +88,23 @@ class QuestionJsonUploadAction
                             $missingFields = [];
 
                             foreach ($requiredFields as $field) {
-                                if (!isset($questionData[$field])) {
+                                if (! isset($questionData[$field])) {
                                     $missingFields[] = $field;
                                 }
                             }
 
-                            if (!empty($missingFields)) {
+                            if (! empty($missingFields)) {
                                 $errorCount++;
-                                $errors[] = "Question #{$index}: Missing required fields: " . implode(', ', $missingFields);
+                                $errors[] = "Question #{$index}: Missing required fields: ".implode(', ', $missingFields);
+
                                 continue;
                             }
 
                             // Make sure options is an array
-                            if (!is_array($questionData['options'])) {
+                            if (! is_array($questionData['options'])) {
                                 $errorCount++;
                                 $errors[] = "Question #{$index}: 'options' field must be an object/array";
+
                                 continue;
                             }
 
@@ -112,7 +113,8 @@ class QuestionJsonUploadAction
 
                             if ($validator->fails()) {
                                 $errorCount++;
-                                $errors[] = "Question #{$index}: " . implode(', ', $validator->errors()->all());
+                                $errors[] = "Question #{$index}: ".implode(', ', $validator->errors()->all());
+
                                 continue;
                             }
 
@@ -185,10 +187,10 @@ class QuestionJsonUploadAction
                             $createdCount++;
                         } catch (\Throwable $e) {
                             $errorCount++;
-                            $errors[] = "Question #{$index}: " . $e->getMessage();
-                            Log::error('Error uploading question: ' . $e->getMessage(), [
+                            $errors[] = "Question #{$index}: ".$e->getMessage();
+                            Log::error('Error uploading question: '.$e->getMessage(), [
                                 'exception' => $e,
-                                'questionData' => $questionData ?? 'No question data'
+                                'questionData' => $questionData ?? 'No question data',
                             ]);
                         }
                     }
@@ -234,9 +236,9 @@ class QuestionJsonUploadAction
             'question' => 'required|string',
             'hint' => 'nullable|array',
             'explanation_text' => 'nullable|string',
-            'question_type' => 'required|string|in:' . implode(',', array_column(QuestionType::cases(), 'value')),
-            'scope' => 'required|string|in:' . implode(',', array_column(QuestionScope::cases(), 'value')),
-            'direction' => 'required|string|in:' . implode(',', array_column(ContentDirection::cases(), 'value')),
+            'question_type' => 'required|string|in:'.implode(',', array_column(QuestionType::cases(), 'value')),
+            'scope' => 'required|string|in:'.implode(',', array_column(QuestionScope::cases(), 'value')),
+            'direction' => 'required|string|in:'.implode(',', array_column(ContentDirection::cases(), 'value')),
             'question_is_latex' => 'boolean',
             'explanation_text_is_latex' => 'boolean',
             'options' => 'required|array',

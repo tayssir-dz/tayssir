@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -12,7 +11,9 @@ use Illuminate\Queue\SerializesModels;
 class EmailVerificationMail extends Mailable
 {
     use Queueable, SerializesModels;
+
     public $mailData;
+
     /**
      * Create a new message instance.
      */
@@ -27,7 +28,7 @@ class EmailVerificationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: config("app.name") . ' Email Verification',
+            subject: config('app.name').' Email Verification',
         );
     }
 

@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources\ChapterResource\RelationManagers\Question_types;
 
-use Filament\Forms\Components\Component;
-use Filament\Forms\Components\Toggle;
 use App\Enums\QuestionType as QuestionTypeEnum;
+use Filament\Forms\Components\Toggle;
 
 class TrueOrFalse extends QuestionType
 {
@@ -29,8 +28,8 @@ class TrueOrFalse extends QuestionType
                 ->afterStateHydrated(function (Toggle $component, $state) {
                     $component->state((bool) ($state ?? false));
                 })
-                ->dehydrateStateUsing(fn($state) => (bool) $state)
-                ->rules(['boolean'])
+                ->dehydrateStateUsing(fn ($state) => (bool) $state)
+                ->rules(['boolean']),
         ];
     }
 }

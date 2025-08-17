@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class PromoCode extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'promoter_id',
         'code',
@@ -29,7 +30,6 @@ class PromoCode extends Model
         ];
     }
 
-
     public function promoter(): BelongsTo
     {
         return $this->belongsTo(Promoter::class);
@@ -38,6 +38,7 @@ class PromoCode extends Model
     public function getIsActiveAttribute(): bool
     {
         $now = Carbon::now()->toDateString();
+
         return $this->start_date <= $now && $this->end_date >= $now;
     }
 }

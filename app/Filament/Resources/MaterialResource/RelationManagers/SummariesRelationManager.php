@@ -2,8 +2,6 @@
 
 namespace App\Filament\Resources\MaterialResource\RelationManagers;
 
-use App\Filament\Resources\SummaryResource;
-use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
@@ -17,12 +15,10 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SummariesRelationManager extends RelationManager
 {
-    protected static ?string $icon = "heroicon-o-folder-arrow-down";
+    protected static ?string $icon = 'heroicon-o-folder-arrow-down';
 
     public static function getModelLabel(): string
     {
@@ -63,7 +59,7 @@ class SummariesRelationManager extends RelationManager
                 Section::make(__('custom.forms.summary.create.section.file'))->schema([
                     SpatieMediaLibraryFileUpload::make('pdf')
                         ->multiple(false)
-                        ->label("")
+                        ->label('')
                         ->collection('pdf')
                         ->acceptedFileTypes(['application/pdf'])
                         ->downloadable()
@@ -81,8 +77,8 @@ class SummariesRelationManager extends RelationManager
                 IconColumn::make('pdf')
                     ->label(__('custom.models.summary.pdf'))
                     ->icon('heroicon-o-document-text')
-                    ->color(fn($record) => $record->pdf ? 'success' : 'gray')
-                    ->tooltip(fn($record) => $record->pdf ? 'PDF Available' : 'No PDF'),
+                    ->color(fn ($record) => $record->pdf ? 'success' : 'gray')
+                    ->tooltip(fn ($record) => $record->pdf ? 'PDF Available' : 'No PDF'),
 
                 TextColumn::make('title')
                     ->label(__('custom.models.summary.title'))
@@ -118,9 +114,9 @@ class SummariesRelationManager extends RelationManager
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\Action::make('download')
                     ->icon('heroicon-o-arrow-down-tray')
-                    ->url(fn($record) => $record->pdf)
+                    ->url(fn ($record) => $record->pdf)
                     ->openUrlInNewTab()
-                    ->visible(fn($record) => $record->pdf)
+                    ->visible(fn ($record) => $record->pdf)
                     ->label('Download PDF'),
             ])
             ->bulkActions([

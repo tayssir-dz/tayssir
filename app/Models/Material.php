@@ -12,15 +12,14 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Material extends Model implements HasMedia
 {
-    use InteractsWithMedia;
     use HasFactory;
+    use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-
     protected $fillable = [
         'name',
         'code',
@@ -37,7 +36,6 @@ class Material extends Model implements HasMedia
      *
      * @var array<int, string>
      */
-
     protected $hidden = [
         'created_at',
         'updated_at',
@@ -89,8 +87,6 @@ class Material extends Model implements HasMedia
             ->using(DivisionMaterial::class)
             ->withPivot('sort');
     }
-
-
 
     public function units()
     {

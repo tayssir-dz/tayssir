@@ -5,7 +5,7 @@ return [
     'nav.section.platform' => 'Platform',
     'nav.section.content' => 'Content',
     'nav.section.management' => 'Management',
-    'nav.section.points' =>  'Points',
+    'nav.section.points' => 'Points',
 
     'models.cards' => 'Cards (old)',
     'models.card' => 'Card',
@@ -31,11 +31,11 @@ return [
     'models.subscriptions' => 'Subscriptions',
     'models.subscription' => 'Subscription',
 
-    'models.discounts' => "Discounts",
-    'models.discount' => "Discount",
+    'models.discounts' => 'Discounts',
+    'models.discount' => 'Discount',
 
-    'models.subscriptionCards' => "Subscription cards",
-    'models.subscriptionCard' => "Subscription card",
+    'models.subscriptionCards' => 'Subscription cards',
+    'models.subscriptionCard' => 'Subscription card',
 
     'models.banners' => 'Banners',
     'models.banner' => 'Banner',
@@ -48,7 +48,7 @@ return [
 
     // # Promoter
     'models.promoter.name' => 'Name',
-    'models.promoter.avatar' => "Profile picture",
+    'models.promoter.avatar' => 'Profile picture',
     'models.promoter.email' => 'Email',
     'models.promoter.password' => 'Password',
     'models.promoter.phone' => 'Phone',
@@ -56,11 +56,11 @@ return [
     'models.promoter.wilaya' => 'Wilaya',
     'models.promoter.wilayas' => 'Wilayas',
     'models.promoter.wilaya.empty' => 'No wilaya selected',
-    'models.promoter.wilaya.field' => "name",
+    'models.promoter.wilaya.field' => 'name',
     'models.promoter.commune' => 'Commune',
     'models.promoter.communes' => 'Communes',
     'models.promoter.commune.empty' => 'No commune selected',
-    'models.promoter.commune.field' => "name",
+    'models.promoter.commune.field' => 'name',
     'models.promoter.personal_info' => 'Personal informations',
 
     // # Promo Code
@@ -144,15 +144,15 @@ return [
     'models.flashcard.description' => 'Description',
 
     // # Division
-    "forms.division.create.section.infos" => "Division informations",
-    "forms.division.create.section.image" => "Division image",
+    'forms.division.create.section.infos' => 'Division informations',
+    'forms.division.create.section.image' => 'Division image',
 
     'models.division.name' => 'Division name',
     'models.division.description' => 'Division description',
 
     // # Material
-    "forms.material.create.section.infos" => "Material informations",
-    "forms.material.create.section.image" => "Material media",
+    'forms.material.create.section.infos' => 'Material informations',
+    'forms.material.create.section.image' => 'Material media',
 
     'models.material.name' => 'Material name',
     'models.material.description' => 'Material description',
@@ -172,12 +172,12 @@ return [
     'models.unit.action.details' => 'Unit details',
     'models.unit.subscriptions' => 'Subscriptions',
     'models.unit.image' => 'Unit image',
-    "forms.unit.create.section.infos" => "Unit information",
-    "forms.unit.create.section.image" => "Unit image",
+    'forms.unit.create.section.infos' => 'Unit information',
+    'forms.unit.create.section.image' => 'Unit image',
 
     // # User
     'models.user.name' => 'Name',
-    'models.user.avatar' => "Profile picture",
+    'models.user.avatar' => 'Profile picture',
     'models.user.email' => 'Email',
     'models.user.password' => 'Password',
     'models.user.phone' => 'Phone',
@@ -191,11 +191,11 @@ return [
     'models.user.wilaya' => 'Wilaya',
     'models.user.wilayas' => 'Wilayas',
     'models.user.wilaya.empty' => 'No wilaya selected',
-    'models.user.wilaya.field' => "name",
+    'models.user.wilaya.field' => 'name',
     'models.user.commune' => 'Commune',
     'models.user.communes' => 'Communes',
     'models.user.commune.empty' => 'No commune selected',
-    'models.user.commune.field' => "name",
+    'models.user.commune.field' => 'name',
 
     'models.user.tabs.all' => 'All',
     'models.user.tabs.students' => 'Students',
@@ -209,21 +209,21 @@ return [
     'models.user.roles_and_subscription' => 'Roles and subscription',
 
     // # Chapter
-    "forms.chapter.create.section.infos" => "Chapter informations",
-    "forms.chapter.create.section.image" => "Chapter image",
+    'forms.chapter.create.section.infos' => 'Chapter informations',
+    'forms.chapter.create.section.image' => 'Chapter image',
     'models.chapter.name' => 'Chapter name',
     'models.chapter.description' => 'Chapter description',
     'models.chapter.unit' => 'Unit',
     'models.chapter.photo' => 'Photo',
     'models.chapter.action.details' => 'Chapter details',
-    "models.chapter.subscriptions" => "Subscriptions",
+    'models.chapter.subscriptions' => 'Subscriptions',
 
     'models.chapter_levels' => 'Chapter Levels',
     'models.chapter_level' => 'Chapter Level',
     'models.chapter_level.name' => 'Level Name',
     'models.chapter_level.exercice_points' => 'Exercise Points',
     'models.chapter_level.lesson_points' => 'Lesson Points',
-    'models.chapter_level.bonus' =>  'Bonus',
+    'models.chapter_level.bonus' => 'Bonus',
     'forms.chapter_level.create.section.infos' => 'Level Information',
     'models.chapter.level' => 'Level',
 
@@ -272,7 +272,7 @@ return [
     'models.question.true_false.true' => 'True',
     'models.question.true_false.false' => 'False',
     'models.question.add_option' => 'Add Option',
-    "models.question.add_word" => "Add Word",
+    'models.question.add_word' => 'Add Word',
     'models.question.add_duo' => 'Add Pair',
 
     'models.question.difficulty' => 'Difficulty',
@@ -281,8 +281,8 @@ return [
     'models.question.difficulty.hard' => 'Hard',
 
     'models.question.scope' => 'Scope',
-    'models.question.scope.exercice' => "Exercise",
-    'models.question.scope.lesson' => "Lesson",
+    'models.question.scope.exercice' => 'Exercise',
+    'models.question.scope.lesson' => 'Lesson',
     'models.question.is_latex' => 'Is LaTeX',
 
     // # JSON Upload
@@ -337,19 +337,19 @@ return [
 
     // Card
 
-    "models.card.code" => "Code",
-    "models.card.code.warning" => "It is recommended to add cards from the 'Add Cards' command",
-    "models.card.tab.code" => "Code",
-    "models.card.tab.pricing" => "Pricing",
-    "models.card.tab.subscription" => "Subscription",
-    "models.card.price" => "Price",
-    "models.card.subscription_type" => "Subscription type",
-    "models.card.user" => "User",
-    "models.card.activated" => "Activated",
-    "models.card.expired" => "Expired",
+    'models.card.code' => 'Code',
+    'models.card.code.warning' => "It is recommended to add cards from the 'Add Cards' command",
+    'models.card.tab.code' => 'Code',
+    'models.card.tab.pricing' => 'Pricing',
+    'models.card.tab.subscription' => 'Subscription',
+    'models.card.price' => 'Price',
+    'models.card.subscription_type' => 'Subscription type',
+    'models.card.user' => 'User',
+    'models.card.activated' => 'Activated',
+    'models.card.expired' => 'Expired',
     'models.card.done' => 'Done',
-    "models.card.expires_at" => "Expires at",
-    "models.card.activated_at" => "Activated at",
+    'models.card.expires_at' => 'Expires at',
+    'models.card.activated_at' => 'Activated at',
     'models.card.is_on_discount' => 'Is on discount',
     'models.card.discount_price' => 'Discount price',
     'models.card.discount_percentage' => 'Discount percentage %',
@@ -364,59 +364,59 @@ return [
     'models.card.status.problem' => 'Problem',
     'models.card.create_cards' => 'Create cards',
 
-    # Subscription
+    // Subscription
     'models.subscription.name' => 'Name',
     'models.subscription.description' => 'Description',
     'models.subscription.discounts' => 'Discounts',
-    "models.subscription.discounts.empty" => "No discounts",
+    'models.subscription.discounts.empty' => 'No discounts',
     'models.subscription.price' => 'Price',
     'models.subscription.ending_date' => 'Ending date',
 
-    # Discount
+    // Discount
     'models.discount.name' => 'Name',
     'models.discount.description' => 'Description',
     'models.discount.amount' => 'Discount amount',
     'models.discount.percentage' => 'Discount percentage',
-    'models.discount.from' => "From",
-    'models.discount.to' => "To",
+    'models.discount.from' => 'From',
+    'models.discount.to' => 'To',
     'models.discount.subscriptions' => 'Subscriptions',
     'models.discount.subscriptions.empty' => 'No subscriptions',
-    'models.discount.tabs.informations' => "Discount informations",
-    'models.discount.tabs.reduction' => "Reduction",
-    'models.discount.tabs.period' => "Period",
+    'models.discount.tabs.informations' => 'Discount informations',
+    'models.discount.tabs.reduction' => 'Reduction',
+    'models.discount.tabs.period' => 'Period',
 
-    # Subscription Card
+    // Subscription Card
     'models.subscriptionCard.code' => 'Code',
     'models.subscriptionCard.user' => 'User',
     'models.subscriptionCard.subscription' => 'Subscription',
-    'models.subscriptionCard.redeemed_at' => "Redeemed at",
-    'models.subscriptionCard.redeemed_at.empty' => "Not redeemed yet",
+    'models.subscriptionCard.redeemed_at' => 'Redeemed at',
+    'models.subscriptionCard.redeemed_at.empty' => 'Not redeemed yet',
 
     'models.subscriptionCard.copy_code' => 'Copy code',
     'models.subscriptionCard.create_subscriptionCards' => 'Create subscription cards',
     'models.subscriptionCard.number_of_cards' => 'Number of cards',
-    'models.subscriptionCard.attach_user' => "Attach user",
-    'models.subscriptionCard.user.email' => "User email",
-    'models.subscriptionCard.user.empty' => "No user attached",
-    'models.subscriptionCard.user.added_successfully' => "User attached successfully",
-    'models.subscriptionCard.user.not_found' => "User not found",
-    'models.subscriptionCard.user.already_subscribed' => "User already subscribed",
-    'models.subscriptionCard.activated_cards' => "Activated cards",
-    'models.subscriptionCard.unactivated_cards' => "Unactivated cards",
-    'models.subscriptionCard.code_copied' => "Code copied",
+    'models.subscriptionCard.attach_user' => 'Attach user',
+    'models.subscriptionCard.user.email' => 'User email',
+    'models.subscriptionCard.user.empty' => 'No user attached',
+    'models.subscriptionCard.user.added_successfully' => 'User attached successfully',
+    'models.subscriptionCard.user.not_found' => 'User not found',
+    'models.subscriptionCard.user.already_subscribed' => 'User already subscribed',
+    'models.subscriptionCard.activated_cards' => 'Activated cards',
+    'models.subscriptionCard.unactivated_cards' => 'Unactivated cards',
+    'models.subscriptionCard.code_copied' => 'Code copied',
 
     // # Active field
     'models.active' => 'Active',
     'models.active.true' => 'Active',
     'models.active.false' => 'Inactive',
 
-    # Currency
+    // Currency
 
-    "currency.local.dzd" => env('MONEY_DEFAULT_LOCALE_en', 'EN_DZ'),
+    'currency.local.dzd' => env('MONEY_DEFAULT_LOCALE_en', 'EN_DZ'),
 
-    # Stats
-    "stats.users.new" => 'New users',
-    "stats.users.last30Days" => 'Last 30 days',
+    // Stats
+    'stats.users.new' => 'New users',
+    'stats.users.last30Days' => 'Last 30 days',
     // Referral Sources Widget
     'stats.referral_sources.widget.title' => 'Users by Referral Source',
     'stats.referral_sources.filter.today' => 'Today',
@@ -434,12 +434,12 @@ return [
     'models.leaderboard.user' => 'User',
     'models.leaderboard.progress' => 'Progress',
 
-    "direction.label" =>  'Text direction',
-    "direction.rtl" =>  "From right to left (rtl)",
-    "direction.ltr" =>   "From left to right (ltr)",
-    "direction.inherit" =>  "Use the parent direction (inherit)",
+    'direction.label' => 'Text direction',
+    'direction.rtl' => 'From right to left (rtl)',
+    'direction.ltr' => 'From left to right (ltr)',
+    'direction.inherit' => 'Use the parent direction (inherit)',
 
-    'table.image.empty' => "Image not uploaded",
+    'table.image.empty' => 'Image not uploaded',
 
     // # Json Column
     'models.json_column.viewer_tab' => 'Viewer',

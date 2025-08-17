@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\MaterialResource\RelationManagers;
 
 use App\Filament\Resources\FlashcardGroupResource;
-use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -12,8 +11,6 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class FlashcardGroupsRelationManager extends RelationManager
 {
@@ -86,11 +83,11 @@ class FlashcardGroupsRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\LinkAction::make("Details")
+                Tables\Actions\LinkAction::make('Details')
                     ->label(__('custom.models.flashcard_group.action.details'))
                     ->icon('heroicon-o-eye')
                     ->color('secondary')
-                    ->url(fn($record) => FlashcardGroupResource::getUrl("edit", ['record' => $record])),
+                    ->url(fn ($record) => FlashcardGroupResource::getUrl('edit', ['record' => $record])),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

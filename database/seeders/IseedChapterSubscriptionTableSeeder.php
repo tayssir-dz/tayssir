@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 
 class IseedChapterSubscriptionTableSeeder extends Seeder
 {
-
     /**
      * Auto generated seed file
      *
@@ -14,29 +13,25 @@ class IseedChapterSubscriptionTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
         \DB::table('chapter_subscription')->delete();
-        
-        \DB::table('chapter_subscription')->insert(array (
-            0 => 
-            array (
+
+        \DB::table('chapter_subscription')->insert([
+            0 => [
                 'id' => 123,
                 'subscription_id' => 1,
                 'chapter_id' => 9,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            1 => 
-            array (
+                'created_at' => null,
+                'updated_at' => null,
+            ],
+            1 => [
                 'id' => 124,
                 'subscription_id' => 1,
                 'chapter_id' => 10,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-        ));
-        
-        
+                'created_at' => null,
+                'updated_at' => null,
+            ],
+        ]);
+
     }
 }

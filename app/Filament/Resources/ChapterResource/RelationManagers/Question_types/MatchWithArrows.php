@@ -3,10 +3,8 @@
 namespace App\Filament\Resources\ChapterResource\RelationManagers\Question_types;
 
 use App\Enums\QuestionType as QuestionTypeEnum;
-use Filament\Forms\Components\Component;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 
@@ -56,10 +54,10 @@ class MatchWithArrows extends QuestionType
                 // ->reorderableWithButtons()
                 ->collapsible()
                 ->collapsed()
-                ->label("")
-                ->itemLabel(fn(array $state): ?string => '(' . ($state['first'] ?? '-') . ') → (' . ($state['second'] ?? '-') . ")")
+                ->label('')
+                ->itemLabel(fn (array $state): ?string => '('.($state['first'] ?? '-').') → ('.($state['second'] ?? '-').')')
                 ->columnSpanFull()
-                ->addActionLabel(trans('custom.models.question.add_duo'))
+                ->addActionLabel(trans('custom.models.question.add_duo')),
         ];
     }
 }

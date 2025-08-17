@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\API\BaseController;
 use App\Models\Bac;
 use Illuminate\Http\Request;
 
@@ -52,7 +51,7 @@ class BacController extends BaseController
                         'pdf_url' => $bac->pdf,
                         'created_at' => $bac->created_at,
                     ];
-                })->values()
+                })->values(),
             ];
         })->values();
 
@@ -65,8 +64,8 @@ class BacController extends BaseController
                 'total' => $bacs->total(),
                 'from' => $bacs->firstItem(),
                 'to' => $bacs->lastItem(),
-            ]
-        ], __("response.bacs_retrieved_successfully"));
+            ],
+        ], __('response.bacs_retrieved_successfully'));
     }
 
     public function show($id)
@@ -76,7 +75,7 @@ class BacController extends BaseController
             ->find($id);
 
         if (is_null($bac)) {
-            return $this->sendError(__("response.bac_not_found"));
+            return $this->sendError(__('response.bac_not_found'));
         }
 
         $bacData = [
@@ -95,7 +94,7 @@ class BacController extends BaseController
             'updated_at' => $bac->updated_at,
         ];
 
-        return $this->sendResponse($bacData, __("response.bac_retrieved_successfully"));
+        return $this->sendResponse($bacData, __('response.bac_retrieved_successfully'));
     }
 
     public function content(Request $request)

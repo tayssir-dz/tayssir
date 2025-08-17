@@ -52,6 +52,7 @@ class ReferralSource extends Model implements HasMedia
         if ($this->relationLoaded('users')) {
             return $this->users->count();
         }
+
         return $this->users()->count();
     }
 }

@@ -8,10 +8,9 @@ use App\Models\Subscription;
 use App\Models\SubscriptionCard;
 use Carbon\Carbon;
 use Exception;
+use G4T\Swagger\Attributes\SwaggerSection;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Http\Request;
-use Validator;
-use G4T\Swagger\Attributes\SwaggerSection;
 use Illuminate\Support\Facades\Hash;
 
 // #[SwaggerSection("This section oversees subscription management, allowing users to view their subscriptions, redeem subscription cards, and unsubscribe from active subscriptions. It enforces checks to ensure valid subscriptions and handles user-specific subscription actions securely, including error handling for invalid or already used subscription codes.")]
@@ -35,7 +34,7 @@ class SubscriptionController extends BaseController
             });
         }
 
-        $subscriptions =  $subscriptions->unique('id')->values();
+        $subscriptions = $subscriptions->unique('id')->values();
         $subscriptions = $subscriptions->map(function ($subscription) {
             return [
                 'id' => $subscription->id,
@@ -56,11 +55,11 @@ class SubscriptionController extends BaseController
                         'from' => $discount->from,
                         'to' => $discount->to,
                     ];
-                })
+                }),
             ];
         });
 
-        return $this->sendResponse($subscriptions, __("response.subscriptions_retrieved_successfully"));
+        return $this->sendResponse($subscriptions, __('response.subscriptions_retrieved_successfully'));
     }
 
     /**
@@ -74,7 +73,7 @@ class SubscriptionController extends BaseController
         $subscription = Subscription::with('discounts')->find($id);
 
         if (is_null($subscription)) {
-            return $this->sendError(__("response.subscription_not_found"));
+            return $this->sendError(__('response.subscription_not_found'));
         }
 
         $result = [
@@ -96,37 +95,39 @@ class SubscriptionController extends BaseController
                     'from' => $discount->from,
                     'to' => $discount->to,
                 ];
-            })
+            }),
         ];
 
-        return $this->sendResponse($result, __("response.subscription_retrieved_successfully"));
+        return $this->sendResponse($result, __('response.subscription_retrieved_successfully'));
     }
+
     public function redeem(RedeemRequest $request)
     {
         $code = $request->input('card_code');
         $user = $request->user();
         if ($user->subscriptionCard !== null) {
-            return $this->sendError(__("response.user_already_has_subscription_card"));
+            return $this->sendError(__('response.user_already_has_subscription_card'));
         }
         $subscriptionCard = SubscriptionCard::where('code', $code)->first();
         if ($subscriptionCard === null) {
-            return $this->sendError(__("response.invalid_code"));
+            return $this->sendError(__('response.invalid_code'));
         }
         if ($subscriptionCard->user_id === $user->id) {
-            return $this->sendError(__("response.subscription_card_already_redeemed_by_user"));
+            return $this->sendError(__('response.subscription_card_already_redeemed_by_user'));
         }
         if ($subscriptionCard->user_id !== null) {
-            return $this->sendError(__("response.subscription_card_already_redeemed"));
+            return $this->sendError(__('response.subscription_card_already_redeemed'));
         }
         try {
             $subscriptionCard->user_id = $user->id;
             $subscriptionCard->redeemed_at = now();
             $subscriptionCard->save();
-            return $this->sendResponse(message: __("response.subscription_card_redeemed_successfully"));
+
+            return $this->sendResponse(message: __('response.subscription_card_redeemed_successfully'));
         } catch (UniqueConstraintViolationException $e) {
-            return $this->sendError(error: __("response.user_already_subscribed"), code: 409);
+            return $this->sendError(error: __('response.user_already_subscribed'), code: 409);
         } catch (Exception $e) {
-            return $this->sendError(__("response.an_error_occurred"), $e->getMessage(), 500);
+            return $this->sendError(__('response.an_error_occurred'), $e->getMessage(), 500);
         }
     }
 
@@ -135,17 +136,17 @@ class SubscriptionController extends BaseController
         $user = $request->user();
         $subscriptions = $user->active_subscriptions->map(function ($subscription) {
             return [
-                "id" => $subscription->id,
-                "name" => $subscription->name,
-                "description" => $subscription->description,
-                "ending_date" => $subscription->ending_date,
+                'id' => $subscription->id,
+                'name' => $subscription->name,
+                'description' => $subscription->description,
+                'ending_date' => $subscription->ending_date,
                 'gradiant_start' => $subscription->gradiant_start,
                 'gradiant_end' => $subscription->gradiant_end,
                 'bottom_color_at_start' => $subscription->bottom_color_at_start,
             ];
         })->toArray();
 
-        return $this->sendResponse(["subscriptions" => $subscriptions]);
+        return $this->sendResponse(['subscriptions' => $subscriptions]);
     }
 
     public function unsubscribe(UnsubscribeRequest $request)
@@ -154,22 +155,22 @@ class SubscriptionController extends BaseController
         $password = $request->input('password');
         $user = $request->user();
 
-        if (!Hash::check($password, $user->password)) {
-            return $this->sendError(__("response.invalid_password"));
+        if (! Hash::check($password, $user->password)) {
+            return $this->sendError(__('response.invalid_password'));
         }
 
         $subscriptionCard = $user->subscriptionCards->where('subscription_id', $subscription_id)->first();
 
         if ($subscriptionCard === null) {
-            return $this->sendError(__("response.user_not_subscribed_to_this_subscription"));
+            return $this->sendError(__('response.user_not_subscribed_to_this_subscription'));
         }
 
         if ($subscriptionCard->subscription->ending_date->lessThan(Carbon::now())) {
-            return $this->sendError(__("response.subscription_already_expired"));
+            return $this->sendError(__('response.subscription_already_expired'));
         }
 
         $subscriptionCard->delete();
 
-        return $this->sendResponse(__("response.subscription_unsubscribed_successfully"));
+        return $this->sendResponse(__('response.subscription_unsubscribed_successfully'));
     }
 }

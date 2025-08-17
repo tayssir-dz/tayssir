@@ -13,7 +13,7 @@ return [
     |
     */
 
-    "user_register_successfully" => "تم تسجيل المستخدم بنجاح.",
+    'user_register_successfully' => 'تم تسجيل المستخدم بنجاح.',
 
     // Banners
     'banners_retrieved_successfully' => 'تم استرجاع البانرات بنجاح',
@@ -37,7 +37,7 @@ return [
     'flashcard_not_found' => 'البطاقة التعليمية غير موجودة',
     // Referral Sources
     'referral_sources_retrieved_successfully' => 'تم استرجاع مصادر الإحالة بنجاح',
-    "user_login_successfully" => "تم تسجيل الدخول بنجاح.",
+    'user_login_successfully' => 'تم تسجيل الدخول بنجاح.',
 
     'unauthorised' => 'غير مصرح.',
     'wrong_email_or_password' => 'البريد الإلكتروني أو كلمة المرور خاطئة.',
@@ -59,7 +59,7 @@ return [
     'email_not_exists' => 'البريد الإلكتروني غير موجود',
     'phone_exists' => 'رقم الهاتف موجود بالفعل',
     'phone_not_exists' => 'رقم الهاتف غير موجود',
-    "password_reset_successfully" => "تمت إعادة تعيين كلمة المرور بنجاح",
+    'password_reset_successfully' => 'تمت إعادة تعيين كلمة المرور بنجاح',
 
     'user_already_has_subscription_card' => 'المستخدم لديه بطاقة اشتراك بالفعل',
     'invalid_code' => 'رمز غير صالح',

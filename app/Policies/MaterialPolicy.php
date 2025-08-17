@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Material;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MaterialPolicy
@@ -104,6 +104,7 @@ class MaterialPolicy
     public function reorder(User $user): bool
     {
         return true;
+
         return $user->can('{{ Reorder }}');
     }
 }

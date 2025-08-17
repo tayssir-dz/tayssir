@@ -10,16 +10,11 @@ use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\Match
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\MultipleChoice;
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\PickTheIntruder;
 use App\Filament\Resources\ChapterResource\RelationManagers\Question_types\TrueOrFalse;
-use App\Filament\Resources\ChapterResource\RelationManagers\QuestionJsonUploadAction;
-use App\Filament\Resources\ChapterResource\RelationManagers\QuestionJsonEditAction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Tables\Actions\Action;
-use Illuminate\Database\Eloquent\Model;
-use Log;
 
 class QuestionsRelationManager extends RelationManager
 {
@@ -32,10 +27,12 @@ class QuestionsRelationManager extends RelationManager
     {
         return __('custom.models.questions');
     }
+
     public static function getTitle($ownerRecord, string $pageClass): string
     {
         return __('custom.models.questions');
     }
+
     protected static string $relationship = 'questions';
 
     public function form(Form $form): Form
@@ -143,7 +140,7 @@ class QuestionsRelationManager extends RelationManager
                                             $set('options', [
                                                 'paragraph' => '',
                                                 'blanks' => [],
-                                                'suggestions' => []
+                                                'suggestions' => [],
                                             ]);
                                         } else {
                                             $set('options', null);
@@ -157,13 +154,13 @@ class QuestionsRelationManager extends RelationManager
                                 PickTheIntruder::make(),
                                 MatchWithArrows::make(),
                             ]),
-                    ])
+                    ]),
             ])->columns(1);
     }
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        if (!isset($data['options'])) {
+        if (! isset($data['options'])) {
             $data['options'] = [];
         }
 
@@ -217,13 +214,13 @@ class QuestionsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('question_type')
                     ->label(__('custom.models.question.type'))
                     ->badge()
-                    ->formatStateUsing(fn(QuestionType $state) => $state->getLabel())
-                    ->color(fn(QuestionType $state) => $state->getColor()),
+                    ->formatStateUsing(fn (QuestionType $state) => $state->getLabel())
+                    ->color(fn (QuestionType $state) => $state->getColor()),
                 Tables\Columns\TextColumn::make('scope')
                     ->label(__('custom.models.question.scope'))
                     ->badge()
-                    ->formatStateUsing(fn(QuestionScope $state) => $state->getLabel())
-                    ->color(fn(QuestionScope $state) => $state->getColor()),
+                    ->formatStateUsing(fn (QuestionScope $state) => $state->getLabel())
+                    ->color(fn (QuestionScope $state) => $state->getColor()),
 
                 Tables\Columns\TextColumn::make('points')
                     ->label(__('custom.models.question.points'))
@@ -234,16 +231,16 @@ class QuestionsRelationManager extends RelationManager
             ])
             ->headerActions([
                 QuestionJsonUploadAction::make(),
-                Tables\Actions\CreateAction::make()
+                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
                 QuestionJsonEditAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
+                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

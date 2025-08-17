@@ -3,11 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BannerResource\Pages;
-use App\Filament\Resources\BannerResource\RelationManagers;
 use App\Models\Banner;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use BezhanSalleh\FilamentShield\Support\Utils;
-use Filament\Forms;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -23,12 +21,11 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BannerResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = Banner::class;
+
     protected static ?string $recordTitleAttribute = 'title';
 
     public static function getNavigationGroup(): ?string
@@ -61,6 +58,7 @@ class BannerResource extends Resource implements HasShieldPermissions
     }
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
+
     protected static ?int $navigationSort = 8;
 
     public static function form(Form $form): Form
@@ -104,7 +102,7 @@ class BannerResource extends Resource implements HasShieldPermissions
                 Section::make(__('custom.forms.banner.create.section.image'))->schema([
                     SpatieMediaLibraryFileUpload::make('image')
                         ->multiple(false)
-                        ->label("")
+                        ->label('')
                         ->collection('image')
                         ->image()
                         ->imageEditor(),
@@ -118,7 +116,7 @@ class BannerResource extends Resource implements HasShieldPermissions
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')
                     ->label(__('custom.models.banner.image'))
-                    ->placeholder(__("custom.table.image.empty"))
+                    ->placeholder(__('custom.table.image.empty'))
                     ->collection('image')
                     ->rounded(),
 

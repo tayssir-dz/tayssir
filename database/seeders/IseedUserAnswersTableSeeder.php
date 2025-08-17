@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 
 class IseedUserAnswersTableSeeder extends Seeder
 {
-
     /**
      * Auto generated seed file
      *
@@ -14,13 +13,11 @@ class IseedUserAnswersTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
         \DB::table('user_answers')->delete();
-        
-        \DB::table('user_answers')->insert(array (
-            0 => 
-            array (
+
+        \DB::table('user_answers')->insert([
+            0 => [
                 'id' => 1,
                 'user_id' => 2,
                 'question_id' => 81,
@@ -30,9 +27,8 @@ class IseedUserAnswersTableSeeder extends Seeder
                 'points_earned' => 1,
                 'created_at' => '2025-03-18 02:20:51',
                 'updated_at' => '2025-03-18 02:20:51',
-            ),
-            1 => 
-            array (
+            ],
+            1 => [
                 'id' => 2,
                 'user_id' => 2,
                 'question_id' => 82,
@@ -42,9 +38,8 @@ class IseedUserAnswersTableSeeder extends Seeder
                 'points_earned' => 0,
                 'created_at' => '2025-03-18 02:20:51',
                 'updated_at' => '2025-03-18 02:20:51',
-            ),
-        ));
-        
-        
+            ],
+        ]);
+
     }
 }

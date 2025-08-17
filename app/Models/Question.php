@@ -4,26 +4,25 @@ namespace App\Models;
 
 use App\Enums\ContentDirection;
 use App\Enums\QuestionScope;
+use App\Enums\QuestionType;
+use App\Models\Pivot\ChapterQuestion;
+use App\Traits\User\HasQuestionMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use App\Enums\QuestionType;
-use App\Models\Pivot\ChapterQuestion;
-use App\Traits\User\HasQuestionMedia;
 
 class Question extends Model implements HasMedia
 {
-    use InteractsWithMedia;
-    use HasQuestionMedia;
     use HasFactory;
+    use HasQuestionMedia;
+    use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-
     protected $fillable = [
         'question',
         'hint',
@@ -41,7 +40,6 @@ class Question extends Model implements HasMedia
      *
      * @var array<int, string>
      */
-
     protected $hidden = [
         'created_at',
         'updated_at',
@@ -75,7 +73,6 @@ class Question extends Model implements HasMedia
         $this->addMediaCollection('hint_image')
             ->singleFile();
     }
-
 
     public function chapter()
     {
@@ -115,7 +112,7 @@ class Question extends Model implements HasMedia
     public function getPointsAttribute()
     {
         $chapter = $this->chapter()->first();
-        if (!$chapter || !$chapter->chapter_level) {
+        if (! $chapter || ! $chapter->chapter_level) {
             return 0;
         }
 

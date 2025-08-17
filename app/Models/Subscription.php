@@ -9,19 +9,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Subscription extends Model
 {
-    use HasFactory;
     use HasDiscounts;
+    use HasFactory;
 
     public const GUEST_ID = 1;
 
     protected $fillable = [
-        "name",
-        "description",
-        "price",
-        "ending_date",
-        "gradiant_start",
-        "gradiant_end",
-        "bottom_color_at_start",
+        'name',
+        'description',
+        'price',
+        'ending_date',
+        'gradiant_start',
+        'gradiant_end',
+        'bottom_color_at_start',
     ];
 
     // protected $with = ["subscriptionCards"];

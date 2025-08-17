@@ -3,51 +3,40 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use Filament\Forms;
+use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Columns\Layout\Split;
-use Filament\Tables\Columns\Layout\Stack;
-use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use BezhanSalleh\FilamentShield\Support\Utils;
-use Kossa\AlgerianCities\Commune;
-use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
-use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
-use Filament\Tables\Table;  // Add this line
-use Filament\Forms\Components\CheckboxList; // Add this to use statements
-use Filament\Forms\Components\Placeholder;
-use Illuminate\Support\HtmlString;
+use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Database\Eloquent\Builder;  // Add this line
+// Add this to use statements
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\HtmlString;
+use Kossa\AlgerianCities\Commune;
+use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
 
 class UserResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $recordTitleAttribute = 'recordTitle';
-    public static function getGlobalSearchResultTitle(Model $record): string | Htmlable
-    {
-        return $record->name . ' (' . $record->email . ')';
-    }
 
+    public static function getGlobalSearchResultTitle(Model $record): string|Htmlable
+    {
+        return $record->name.' ('.$record->email.')';
+    }
 
     public static function getNavigationGroup(): ?string
     {
@@ -65,12 +54,14 @@ class UserResource extends Resource implements HasShieldPermissions
     {
         return __('custom.models.users');
     }
+
     public static function getNavigationBadge(): ?string
     {
         return Utils::isResourceNavigationBadgeEnabled()
             ? strval(static::getEloquentQuery()->count())
             : null;
     }
+
     public static function getPermissionPrefixes(): array
     {
         return [
@@ -88,17 +79,19 @@ class UserResource extends Resource implements HasShieldPermissions
             'view_with_roles',
         ];
     }
+
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
+
     protected static ?int $navigationSort = 3;
 
     protected static bool $isGloballySearchable = true;
+
     public static function getGloballySearchableAttributes(): array
     {
         return ['name', 'phone_number', 'email', 'new_email', 'wilaya.arabic_name', 'commune.arabic_name', 'wilaya.name', 'commune.name'];
     }
-
 
     public static function form(Form $form): Form
     {
@@ -106,23 +99,23 @@ class UserResource extends Resource implements HasShieldPermissions
             ->schema([
                 Section::make(__('custom.models.user.perfonal_info'))
                     ->schema([
-                        TextInput::make("name")
+                        TextInput::make('name')
                             ->required()
                             ->label(__('custom.models.user.name'))
                             ->columnSpan(2),
 
-                        TextInput::make("email")
-                            ->disabledOn("edit")
+                        TextInput::make('email')
+                            ->disabledOn('edit')
                             ->required()
                             ->unique(ignoreRecord: true)
                             ->email()
                             ->label(__('custom.models.user.email')),
 
                         TextInput::make('phone_number')
-                            ->disabledOn("edit")
+                            ->disabledOn('edit')
                             ->label(__('custom.models.user.phone')),
 
-                        TextInput::make("password")
+                        TextInput::make('password')
                             ->password()
                             ->required()
                             ->label(__('custom.models.user.password'))
@@ -135,18 +128,18 @@ class UserResource extends Resource implements HasShieldPermissions
                         //     ->visibleOn('edit')->columnSpan(2),
 
                         Select::make('wilaya_id')
-                            ->label(__("custom.models.user.wilaya"))
-                            ->relationship(name: 'wilaya', titleAttribute: __("custom.models.user.wilaya.field"))  // Select field for wilaya
+                            ->label(__('custom.models.user.wilaya'))
+                            ->relationship(name: 'wilaya', titleAttribute: __('custom.models.user.wilaya.field'))  // Select field for wilaya
                             ->searchable()
                             ->preload()
                             ->reactive()  // Makes it reactive to changes
-                            ->afterStateUpdated(fn(callable $set) => $set('commune_id', null)),  // Clear commune when wilaya changes
+                            ->afterStateUpdated(fn (callable $set) => $set('commune_id', null)),  // Clear commune when wilaya changes
 
                         Select::make('commune_id')
-                            ->label(__("custom.models.user.commune"))
+                            ->label(__('custom.models.user.commune'))
                             ->options(function (callable $get) {
                                 $wilayaId = $get('wilaya_id');
-                                $field = __("custom.models.user.wilaya.field"); // 'name' or 'arabic_name' based on the language
+                                $field = __('custom.models.user.wilaya.field'); // 'name' or 'arabic_name' based on the language
 
                                 if ($wilayaId) {
                                     // Query the communes based on the selected wilaya and the dynamic field
@@ -159,11 +152,11 @@ class UserResource extends Resource implements HasShieldPermissions
 
                                 return [];
                             })
-                            ->disabled(fn(callable $get) => !$get('wilaya_id'))  // Disable if no Wilaya selected
+                            ->disabled(fn (callable $get) => ! $get('wilaya_id'))  // Disable if no Wilaya selected
                             ->searchable()
                             ->preload()
                             ->afterStateUpdated(function (callable $set, callable $get) {
-                                if (!$get('wilaya_id')) {
+                                if (! $get('wilaya_id')) {
                                     $set('commune_id', null);
                                 }
                             }),
@@ -173,7 +166,7 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->multiple()
                             ->preload()
                             ->searchable()
-                            ->visible(Auth::user()->can("assign_role_user"))
+                            ->visible(Auth::user()->can('assign_role_user'))
                             ->columnSpan(2),
 
                         Select::make('division')
@@ -181,7 +174,7 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->relationship('division', 'name')
                             ->preload()
                             ->searchable()
-                            ->visible(Auth::user()->can("assign_division_user"))
+                            ->visible(Auth::user()->can('assign_division_user'))
                             ->columnSpan(2),
 
                         Select::make('referral_source_id')
@@ -191,17 +184,16 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->searchable()
                             ->columnSpan(2),
 
-
-
                         Placeholder::make('active_subscriptions')
                             ->label(__('custom.models.user.subscribtion'))
                             ->content(function ($record) {
-                                if (!$record)
+                                if (! $record) {
                                     return '';
+                                }
 
                                 return new HtmlString(
                                     $record->active_subscriptions
-                                        ->map(fn($sub) => sprintf(
+                                        ->map(fn ($sub) => sprintf(
                                             '<div class="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-primary-500 text-white">%s</div>',
                                             $sub->name
                                         ))
@@ -213,16 +205,15 @@ class UserResource extends Resource implements HasShieldPermissions
                     ])->columnSpan(2)->columns(2),
                 Group::make()->schema([
                     Section::make(__('custom.models.user.avatar'))->schema([
-                        FileUpload::make("avatar_url")->image()->imageEditor()
+                        FileUpload::make('avatar_url')->image()->imageEditor()
                             ->directory('avatars')
                             ->deletable()
-                            ->label("")
+                            ->label(''),
                     ]),
-                ])
+                ]),
 
             ])->columns(3);
     }
-
 
     public static function table(Table $table): Table
     {
@@ -232,7 +223,7 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->toggleable()
                     ->label(__('custom.models.user.avatar'))
                     ->html()
-                    ->getStateUsing(fn($record) => view('components.filament-ui.avatar', [
+                    ->getStateUsing(fn ($record) => view('components.filament-ui.avatar', [
                         'name' => $record->name,
                         'avatar_url' => $record->avatar_url,
                     ])->render()),
@@ -256,7 +247,7 @@ class UserResource extends Resource implements HasShieldPermissions
 
                 PhoneColumn::make('phone_number')
                     ->label(__('custom.models.user.phone'))
-                    ->default(__("custom.models.user.phone.empty"))
+                    ->default(__('custom.models.user.phone.empty'))
                     ->searchable()
                     ->toggleable()
                     ->copyable()
@@ -293,20 +284,20 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->size('sm')
                     ->getStateUsing(function ($record) {
                         return $record->active_subscriptions
-                            ->map(fn($sub) => $sub->name)
+                            ->map(fn ($sub) => $sub->name)
                             ->values()
                             ->toArray() ?: ['-'];
                     })
                     ->wrap(),
 
-                TextColumn::make('wilaya.' . __('custom.models.user.wilaya.field'))
+                TextColumn::make('wilaya.'.__('custom.models.user.wilaya.field'))
                     ->label(__('custom.models.user.wilaya'))
                     ->searchable()
                     ->toggleable()
                     ->sortable()
                     ->size('sm')
                     ->default(__('custom.models.user.wilaya.empty'))
-                    ->description(fn($record) => $record->commune?->{__('custom.models.user.commune.field')} ?? __('custom.models.user.commune.empty')),
+                    ->description(fn ($record) => $record->commune?->{__('custom.models.user.commune.field')} ?? __('custom.models.user.commune.empty')),
 
                 ToggleColumn::make('email_verified_at')
                     ->label(__('custom.models.user.verified'))
@@ -345,8 +336,8 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->trueLabel(__('custom.models.user.email_verified'))
                     ->falseLabel(__('custom.models.user.email_not_verified'))
                     ->queries(
-                        true: fn(Builder $query) => $query->whereNotNull('email_verified_at'),
-                        false: fn(Builder $query) => $query->whereNull('email_verified_at'),
+                        true: fn (Builder $query) => $query->whereNotNull('email_verified_at'),
+                        false: fn (Builder $query) => $query->whereNull('email_verified_at'),
                     ),
             ])
             ->actions([

@@ -25,7 +25,7 @@ class LeaderBoardController extends BaseController
             $leaderboardData[] = [
                 'id' => $item->user->id,
                 'name' => $item->user->name,
-                'avatar_url' => config('app.url') . "/storage/" . $item->user->avatar_url,
+                'avatar_url' => config('app.url').'/storage/'.$item->user->avatar_url,
                 'points' => $item->points,
                 'wilaya' => $item->user->wilaya ? $item->user->wilaya->arabic_name : null,
                 'commune' => $item->user->commune ? $item->user->commune->arabic_name : null,
@@ -38,7 +38,7 @@ class LeaderBoardController extends BaseController
             'total_items' => LeaderBoard::count(), // Get total items
             'total_pages' => $leaderBoard->lastPage(),
             'current_page' => $currentPage,
-            'data' => $leaderboardData
+            'data' => $leaderboardData,
         ];
 
         // Return the data and the pagination metadata

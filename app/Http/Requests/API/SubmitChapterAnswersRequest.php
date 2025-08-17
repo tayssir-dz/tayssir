@@ -3,7 +3,6 @@
 namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
 class SubmitChapterAnswersRequest extends FormRequest
@@ -11,18 +10,18 @@ class SubmitChapterAnswersRequest extends FormRequest
     public function authorize(): bool
     {
         $user = $this->user();
-        if (!$user) {
+        if (! $user) {
             return false;
         }
 
         // Verify the chapter exists and is part of user's subscribed content
         $chapterId = $this->input('chapter_id');
         $chapter = \App\Models\Chapter::find($chapterId);
-        if (!$chapter) {
+        if (! $chapter) {
             return false;
         }
         $unit = $chapter->unit()->first();
-        if (!$unit) {
+        if (! $unit) {
             return false;
         }
 
@@ -45,7 +44,7 @@ class SubmitChapterAnswersRequest extends FormRequest
                 'integer',
                 'exists:questions,id',
                 // Validate that each question belongs to the chapter
-                Rule::exists('chapter_question', 'question_id')->where('chapter_id', $this->input('chapter_id'))
+                Rule::exists('chapter_question', 'question_id')->where('chapter_id', $this->input('chapter_id')),
             ],
             'answers.*.answered_correctly' => ['required', 'boolean'],
         ];

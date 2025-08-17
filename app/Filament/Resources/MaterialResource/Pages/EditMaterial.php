@@ -10,6 +10,7 @@ use Howdu\FilamentRecordSwitcher\Filament\Concerns\HasRecordSwitcher;
 class EditMaterial extends EditRecord
 {
     use HasRecordSwitcher;
+
     protected static string $resource = MaterialResource::class;
 
     protected function getHeaderActions(): array

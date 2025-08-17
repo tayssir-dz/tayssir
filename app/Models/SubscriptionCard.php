@@ -10,18 +10,19 @@ class SubscriptionCard extends Model
     use HasFactory;
 
     protected $fillable = [
-        "code",
-        "user_id",
-        "subscription_id",
-        "redeemed_at",
+        'code',
+        'user_id',
+        'subscription_id',
+        'redeemed_at',
     ];
 
-    protected $with = ["subscription"];
+    protected $with = ['subscription'];
 
     public function subscription()
     {
         return $this->belongsTo(Subscription::class);
     }
+
     public function user()
     {
         return $this->belongsTo(User::class);

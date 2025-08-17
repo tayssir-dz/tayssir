@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Chapter;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ChapterPolicy
@@ -104,6 +104,7 @@ class ChapterPolicy
     public function reorder(User $user): bool
     {
         return true;
+
         return $user->can('{{ Reorder }}');
     }
 }

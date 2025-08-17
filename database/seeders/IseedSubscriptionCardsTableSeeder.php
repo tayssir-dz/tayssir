@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 
 class IseedSubscriptionCardsTableSeeder extends Seeder
 {
-
     /**
      * Auto generated seed file
      *
@@ -14,11 +13,8 @@ class IseedSubscriptionCardsTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
         \DB::table('subscription_cards')->delete();
-        
-        
-        
+
     }
 }

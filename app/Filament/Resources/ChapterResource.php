@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Enums\ContentDirection;
 use App\Filament\Resources\ChapterResource\Pages;
-use App\Filament\Resources\ChapterResource\RelationManagers;
 use App\Filament\Resources\ChapterResource\RelationManagers\QuestionsRelationManager;
 use App\Models\Chapter;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
@@ -21,8 +20,6 @@ use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ChapterResource extends Resource implements HasShieldPermissions
 {
@@ -42,6 +39,7 @@ class ChapterResource extends Resource implements HasShieldPermissions
     {
         return __('custom.models.chapters');
     }
+
     public static function getPermissionPrefixes(): array
     {
         return [
@@ -52,14 +50,20 @@ class ChapterResource extends Resource implements HasShieldPermissions
             'delete',
             'delete_any',
             'upload_json',
-            'edit_json'
+            'edit_json',
         ];
     }
+
     protected static ?string $model = Chapter::class;
+
     protected static ?string $recordTitleAttribute = 'name';
+
     protected static bool $isGloballySearchable = true;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?int $navigationSort = 12;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -119,7 +123,7 @@ class ChapterResource extends Resource implements HasShieldPermissions
                         ->label(__('custom.models.chapter.subscriptions'))
                         ->columnSpan(2),
 
-                    Textarea::make("description")
+                    Textarea::make('description')
                         ->rows(4)
                         ->columnSpan(2)
                         ->label(__('custom.models.chapter.description')),
@@ -147,7 +151,7 @@ class ChapterResource extends Resource implements HasShieldPermissions
             ->columns([
                 SpatieMediaLibraryImageColumn::make('photo')
                     ->collection('chapter_photos')
-                    ->placeholder(__("custom.table.image.empty"))
+                    ->placeholder(__('custom.table.image.empty'))
                     ->rounded()
                     ->label(__('custom.models.chapter.photo')),
 
@@ -172,8 +176,8 @@ class ChapterResource extends Resource implements HasShieldPermissions
                     ->sortable()
                     ->colors(['primary']),
 
-                TextColumn::make("subscriptions.name")
-                    ->label(__("custom.models.subscriptions"))
+                TextColumn::make('subscriptions.name')
+                    ->label(__('custom.models.subscriptions'))
                     ->badge(),
 
                 Tables\Columns\ToggleColumn::make('active')
@@ -197,7 +201,7 @@ class ChapterResource extends Resource implements HasShieldPermissions
     public static function getRelations(): array
     {
         return [
-            QuestionsRelationManager::class
+            QuestionsRelationManager::class,
         ];
     }
 

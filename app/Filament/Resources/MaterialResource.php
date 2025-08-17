@@ -4,17 +4,15 @@ namespace App\Filament\Resources;
 
 use App\Enums\ContentDirection;
 use App\Filament\Resources\MaterialResource\Pages;
-use App\Filament\Resources\MaterialResource\RelationManagers;
-use App\Filament\Resources\MaterialResource\RelationManagers\UnitsRelationManager;
-use App\Filament\Resources\MaterialResource\RelationManagers\SummariesRelationManager;
 use App\Filament\Resources\MaterialResource\RelationManagers\BacsRelationManager;
 use App\Filament\Resources\MaterialResource\RelationManagers\FlashcardGroupsRelationManager;
+use App\Filament\Resources\MaterialResource\RelationManagers\SummariesRelationManager;
+use App\Filament\Resources\MaterialResource\RelationManagers\UnitsRelationManager;
 use App\Models\Material;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms;
 use Filament\Forms\Components\ColorPicker;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -24,17 +22,14 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ColorColumn;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Str;
 
 class MaterialResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $recordTitleAttribute = 'code';
+
     public static function getNavigationGroup(): ?string
     {
         return Utils::isResourceNavigationGroupEnabled()
@@ -51,6 +46,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
     {
         return __('custom.models.materials');
     }
+
     public static function getPermissionPrefixes(): array
     {
         return [
@@ -62,10 +58,13 @@ class MaterialResource extends Resource implements HasShieldPermissions
             'delete_any',
         ];
     }
+
     protected static ?string $model = Material::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
+
     protected static ?int $navigationSort = 10;
+
     protected static bool $isGloballySearchable = true;
 
     public static function form(Form $form): Form
@@ -73,10 +72,10 @@ class MaterialResource extends Resource implements HasShieldPermissions
         return $form
             ->schema([
                 Section::make(__('custom.forms.material.create.section.infos'))->schema([
-                    TextInput::make("name")->required()->minLength(3)
+                    TextInput::make('name')->required()->minLength(3)
                         ->label(__('custom.models.material.name')),
 
-                    TextInput::make("code")
+                    TextInput::make('code')
                         ->required()
                         ->unique(ignoreRecord: true)
                         ->minLength(3)
@@ -84,7 +83,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
                         ->label(__('custom.models.material.code'))
                         ->columnSpan(1),
 
-                    ColorPicker::make("color")
+                    ColorPicker::make('color')
                         ->required()
                         ->label(__('custom.models.material.color')),
 
@@ -109,7 +108,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
                         ->required()
                         ->label(__('custom.direction.label')),
 
-                    Textarea::make("description")
+                    Textarea::make('description')
                         ->rows(4)
                         ->columnSpan(2)
                         ->label(__('custom.models.material.description')),
@@ -146,49 +145,49 @@ class MaterialResource extends Resource implements HasShieldPermissions
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')
                     ->toggleable()
-                    ->placeholder(__("custom.table.image.empty"))
-                    ->label(__("custom.models.material.image"))
+                    ->placeholder(__('custom.table.image.empty'))
+                    ->label(__('custom.models.material.image'))
                     ->collection('image')
                     ->rounded(),
 
                 SpatieMediaLibraryImageColumn::make('image_grid')
                     ->toggleable()
-                    ->placeholder(__("custom.table.image.empty"))
-                    ->label(__("custom.models.material.image_grid"))
+                    ->placeholder(__('custom.table.image.empty'))
+                    ->label(__('custom.models.material.image_grid'))
                     ->collection('image_grid')
                     ->rounded(),
 
-                TextColumn::make("name")
-                    ->label(__("custom.models.material.name"))
+                TextColumn::make('name')
+                    ->label(__('custom.models.material.name'))
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
 
-                TextColumn::make("code")
+                TextColumn::make('code')
                     ->searchable()
                     ->sortable()
                     ->toggleable()
                     ->badge()
                     ->colors(['primary'])
-                    ->label(__("custom.models.material.code")),
+                    ->label(__('custom.models.material.code')),
 
-                ColorColumn::make("color")
+                ColorColumn::make('color')
                     ->toggleable()
-                    ->label(__("custom.models.material.color")),
+                    ->label(__('custom.models.material.color')),
 
-                ColorColumn::make("secondary_color")
+                ColorColumn::make('secondary_color')
                     ->toggleable()
-                    ->label(__("custom.models.material.secondary_color"))
+                    ->label(__('custom.models.material.secondary_color'))
                     ->default('#000000'),
 
-                TextColumn::make("description")
+                TextColumn::make('description')
                     ->toggleable()
-                    ->label(__("custom.models.material.description"))
+                    ->label(__('custom.models.material.description'))
                     ->limit(30),
 
                 TextColumn::make('divisions.name')
                     ->toggleable()
-                    ->label(__("custom.models.material.division"))
+                    ->label(__('custom.models.material.division'))
                     ->badge()
                     ->colors(['gray'])
                     ->searchable()
@@ -210,7 +209,7 @@ class MaterialResource extends Resource implements HasShieldPermissions
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('divisions.name')
-                    ->relationship("divisions", "name")
+                    ->relationship('divisions', 'name')
                     ->multiple()
                     ->preload()
                     ->searchable()

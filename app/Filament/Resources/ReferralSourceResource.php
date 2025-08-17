@@ -3,28 +3,25 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReferralSourceResource\Pages;
-use App\Filament\Resources\ReferralSourceResource\RelationManagers;
 use App\Models\ReferralSource;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
-use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ReferralSourceResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = ReferralSource::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-share';
+
     protected static ?int $navigationSort = 4;
 
     public static function getNavigationGroup(): ?string
@@ -73,7 +70,7 @@ class ReferralSourceResource extends Resource implements HasShieldPermissions
                         SpatieMediaLibraryFileUpload::make('icon')
                             ->label(__('custom.models.referral_source.icon'))
                             ->collection('icon')
-                            ->getUploadedFileNameForStorageUsing(fn($file) => str()->slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.svg')
+                            ->getUploadedFileNameForStorageUsing(fn ($file) => str()->slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)).'.svg')
                             ->acceptedFileTypes(['image/svg+xml'])
                             ->rules(['mimetypes:image/svg+xml'])
                             ->imageEditor(false)
@@ -81,7 +78,7 @@ class ReferralSourceResource extends Resource implements HasShieldPermissions
                             ->preserveFilenames()
                             ->multiple(false)
                             ->columnSpanFull(),
-                    ])->columns(2)
+                    ])->columns(2),
             ]);
     }
 
@@ -108,7 +105,7 @@ class ReferralSourceResource extends Resource implements HasShieldPermissions
                     ->sortable()
                     ->badge()
                     ->alignCenter()
-                    ->color(fn($state) => $state > 0 ? 'success' : 'gray')
+                    ->color(fn ($state) => $state > 0 ? 'success' : 'gray')
                     ->toggleable(),
                 TextColumn::make('created_at')
                     ->dateTime()

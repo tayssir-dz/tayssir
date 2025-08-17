@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Banner;
-use App\Http\Controllers\API\BaseController;
-use Illuminate\Http\Request;
 
 class BannerController extends BaseController
 {
@@ -32,7 +30,7 @@ class BannerController extends BaseController
                 ];
             });
 
-        return $this->sendResponse($banners, __("response.banners_retrieved_successfully"));
+        return $this->sendResponse($banners, __('response.banners_retrieved_successfully'));
     }
 
     /**
@@ -46,7 +44,7 @@ class BannerController extends BaseController
         $banner = Banner::where('is_active', true)->find($id);
 
         if (is_null($banner)) {
-            return $this->sendError(__("response.banner_not_found"));
+            return $this->sendError(__('response.banner_not_found'));
         }
 
         $bannerData = [
@@ -61,6 +59,6 @@ class BannerController extends BaseController
             'created_at' => $banner->created_at,
         ];
 
-        return $this->sendResponse($bannerData, __("response.banner_retrieved_successfully"));
+        return $this->sendResponse($bannerData, __('response.banner_retrieved_successfully'));
     }
 }

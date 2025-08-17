@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 
 class IseedDivisionMaterialTableSeeder extends Seeder
 {
-
     /**
      * Auto generated seed file
      *
@@ -14,22 +13,19 @@ class IseedDivisionMaterialTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
         \DB::table('division_material')->delete();
-        
-        \DB::table('division_material')->insert(array (
-            0 => 
-            array (
+
+        \DB::table('division_material')->insert([
+            0 => [
                 'id' => 12,
                 'division_id' => 1,
                 'material_id' => 3,
                 'sort' => 0,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-        ));
-        
-        
+                'created_at' => null,
+                'updated_at' => null,
+            ],
+        ]);
+
     }
 }

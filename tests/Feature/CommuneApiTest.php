@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 describe('Commune API Endpoints', function () {
 
     it('returns a successful response for communes list', function () {

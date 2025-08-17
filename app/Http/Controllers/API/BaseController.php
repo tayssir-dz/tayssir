@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\API;
-use Illuminate\Http\Request;
 
 class BaseController
 {
@@ -10,19 +9,18 @@ class BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendResponse($result = [], $message = "Success")
+    public function sendResponse($result = [], $message = 'Success')
     {
         $response = [
             'success' => true,
             'message' => $message,
         ];
-        if (!empty($result)) {
+        if (! empty($result)) {
             $response['data'] = $result;
         }
 
         return response()->json($response, 200);
     }
-
 
     /**
      * return error response.
@@ -36,12 +34,13 @@ class BaseController
             'message' => $error,
         ];
 
-        if (!empty($errorMessages)) {
+        if (! empty($errorMessages)) {
             $response['data'] = $errorMessages;
         }
 
         return response()->json($response, $code);
     }
+
     /**
      * return error response.
      *
@@ -51,14 +50,13 @@ class BaseController
     {
         $response = [
             'success' => false,
-            'message' => "Validation Error.",
+            'message' => 'Validation Error.',
         ];
 
-        if (!empty($errorMessages)) {
+        if (! empty($errorMessages)) {
             $response['data'] = $errorMessages;
         }
 
         return response()->json($response, 422);
     }
-
 }

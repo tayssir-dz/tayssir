@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -12,6 +11,7 @@ use Illuminate\Queue\SerializesModels;
 class ChangeEmailMail extends Mailable
 {
     use Queueable, SerializesModels;
+
     public $mailData;
 
     /**
@@ -28,7 +28,7 @@ class ChangeEmailMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: config("app.name") . ' - تغيير البريد الإلكتروني',
+            subject: config('app.name').' - تغيير البريد الإلكتروني',
         );
     }
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->boolean('explanation_text_is_latex')->default(false);
         });
     }
+
     /**
      * Reverse the migrations.
      */
@@ -26,7 +27,7 @@ return new class extends Migration
             $table->dropColumn([
                 'question_is_latex',
                 'hint_is_latex',
-                'explanation_text_is_latex'
+                'explanation_text_is_latex',
             ]);
         });
     }

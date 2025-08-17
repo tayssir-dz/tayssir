@@ -2,18 +2,13 @@
 
 namespace App\Filament\Resources\ChapterResource\RelationManagers;
 
-use App\Enums\ContentDirection;
-use App\Enums\QuestionScope;
 use App\Enums\QuestionType;
 use App\Models\Question;
 use Filament\Forms;
 use Filament\Notifications\Notification;
-use Filament\Support\Colors\Color;
 use Filament\Tables\Actions\Action;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
 use ValentinMorice\FilamentJsonColumn\FilamentJsonColumn;
-use ValentinMorice\FilamentJsonColumn\JsonColumn;
 
 class QuestionJsonEditAction
 {
@@ -39,17 +34,17 @@ class QuestionJsonEditAction
                 ];
 
                 // Add optional fields if they exist
-                if (!empty($record->hint)) {
+                if (! empty($record->hint)) {
                     $questionData['hint'] = $record->hint;
                 }
 
-                if (!empty($record->explanation_text)) {
+                if (! empty($record->explanation_text)) {
                     $questionData['explanation_text'] = $record->explanation_text;
                     $questionData['explanation_text_is_latex'] = $record->explanation_text_is_latex;
                 }
 
                 $form->fill([
-                    'json_data' => json_encode($questionData, JSON_PRETTY_PRINT)
+                    'json_data' => json_encode($questionData, JSON_PRETTY_PRINT),
                 ]);
             })
             ->form([
@@ -60,7 +55,7 @@ class QuestionJsonEditAction
                     ->helperText(__('custom.models.question.json_edit.helper_text'))
                     ->accent('#F037A5')
                     ->viewerHeight(400)
-                    ->editorHeight(400)
+                    ->editorHeight(400),
             ])
             ->action(function (array $data, Question $record): void {
                 try {
@@ -73,16 +68,18 @@ class QuestionJsonEditAction
                             ->body(__('custom.models.question.json_edit.invalid_json_message', ['error' => json_last_error_msg()]))
                             ->danger()
                             ->send();
+
                         return;
                     }
 
                     // Ensure we have a valid question object
-                    if (!is_array($jsonData)) {
+                    if (! is_array($jsonData)) {
                         Notification::make()
                             ->title(__('custom.models.question.json_edit.invalid_format'))
                             ->body(__('custom.models.question.json_edit.invalid_format_message'))
                             ->danger()
                             ->send();
+
                         return;
                     }
 
@@ -95,6 +92,7 @@ class QuestionJsonEditAction
                             ->body(implode(', ', $validator->errors()->all()))
                             ->danger()
                             ->send();
+
                         return;
                     }
 

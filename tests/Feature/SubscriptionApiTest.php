@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 describe('Subscription API Endpoints', function () {
 
     it('returns a successful response for subscriptions list', function () {

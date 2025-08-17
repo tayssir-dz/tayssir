@@ -17,12 +17,12 @@ class CardObserver
             $discountPercentage = $card->discount_percentage;
             $card->display_price = ($price - ($price * ($discountPercentage / 100))) - $discountPrice;
             Card::where('id', $card->id)->update([
-                'display_price' => $card->display_price
+                'display_price' => $card->display_price,
             ]);
         } else {
             $card->display_price = $card->price;
             Card::where('id', $card->id)->update([
-                'display_price' => $card->price
+                'display_price' => $card->price,
             ]);
         }
     }
@@ -40,12 +40,12 @@ class CardObserver
                 $discountPercentage = $card->discount_percentage;
                 $card->display_price = ($price - ($price * ($discountPercentage / 100))) - $discountPrice;
                 Card::where('id', $card->id)->update([
-                    'display_price' => $card->display_price
+                    'display_price' => $card->display_price,
                 ]);
             } else {
                 $card->display_price = $card->price;
                 Card::where('id', $card->id)->update([
-                    'display_price' => $card->price
+                    'display_price' => $card->price,
                 ]);
             }
         }

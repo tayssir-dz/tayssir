@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -20,10 +20,10 @@ return new class extends Migration
         DB::table('questions')->orderBy('id')->chunk(100, function ($questions) {
             foreach ($questions as $question) {
                 $newHint = [];
-                if (!empty($question->hint)) {
+                if (! empty($question->hint)) {
                     $newHint[] = [
                         'value' => $question->hint,
-                        'is_latex' => (bool)$question->hint_is_latex,
+                        'is_latex' => (bool) $question->hint_is_latex,
                     ];
                 }
 

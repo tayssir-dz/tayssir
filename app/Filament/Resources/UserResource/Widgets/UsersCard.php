@@ -3,9 +3,6 @@
 namespace App\Filament\Resources\UserResource\Widgets;
 
 use App\Enums\QuestionScope;
-use App\Filament\Widgets\MoneyStat;
-use App\Models\User;
-use App\Models\Card;
 use App\Models\Chapter;
 use App\Models\Division;
 use App\Models\Material;
@@ -13,19 +10,19 @@ use App\Models\Question;
 use App\Models\Subscription;
 use App\Models\SubscriptionCard;
 use App\Models\Unit;
+use App\Models\User;
 use App\Models\UserAnswer;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Illuminate\Support\Facades\DB;
 use Spatie\FilamentSimpleStats\SimpleStat;
-use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
 class UsersCard extends BaseWidget
 {
     use HasWidgetShield;
 
     // Set the maximum columns to 3 for better display
-    protected string | array | int $columnSpan = 3;
+    protected string|array|int $columnSpan = 3;
 
     protected function getStats(): array
     {
@@ -37,7 +34,7 @@ class UsersCard extends BaseWidget
                 ->label(__('stats.users.new'))
                 ->description(__('stats.users.last30Days'))
                 ->descriptionIcon('heroicon-o-users')
-                ->color("success"),
+                ->color('success'),
 
             Stat::make(__('stats.users.total'), User::count())
                 ->description(__('stats.users.overall'))
@@ -51,7 +48,7 @@ class UsersCard extends BaseWidget
                 ->label(__('stats.users.thisWeek'))
                 ->description(__('stats.users.last7Days'))
                 ->descriptionIcon('heroicon-o-user-plus')
-                ->color("info"),
+                ->color('info'),
 
             // Subscription statistics
             SimpleStat::make(Subscription::class)
@@ -60,7 +57,7 @@ class UsersCard extends BaseWidget
                 ->label(__('stats.subscriptions.active'))
                 ->description(__('stats.subscriptions.plans'))
                 ->descriptionIcon('heroicon-o-credit-card')
-                ->color("success"),
+                ->color('success'),
 
             SimpleStat::make(SubscriptionCard::class)
                 ->lastDays(30)
@@ -68,7 +65,7 @@ class UsersCard extends BaseWidget
                 ->label(__('stats.subscriptions.cards'))
                 ->description(__('stats.subscriptions.created'))
                 ->descriptionIcon('heroicon-o-ticket')
-                ->color("warning"),
+                ->color('warning'),
 
             Stat::make(__('stats.subscriptions.redeemed'), SubscriptionCard::whereNotNull('redeemed_at')->count())
                 ->description(__('stats.subscriptions.total_redeemed'))
@@ -76,7 +73,7 @@ class UsersCard extends BaseWidget
                 ->chart([2, 5, 8, 10, 15, SubscriptionCard::whereNotNull('redeemed_at')->count()])
                 ->color('success'),
 
-            // Material, Unit, and Chapter statistics  
+            // Material, Unit, and Chapter statistics
             Stat::make(__('stats.materials.total'), Material::count())
                 ->description(__('stats.materials.available'))
                 ->descriptionIcon('heroicon-o-book-open')
@@ -137,7 +134,6 @@ class UsersCard extends BaseWidget
                 ->description(__('stats.divisions.available'))
                 ->descriptionIcon('heroicon-o-building-library')
                 ->color('info'),
-
 
         ];
     }

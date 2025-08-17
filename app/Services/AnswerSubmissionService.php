@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use App\Models\Chapter;
+use App\Models\User;
 use App\Models\UserAnswer;
 use App\Models\UserChapterBonus;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class AnswerSubmissionService
@@ -13,10 +13,7 @@ class AnswerSubmissionService
     /**
      * Handle bulk submission of chapter answers and return progress/points payload
      *
-     * @param User   $user
-     * @param int    $chapterId
-     * @param array  $answers [ ['question_id' => int, 'answered_correctly' => bool], ... ]
-     * @return array
+     * @param  array  $answers  [ ['question_id' => int, 'answered_correctly' => bool], ... ]
      */
     public function submit(User $user, int $chapterId, array $answers): array
     {
@@ -27,7 +24,7 @@ class AnswerSubmissionService
                     $questionIds = array_column($answers, 'question_id');
                     $query->whereIn('questions.id', $questionIds);
                 },
-                'chapter_level'
+                'chapter_level',
             ])->findOrFail($chapterId);
 
             $unit = $chapter->unit()->first();
@@ -50,7 +47,7 @@ class AnswerSubmissionService
             foreach ($answers as $answer) {
                 $questionId = $answer['question_id'];
 
-                if (!isset($questionsMap[$questionId])) {
+                if (! isset($questionsMap[$questionId])) {
                     continue;
                 }
 
@@ -89,7 +86,7 @@ class AnswerSubmissionService
                 }
             }
 
-            if (!empty($userAnswersData)) {
+            if (! empty($userAnswersData)) {
                 UserAnswer::insert($userAnswersData);
             }
 
@@ -107,11 +104,11 @@ class AnswerSubmissionService
                     ->where('chapter_id', $chapterId)
                     ->first();
 
-                if (!$existingBonus && $bonusPoints > 0) {
+                if (! $existingBonus && $bonusPoints > 0) {
                     UserChapterBonus::create([
                         'user_id' => $user->id,
                         'chapter_id' => $chapterId,
-                        'bonus_points' => $bonusPoints
+                        'bonus_points' => $bonusPoints,
                     ]);
 
                     $earnedBonusPointsInThisSubmission = $bonusPoints;
@@ -136,12 +133,12 @@ class AnswerSubmissionService
                     'material' => [
                         'id' => $material->id,
                         'progress' => $materialProgress,
-                        'points' => $materialPoints
+                        'points' => $materialPoints,
                     ],
                     'unit' => [
                         'id' => $unit->id,
                         'progress' => $unitProgress,
-                        'points' => $unitPoints
+                        'points' => $unitPoints,
                     ],
                     'chapter' => [
                         'id' => $chapter->id,
@@ -149,9 +146,9 @@ class AnswerSubmissionService
                         'points' => $chapterPoints,
                         'bonus_points' => $chapterBonusPoints,
                         'earned_points' => $earnedPointsInThisSubmission,
-                        'earned_bonus_points' => $earnedBonusPointsInThisSubmission
-                    ]
-                ]
+                        'earned_bonus_points' => $earnedBonusPointsInThisSubmission,
+                    ],
+                ],
             ];
         });
     }

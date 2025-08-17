@@ -10,7 +10,7 @@ class UserChapterBonus extends Model
     protected $fillable = [
         'user_id',
         'chapter_id',
-        'bonus_points'
+        'bonus_points',
     ];
 
     public function user(): BelongsTo

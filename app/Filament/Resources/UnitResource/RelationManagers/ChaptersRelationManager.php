@@ -5,9 +5,9 @@ namespace App\Filament\Resources\UnitResource\RelationManagers;
 use App\Enums\ContentDirection;
 use App\Filament\Resources\ChapterResource;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -16,8 +16,6 @@ use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ChaptersRelationManager extends RelationManager
 {
@@ -30,11 +28,14 @@ class ChaptersRelationManager extends RelationManager
     {
         return __('custom.models.chapters');
     }
+
     public static function getTitle($ownerRecord, string $pageClass): string
     {
         return __('custom.models.chapters');
     }
+
     protected static string $relationship = 'chapters';
+
     protected static ?string $recordTitleAttribute = 'name';
 
     public function form(Form $form): Form
@@ -46,7 +47,6 @@ class ChaptersRelationManager extends RelationManager
                         ->required()
                         ->minLength(3)
                         ->label(__('custom.models.chapter.name')),
-
 
                     Select::make('chapter_level_id')
                         ->relationship('chapter_level', 'name')
@@ -84,7 +84,7 @@ class ChaptersRelationManager extends RelationManager
                         ->preload()
                         ->label(__('custom.models.chapter.subscriptions')),
 
-                    Textarea::make("description")
+                    Textarea::make('description')
                         ->rows(4)
                         ->label(__('custom.models.chapter.description')),
 
@@ -95,7 +95,7 @@ class ChaptersRelationManager extends RelationManager
                 ])->columnSpan(2),
                 Section::make(__('custom.forms.chapter.create.section.image'))->schema([
                     SpatieMediaLibraryFileUpload::make('photo')
-                        ->label("")
+                        ->label('')
                         ->multiple(false)
                         ->collection('chapter_photos')
                         ->image()
@@ -111,9 +111,9 @@ class ChaptersRelationManager extends RelationManager
             ->reorderable('sort')
             ->recordTitleAttribute('name')
             ->columns([
-                TextColumn::make("id"),
+                TextColumn::make('id'),
                 SpatieMediaLibraryImageColumn::make('photo')
-                    ->placeholder(__("custom.table.image.empty"))
+                    ->placeholder(__('custom.table.image.empty'))
                     ->collection('chapter_photos')
                     ->label(__('custom.models.chapter.photo')),
 
@@ -132,8 +132,8 @@ class ChaptersRelationManager extends RelationManager
                     ->counts('questions')
                     ->colors(['primary']),
 
-                TextColumn::make("subscriptions.name")
-                    ->label(__("custom.models.subscriptions"))
+                TextColumn::make('subscriptions.name')
+                    ->label(__('custom.models.subscriptions'))
                     ->badge(),
 
                 Tables\Columns\ToggleColumn::make('active')
@@ -149,7 +149,7 @@ class ChaptersRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\LinkAction::make("Details")->icon('heroicon-o-eye')->color('secondary')->url(fn($record) => ChapterResource::getUrl("edit", ['record' => $record]))
+                Tables\Actions\LinkAction::make('Details')->icon('heroicon-o-eye')->color('secondary')->url(fn ($record) => ChapterResource::getUrl('edit', ['record' => $record]))
                     ->label(__('custom.models.chapter.action.details')),
             ])
             ->bulkActions([

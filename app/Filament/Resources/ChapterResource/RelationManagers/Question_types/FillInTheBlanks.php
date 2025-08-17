@@ -3,12 +3,11 @@
 namespace App\Filament\Resources\ChapterResource\RelationManagers\Question_types;
 
 use App\Enums\QuestionType as QuestionTypeEnum;
-use Filament\Forms\Components\Component;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 
 class FillInTheBlanks extends QuestionType
 {
@@ -59,11 +58,11 @@ class FillInTheBlanks extends QuestionType
                         ->collapsible()
                         ->collapsed()
                         ->label(trans('custom.models.question.fill_blank.blanks'))
-                        ->itemLabel(fn(array $state): ?string => isset ($state['correct_word'], $state['position']) ? '[' . $state['position'] . '] ' . $state['correct_word'] : null)
+                        ->itemLabel(fn (array $state): ?string => isset($state['correct_word'], $state['position']) ? '['.$state['position'].'] '.$state['correct_word'] : null)
                         ->columnSpanFull()
-                        ->addActionLabel(trans('custom.models.question.fill_blank.add_blank'))
+                        ->addActionLabel(trans('custom.models.question.fill_blank.add_blank')),
                 ])
-                ->columnSpanFull()
+                ->columnSpanFull(),
         ];
     }
 
@@ -72,7 +71,7 @@ class FillInTheBlanks extends QuestionType
         return [
             'paragraph' => '',
             'blanks' => [],
-            'suggestions' => []
+            'suggestions' => [],
         ];
     }
 

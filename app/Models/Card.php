@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Observers\CardObserver;
-use App\Observers\UserObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,17 +13,17 @@ class Card extends Model
     use HasFactory;
 
     protected $fillable = [
-        "code",
-        "price",
-        "is_on_discount",
-        "discount_price",
-        "discount_percentage",
+        'code',
+        'price',
+        'is_on_discount',
+        'discount_price',
+        'discount_percentage',
         'display_price',
         'status',
-        "subscription_type",
-        "user_id",
-        "activated_at",
-        "expires_at",
+        'subscription_type',
+        'user_id',
+        'activated_at',
+        'expires_at',
     ];
 
     protected $casts = [

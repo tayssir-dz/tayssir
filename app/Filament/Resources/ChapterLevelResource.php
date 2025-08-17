@@ -5,23 +5,26 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ChapterLevelResource\Pages;
 use App\Models\ChapterLevel;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use Filament\Forms;
+use BezhanSalleh\FilamentShield\Support\Utils;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
-use BezhanSalleh\FilamentShield\Support\Utils;
 
 class ChapterLevelResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = ChapterLevel::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?int $navigationSort = 7;
+
     protected static bool $isGloballySearchable = true;
+
     protected static ?string $recordTitleAttribute = 'recordTitle';
+
     public static function getPermissionPrefixes(): array
     {
         return [
@@ -33,6 +36,7 @@ class ChapterLevelResource extends Resource implements HasShieldPermissions
             'delete_any',
         ];
     }
+
     public static function getNavigationGroup(): ?string
     {
         return Utils::isResourceNavigationGroupEnabled()
@@ -74,7 +78,7 @@ class ChapterLevelResource extends Resource implements HasShieldPermissions
                             ->minValue(0)
                             ->required()
                             ->label(__('custom.models.chapter_level.bonus')),
-                    ])
+                    ]),
             ]);
     }
 

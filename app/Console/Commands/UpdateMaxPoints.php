@@ -37,8 +37,9 @@ class UpdateMaxPoints extends Command
     private function updateUserMaxPoints($userId)
     {
         $user = User::find($userId);
-        if (!$user) {
+        if (! $user) {
             $this->error("User with ID {$userId} not found.");
+
             return;
         }
 

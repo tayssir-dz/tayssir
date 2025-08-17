@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Enums\ContentDirection;
 use App\Filament\Resources\UnitResource\Pages;
-use App\Filament\Resources\UnitResource\RelationManagers;
 use App\Filament\Resources\UnitResource\RelationManagers\ChaptersRelationManager;
 use App\Models\Unit;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
@@ -21,9 +20,6 @@ use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Columns\IconColumn;
 
 class UnitResource extends Resource implements HasShieldPermissions
 {
@@ -43,6 +39,7 @@ class UnitResource extends Resource implements HasShieldPermissions
     {
         return __('custom.models.units');
     }
+
     public static function getPermissionPrefixes(): array
     {
         return [
@@ -54,11 +51,17 @@ class UnitResource extends Resource implements HasShieldPermissions
             'delete_any',
         ];
     }
+
     protected static ?string $model = Unit::class;
+
     protected static ?string $recordTitleAttribute = 'name';
+
     protected static bool $isGloballySearchable = true;
+
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
+
     protected static ?int $navigationSort = 11;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -83,7 +86,7 @@ class UnitResource extends Resource implements HasShieldPermissions
                         ->required()
                         ->label(__('custom.direction.label')),
 
-                    Textarea::make("description")
+                    Textarea::make('description')
                         ->rows(4)
                         ->columnSpan(2)
                         ->label(__('custom.models.unit.description')),
@@ -105,7 +108,7 @@ class UnitResource extends Resource implements HasShieldPermissions
                 Section::make(__('custom.forms.unit.create.section.image'))->schema([
                     SpatieMediaLibraryFileUpload::make('image')
                         ->multiple(false)
-                        ->label("")
+                        ->label('')
                         ->collection('image')
                         ->image()
                         ->imageEditor(),
@@ -119,8 +122,8 @@ class UnitResource extends Resource implements HasShieldPermissions
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')
                     ->toggleable()
-                    ->placeholder(__("custom.table.image.empty"))
-                    ->label(__("custom.forms.unit.create.section.image"))
+                    ->placeholder(__('custom.table.image.empty'))
+                    ->label(__('custom.forms.unit.create.section.image'))
                     ->collection('image')
                     ->rounded(),
 
@@ -147,7 +150,7 @@ class UnitResource extends Resource implements HasShieldPermissions
                     ->sortable()
                     ->colors(['primary']),
 
-                TextColumn::make("subscriptions.name")
+                TextColumn::make('subscriptions.name')
                     ->label(__('custom.models.subscriptions'))
                     ->badge(),
 
@@ -173,7 +176,7 @@ class UnitResource extends Resource implements HasShieldPermissions
     public static function getRelations(): array
     {
         return [
-            ChaptersRelationManager::class
+            ChaptersRelationManager::class,
         ];
     }
 

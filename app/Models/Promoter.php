@@ -7,22 +7,19 @@ use App\Traits\User\IsPanelUser;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\MediaLibrary\MediaCollections\File;
 
-class Promoter extends Authenticatable implements HasMedia, HasAvatar, FilamentUser
+class Promoter extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
 {
     use HasFactory;
-    use Notifiable;
-    use InteractsWithMedia;
     use HasWilayaAndCommune;
+    use InteractsWithMedia;
     use IsPanelUser;
+    use Notifiable;
 
     protected $fillable = ['name', 'phone_number', 'email', 'password', 'wilaya_id', 'commune_id'];
 
@@ -37,7 +34,7 @@ class Promoter extends Authenticatable implements HasMedia, HasAvatar, FilamentU
 
     public function getRecordTitleAttribute()
     {
-        return $this->name . ' (' . $this->email . ')';
+        return $this->name.' ('.$this->email.')';
     }
 
     public function registerMediaCollections(): void
@@ -50,8 +47,10 @@ class Promoter extends Authenticatable implements HasMedia, HasAvatar, FilamentU
     public function getAvatarAttribute(): ?string
     {
         $media = $this->getFirstMedia('avatar');
-        return $media ? $media->getUrl() : "https://ui-avatars.com/api/?name=" . urlencode($this->name) . "&color=FFFFFF&background=111827";
+
+        return $media ? $media->getUrl() : 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=FFFFFF&background=111827';
     }
+
     public function getFilamentAvatarUrl(): ?string
     {
         return $this->getFirstMediaUrl('avatar');

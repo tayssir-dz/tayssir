@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Chapter;
 use App\Models\Material;
 use App\Models\Unit;
-use App\Models\Chapter;
 use Illuminate\Http\Request;
 
 class ContentWebController extends BaseController
@@ -12,13 +12,14 @@ class ContentWebController extends BaseController
     private function perPage(Request $request): int
     {
         $perPage = (int) $request->query('per_page', 15);
+
         return max(1, min(100, $perPage));
     }
 
     public function content(Request $request)
     {
         $user = $request->user();
-        if (!$user->division) {
+        if (! $user->division) {
             return $this->sendError(__('response.an_error_occurred'));
         }
 
@@ -155,6 +156,7 @@ class ContentWebController extends BaseController
         $chapters->setCollection(
             $chapters->getCollection()->map(function ($chapter) use ($progressData, $unit, $chapterVisibility) {
                 $bonusPoints = $progressData['points']['bonuses'][$chapter->id] ?? 0;
+
                 return [
                     'id' => $chapter->id,
                     'name' => $chapter->name,

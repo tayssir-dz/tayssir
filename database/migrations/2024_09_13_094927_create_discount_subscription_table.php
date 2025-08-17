@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -14,7 +15,6 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBiginteger('subscription_id');
             $table->unsignedBiginteger('discount_id');
-
 
             $table->foreign('subscription_id')->references('id')
                 ->on('subscriptions')->onDelete('cascade');
@@ -31,5 +31,3 @@ return new class extends Migration {
         Schema::dropIfExists('discount_subscription');
     }
 };
-
-

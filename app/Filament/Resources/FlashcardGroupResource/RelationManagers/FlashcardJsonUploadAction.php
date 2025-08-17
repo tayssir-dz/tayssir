@@ -3,15 +3,11 @@
 namespace App\Filament\Resources\FlashcardGroupResource\RelationManagers;
 
 use App\Models\Flashcard;
-use Filament\Forms;
 use Filament\Notifications\Notification;
-use Filament\Support\Colors\Color;
 use Filament\Tables\Actions\Action;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use ValentinMorice\FilamentJsonColumn\FilamentJsonColumn;
-use ValentinMorice\FilamentJsonColumn\JsonColumn;
 
 class FlashcardJsonUploadAction
 {
@@ -33,7 +29,7 @@ class FlashcardJsonUploadAction
                     ->accent('#F037A5')
                     ->viewerHeight(400)
                     ->editorHeight(400)
-                    ->default('{}')
+                    ->default('{}'),
             ])
             ->action(function (array $data, $livewire) {
                 try {
@@ -46,16 +42,18 @@ class FlashcardJsonUploadAction
                             ->body(__('custom.models.flashcard.json_upload.invalid_json_message', ['error' => json_last_error_msg()]))
                             ->danger()
                             ->send();
+
                         return;
                     }
 
                     // Ensure we have an array of flashcards
-                    if (!is_array($jsonData)) {
+                    if (! is_array($jsonData)) {
                         Notification::make()
                             ->title(__('custom.models.flashcard.json_upload.invalid_format'))
                             ->body(__('custom.models.flashcard.json_upload.invalid_format_message'))
                             ->danger()
                             ->send();
+
                         return;
                     }
 
@@ -74,9 +72,10 @@ class FlashcardJsonUploadAction
                     foreach ($jsonData as $index => $flashcardData) {
                         try {
                             // Ensure flashcardData is an array
-                            if (!is_array($flashcardData)) {
+                            if (! is_array($flashcardData)) {
                                 $errorCount++;
                                 $errors[] = "Flashcard #{$index}: Flashcard data must be an object/array";
+
                                 continue;
                             }
 
@@ -85,14 +84,15 @@ class FlashcardJsonUploadAction
                             $missingFields = [];
 
                             foreach ($requiredFields as $field) {
-                                if (!isset($flashcardData[$field]) || empty(trim($flashcardData[$field]))) {
+                                if (! isset($flashcardData[$field]) || empty(trim($flashcardData[$field]))) {
                                     $missingFields[] = $field;
                                 }
                             }
 
-                            if (!empty($missingFields)) {
+                            if (! empty($missingFields)) {
                                 $errorCount++;
-                                $errors[] = "Flashcard #{$index}: Missing required fields: " . implode(', ', $missingFields);
+                                $errors[] = "Flashcard #{$index}: Missing required fields: ".implode(', ', $missingFields);
+
                                 continue;
                             }
 
@@ -101,7 +101,8 @@ class FlashcardJsonUploadAction
 
                             if ($validator->fails()) {
                                 $errorCount++;
-                                $errors[] = "Flashcard #{$index}: " . implode(', ', $validator->errors()->all());
+                                $errors[] = "Flashcard #{$index}: ".implode(', ', $validator->errors()->all());
+
                                 continue;
                             }
 
@@ -117,10 +118,10 @@ class FlashcardJsonUploadAction
                             $createdCount++;
                         } catch (\Throwable $e) {
                             $errorCount++;
-                            $errors[] = "Flashcard #{$index}: " . $e->getMessage();
-                            Log::error('Error uploading flashcard: ' . $e->getMessage(), [
+                            $errors[] = "Flashcard #{$index}: ".$e->getMessage();
+                            Log::error('Error uploading flashcard: '.$e->getMessage(), [
                                 'exception' => $e,
-                                'flashcardData' => $flashcardData ?? 'No flashcard data'
+                                'flashcardData' => $flashcardData ?? 'No flashcard data',
                             ]);
                         }
                     }

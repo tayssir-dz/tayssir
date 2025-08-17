@@ -13,7 +13,7 @@ class UserAnswer extends Model
         'chapter_id',
         'unit_id',
         'material_id',
-        'points_earned'
+        'points_earned',
     ];
 
     public function user(): BelongsTo

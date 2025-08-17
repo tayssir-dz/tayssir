@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\PromoterResource\RelationManagers;
 
 use Carbon\Carbon;
-use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -15,7 +14,6 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PromoCodesRelationManager extends RelationManager
 {
@@ -155,6 +153,7 @@ class PromoCodesRelationManager extends RelationManager
                     ->boolean()
                     ->getStateUsing(function ($record) {
                         $now = Carbon::now()->toDateString();
+
                         return $record->start_date <= $now && $record->end_date >= $now;
                     })
                     ->trueIcon('heroicon-o-check-circle')
@@ -175,8 +174,9 @@ class PromoCodesRelationManager extends RelationManager
             ->filters([
                 Tables\Filters\Filter::make('active')
                     ->label('Active Only')
-                    ->query(fn(Builder $query): Builder => $query->where(function ($query) {
+                    ->query(fn (Builder $query): Builder => $query->where(function ($query) {
                         $now = Carbon::now()->toDateString();
+
                         return $query->where('start_date', '<=', $now)
                             ->where('end_date', '>=', $now);
                     }))
@@ -184,7 +184,7 @@ class PromoCodesRelationManager extends RelationManager
 
                 Tables\Filters\Filter::make('expired')
                     ->label('Expired Only')
-                    ->query(fn(Builder $query): Builder => $query->where('end_date', '<', Carbon::now()->toDateString()))
+                    ->query(fn (Builder $query): Builder => $query->where('end_date', '<', Carbon::now()->toDateString()))
                     ->toggle(),
             ])
             ->headerActions([

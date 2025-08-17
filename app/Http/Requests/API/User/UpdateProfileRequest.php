@@ -26,7 +26,7 @@ class UpdateProfileRequest extends FormRequest
             'phone_number' => 'sometimes|nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'profile_picture' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'wilaya_id' => 'sometimes|nullable|numeric|exists:wilayas,id',
-            'commune_id' => 'sometimes|nullable|numeric|exists:communes,id|exists:communes,id,wilaya_id,' . $this->wilaya_id,
+            'commune_id' => 'sometimes|nullable|numeric|exists:communes,id|exists:communes,id,wilaya_id,'.$this->wilaya_id,
             'age' => 'sometimes|nullable|numeric|min:1|max:120',
             'division_id' => 'sometimes|nullable|numeric|exists:divisions,id',
         ];

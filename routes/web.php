@@ -1,10 +1,9 @@
 <?php
 
-use App\Mail\welcome;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view("home");
+    return view('home');
 
     // admin user
     // $user = \App\Models\User::find(1);
@@ -19,7 +18,7 @@ Route::get('/', function () {
     //     "subscriptions" => $user->subscriptions->pluck("name")->toArray(),
     //     "materials" => $user->accessibleMaterials,
     // ]);
-})->name("login");
+})->name('login');
 
 Route::get('/testing', function () {
     // return view('testing');

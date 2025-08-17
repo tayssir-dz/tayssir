@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'disk' => "public",
+    'disk' => 'public',
     'visibility' => 'public',
 ];

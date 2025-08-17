@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\API\BaseController;
-use App\Models\FlashcardGroup;
 use App\Models\Flashcard;
 use App\Models\Material;
 use Illuminate\Http\Request;
@@ -53,13 +51,13 @@ class FlashCardsController extends BaseController
                         'flashcards_count' => $group->flashcards_count,
                         'created_at' => $group->created_at,
                     ];
-                })->values()
+                })->values(),
             ];
         })->values();
 
         return $this->sendResponse([
             'materials_with_flashcard_groups' => $materialsWithGroups,
-        ], __("response.materials_with_flashcard_groups_retrieved_successfully"));
+        ], __('response.materials_with_flashcard_groups_retrieved_successfully'));
     }
 
     public function index(Request $request)
@@ -130,8 +128,8 @@ class FlashCardsController extends BaseController
                 'total' => $flashcards->total(),
                 'from' => $flashcards->firstItem(),
                 'to' => $flashcards->lastItem(),
-            ]
-        ], __("response.flashcards_retrieved_successfully"));
+            ],
+        ], __('response.flashcards_retrieved_successfully'));
     }
 
     public function show($id)
@@ -140,7 +138,7 @@ class FlashCardsController extends BaseController
             ->find($id);
 
         if (is_null($flashcard)) {
-            return $this->sendError(__("response.flashcard_not_found"));
+            return $this->sendError(__('response.flashcard_not_found'));
         }
 
         $flashcardData = [
@@ -163,7 +161,7 @@ class FlashCardsController extends BaseController
             'updated_at' => $flashcard->updated_at,
         ];
 
-        return $this->sendResponse($flashcardData, __("response.flashcard_retrieved_successfully"));
+        return $this->sendResponse($flashcardData, __('response.flashcard_retrieved_successfully'));
     }
 
     public function content(Request $request)

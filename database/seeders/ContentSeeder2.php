@@ -6,10 +6,10 @@ use App\Models\Chapter;
 use App\Models\Division;
 use App\Models\Material;
 use App\Models\Question;
-use App\Models\Unit;
 use App\Models\Subscription;
-use Illuminate\Database\Seeder;
+use App\Models\Unit;
 use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class ContentSeeder2 extends Seeder
@@ -30,7 +30,7 @@ class ContentSeeder2 extends Seeder
 
         $content = json_decode(file_get_contents(database_path('seeders/json/Content2.json')), true);
 
-        DB::transaction(function () use ($content, $faker) {
+        DB::transaction(function () use ($content) {
             foreach ($content['divisions'] as $divisionData) {
                 $division = Division::firstOrCreate(
                     ['name' => $divisionData['name']],
@@ -51,7 +51,7 @@ class ContentSeeder2 extends Seeder
                     foreach ($materialData['units'] as $unitData) {
                         $unit = new Unit([
                             'name' => $unitData['name'],
-                            'description' => $unitData['description']
+                            'description' => $unitData['description'],
                         ]);
 
                         $material->units()->save($unit);
@@ -64,7 +64,7 @@ class ContentSeeder2 extends Seeder
                         foreach ($unitData['chapters'] as $chapterData) {
                             $chapter = new Chapter([
                                 'name' => $chapterData['name'],
-                                'description' => $chapterData['description']
+                                'description' => $chapterData['description'],
                             ]);
 
                             $unit->chapters()->save($chapter);
@@ -111,7 +111,7 @@ class ContentSeeder2 extends Seeder
                 $chapter->questions()->attach($question->id);
             } else {
                 $question = Question::create([
-                    'question' => rtrim($this->arabicFaker->realText(50), '.') . '؟',
+                    'question' => rtrim($this->arabicFaker->realText(50), '.').'؟',
                     'question_type' => $questionType,
                     'scope' => $questionScope,
                     'options' => $options,
@@ -128,7 +128,7 @@ class ContentSeeder2 extends Seeder
 
         return Question::create([
             'scope' => $questionScope,
-            'question' => $faker->sentence() . '؟',
+            'question' => $faker->sentence().'؟',
             'question_type' => 'true_or_false',
             'options' => ['correct' => $faker->boolean()],
             'hint' => $faker->optional()->sentence(),
@@ -139,9 +139,10 @@ class ContentSeeder2 extends Seeder
     private function getRandomQuestionScope(): string
     {
         $scopes = [
-            "exercice",
-            'lesson'
+            'exercice',
+            'lesson',
         ];
+
         return $scopes[array_rand($scopes)];
     }
 
@@ -152,7 +153,7 @@ class ContentSeeder2 extends Seeder
             'fill_in_the_blanks',
             'pick_the_intruder',
             'true_or_false',
-            'match_with_arrows'
+            'match_with_arrows',
         ];
 
         return $types[array_rand($types)];
@@ -169,9 +170,10 @@ class ContentSeeder2 extends Seeder
                 for ($i = 0; $i < $numOptions; $i++) {
                     $choices[] = [
                         'option' => rtrim($this->arabicFaker->realText(20), '.'),
-                        'is_correct' => ($i === $correctOption)
+                        'is_correct' => ($i === $correctOption),
                     ];
                 }
+
                 return ['choices' => $choices];
 
             case 'fill_in_the_blanks':
@@ -185,7 +187,7 @@ class ContentSeeder2 extends Seeder
                 }
 
                 $positions = array_rand($words_array, $numBlanks);
-                if (!is_array($positions)) {
+                if (! is_array($positions)) {
                     $positions = [$positions];
                 }
 
@@ -197,7 +199,7 @@ class ContentSeeder2 extends Seeder
                     $position = $index + 1;
                     $blanks[] = [
                         'correct_word' => $word,
-                        'position' => $position
+                        'position' => $position,
                     ];
                     $words_array[$pos] = "[$position]";
                     $suggestions[] = $word;
@@ -215,7 +217,7 @@ class ContentSeeder2 extends Seeder
                 return [
                     'paragraph' => implode(' ', $words_array),
                     'blanks' => $blanks,
-                    'suggestions' => $suggestions
+                    'suggestions' => $suggestions,
                 ];
 
             case 'pick_the_intruder':
@@ -226,9 +228,10 @@ class ContentSeeder2 extends Seeder
                 for ($i = 0; $i < $numWords; $i++) {
                     $words[] = [
                         'word' => rtrim($this->arabicFaker->realText(15), '.'),
-                        'is_intruder' => ($i === $intruderIndex)
+                        'is_intruder' => ($i === $intruderIndex),
                     ];
                 }
+
                 return ['words' => $words];
 
             case 'match_with_arrows':
@@ -238,14 +241,15 @@ class ContentSeeder2 extends Seeder
                 for ($i = 0; $i < $numPairs; $i++) {
                     $pairs[] = [
                         'first' => rtrim($this->arabicFaker->realText(15), '.'),
-                        'second' => rtrim($this->arabicFaker->realText(15), '.')
+                        'second' => rtrim($this->arabicFaker->realText(15), '.'),
                     ];
                 }
+
                 return ['pairs' => $pairs];
 
             case 'true_or_false':
                 return [
-                    'correct' => (bool) rand(0, 1)
+                    'correct' => (bool) rand(0, 1),
                 ];
 
             default:

@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 
 class IseedModelHasPermissionsTableSeeder extends Seeder
 {
-
     /**
      * Auto generated seed file
      *
@@ -14,11 +13,8 @@ class IseedModelHasPermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
         \DB::table('model_has_permissions')->delete();
-        
-        
-        
+
     }
 }

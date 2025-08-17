@@ -3,13 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SubscriptionResource\Pages;
-use App\Filament\Resources\SubscriptionResource\RelationManagers;
 use App\Filament\Resources\SubscriptionResource\RelationManagers\SubscriptionCardsRelationManager;
 use App\Models\Subscription;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
+use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -19,11 +18,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Pelmered\FilamentMoneyField\Forms\Components\MoneyInput;
 use Pelmered\FilamentMoneyField\Tables\Columns\MoneyColumn;
-use BezhanSalleh\FilamentShield\Support\Utils;
 
 class SubscriptionResource extends Resource implements HasShieldPermissions
 {
@@ -43,6 +39,7 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
     {
         return __('custom.models.subscriptions');
     }
+
     public static function getPermissionPrefixes(): array
     {
         return [
@@ -55,13 +52,16 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
             'create_subsciption_cards',
             'copy_card_code',
             'attach_user',
-            'delete_card'
+            'delete_card',
         ];
     }
+
     protected static ?int $navigationSort = 5;
+
     protected static ?string $model = Subscription::class;
 
     protected static bool $isGloballySearchable = true;
+
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
@@ -71,26 +71,25 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
         return $form
             ->schema([
                 Section::make()->schema([
-                    TextInput::make("name")
-                        ->label(__("custom.models.subscription.name"))
+                    TextInput::make('name')
+                        ->label(__('custom.models.subscription.name'))
                         ->unique()
                         ->unique(ignoreRecord: true)
                         ->required(),
 
-                    Textarea::make("description")
-                        ->label(__("custom.models.subscription.description"))
+                    Textarea::make('description')
+                        ->label(__('custom.models.subscription.description'))
                         ->rows(7),
 
-
-                    MoneyInput::make("price")
-                        ->label(__("custom.models.subscription.price"))
+                    MoneyInput::make('price')
+                        ->label(__('custom.models.subscription.price'))
                         ->default(0)
-                        ->locale(__("custom.currency.local.dzd")),
-                    DatePicker::make("ending_date")
-                        ->label(__("custom.models.subscription.ending_date")),
+                        ->locale(__('custom.currency.local.dzd')),
+                    DatePicker::make('ending_date')
+                        ->label(__('custom.models.subscription.ending_date')),
 
                     Select::make('discounts')
-                        ->label(__("custom.models.subscription.discounts"))
+                        ->label(__('custom.models.subscription.discounts'))
                         ->relationship('discounts', 'name')
                         ->multiple()
                         ->preload()
@@ -117,26 +116,26 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
             // ->reorderable("id")
             ->paginated(false)
             ->columns([
-                TextColumn::make("name")
-                    ->label(__("custom.models.subscription.name"))
+                TextColumn::make('name')
+                    ->label(__('custom.models.subscription.name'))
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('discounts.name')
-                    ->default(__("custom.models.subscription.discounts.empty"))
-                    ->badge()->color("primary")
+                    ->default(__('custom.models.subscription.discounts.empty'))
+                    ->badge()->color('primary')
                     ->sortable()
                     ->searchable()
-                    ->label(__("custom.models.subscription.discounts")),
+                    ->label(__('custom.models.subscription.discounts')),
 
-                MoneyColumn::make("price")
-                    ->label(__("custom.models.subscription.price"))
+                MoneyColumn::make('price')
+                    ->label(__('custom.models.subscription.price'))
                     ->badge()
                     ->sortable()
-                    ->color("success")
-                    ->locale(__("custom.currency.local.dzd")),
+                    ->color('success')
+                    ->locale(__('custom.currency.local.dzd')),
 
-                MoneyColumn::make("price_after_discount")->badge()->color("success"),
+                MoneyColumn::make('price_after_discount')->badge()->color('success'),
                 // MoneyColumn::make("discount_amount")->badge()->color("success"),
                 // TextColumn::make("discount_percentage")->badge()->color("success"),
                 // TextColumn::make("ending_date")
@@ -155,7 +154,7 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\ViewAction::make()
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -167,7 +166,7 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
     public static function getRelations(): array
     {
         return [
-            SubscriptionCardsRelationManager::class
+            SubscriptionCardsRelationManager::class,
         ];
     }
 

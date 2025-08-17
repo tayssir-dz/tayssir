@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('wilayas') ||  Schema::hasTable('communes')) {
+        if (Schema::hasTable('wilayas') || Schema::hasTable('communes')) {
             return;
         }
 

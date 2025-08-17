@@ -2,7 +2,6 @@
 
 namespace App\Traits\User;
 
-use App\Enums\ContentDirection;
 use App\Enums\QuestionType;
 
 trait InteractsWithContent
@@ -28,9 +27,9 @@ trait InteractsWithContent
                             })
                                 ->where('active', true)
                                 ->with('questions');
-                        }
+                        },
                     ]);
-            }
+            },
         ]);
 
         // Filter out inactive materials
@@ -56,7 +55,7 @@ trait InteractsWithContent
                 'image' => $material->image,
                 'image_grid' => $material->image_grid,
                 'progress' => $progressData['materials'][$material->id] ?? 0,
-                'points' => $progressData['points']['materials'][$material->id] ?? 0
+                'points' => $progressData['points']['materials'][$material->id] ?? 0,
             ];
 
             foreach ($material->units as $unit) {
@@ -72,7 +71,7 @@ trait InteractsWithContent
                     'direction' => $unit->getEffectiveDirection()->value,
                     'material_id' => $material->id,
                     'progress' => $progressData['units'][$unit->id] ?? 0,
-                    'points' => $progressData['points']['units'][$unit->id] ?? 0
+                    'points' => $progressData['points']['units'][$unit->id] ?? 0,
                 ];
 
                 foreach ($unit->chapters as $chapter) {
@@ -85,13 +84,13 @@ trait InteractsWithContent
                         'name' => $chapter->name,
                         'direction' => $chapter->getEffectiveDirection()->value,
                         'description' => $chapter->description,
-                        "image" => $chapter->image,
+                        'image' => $chapter->image,
                         'unit_id' => $unit->id,
                         'bonus_points' => $chapter->chapter_level ? $chapter->chapter_level->bonus : 0,
                         'earned_bonus' => $bonusPoints,
                         'progress' => $progressData['chapters'][$chapter->id] ?? 0,
                         'points' => $progressData['points']['chapters'][$chapter->id] ?? 0,
-                        'visibility' => $chapterVisibility[$chapter->id] ?? \App\Enums\ChapterVisibility::LOCKED->value
+                        'visibility' => $chapterVisibility[$chapter->id] ?? \App\Enums\ChapterVisibility::LOCKED->value,
                     ];
 
                     // Transform questions
@@ -103,7 +102,7 @@ trait InteractsWithContent
                     }
 
                     // Add to exercices list (only questions)
-                    if (!empty($transformedQuestions)) {
+                    if (! empty($transformedQuestions)) {
                         $exercices[] = [
                             'chapter_id' => $chapter->id,
                             'questions' => $transformedQuestions,
@@ -119,7 +118,7 @@ trait InteractsWithContent
             'units' => $units,
             'chapters' => $chapters,
             'exercices' => $exercices,
-            'total_points' => $progressData['points']['total'] ?? 0
+            'total_points' => $progressData['points']['total'] ?? 0,
         ];
     }
 
@@ -134,18 +133,18 @@ trait InteractsWithContent
             'type' => $question->question_type,
             'chapter_id' => $question->chapter()->first()->id ?? null,
             'image' => $question->image,
-            'difficulty' => "medium", // TODO: remove this cuz its not used anymore, its here so that the mobile client will not crash
+            'difficulty' => 'medium', // TODO: remove this cuz its not used anymore, its here so that the mobile client will not crash
             'points' => $question->points,
             'scope' => $question->scope,
             'hint' => $question->hint ?? [],
             'explanation_text' => [
-                'value' => !empty($question->explanation_text) ? $question->explanation_text : null,
+                'value' => ! empty($question->explanation_text) ? $question->explanation_text : null,
                 'is_latex' => $question->explanation_text_is_latex ?? false,
             ],
             'explanationVideo' => $question->explanation_asset,
             'hintImage' => $question->hint_image,
             'question' => [
-                'value' => !empty($question->question) ? $question->question : null,
+                'value' => ! empty($question->question) ? $question->question : null,
                 'is_latex' => $question->question_is_latex ?? false,
             ],
             'direction' => $question->getEffectiveDirection()->value,
@@ -177,11 +176,11 @@ trait InteractsWithContent
 
         foreach ($choices as $index => $choice) {
             $options[] = [
-                'value' => !empty($choice['option']) ? $choice['option'] : null,
+                'value' => ! empty($choice['option']) ? $choice['option'] : null,
                 'is_latex' => $choice['option_is_latex'] ?? false,
             ];
 
-            if (!empty($choice['is_correct'])) {
+            if (! empty($choice['is_correct'])) {
                 $correctOptions[] = $index;
             }
         }
@@ -200,11 +199,11 @@ trait InteractsWithContent
 
         foreach ($wordsArr as $index => $item) {
             $words[] = [
-                'value' => !empty($item['word']) ? $item['word'] : null,
+                'value' => ! empty($item['word']) ? $item['word'] : null,
                 'is_latex' => $item['word_is_latex'] ?? false,
             ];
 
-            if (!empty($item['is_intruder'])) {
+            if (! empty($item['is_intruder'])) {
                 $correctAnomalies[] = $index;
             }
         }
@@ -253,18 +252,18 @@ trait InteractsWithContent
         foreach ($pairsData as $pair) {
             $pairs[] = [
                 'first' => [
-                    'value' => !empty($pair['first']) ? $pair['first'] : null,
+                    'value' => ! empty($pair['first']) ? $pair['first'] : null,
                     'is_latex' => $pair['first_is_latex'] ?? false,
                 ],
                 'second' => [
-                    'value' => !empty($pair['second']) ? $pair['second'] : null,
-                    'is_latex' => $pair['second_is_latex'] ?? false
-                ]
+                    'value' => ! empty($pair['second']) ? $pair['second'] : null,
+                    'is_latex' => $pair['second_is_latex'] ?? false,
+                ],
             ];
         }
 
         return [
-            'pairs' => $pairs
+            'pairs' => $pairs,
         ];
     }
 }

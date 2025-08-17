@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Summary;
-use App\Http\Controllers\API\BaseController;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class SummaryController extends BaseController
 {
@@ -32,6 +30,7 @@ class SummaryController extends BaseController
 
         $groupedSummaries = $summaries->groupBy('material_id')->map(function ($materialSummaries) {
             $material = $materialSummaries->first()->material;
+
             return [
                 'material' => [
                     'id' => $material->id,
@@ -48,7 +47,7 @@ class SummaryController extends BaseController
                         'pdf_url' => $summary->pdf,
                         'created_at' => $summary->created_at,
                     ];
-                })->values()
+                })->values(),
             ];
         })->values();
 
@@ -61,15 +60,15 @@ class SummaryController extends BaseController
                 'total' => $summaries->total(),
                 'from' => $summaries->firstItem(),
                 'to' => $summaries->lastItem(),
-            ]
-        ], __("response.summaries_retrieved_successfully"));
+            ],
+        ], __('response.summaries_retrieved_successfully'));
     }
 
     public function show($id)
     {
         $summary = Summary::with('material')->where('is_active', true)->find($id);
         if (is_null($summary)) {
-            return $this->sendError(__("response.summary_not_found"));
+            return $this->sendError(__('response.summary_not_found'));
         }
         $summaryData = [
             'id' => $summary->id,
@@ -86,7 +85,8 @@ class SummaryController extends BaseController
             'created_at' => $summary->created_at,
             'updated_at' => $summary->updated_at,
         ];
-        return $this->sendResponse($summaryData, __("response.summary_retrieved_successfully"));
+
+        return $this->sendResponse($summaryData, __('response.summary_retrieved_successfully'));
     }
 
     public function content(Request $request)

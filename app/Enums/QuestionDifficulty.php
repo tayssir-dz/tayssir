@@ -3,14 +3,15 @@
 namespace App\Enums;
 
 use Filament\Support\Contracts\HasColor;
-use Filament\Support\Contracts\HasLabel;
 use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasLabel;
 
-enum QuestionDifficulty: string implements HasLabel, HasColor, HasIcon
+enum QuestionDifficulty: string implements HasColor, HasIcon, HasLabel
 {
     case EASY = 'easy';
     case MEDIUM = 'medium';
     case HARD = 'hard';
+
     public function points(): int
     {
         return match ($this) {

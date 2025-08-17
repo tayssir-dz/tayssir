@@ -5,8 +5,6 @@ namespace App\Filament\Resources\ChapterResource\Pages;
 use App\Filament\Resources\ChapterResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Database\Eloquent\Builder;
 
 class ListChapters extends ListRecords
 {

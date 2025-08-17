@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 
 class IseedQuestionsTableSeeder extends Seeder
 {
-
     /**
      * Auto generated seed file
      *
@@ -14,13 +13,11 @@ class IseedQuestionsTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
         \DB::table('questions')->delete();
-        
-        \DB::table('questions')->insert(array (
-            0 => 
-            array (
+
+        \DB::table('questions')->insert([
+            0 => [
                 'id' => 61,
                 'question' => 'إلى نظر آخر من طريق ثان، فيرى أن أعضاءه، وان؟',
                 'question_type' => 'pick_the_intruder',
@@ -28,13 +25,12 @@ class IseedQuestionsTableSeeder extends Seeder
                 'scope' => 'exercice',
                 'difficulty' => 'easy',
                 'hint' => 'القرارة الأولى؛ إلا أنه يظهر',
-                'explanation' => NULL,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            1 => 
-            array (
+                'explanation_text' => null,
+            ],
+            1 => [
                 'id' => 62,
                 'question' => 'من الأوقات، فبان له بذلك أن الفلك على اختلاف؟',
                 'question_type' => 'multiple_choices',
@@ -42,55 +38,51 @@ class IseedQuestionsTableSeeder extends Seeder
                 'scope' => 'lesson',
                 'difficulty' => 'easy',
                 'hint' => 'لا غير، ولعل تلك الأفعال',
-                'explanation' => NULL,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            2 => 
-            array (
+                'explanation_text' => null,
+            ],
+            2 => [
                 'id' => 63,
                 'question' => 'ترفق به و ترحمه وتحمله إلى مواضع فيها شجر مثمر؟',
                 'question_type' => 'match_with_arrows',
                 'options' => '{"pairs":[{"first":"\\u0644\\u0627 \\u062a\\u0641\\u0627\\u0648\\u062a \\u0641\\u064a\\u0647","second":"\\u0627\\u0644\\u062a\\u0635\\u0631\\u064a\\u0641 \\u0628\\u062d\\u0633\\u0628"},{"first":"\\u0639\\u0644\\u064a\\u0647 \\u0628\\u0627\\u0644\\u0630\\u0627\\u062a\\u060c","second":"\\u0630\\u0644\\u0643. \\u0648\\u0631\\u0623\\u0649 \\u0623\\u0646\\u0647"},{"first":"\\u0627\\u0644\\u0623\\u0639\\u0645\\u0627\\u0644 \\u0627\\u0644\\u062a\\u064a","second":"\\u0644\\u0645 \\u064a\\u062e\\u062a\\u0644\\u0641 \\u0625\\u0644\\u0627"}]}',
                 'scope' => 'lesson',
                 'difficulty' => 'easy',
-                'hint' => NULL,
-                'explanation' => NULL,
+                'hint' => null,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            3 => 
-            array (
+                'explanation_text' => null,
+            ],
+            3 => [
                 'id' => 64,
                 'question' => 'والخفيف، مركبة من معنيين: أحدهما ما يقع فيه؟',
                 'question_type' => 'match_with_arrows',
                 'options' => '{"pairs":[{"first":"\\u0627\\u0644\\u0634\\u064a\\u0621 \\u0647\\u0648 \\u0635\\u0648\\u0631\\u0629","second":"\\u0627\\u0644\\u0638\\u0628\\u064a\\u0629\\u060c \\u0648\\u0643\\u0627\\u0646\\u062a"},{"first":"\\u0627\\u0644\\u0639\\u0636\\u0648 \\u0627\\u0644\\u0648\\u0627\\u062d\\u062f","second":"\\u0648\\u0639\\u0628\\u062f\\u0627 \\u0627\\u0644\\u0644\\u0647 \\u0641\\u064a"}]}',
                 'scope' => 'lesson',
                 'difficulty' => 'easy',
-                'hint' => NULL,
-                'explanation' => NULL,
+                'hint' => null,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            4 => 
-            array (
+                'explanation_text' => null,
+            ],
+            4 => [
                 'id' => 65,
                 'question' => 'الحرارة إلا الحركة أو ملاقاة الأجسام الحارة؟',
                 'question_type' => 'match_with_arrows',
                 'options' => '{"pairs":[{"first":"\\u0627\\u0644\\u0645\\u062d\\u0636 \\u0627\\u0644\\u0630\\u064a \\u0644\\u0627","second":"\\u0628\\u0647\\u0627 \\u0645\\u0646 \\u0627\\u0644\\u062e\\u0635\\u0628"},{"first":"\\u062a\\u0644\\u062a\\u0626\\u0645 \\u062d\\u0642\\u064a\\u0642\\u062a\\u0647","second":"\\u0645\\u0646 \\u0647\\u0630\\u0627 \\u0623\\u0646 \\u062d\\u0635\\u0644"},{"first":"\\u0625\\u0644\\u0649 \\u0628\\u0639\\u0636\\u060c \\u0644\\u0626\\u0644\\u0627","second":"\\u0627\\u0644\\u0639\\u0627\\u0626\\u0642\\u060c \\u0648\\u0643\\u0630\\u0644\\u0643"}]}',
                 'scope' => 'lesson',
                 'difficulty' => 'medium',
-                'hint' => NULL,
-                'explanation' => NULL,
+                'hint' => null,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            5 => 
-            array (
+                'explanation_text' => null,
+            ],
+            5 => [
                 'id' => 66,
                 'question' => 'حتى يسر الله عز وجل وملائكته، وصفات الميعاد؟',
                 'question_type' => 'fill_in_the_blanks',
@@ -98,13 +90,12 @@ class IseedQuestionsTableSeeder extends Seeder
                 'scope' => 'exercice',
                 'difficulty' => 'medium',
                 'hint' => 'لا نهاية لها. فأما من يتخلص',
-                'explanation' => NULL,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            6 => 
-            array (
+                'explanation_text' => null,
+            ],
+            6 => [
                 'id' => 67,
                 'question' => 'وبكائه. فسمع صوتاً حسناً وحروف منظمة، لم يعهد؟',
                 'question_type' => 'fill_in_the_blanks',
@@ -112,13 +103,12 @@ class IseedQuestionsTableSeeder extends Seeder
                 'scope' => 'lesson',
                 'difficulty' => 'medium',
                 'hint' => 'يسيراً حتى ذوى ذلك الورق وجف',
-                'explanation' => NULL,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            7 => 
-            array (
+                'explanation_text' => null,
+            ],
+            7 => [
                 'id' => 68,
                 'question' => 'ذكروا: إن جزيرة قريبة من الجزيرة المعمورة، فقربه؟',
                 'question_type' => 'pick_the_intruder',
@@ -126,13 +116,12 @@ class IseedQuestionsTableSeeder extends Seeder
                 'scope' => 'lesson',
                 'difficulty' => 'hard',
                 'hint' => 'مجلل بغشاء في غاية القوة',
-                'explanation' => NULL,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            8 => 
-            array (
+                'explanation_text' => null,
+            ],
+            8 => [
                 'id' => 69,
                 'question' => 'الجنين في الرحم، لم يغادروا من ذلك فكان ايسر؟',
                 'question_type' => 'pick_the_intruder',
@@ -140,41 +129,38 @@ class IseedQuestionsTableSeeder extends Seeder
                 'scope' => 'lesson',
                 'difficulty' => 'hard',
                 'hint' => 'غير متناهية، فأما أن نجد',
-                'explanation' => NULL,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            9 => 
-            array (
+                'explanation_text' => null,
+            ],
+            9 => [
                 'id' => 70,
                 'question' => 'Eum vel esse deserunt quo eaque omnis accusantium.؟',
                 'question_type' => 'true_or_false',
                 'options' => '{"correct":true}',
                 'scope' => 'exercice',
                 'difficulty' => 'hard',
-                'hint' => NULL,
-                'explanation' => NULL,
+                'hint' => null,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
                 'explanation_text' => 'Officiis dolore autem rerum laboriosam perferendis repellat consectetur. Illo eaque quis dolorem voluptate sit aspernatur consequatur tenetur. In sed et est aut vero. Maxime saepe natus qui eveniet.',
-            ),
-            10 => 
-            array (
+            ],
+            10 => [
                 'id' => 71,
                 'question' => 'لما كان قد شق عليه من جهة مادته وجود ضعيف لا؟',
                 'question_type' => 'pick_the_intruder',
                 'options' => '{"words":[{"word":"\\u0627\\u0644\\u0645\\u0631\\u0623\\u0629 \\u0645\\u0642\\u0639\\u0631\\u0629","is_intruder":false},{"word":"\\u0627\\u0644\\u0632\\u0647\\u0631 \\u0625\\u0644\\u0649 \\u062c\\u0647\\u0629","is_intruder":false},{"word":"\\u0648\\u0627\\u0644\\u062a\\u0633\\u0644\\u064a\\u0645 \\u0644\\u0647\\u0627\\u060c","is_intruder":false},{"word":"\\u064a\\u062a\\u0641\\u0643\\u0631 \\u0645\\u0627 \\u0627\\u0644\\u0630\\u064a","is_intruder":true}]}',
                 'scope' => 'lesson',
                 'difficulty' => 'easy',
-                'hint' => NULL,
-                'explanation' => NULL,
+                'hint' => null,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            11 => 
-            array (
+                'explanation_text' => null,
+            ],
+            11 => [
                 'id' => 72,
                 'question' => 'فتعلق به عند ذلك الروح الحيواني الذي لجميع ذلك؟',
                 'question_type' => 'fill_in_the_blanks',
@@ -182,13 +168,12 @@ class IseedQuestionsTableSeeder extends Seeder
                 'scope' => 'lesson',
                 'difficulty' => 'easy',
                 'hint' => 'العدو، ويحسن إليها بأعداد',
-                'explanation' => NULL,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            12 => 
-            array (
+                'explanation_text' => null,
+            ],
+            12 => [
                 'id' => 73,
                 'question' => 'إذ تأتي له بها ستر عورته واتخاذ العصي التي يدافع؟',
                 'question_type' => 'multiple_choices',
@@ -196,27 +181,25 @@ class IseedQuestionsTableSeeder extends Seeder
                 'scope' => 'exercice',
                 'difficulty' => 'easy',
                 'hint' => 'يعهده قبل، فوقف يتعجب منه',
-                'explanation' => NULL,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            13 => 
-            array (
+                'explanation_text' => null,
+            ],
+            13 => [
                 'id' => 74,
                 'question' => 'المادة، لا يجب إن يقال انها كثيرة، ولا واحدة،؟',
                 'question_type' => 'multiple_choices',
                 'options' => '{"choices":[{"option":"\\u0641\\u062a\\u0628\\u064a\\u0646 \\u0644\\u0647 \\u0628\\u0630\\u0644\\u0643 \\u0623\\u0639\\u0638\\u0645","is_correct":false},{"option":"\\u0643\\u062b\\u0631\\u0629 \\u0623\\u0634\\u062e\\u0627\\u0635\\u0647 \\u0628\\u0645\\u0646\\u0632\\u0644\\u0629","is_correct":false},{"option":"\\u0648\\u0639\\u0644\\u0642 \\u0627\\u0644\\u062c\\u0646\\u0627\\u062d\\u064a\\u0646 \\u0639\\u0644\\u0649","is_correct":false},{"option":"\\u0633\\u0645\\u0639 \\u0639\\u0646\\u0647\\u061b \\u0641\\u0647\\u0630\\u0627 \\u0625\\u0630\\u0627","is_correct":true}]}',
                 'scope' => 'exercice',
                 'difficulty' => 'easy',
-                'hint' => NULL,
-                'explanation' => NULL,
+                'hint' => null,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            14 => 
-            array (
+                'explanation_text' => null,
+            ],
+            14 => [
                 'id' => 75,
                 'question' => 'البيت الأيسر فأراه خالياً لاشيء فيه، وما أرى ذلك؟',
                 'question_type' => 'match_with_arrows',
@@ -224,13 +207,12 @@ class IseedQuestionsTableSeeder extends Seeder
                 'scope' => 'exercice',
                 'difficulty' => 'medium',
                 'hint' => 'بعداً عن التأويل، وأوقف عن',
-                'explanation' => NULL,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            15 => 
-            array (
+                'explanation_text' => null,
+            ],
+            15 => [
                 'id' => 76,
                 'question' => 'تناول ضرورية من هذه الجهة المتناهية، ويمران في؟',
                 'question_type' => 'multiple_choices',
@@ -238,13 +220,12 @@ class IseedQuestionsTableSeeder extends Seeder
                 'scope' => 'lesson',
                 'difficulty' => 'medium',
                 'hint' => 'أهلها الرجلين على الشاطئ',
-                'explanation' => NULL,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            16 => 
-            array (
+                'explanation_text' => null,
+            ],
+            16 => [
                 'id' => 77,
                 'question' => 'ويقف عن الامتدادمعه، فيكون متناهياً، فإذا رد؟',
                 'question_type' => 'match_with_arrows',
@@ -252,27 +233,25 @@ class IseedQuestionsTableSeeder extends Seeder
                 'scope' => 'lesson',
                 'difficulty' => 'medium',
                 'hint' => 'المذكورة تفنن في هذه الحال',
-                'explanation' => NULL,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            17 => 
-            array (
+                'explanation_text' => null,
+            ],
+            17 => [
                 'id' => 78,
                 'question' => 'فوصف له الصلاة والزكاة، والصيام والحج، وما؟',
                 'question_type' => 'pick_the_intruder',
                 'options' => '{"words":[{"word":"\\u0644\\u0647 \\u0623\\u0646 \\u0627\\u0644\\u0645\\u062f\\u0631\\u0639\\u0629","is_intruder":false},{"word":"\\u0641\\u064a \\u0647\\u0630\\u0627 \\u0627\\u0644\\u0645\\u0648\\u0636\\u0639","is_intruder":false},{"word":"\\u0627\\u0644\\u0648\\u0627\\u062d\\u062f \\u0627\\u0644\\u062d\\u0642\\u060c","is_intruder":false},{"word":"\\u064a\\u062f\\u0631\\u0623 \\u0627\\u0644\\u0648\\u0633\\u0648\\u0627\\u0633\\u060c","is_intruder":true}]}',
                 'scope' => 'exercice',
                 'difficulty' => 'hard',
-                'hint' => NULL,
-                'explanation' => NULL,
+                'hint' => null,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            18 => 
-            array (
+                'explanation_text' => null,
+            ],
+            18 => [
                 'id' => 79,
                 'question' => 'الصور. وهذا الشيء العارف، أمر رباني الهي يستحيل؟',
                 'question_type' => 'multiple_choices',
@@ -280,13 +259,12 @@ class IseedQuestionsTableSeeder extends Seeder
                 'scope' => 'exercice',
                 'difficulty' => 'hard',
                 'hint' => 'ذلك بمنزلة ماء واحد مقسوم',
-                'explanation' => NULL,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            19 => 
-            array (
+                'explanation_text' => null,
+            ],
+            19 => [
                 'id' => 80,
                 'question' => 'تكون الحرارة في حد خروج الجنين من البطن،؟',
                 'question_type' => 'fill_in_the_blanks',
@@ -294,27 +272,25 @@ class IseedQuestionsTableSeeder extends Seeder
                 'scope' => 'lesson',
                 'difficulty' => 'hard',
                 'hint' => 'الأجسام المحتاجة إليها. ولو',
-                'explanation' => NULL,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:02:21',
                 'updated_at' => '2025-03-18 02:02:21',
-                'explanation_text' => NULL,
-            ),
-            20 => 
-            array (
+                'explanation_text' => null,
+            ],
+            20 => [
                 'id' => 81,
                 'question' => 'hello world',
                 'question_type' => 'true_or_false',
                 'options' => '{"correct":true}',
                 'scope' => 'exercice',
                 'difficulty' => 'easy',
-                'hint' => NULL,
-                'explanation' => NULL,
+                'hint' => null,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:18:35',
                 'updated_at' => '2025-03-18 02:18:35',
-                'explanation_text' => NULL,
-            ),
-            21 => 
-            array (
+                'explanation_text' => null,
+            ],
+            21 => [
                 'id' => 82,
                 'question' => 'world hello',
                 'question_type' => 'match_with_arrows',
@@ -322,27 +298,25 @@ class IseedQuestionsTableSeeder extends Seeder
                 'scope' => 'lesson',
                 'difficulty' => 'medium',
                 'hint' => 'adzazd',
-                'explanation' => NULL,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:19:19',
                 'updated_at' => '2025-03-18 02:19:19',
                 'explanation_text' => 'qsdqsd',
-            ),
-            22 => 
-            array (
+            ],
+            22 => [
                 'id' => 83,
                 'question' => 'test',
                 'question_type' => 'true_or_false',
                 'options' => '{"correct":true}',
                 'scope' => 'exercice',
                 'difficulty' => 'easy',
-                'hint' => NULL,
-                'explanation' => NULL,
+                'hint' => null,
+                'explanation' => null,
                 'created_at' => '2025-03-18 02:24:13',
                 'updated_at' => '2025-03-18 02:24:13',
-                'explanation_text' => NULL,
-            ),
-        ));
-        
-        
+                'explanation_text' => null,
+            ],
+        ]);
+
     }
 }

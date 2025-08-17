@@ -2,10 +2,9 @@
 
 namespace App\Traits\User;
 
-use App\Models\SubscriptionCard;
 use App\Models\Subscription;
+use App\Models\SubscriptionCard;
 use App\Models\Unit;
-use App\Models\Material;
 
 trait HasSubscriptions
 {
@@ -13,6 +12,7 @@ trait HasSubscriptions
     {
         return $this->hasMany(SubscriptionCard::class);
     }
+
     public function subscription_cards()
     {
         return $this->hasMany(SubscriptionCard::class)
@@ -30,11 +30,11 @@ trait HasSubscriptions
     public function getSubscriptionsAttribute()
     {
         $subscriptions = $this->subscription_cards
-            ->map(fn($card) => $card->subscription)
+            ->map(fn ($card) => $card->subscription)
             ->filter();
 
         $guestSubscription = Subscription::find(Subscription::GUEST_ID);
-        if ($guestSubscription && !$subscriptions->contains('id', Subscription::GUEST_ID)) {
+        if ($guestSubscription && ! $subscriptions->contains('id', Subscription::GUEST_ID)) {
             $subscriptions->push($guestSubscription);
         }
 
@@ -44,7 +44,7 @@ trait HasSubscriptions
     public function getActiveSubscriptionsAttribute()
     {
         $subscriptions = $this->subscription_cards
-            ->map(fn($card) => $card->subscription)
+            ->map(fn ($card) => $card->subscription)
             ->filter();
 
         if ($subscriptions->isEmpty()) {

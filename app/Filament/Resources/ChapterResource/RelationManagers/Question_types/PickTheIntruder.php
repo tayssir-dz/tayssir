@@ -3,10 +3,8 @@
 namespace App\Filament\Resources\ChapterResource\RelationManagers\Question_types;
 
 use App\Enums\QuestionType as QuestionTypeEnum;
-use Filament\Forms\Components\Component;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 
@@ -50,17 +48,18 @@ class PickTheIntruder extends QuestionType
                 ->collapsible()
                 ->collapsed()
                 // ->itemLabel(fn(array $state): ?string => $state['word'] ?? null)
-                ->itemLabel(fn(array $state): ?string => $state['word'] . " " . ($state['is_intruder'] ? ("(" . trans('custom.models.question.word.is_intruder') . ')') : null))
+                ->itemLabel(fn (array $state): ?string => $state['word'].' '.($state['is_intruder'] ? ('('.trans('custom.models.question.word.is_intruder').')') : null))
                 ->columnSpanFull()
-                ->label("")
+                ->label('')
                 ->addActionLabel(trans('custom.models.question.add_word'))
                 ->mutateRelationshipDataBeforeSaveUsing(function (array $data): array {
                     $intruderCount = collect($data)->where('is_intruder', true)->count();
                     if ($intruderCount !== 1) {
                         throw new \Exception('There must be exactly one intruder.');
                     }
+
                     return $data;
-                })
+                }),
         ];
     }
 }

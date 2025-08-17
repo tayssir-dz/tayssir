@@ -3,10 +3,10 @@
 namespace App\Enums;
 
 use Filament\Support\Contracts\HasColor;
-use Filament\Support\Contracts\HasLabel;
 use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasLabel;
 
-enum QuestionScope: string implements HasLabel, HasColor, HasIcon
+enum QuestionScope: string implements HasColor, HasIcon, HasLabel
 {
     case EXERCICE = 'exercice';
     case LESSON = 'lesson';

@@ -3,10 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FlashcardGroupResource\Pages;
-use App\Filament\Resources\FlashcardGroupResource\RelationManagers;
 use App\Filament\Resources\FlashcardGroupResource\RelationManagers\FlashcardsRelationManager;
 use App\Models\FlashcardGroup;
-use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -14,8 +12,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class FlashcardGroupResource extends Resource
 {

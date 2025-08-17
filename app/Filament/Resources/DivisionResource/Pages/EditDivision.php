@@ -10,6 +10,7 @@ use Howdu\FilamentRecordSwitcher\Filament\Concerns\HasRecordSwitcher;
 class EditDivision extends EditRecord
 {
     use HasRecordSwitcher;
+
     protected static string $resource = DivisionResource::class;
 
     protected function getHeaderActions(): array

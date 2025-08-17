@@ -10,7 +10,6 @@ use App\Models\Question;
 use App\Models\Unit;
 use App\Models\UserAnswer;
 use App\Models\UserChapterBonus;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 trait HasProgress
@@ -76,8 +75,8 @@ trait HasProgress
 
         return $materials->map(function ($material) {
             $totalQuestions = $material->units
-                ->flatMap(fn($unit) => $unit->chapters)
-                ->flatMap(fn($chapter) => $chapter->questions)
+                ->flatMap(fn ($unit) => $unit->chapters)
+                ->flatMap(fn ($chapter) => $chapter->questions)
                 ->count();
 
             $answers = UserAnswer::where('user_id', $this->id)
@@ -85,16 +84,14 @@ trait HasProgress
                 ->count();
 
             return [
-                "material_id" => $material->id,
-                "progress" => $totalQuestions > 0 ? ($answers / $totalQuestions) * 100 : 0
+                'material_id' => $material->id,
+                'progress' => $totalQuestions > 0 ? ($answers / $totalQuestions) * 100 : 0,
             ];
         })->toArray();
     }
 
     /**
      * Get all progress data efficiently for all accessible materials, units, and chapters
-     * 
-     * @return array
      */
     public function getAllProgressData(): array
     {
@@ -172,14 +169,14 @@ trait HasProgress
 
         foreach ($userAnswers as $answer) {
             if (isset($answer->material_id)) {
-                if (!isset($materialAnswers[$answer->material_id])) {
+                if (! isset($materialAnswers[$answer->material_id])) {
                     $materialAnswers[$answer->material_id] = 0;
                 }
                 $materialAnswers[$answer->material_id] += $answer->answer_count;
             }
 
             if (isset($answer->unit_id)) {
-                if (!isset($unitAnswers[$answer->unit_id])) {
+                if (! isset($unitAnswers[$answer->unit_id])) {
                     $unitAnswers[$answer->unit_id] = 0;
                 }
                 $unitAnswers[$answer->unit_id] += $answer->answer_count;
@@ -216,14 +213,12 @@ trait HasProgress
             'materials' => $materialProgress,
             'units' => $unitProgress,
             'chapters' => $chapterProgress,
-            'points' => $this->calculateAllPoints()
+            'points' => $this->calculateAllPoints(),
         ];
     }
 
     /**
      * Calculate all points earned by the user efficiently, including bonus points
-     * 
-     * @return array
      */
     protected function calculateAllPoints(): array
     {
@@ -285,21 +280,21 @@ trait HasProgress
             $totalPoints += $points->total_points;
 
             if (isset($points->material_id)) {
-                if (!isset($materialPoints[$points->material_id])) {
+                if (! isset($materialPoints[$points->material_id])) {
                     $materialPoints[$points->material_id] = 0;
                 }
                 $materialPoints[$points->material_id] += $points->total_points;
             }
 
             if (isset($points->unit_id)) {
-                if (!isset($unitPoints[$points->unit_id])) {
+                if (! isset($unitPoints[$points->unit_id])) {
                     $unitPoints[$points->unit_id] = 0;
                 }
                 $unitPoints[$points->unit_id] += $points->total_points;
             }
 
             if (isset($points->chapter_id)) {
-                if (!isset($chapterPoints[$points->chapter_id])) {
+                if (! isset($chapterPoints[$points->chapter_id])) {
                     $chapterPoints[$points->chapter_id] = 0;
                 }
                 $chapterPoints[$points->chapter_id] += $points->total_points;
@@ -313,7 +308,7 @@ trait HasProgress
                 $bonusTotal += $bonus;
 
                 // Add bonus to chapter points
-                if (!isset($chapterPoints[$chapterId])) {
+                if (! isset($chapterPoints[$chapterId])) {
                     $chapterPoints[$chapterId] = 0;
                 }
                 $chapterPoints[$chapterId] += $bonus;
@@ -325,13 +320,13 @@ trait HasProgress
                         foreach ($unit->chapters as $chapter) {
                             if ($chapter->id == $chapterId) {
                                 // Add bonus to unit points
-                                if (!isset($unitPoints[$unit->id])) {
+                                if (! isset($unitPoints[$unit->id])) {
                                     $unitPoints[$unit->id] = 0;
                                 }
                                 $unitPoints[$unit->id] += $bonus;
 
                                 // Add bonus to material points
-                                if (!isset($materialPoints[$material->id])) {
+                                if (! isset($materialPoints[$material->id])) {
                                     $materialPoints[$material->id] = 0;
                                 }
                                 $materialPoints[$material->id] += $bonus;
@@ -350,14 +345,12 @@ trait HasProgress
             'materials' => $materialPoints,
             'units' => $unitPoints,
             'chapters' => $chapterPoints,
-            'bonuses' => $bonusPointsByChapter
+            'bonuses' => $bonusPointsByChapter,
         ];
     }
 
     /**
      * Get the total points earned by the user, including bonus points
-     *
-     * @return int
      */
     public function points(): int
     {
@@ -373,12 +366,12 @@ trait HasProgress
             ['user_id' => $this->id],
             [
                 'points' => $answerPoints + $bonusPoints,
-                'last_updated_at' => now()
+                'last_updated_at' => now(),
             ]
         );
 
         // Update max_points if it's empty or if subscriptions might have changed
-        if (!$leaderboard->max_points || $leaderboard->wasRecentlyCreated) {
+        if (! $leaderboard->max_points || $leaderboard->wasRecentlyCreated) {
             $leaderboard->max_points = $this->maxPoints();
             $leaderboard->save();
         }
@@ -389,8 +382,7 @@ trait HasProgress
     /**
      * Get the points earned by the user for a specific material
      *
-     * @param mixed $material
-     * @return int
+     * @param  mixed  $material
      */
     public function materialPoints($material): int
     {
@@ -402,8 +394,7 @@ trait HasProgress
     /**
      * Get the points earned by the user for a specific unit
      *
-     * @param mixed $unit
-     * @return int
+     * @param  mixed  $unit
      */
     public function unitPoints($unit): int
     {
@@ -415,8 +406,7 @@ trait HasProgress
     /**
      * Get the points earned by the user for a specific chapter, including bonus
      *
-     * @param mixed $chapter
-     * @return int
+     * @param  mixed  $chapter
      */
     public function chapterPoints($chapter): int
     {
@@ -434,8 +424,6 @@ trait HasProgress
     /**
      * Get the maximum points a user can earn based on their subscriptions
      * This includes all question points + all bonus points from accessible chapters
-     *
-     * @return int
      */
     public function maxPoints(): int
     {
@@ -483,9 +471,6 @@ trait HasProgress
 
     /**
      * Get the chapter visibility status for a specific unit
-     * 
-     * @param int $unitId
-     * @return array
      */
     public function getChapterVisibility(int $unitId): array
     {
@@ -522,7 +507,7 @@ trait HasProgress
                 $status = ChapterVisibility::DONE;
             }
             // If we haven't found the current chapter yet and this one is not DONE, it's CURRENT
-            elseif (!$foundCurrent) {
+            elseif (! $foundCurrent) {
                 $status = ChapterVisibility::CURRENT;
                 $foundCurrent = true;
             }
@@ -531,7 +516,7 @@ trait HasProgress
         }
 
         // If no CURRENT chapter was set and it's the first chapter, make it CURRENT
-        if (!$foundCurrent && !empty($result)) {
+        if (! $foundCurrent && ! empty($result)) {
             $firstChapterId = $chapters->first()->id;
             $result[$firstChapterId] = ChapterVisibility::CURRENT->value;
         }

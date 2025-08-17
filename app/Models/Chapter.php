@@ -33,7 +33,6 @@ class Chapter extends Model implements HasMedia
      *
      * @var array<int, string>
      */
-
     protected $hidden = [
         'created_at',
         'updated_at',
@@ -60,8 +59,6 @@ class Chapter extends Model implements HasMedia
             ->withPivot('sort')
             ->limit(1);
     }
-
-
 
     /**
      * Get the questions for the chapter.

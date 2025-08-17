@@ -10,12 +10,12 @@ class Discount extends Model
     use HasFactory;
 
     protected $fillable = [
-        "name",
-        "description",
-        "amount",
-        "percentage",
-        "from",
-        "to",
+        'name',
+        'description',
+        'amount',
+        'percentage',
+        'from',
+        'to',
     ];
 
     protected function casts(): array

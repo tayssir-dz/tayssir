@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 
 class IseedDivisionsTableSeeder extends Seeder
 {
-
     /**
      * Auto generated seed file
      *
@@ -14,22 +13,19 @@ class IseedDivisionsTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
         \DB::table('divisions')->delete();
-        
-        \DB::table('divisions')->insert(array (
-            0 => 
-            array (
+
+        \DB::table('divisions')->insert([
+            0 => [
                 'id' => 1,
                 'name' => 'رياضيات',
-                'image' => NULL,
+                'image' => null,
                 'description' => 'شعبة الرياضيات للبكالوريا الجزائرية',
                 'created_at' => '2025-03-18 02:02:20',
                 'updated_at' => '2025-03-18 02:02:20',
-            ),
-        ));
-        
-        
+            ],
+        ]);
+
     }
 }

@@ -6,18 +6,16 @@ use App\Enums\ContentDirection;
 use App\Filament\Resources\UnitResource;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UnitsRelationManager extends RelationManager
 {
@@ -32,12 +30,13 @@ class UnitsRelationManager extends RelationManager
     {
         return __('custom.models.units');
     }
+
     public static function getTitle($ownerRecord, string $pageClass): string
     {
         return __('custom.models.units');
     }
-    protected static string $relationship = 'units';
 
+    protected static string $relationship = 'units';
 
     public function form(Form $form): Form
     {
@@ -56,7 +55,7 @@ class UnitsRelationManager extends RelationManager
                         ->required()
                         ->label(__('custom.direction.label')),
 
-                    Textarea::make("description")
+                    Textarea::make('description')
                         ->rows(4)
                         ->label(__('custom.models.unit.description')),
 
@@ -75,7 +74,7 @@ class UnitsRelationManager extends RelationManager
                 Section::make(__('custom.forms.unit.create.section.image'))->schema([
                     SpatieMediaLibraryFileUpload::make('image')
                         ->multiple(false)
-                        ->label("")
+                        ->label('')
                         ->collection('image')
                         ->image()
                         ->imageEditor(),
@@ -92,8 +91,8 @@ class UnitsRelationManager extends RelationManager
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')
                     ->toggleable()
-                    ->placeholder(__("custom.table.image.empty"))
-                    ->label(__("custom.forms.unit.create.section.image"))
+                    ->placeholder(__('custom.table.image.empty'))
+                    ->label(__('custom.forms.unit.create.section.image'))
                     ->collection('image')
                     ->rounded(),
 
@@ -112,7 +111,7 @@ class UnitsRelationManager extends RelationManager
 
                 TextColumn::make('subscriptions.name')
                     ->badge()
-                    ->default("-")
+                    ->default('-')
                     ->label(__('custom.models.subscriptions'))
                     ->colors(['primary']),
 
@@ -129,7 +128,7 @@ class UnitsRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\LinkAction::make("Details")->label(__('custom.models.unit.action.details'))->icon('heroicon-o-eye')->color('secondary')->url(fn($record) => UnitResource::getUrl("edit", ['record' => $record])),
+                Tables\Actions\LinkAction::make('Details')->label(__('custom.models.unit.action.details'))->icon('heroicon-o-eye')->color('secondary')->url(fn ($record) => UnitResource::getUrl('edit', ['record' => $record])),
                 // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

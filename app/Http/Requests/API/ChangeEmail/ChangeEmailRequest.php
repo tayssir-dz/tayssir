@@ -27,7 +27,7 @@ class ChangeEmailRequest extends FormRequest
                 'required',
                 'email',
                 Rule::unique('users', 'email'),
-                'different:email'
+                'different:email',
             ],
         ];
     }

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\ResponseController;
 use App\Http\Requests\API\User\UpdateProfileRequest;
-use Illuminate\Http\Request;
 use G4T\Swagger\Attributes\SwaggerSection;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,9 +17,10 @@ class UserController extends BaseController
         $user = $request->user();
 
         return $this->sendResponse([
-            "user" => ResponseController::userRes($user),
+            'user' => ResponseController::userRes($user),
         ]);
     }
+
     public function updateUser(UpdateProfileRequest $request)
     {
         $user = $request->user();
@@ -49,8 +50,8 @@ class UserController extends BaseController
         $user->save();
 
         return $this->sendResponse([
-            "user" => ResponseController::userRes($user),
-        ], __("response.user_updated_successfully"));
+            'user' => ResponseController::userRes($user),
+        ], __('response.user_updated_successfully'));
     }
 
     public function updatePassword(Request $request)
@@ -63,8 +64,8 @@ class UserController extends BaseController
             return $this->sendValidationError($validator->errors());
         }
         $user = $request->user();
-        if (!Hash::check($request->current_password, $user->password)) {
-            return $this->sendError(__("response.current_password_is_incorrect"));
+        if (! Hash::check($request->current_password, $user->password)) {
+            return $this->sendError(__('response.current_password_is_incorrect'));
         }
         $device_name = $user->currentAccessToken()->name;
         $user->currentAccessToken()->delete();
@@ -74,8 +75,8 @@ class UserController extends BaseController
         $user->save();
 
         return $this->sendResponse([
-            "user" => ResponseController::userRes($user),
-            "token" => $token,
-        ], __("response.password_updated_successfully"));
+            'user' => ResponseController::userRes($user),
+            'token' => $token,
+        ], __('response.password_updated_successfully'));
     }
 }

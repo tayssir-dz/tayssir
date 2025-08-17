@@ -15,7 +15,7 @@ class EditChapter extends EditRecord
     {
         return [
             Actions\DeleteAction::make(),
-            Actions\Action::make("view_unit")->url(fn($record) => UnitResource::getUrl("edit", ['record' => $record->unit->first()]))->label(fn($record) => __("custom.models.unit.action.details") . "'" . $record->unit->first()->name . "'"),
+            Actions\Action::make('view_unit')->url(fn ($record) => UnitResource::getUrl('edit', ['record' => $record->unit->first()]))->label(fn ($record) => __('custom.models.unit.action.details')."'".$record->unit->first()->name."'"),
 
         ];
     }

@@ -47,7 +47,7 @@ class Summary extends Model implements HasMedia
     /**
      * Register the media conversions.
      */
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         // No conversions needed for PDF files
     }

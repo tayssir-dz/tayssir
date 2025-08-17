@@ -14,7 +14,7 @@ class CheckPhoneNumberRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone_number' => 'required|string|regex:/^[0-9]+$/'
+            'phone_number' => 'required|string|regex:/^[0-9]+$/',
         ];
     }
 }

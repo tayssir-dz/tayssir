@@ -7,8 +7,6 @@ use App\Http\Requests\API\ChangeEmail\VerifyChangeEmailRequest;
 use App\Mail\ChangeEmailMail;
 use Ichtrojan\Otp\Otp;
 use Illuminate\Support\Facades\Mail;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class ChangeEmailController extends BaseController
 {
@@ -25,17 +23,17 @@ class ChangeEmailController extends BaseController
 
         // Generate OTP
         $verification_otp = (new Otp)->generate($user->new_email, 'numeric', 6, 10);
-        if (!$verification_otp->status) {
-            return $this->sendError(__("response.failed_to_generate_otp"));
+        if (! $verification_otp->status) {
+            return $this->sendError(__('response.failed_to_generate_otp'));
         }
 
         // Send verification email to new email address
         Mail::to($user->new_email)->send(new ChangeEmailMail([
             'otp' => $verification_otp->token,
-            'name' => $user->name
+            'name' => $user->name,
         ]));
 
-        return $this->sendResponse(message: __("response.email_change_verification_sent"));
+        return $this->sendResponse(message: __('response.email_change_verification_sent'));
     }
 
     /**
@@ -45,13 +43,13 @@ class ChangeEmailController extends BaseController
     {
         $user = $request->user();
 
-        if (!$user->new_email) {
-            return $this->sendError(__("response.no_email_change_requested"));
+        if (! $user->new_email) {
+            return $this->sendError(__('response.no_email_change_requested'));
         }
 
         $obj = (new Otp)->validate($user->new_email, $request->otp);
         if ($obj->status === false) {
-            return $this->sendError(__("response.invalid_otp"));
+            return $this->sendError(__('response.invalid_otp'));
         }
 
         // Update user email
@@ -62,8 +60,8 @@ class ChangeEmailController extends BaseController
         $user->save();
 
         return $this->sendResponse([
-            "old_email" => $old_email,
-            "new_email" => $user->email
-        ], __("response.email_changed_successfully"));
+            'old_email' => $old_email,
+            'new_email' => $user->email,
+        ], __('response.email_changed_successfully'));
     }
 }

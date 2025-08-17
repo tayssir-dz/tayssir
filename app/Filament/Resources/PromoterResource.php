@@ -3,12 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PromoterResource\Pages;
-use App\Filament\Resources\PromoterResource\RelationManagers;
 use App\Filament\Resources\PromoterResource\RelationManagers\PromoCodesRelationManager;
 use App\Models\Promoter;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use BezhanSalleh\FilamentShield\Support\Utils;
-use Filament\Forms;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -20,8 +18,6 @@ use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kossa\AlgerianCities\Commune;
 use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
 
@@ -43,6 +39,7 @@ class PromoterResource extends Resource implements HasShieldPermissions
     {
         return __('custom.models.promoters');
     }
+
     public static function getPermissionPrefixes(): array
     {
         return [
@@ -54,10 +51,15 @@ class PromoterResource extends Resource implements HasShieldPermissions
             'delete_any',
         ];
     }
+
     protected static ?string $model = Promoter::class;
+
     protected static ?int $navigationSort = 7;
+
     protected static ?string $navigationIcon = 'heroicon-o-users';
+
     protected static bool $isGloballySearchable = true;
+
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getGloballySearchableAttributes(): array
@@ -71,42 +73,41 @@ class PromoterResource extends Resource implements HasShieldPermissions
             ->schema([
                 Section::make(__('custom.models.promoter.personal_info'))
                     ->schema([
-                        TextInput::make("name")
+                        TextInput::make('name')
                             ->required()
                             ->columnSpan(2)
                             ->label(__('custom.models.promoter.name')),
 
-                        TextInput::make("email")
-                            ->disabledOn("edit")
+                        TextInput::make('email')
+                            ->disabledOn('edit')
                             ->required()
                             ->unique(ignoreRecord: true)
                             ->email()
                             ->label(__('custom.models.promoter.email')),
 
                         TextInput::make('phone_number')
-                            ->disabledOn("edit")
+                            ->disabledOn('edit')
                             ->label(__('custom.models.promoter.phone')),
 
-                        TextInput::make("password")
+                        TextInput::make('password')
                             ->password()
                             ->required()
                             ->label(__('custom.models.promoter.password'))
                             ->visibleOn('create'),
 
-
                         Select::make('wilaya_id')
-                            ->label(__("custom.models.promoter.wilaya"))
-                            ->relationship(name: 'wilaya', titleAttribute: __("custom.models.promoter.wilaya.field"))  // Select field for wilaya
+                            ->label(__('custom.models.promoter.wilaya'))
+                            ->relationship(name: 'wilaya', titleAttribute: __('custom.models.promoter.wilaya.field'))  // Select field for wilaya
                             ->searchable()
                             ->preload()
                             ->reactive()  // Makes it reactive to changes
-                            ->afterStateUpdated(fn(callable $set) => $set('commune_id', null)),  // Clear commune when wilaya changes
+                            ->afterStateUpdated(fn (callable $set) => $set('commune_id', null)),  // Clear commune when wilaya changes
 
                         Select::make('commune_id')
-                            ->label(__("custom.models.promoter.commune"))
+                            ->label(__('custom.models.promoter.commune'))
                             ->options(function (callable $get) {
                                 $wilayaId = $get('wilaya_id');
-                                $field = __("custom.models.promoter.wilaya.field"); // 'name' or 'arabic_name' based on the language
+                                $field = __('custom.models.promoter.wilaya.field'); // 'name' or 'arabic_name' based on the language
 
                                 if ($wilayaId) {
                                     // Query the communes based on the selected wilaya and the dynamic field
@@ -119,25 +120,25 @@ class PromoterResource extends Resource implements HasShieldPermissions
 
                                 return [];
                             })
-                            ->disabled(fn(callable $get) => !$get('wilaya_id'))  // Disable if no Wilaya selected
+                            ->disabled(fn (callable $get) => ! $get('wilaya_id'))  // Disable if no Wilaya selected
                             ->searchable()
                             ->preload()
                             ->afterStateUpdated(function (callable $set, callable $get) {
-                                if (!$get('wilaya_id')) {
+                                if (! $get('wilaya_id')) {
                                     $set('commune_id', null);
                                 }
-                            })
+                            }),
                     ])->columnSpan(2)->columns(2),
                 Group::make()->schema([
                     Section::make(__('custom.models.promoter.avatar'))->schema([
-                        SpatieMediaLibraryFileUpload::make("avatar_url")
+                        SpatieMediaLibraryFileUpload::make('avatar_url')
                             ->image()
                             ->imageEditor()
-                            ->collection("avatar")
+                            ->collection('avatar')
                             ->multiple(false)
-                            ->label("")
+                            ->label(''),
                     ]),
-                ])
+                ]),
             ])->columns(3);
     }
 
@@ -145,7 +146,7 @@ class PromoterResource extends Resource implements HasShieldPermissions
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make("avatar")
+                Tables\Columns\ImageColumn::make('avatar')
                     ->circular()
                     ->toggleable()
                     ->label(__('custom.models.promoter.avatar')),
@@ -165,7 +166,7 @@ class PromoterResource extends Resource implements HasShieldPermissions
                     ->size('sm'),
                 PhoneColumn::make('phone_number')
                     ->label(__('custom.models.promoter.phone'))
-                    ->default(__("custom.models.promoter.phone.empty"))
+                    ->default(__('custom.models.promoter.phone.empty'))
                     ->searchable()
                     ->toggleable()
                     ->copyable()
@@ -189,7 +190,7 @@ class PromoterResource extends Resource implements HasShieldPermissions
     public static function getRelations(): array
     {
         return [
-            PromoCodesRelationManager::class
+            PromoCodesRelationManager::class,
         ];
     }
 

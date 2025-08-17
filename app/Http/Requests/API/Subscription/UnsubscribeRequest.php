@@ -22,8 +22,8 @@ class UnsubscribeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "subscription_id" => "required|numeric|exists:subscriptions,id",
-            "password" => "required|string"
+            'subscription_id' => 'required|numeric|exists:subscriptions,id',
+            'password' => 'required|string',
         ];
     }
 }

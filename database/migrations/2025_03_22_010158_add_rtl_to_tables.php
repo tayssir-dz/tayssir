@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('direction', [
                 ContentDirection::RTL->value,
                 ContentDirection::LTR->value,
-                ContentDirection::INHERIT->value
+                ContentDirection::INHERIT->value,
             ])->default(ContentDirection::INHERIT->value);
         });
 
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->enum('direction', [
                 ContentDirection::RTL->value,
                 ContentDirection::LTR->value,
-                ContentDirection::INHERIT->value
+                ContentDirection::INHERIT->value,
             ])->default(ContentDirection::INHERIT->value);
         });
 
@@ -37,7 +37,7 @@ return new class extends Migration
             $table->enum('direction', [
                 ContentDirection::RTL->value,
                 ContentDirection::LTR->value,
-                ContentDirection::INHERIT->value
+                ContentDirection::INHERIT->value,
             ])->default(ContentDirection::INHERIT->value);
         });
     }

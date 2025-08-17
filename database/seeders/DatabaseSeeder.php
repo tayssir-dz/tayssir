@@ -2,14 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Chapter;
 use App\Models\PromoCode;
 use App\Models\Promoter;
 use App\Models\ReferralSource;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,13 +21,12 @@ class DatabaseSeeder extends Seeder
         //     ->has(PromoCode::factory(2), 'promoCodes')
         //     ->create();
 
-
         // Create random number of users for each referral source
         $referralSources = ReferralSource::all();
         foreach ($referralSources as $source) {
             $randomCount = rand(5, 15);
             User::factory($randomCount)->create([
-                'referral_source_id' => $source->id
+                'referral_source_id' => $source->id,
             ]);
         }
     }

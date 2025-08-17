@@ -3,7 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Resources\UserResource\Widgets\UsersCard;
-use App\View\Components\Logo;
+use CharrafiMed\GlobalSearchModal\GlobalSearchModalPlugin;
 use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -20,10 +20,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
-use Illuminate\Support\Facades\Blade;
-use CharrafiMed\GlobalSearchModal\GlobalSearchModalPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -35,21 +34,21 @@ class AdminPanelProvider extends PanelProvider
             ->path('dashboard')
             ->login()
             ->databaseTransactions()
-            ->brandLogo(fn() => view('components.brand'))
-            ->darkModeBrandLogo(fn() => view('components.brand-dark'))
+            ->brandLogo(fn () => view('components.brand'))
+            ->darkModeBrandLogo(fn () => view('components.brand-dark'))
             ->brandLogoHeight('2rem')
-            ->favicon(asset(("favicon.svg")))
+            ->favicon(asset(('favicon.svg')))
             ->colors(
                 [
-                    'primary' => Color::hex("#00C4F6"),
+                    'primary' => Color::hex('#00C4F6'),
                     // 'primary' => Color::Green,
-                    'success' => Color::hex("#12D18E"),
-                    'error' => Color::hex("#F85556"),
-                    'warning' => Color::hex("#FF9500"),
-                    'info' => Color::hex("#F037A5"),
-                    'neutral' => Color::hex("#E5E7EB"),
+                    'success' => Color::hex('#12D18E'),
+                    'error' => Color::hex('#F85556'),
+                    'warning' => Color::hex('#FF9500'),
+                    'info' => Color::hex('#F037A5'),
+                    'neutral' => Color::hex('#E5E7EB'),
                 ]
-            )->font("Poppins")
+            )->font('Poppins')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -106,7 +105,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             // ->spa()
             // ->darkMode(false)
-            ->renderHook('panels::body.end', fn(): string => Blade::render("@vite('resources/js/app.js')"))
-            ->viteTheme('resources/css/filament/dashboard/theme.css');;
+            ->renderHook('panels::body.end', fn (): string => Blade::render("@vite('resources/js/app.js')"))
+            ->viteTheme('resources/css/filament/dashboard/theme.css');
     }
 }

@@ -14,13 +14,14 @@ class PromoterFactory extends Factory
     {
         $wilaya = Wilaya::all()->random();
         $commune = $wilaya->communes->random();
+
         return [
             'name' => $this->faker->name(),
             'phone_number' => $this->faker->phoneNumber(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt('password'),
             'wilaya_id' => $wilaya->id,
-            'commune_id' => $commune->id
+            'commune_id' => $commune->id,
         ];
     }
 }

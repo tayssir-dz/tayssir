@@ -20,7 +20,6 @@ class Unit extends Model implements HasMedia
      *
      * @var array<int, string>
      */
-
     protected $fillable = [
         'name',
         'description',
@@ -34,7 +33,6 @@ class Unit extends Model implements HasMedia
      *
      * @var array<int, string>
      */
-
     protected $hidden = [
         'created_at',
         'updated_at',
@@ -77,8 +75,6 @@ class Unit extends Model implements HasMedia
             ->limit(1);
     }
 
-
-
     /**
      * Get the chapters for the unit.
      */
@@ -109,6 +105,7 @@ class Unit extends Model implements HasMedia
 
         // Inherit from parent (Material)
         $material = $this->material()->first();
+
         return $material ? $material->direction : ContentDirection::RTL;
     }
 
