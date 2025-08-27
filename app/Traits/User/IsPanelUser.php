@@ -9,7 +9,7 @@ trait IsPanelUser
 {
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
+        return $this->hasRole('super_admin');
     }
 
     public function getFilamentAvatarUrl(): ?string
