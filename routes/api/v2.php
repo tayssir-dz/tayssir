@@ -155,7 +155,7 @@ Route::prefix('v2')->group(function () {
 
     // Banner Routes
     Route::get('banners', [BannerController::class, 'index'])
-        ->middleware(['auth:sanctum', 'access', 'email-verified'])
+        ->middleware(['auth:sanctum', 'access'])
         ->summary('List all active banners')
         ->description('This endpoint returns all active banners');
 
