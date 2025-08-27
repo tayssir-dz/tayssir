@@ -12,14 +12,12 @@ use App\Models\SubscriptionCard;
 use App\Models\Unit;
 use App\Models\User;
 use App\Models\UserAnswer;
-use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Spatie\FilamentSimpleStats\SimpleStat;
 
 class UsersCard extends BaseWidget
 {
-    use HasWidgetShield;
 
     // Set the maximum columns to 3 for better display
     protected string|array|int $columnSpan = 3;

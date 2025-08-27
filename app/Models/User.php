@@ -3,7 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-// use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 
 use App\Observers\UserObserver;
 use App\Traits\User\HasProgress;

@@ -4,14 +4,11 @@ namespace App\Filament\Widgets;
 
 use App\Models\ReferralSource;
 use App\Models\User;
-use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Facades\DB;
 
 class ReferralSourcesBarChart extends ChartWidget
 {
-    use HasWidgetShield;
-
     protected static ?string $maxHeight = '300px';
 
     protected int|string|array $columnSpan = 'full';

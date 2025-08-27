@@ -3,7 +3,6 @@
 namespace App\Filament\Pages;
 
 use App\Settings\AppSettings;
-use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -13,8 +12,6 @@ use Illuminate\Support\Facades\Lang;
 
 class ManageAppSettings extends SettingsPage
 {
-    use HasPageShield;
-
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
 
     protected static ?string $title = null;
