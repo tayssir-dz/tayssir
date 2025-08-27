@@ -14,9 +14,10 @@ class BaseController
         $response = [
             'success' => true,
             'message' => $message,
+            'data' => $result
         ];
-        if (! empty($result)) {
-            $response['data'] = $result;
+        if (empty($result)) {
+            unset($response['data']);
         }
 
         return response()->json($response, 200);
@@ -32,10 +33,11 @@ class BaseController
         $response = [
             'success' => false,
             'message' => $error,
+            'data' => $errorMessages
         ];
 
-        if (! empty($errorMessages)) {
-            $response['data'] = $errorMessages;
+        if (empty($errorMessages)) {
+            unset($response['data']);
         }
 
         return response()->json($response, $code);
@@ -51,10 +53,11 @@ class BaseController
         $response = [
             'success' => false,
             'message' => 'Validation Error.',
+            'data' => $errorMessages
         ];
 
-        if (! empty($errorMessages)) {
-            $response['data'] = $errorMessages;
+        if (empty($errorMessages)) {
+            unset($response['data']);
         }
 
         return response()->json($response, 422);

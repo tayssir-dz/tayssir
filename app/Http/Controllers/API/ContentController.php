@@ -4,11 +4,18 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\SubmitChapterAnswersRequest;
 use App\Services\AnswerSubmissionService;
+use Dedoc\Scramble\Attributes\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
+#[Group('Content Management APIs', weight: 6)]
 class ContentController extends BaseController
 {
+    /**
+     * Get user content.
+     *
+     * This endpoint returns the content associated with the authenticated user.
+     */
     public function getUserContent(Request $request)
     {
         $user = $request->user();
@@ -19,6 +26,11 @@ class ContentController extends BaseController
         return $this->sendResponse($user->content);
     }
 
+    /**
+     * Submit chapter answers.
+     *
+     * This endpoint submits the answers of a chapter.
+     */
     public function SubmitChapterAnswers(SubmitChapterAnswersRequest $request)
     {
         $user = $request->user();
@@ -31,7 +43,7 @@ class ContentController extends BaseController
 
             return $this->sendResponse($result, __('response.answers_submitted_successfully'));
         } catch (\Exception $e) {
-            Log::error('Error submitting answers: '.$e->getMessage());
+            Log::error('Error submitting answers: ' . $e->getMessage());
 
             return $this->sendError(__('response.an_error_occurred'), [
                 'message' => $e->getMessage(),

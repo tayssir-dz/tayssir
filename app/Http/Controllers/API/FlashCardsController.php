@@ -4,10 +4,17 @@ namespace App\Http\Controllers\API;
 
 use App\Models\Flashcard;
 use App\Models\Material;
+use Dedoc\Scramble\Attributes\Group;
 use Illuminate\Http\Request;
 
+#[Group('Flashcard Management APIs', weight: 12)]
 class FlashCardsController extends BaseController
 {
+    /**
+     * List materials with their flashcard groups and counts.
+     *
+     * This endpoint returns all materials that have flashcard groups, along with the flashcard groups for each material and the count of cards in each group. You can optionally filter by specific materials using `materials[]=1&materials[]=2` or `material_id=1` parameters. This is useful for displaying a structured overview of available flashcard content organized by materials and groups.
+     */
     public function materialsWithFlashcardGroups(Request $request)
     {
         $request->validate([
@@ -60,6 +67,11 @@ class FlashCardsController extends BaseController
         ], __('response.materials_with_flashcard_groups_retrieved_successfully'));
     }
 
+    /**
+     * List all flashcards with advanced filtering and pagination.
+     *
+     * This endpoint returns flashcards with comprehensive filtering and pagination support. You can filter by multiple materials using `materials[]=1&materials[]=2` or single material with `material_id=1`. You can also filter by multiple flashcard groups using `flashcard_groups[]=1&flashcard_groups[]=2` or single group with `flashcard_group_id=1`. Pagination is controlled with `per_page` (1-100, default 15) and `page` parameters. Examples: `/api/v1/flashcards?per_page=20&page=1` for pagination, `/api/v1/flashcards?materials[]=1&flashcard_groups[]=2&flashcard_groups[]=3` for advanced filtering. Each flashcard includes its content, parent group information, and associated material details.
+     */
     public function index(Request $request)
     {
         $request->validate([
@@ -132,6 +144,11 @@ class FlashCardsController extends BaseController
         ], __('response.flashcards_retrieved_successfully'));
     }
 
+    /**
+     * Get flashcard by ID.
+     *
+     * This endpoint returns a specific flashcard by its ID, including detailed information about the flashcard content, its parent flashcard group, and the associated material.
+     */
     public function show($id)
     {
         $flashcard = Flashcard::with(['flashcardGroup', 'flashcardGroup.material'])
@@ -164,6 +181,11 @@ class FlashCardsController extends BaseController
         return $this->sendResponse($flashcardData, __('response.flashcard_retrieved_successfully'));
     }
 
+    /**
+     * Flashcards content.
+     *
+     * Returns topics (materials), categories (flashcard groups), and cards (flashcards) for the user's division.
+     */
     public function content(Request $request)
     {
         $user = $request->user();

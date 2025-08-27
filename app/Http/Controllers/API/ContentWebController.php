@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Models\Chapter;
 use App\Models\Material;
 use App\Models\Unit;
+use Dedoc\Scramble\Attributes\Group;
 use Illuminate\Http\Request;
 
+#[Group('Web Content APIs', weight: 13)]
 class ContentWebController extends BaseController
 {
     private function perPage(Request $request): int
@@ -16,6 +18,11 @@ class ContentWebController extends BaseController
         return max(1, min(100, $perPage));
     }
 
+    /**
+     * Web content snapshot.
+     *
+     * Lightweight content tree for the authenticated user. Includes paginated materials only. Use query params per_page (1-100, default 15) and page to paginate results.
+     */
     public function content(Request $request)
     {
         $user = $request->user();
@@ -61,6 +68,11 @@ class ContentWebController extends BaseController
         ]);
     }
 
+    /**
+     * List my materials (paginated).
+     *
+     * Returns the user-accessible materials for the current division, filtered by active subscriptions. Supports pagination via per_page (1-100, default 15) and page.
+     */
     public function materials(Request $request)
     {
         $user = $request->user();
@@ -99,6 +111,11 @@ class ContentWebController extends BaseController
         return $this->sendResponse($materials);
     }
 
+    /**
+     * List units by material (paginated).
+     *
+     * Returns units for the specified material if accessible to the user. Supports pagination via per_page (1-100, default 15) and page.
+     */
     public function units(Request $request, int $materialId)
     {
         $user = $request->user();
@@ -133,6 +150,11 @@ class ContentWebController extends BaseController
         return $this->sendResponse($units);
     }
 
+    /**
+     * List chapters by unit (paginated).
+     *
+     * Returns chapters for the specified unit if accessible to the user. Includes progress, points and visibility. Supports pagination via per_page (1-100, default 15) and page.
+     */
     public function chapters(Request $request, int $unitId)
     {
         $user = $request->user();
@@ -176,6 +198,11 @@ class ContentWebController extends BaseController
         return $this->sendResponse($chapters);
     }
 
+    /**
+     * List questions by chapter (paginated).
+     *
+     * Returns transformed questions for the specified chapter. Supports pagination via per_page (1-100, default 15) and page.
+     */
     public function questions(Request $request, int $chapterId)
     {
         $user = $request->user();

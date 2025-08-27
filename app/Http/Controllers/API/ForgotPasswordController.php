@@ -8,13 +8,21 @@ use App\Http\Requests\API\ForgotPassword\VerifyOtpRequest;
 use App\Mail\ForgotPasswordMail;
 use App\Models\User;
 use Carbon\Carbon;
+use Dedoc\Scramble\Attributes\Group;
 use G4T\Swagger\Attributes\SwaggerSection;
 use Ichtrojan\Otp\Otp;
-use Mail;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 // #[SwaggerSection("This section manages the password recovery process. It handles sending password reset emails, verifying OTPs, and resetting passwords through a secure multi-step process, ensuring that users can regain access to their accounts while maintaining security.")]
+#[Group('Password Recovery APIs', weight: 4)]
 class ForgotPasswordController extends BaseController
 {
+    /**
+     * Forgot password.
+     *
+     * This endpoint takes the user email and sends a reset password mail.
+     */
     public function forgotPassword(ForgotPasswordRequest $request)
     {
         $user = User::where('email', $request->email)->first();
@@ -32,6 +40,11 @@ class ForgotPasswordController extends BaseController
         return $this->sendResponse(message: __('response.email_sent_successfully'));
     }
 
+    /**
+     * Reset password.
+     *
+     * This endpoint takes the user email, the reset code, and the new password and resets the user password.
+     */
     public function resetPassword(ResetPasswordRequest $request)
     {
         $user = User::where('email', $request->email)->first();
@@ -50,9 +63,14 @@ class ForgotPasswordController extends BaseController
         return $this->sendResponse([], __('response.password_reset_successfully'));
     }
 
+    /**
+     * Verify OTP.
+     *
+     * This endpoint takes the user email and the otp and verifies the otp.
+     */
     public function verifyOtp(VerifyOtpRequest $request)
     {
-        $otpRecord = \DB::table('otps')
+        $otpRecord = DB::table('otps')
             ->where('identifier', $request->email)
             ->where('token', $request->otp)
             ->where('valid', 1)

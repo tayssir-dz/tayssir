@@ -5,13 +5,17 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\ChangeEmail\ChangeEmailRequest;
 use App\Http\Requests\API\ChangeEmail\VerifyChangeEmailRequest;
 use App\Mail\ChangeEmailMail;
+use Dedoc\Scramble\Attributes\Group;
 use Ichtrojan\Otp\Otp;
 use Illuminate\Support\Facades\Mail;
 
+#[Group('Email Change APIs', weight: 14)]
 class ChangeEmailController extends BaseController
 {
     /**
-     * Request to change user email
+     * Request email change.
+     *
+     * This endpoint takes a new email address and sends a verification OTP to it.
      */
     public function changeEmail(ChangeEmailRequest $request)
     {
@@ -37,7 +41,9 @@ class ChangeEmailController extends BaseController
     }
 
     /**
-     * Verify OTP and complete email change
+     * Verify email change.
+     *
+     * This endpoint verifies the OTP sent to the new email and completes the email change process.
      */
     public function verifyChangeEmail(VerifyChangeEmailRequest $request)
     {

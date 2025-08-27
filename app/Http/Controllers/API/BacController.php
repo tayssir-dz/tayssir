@@ -3,10 +3,17 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Bac;
+use Dedoc\Scramble\Attributes\Group;
 use Illuminate\Http\Request;
 
+#[Group('Bac Management APIs', weight: 11)]
 class BacController extends BaseController
 {
+    /**
+     * List all active bacs grouped by materials.
+     *
+     * This endpoint returns all active bacs grouped by materials with optional material filtering and pagination. Examples: `/api/v1/bacs?per_page=20&page=1` for pagination, `/api/v1/bacs?material_id=1` for single material filter, `/api/v1/bacs?materials[]=1&materials[]=3` for multiple materials filter. Note that the material IDs must exist in the database.
+     */
     public function index(Request $request)
     {
         $request->validate([
@@ -68,6 +75,11 @@ class BacController extends BaseController
         ], __('response.bacs_retrieved_successfully'));
     }
 
+    /**
+     * Get bac by ID.
+     *
+     * This endpoint returns a specific active bac by its ID.
+     */
     public function show($id)
     {
         $bac = Bac::with('material')
@@ -97,6 +109,11 @@ class BacController extends BaseController
         return $this->sendResponse($bacData, __('response.bac_retrieved_successfully'));
     }
 
+    /**
+     * Bacs content.
+     *
+     * Returns division materials and all active bacs as units.
+     */
     public function content(Request $request)
     {
         $user = $request->user();

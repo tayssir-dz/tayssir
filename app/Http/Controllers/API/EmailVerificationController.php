@@ -9,6 +9,7 @@ use App\Http\Requests\API\ForgotPassword\VerifyOtpRequest;
 use App\Mail\EmailVerificationMail;
 use App\Models\User;
 use Carbon\Carbon;
+use Dedoc\Scramble\Attributes\Group;
 use G4T\Swagger\Attributes\SwaggerSection;
 use Ichtrojan\Otp\Otp;
 use Illuminate\Http\Request;
@@ -16,8 +17,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 // #[SwaggerSection("This section is responsible for managing user email verification processes. It includes sending verification emails, verifying the user's email based on a code, and providing testing functionality to unverify emails. It helps maintain a verified email system, ensuring only verified users access specific features.")]
+#[Group('Email Verification APIs', weight: 2)]
 class EmailVerificationController extends BaseController
 {
+    /**
+     * Send verification email.
+     *
+     * Send a verification email with OTP to verify user email.
+     */
     public function sendVerificationMail(SendVerificationMailRequest $request)
     {
         $user = User::where('email', $request->email)->first();
@@ -36,6 +43,11 @@ class EmailVerificationController extends BaseController
         return $this->sendResponse(message: __('response.email_sent_successfully'));
     }
 
+    /**
+     * Verify user email.
+     *
+     * This endpoint takes the verification code and verifies the user email.
+     */
     public function verifyEmail(VerifyEmailRequest $request)
     {
         $user = $request->user();
@@ -52,6 +64,11 @@ class EmailVerificationController extends BaseController
         return $this->sendResponse(['user' => ResponseController::userRes($user)], __('response.email_verified_successfully'));
     }
 
+    /**
+     * Unverify user email (testing).
+     *
+     * This endpoint unverifies the user email (testing).
+     */
     public function unverifyMe(Request $request)
     {
         $user = $request->user();
@@ -64,6 +81,11 @@ class EmailVerificationController extends BaseController
         return response()->json(['message' => __('response.user_unverified_successfully')]);
     }
 
+    /**
+     * Verify OTP.
+     *
+     * This endpoint takes the user email and the otp and verifies the otp.
+     */
     public function verifyOtp(VerifyOtpRequest $request)
     {
         $otpRecord = DB::table('otps')

@@ -3,10 +3,17 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Summary;
+use Dedoc\Scramble\Attributes\Group;
 use Illuminate\Http\Request;
 
+#[Group('Summary Management APIs', weight: 10)]
 class SummaryController extends BaseController
 {
+    /**
+     * List all active summaries grouped by materials.
+     *
+     * This endpoint returns all active summaries grouped by materials with optional material filtering and pagination, simple example `/api/v1/summaries?per_page=20&page=1`, filter materials : `/api/v1/summaries?materials[]=1&materials[]=3`, note that the material ids must exist in the db.
+     */
     public function index(Request $request)
     {
         $request->validate([
@@ -64,6 +71,11 @@ class SummaryController extends BaseController
         ], __('response.summaries_retrieved_successfully'));
     }
 
+    /**
+     * Get summary by ID.
+     *
+     * This endpoint returns a specific active summary by its ID.
+     */
     public function show($id)
     {
         $summary = Summary::with('material')->where('is_active', true)->find($id);
@@ -89,6 +101,11 @@ class SummaryController extends BaseController
         return $this->sendResponse($summaryData, __('response.summary_retrieved_successfully'));
     }
 
+    /**
+     * Summaries content.
+     *
+     * Returns division materials and all active summaries as units.
+     */
     public function content(Request $request)
     {
         $user = $request->user();

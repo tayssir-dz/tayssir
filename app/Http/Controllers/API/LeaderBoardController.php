@@ -4,11 +4,17 @@ namespace App\Http\Controllers\API;
 
 use App\Models\LeaderBoard;
 use App\Models\User;
+use Dedoc\Scramble\Attributes\Group;
 use Illuminate\Http\Request;
 
+#[Group('Leaderboard APIs', weight: 7)]
 class LeaderBoardController extends BaseController
 {
-    // create function index that returns the leader board, paginated mapped with (id, user.name)
+    /**
+     * Leader board.
+     *
+     * This endpoint returns a list of users paginated with query param 'page' and 'per_page', the list of users contains name, image, points.
+     */
     public function index(Request $request)
     {
         $perPage = $request->input('per_page', 10);
@@ -25,7 +31,7 @@ class LeaderBoardController extends BaseController
             $leaderboardData[] = [
                 'id' => $item->user->id,
                 'name' => $item->user->name,
-                'avatar_url' => config('app.url').'/storage/'.$item->user->avatar_url,
+                'avatar_url' => config('app.url') . '/storage/' . $item->user->avatar_url,
                 'points' => $item->points,
                 'wilaya' => $item->user->wilaya ? $item->user->wilaya->arabic_name : null,
                 'commune' => $item->user->commune ? $item->user->commune->arabic_name : null,

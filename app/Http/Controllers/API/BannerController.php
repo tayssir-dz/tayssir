@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Banner;
+use Dedoc\Scramble\Attributes\Group;
 
+#[Group('Banner Management APIs', weight: 9)]
 class BannerController extends BaseController
 {
     /**
-     * Display a listing of the active banners.
+     * List all active banners.
      *
-     * @return \Illuminate\Http\Response
+     * This endpoint returns all active banners.
      */
     public function index()
     {
@@ -34,10 +36,9 @@ class BannerController extends BaseController
     }
 
     /**
-     * Display the specified banner.
+     * Get banner by ID.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * This endpoint returns a specific active banner by its ID.
      */
     public function show($id)
     {

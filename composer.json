@@ -12,12 +12,14 @@
         "bezhansalleh/filament-language-switch": "^3.1",
         "bezhansalleh/filament-shield": "^3.2",
         "charrafimed/global-search-modal": "^3.7",
+        "dedoc/scramble": "^0.12.31",
         "dutchcodingcompany/filament-developer-logins": "^1.5",
         "fakerphp/faker": "^1.23",
         "filament/filament": "3.2.128",
         "filament/spatie-laravel-media-library-plugin": "^3.2",
         "filament/spatie-laravel-settings-plugin": "^3.2",
         "g4t/swagger": "^3.1",
+        "google/apiclient": "^2.16",
         "hammerstone/fast-paginate": "^1.1",
         "howdu/filament-record-switcher": "^1.0",
         "ichtrojan/laravel-otp": "^2.0",
@@ -34,8 +36,7 @@
         "spatie/laravel-permission": "^6.9",
         "spatie/laravel-settings": "^3.4",
         "valentin-morice/filament-json-column": "^1.5",
-        "ysfkaya/filament-phone-input": "^3.1",
-        "google/apiclient": "^2.16"
+        "ysfkaya/filament-phone-input": "^3.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",

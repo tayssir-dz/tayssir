@@ -4,14 +4,21 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\ResponseController;
 use App\Http\Requests\API\User\UpdateProfileRequest;
+use Dedoc\Scramble\Attributes\Group;
 use G4T\Swagger\Attributes\SwaggerSection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 // #[SwaggerSection('This section handles all user-related operations such as retrieving user information, updating user details like name, email, and phone number, and allowing users to change their password securely. It enforces proper user authentication and authorization to protect user data.')]
+#[Group('User Management APIs', weight: 3)]
 class UserController extends BaseController
 {
+    /**
+     * Get user infos.
+     *
+     * This endpoint returns the user data.
+     */
     public function index(Request $request)
     {
         $user = $request->user();
@@ -21,6 +28,11 @@ class UserController extends BaseController
         ]);
     }
 
+    /**
+     * Update user infos.
+     *
+     * This endpoint takes the user name, email, and phone number and updates the user data.
+     */
     public function updateUser(UpdateProfileRequest $request)
     {
         $user = $request->user();
@@ -54,6 +66,11 @@ class UserController extends BaseController
         ], __('response.user_updated_successfully'));
     }
 
+    /**
+     * Change user password.
+     *
+     * This endpoint takes the old password and the new password and changes the user password.
+     */
     public function updatePassword(Request $request)
     {
         $validator = Validator::make($request->all(), [

@@ -14,15 +14,21 @@ use App\Mail\WelcomeMail;
 use App\Models\User;
 use App\Services\GoogleAuthService;
 use Carbon\Carbon;
+use Dedoc\Scramble\Attributes\Group;
 use G4T\Swagger\Attributes\SwaggerSection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
 
-// #[SwaggerSection('This section manages all authentication-related actions such as user registration, login, logout, and token refresh. It ensures secure authentication processes, handling both token-based and user-based operations for registering and logging users in and out of the system.')]
+#[Group('Authentication APIs', weight: 1)]
 class AuthController extends BaseController
 {
+    /**
+     * Register with Google.
+     *
+     * Registers (or updates) a user using a Google ID token and returns Sanctum access & refresh tokens.
+     */
     public function googleRegister(GoogleRegisterRequest $request, GoogleAuthService $google)
     {
         $payload = $google->verifyIdToken($request->id_token);
@@ -65,6 +71,12 @@ class AuthController extends BaseController
         ], __('response.user_register_successfully'));
     }
 
+
+    /**
+     * Login with Google
+     *
+     * Authenticates a user via Google ID token, refreshes profile info, and issues new Sanctum tokens.
+     */
     public function googleLogin(GoogleLoginRequest $request, GoogleAuthService $google)
     {
         $payload = $google->verifyIdToken($request->id_token);
@@ -101,6 +113,11 @@ class AuthController extends BaseController
         ], __('response.user_login_successfully'));
     }
 
+    /**
+     * Register a new user.
+     *
+     * this endpoint takes the user name, email, phone number, and password and creates a new user, it also assigns the student role to the user, and returns the user data and a token
+     */
     public function register(RegisterRequest $request)
     {
         $input = $request->all();
@@ -136,6 +153,12 @@ class AuthController extends BaseController
         ], __('response.user_register_successfully'));
     }
 
+
+    /**
+     * Login a user.
+     *
+     * this endpoint takes the user email and password and logs the user in, it returns the user data and a token
+     */
     public function login(LoginRequest $request)
     {
         $input = $request->all();
@@ -161,6 +184,11 @@ class AuthController extends BaseController
         }
     }
 
+    /**
+     * Logout a user.
+     *
+     * This endpoint logs the user out and deletes the user token.
+     */
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
@@ -168,6 +196,11 @@ class AuthController extends BaseController
         return $this->sendResponse([], __('response.user_logout_successfully'));
     }
 
+    /**
+     * Refresh user token.
+     *
+     * This endpoint deletes the current user token and returns a new one.
+     */
     public function refreshToken(Request $request)
     {
         // delete the old token (only the access_token)
@@ -179,6 +212,11 @@ class AuthController extends BaseController
         ], __('response.token_generated_successfully'));
     }
 
+    /**
+     * Check if email exists.
+     *
+     * This endpoint checks if an email exists in the system.
+     */
     public function checkEmail(CheckEmailRequest $request)
     {
         $exists = User::where('email', $request->email)->exists();
@@ -189,6 +227,11 @@ class AuthController extends BaseController
         ]);
     }
 
+    /**
+     * Check if phone number exists.
+     *
+     * This endpoint checks if a phone number exists in the system.
+     */
     public function checkPhoneNumber(CheckPhoneNumberRequest $request)
     {
         $exists = User::where('phone_number', $request->phone_number)->exists();

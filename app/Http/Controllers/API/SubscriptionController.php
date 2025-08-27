@@ -7,6 +7,7 @@ use App\Http\Requests\API\Subscription\UnsubscribeRequest;
 use App\Models\Subscription;
 use App\Models\SubscriptionCard;
 use Carbon\Carbon;
+use Dedoc\Scramble\Attributes\Group;
 use Exception;
 use G4T\Swagger\Attributes\SwaggerSection;
 use Illuminate\Database\UniqueConstraintViolationException;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 // #[SwaggerSection("This section oversees subscription management, allowing users to view their subscriptions, redeem subscription cards, and unsubscribe from active subscriptions. It enforces checks to ensure valid subscriptions and handles user-specific subscription actions securely, including error handling for invalid or already used subscription codes.")]
+#[Group('Subscription Management APIs', weight: 5)]
 class SubscriptionController extends BaseController
 {
     /**
@@ -101,6 +103,11 @@ class SubscriptionController extends BaseController
         return $this->sendResponse($result, __('response.subscription_retrieved_successfully'));
     }
 
+    /**
+     * Redeem a subscription.
+     *
+     * This endpoint takes the code of the card and redeems it for the user, it errors if the card is already used by the user, if its used by another user, if the user already subscribed to the same subscription so there is no need to subscribe again.
+     */
     public function redeem(RedeemRequest $request)
     {
         $code = $request->input('card_code');
@@ -131,6 +138,11 @@ class SubscriptionController extends BaseController
         }
     }
 
+    /**
+     * Get user subscriptions.
+     *
+     * This returns an array of user subscriptions (id, name, description, ending_date).
+     */
     public function userSubscriptions(Request $request)
     {
         $user = $request->user();
@@ -149,6 +161,11 @@ class SubscriptionController extends BaseController
         return $this->sendResponse(['subscriptions' => $subscriptions]);
     }
 
+    /**
+     * Unsubscribe from a subscription.
+     *
+     * This endpoint takes the subscription id and the user's password and unsubscribes the user from the subscription.
+     */
     public function unsubscribe(UnsubscribeRequest $request)
     {
         $subscription_id = $request->input('subscription_id');

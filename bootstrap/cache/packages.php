@@ -56,6 +56,13 @@
       0 => 'CharrafiMed\\GlobalSearchModal\\GlobalSearchModalServiceProvider',
     ),
   ),
+  'dedoc/scramble' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Dedoc\\Scramble\\ScrambleServiceProvider',
+    ),
+  ),
   'dutchcodingcompany/filament-developer-logins' => 
   array (
     'providers' => 

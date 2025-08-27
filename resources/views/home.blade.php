@@ -17,30 +17,38 @@
 </head>
 
 <body class="bg-base-300">
-    {{-- big text in the center of the screen with the APP_NAME from env inside of it --}}
-    <div class="flex items-center justify-center h-screen w-full max-w-4xl mx-auto px-3">
-        <div class="flex flex-col gap-6 justify-center items-center card card-body card-bordered bg-base-200">
-            <x-logo />
-            <p class="text-center">This app provides a comprehensive
-                platform
-                for
-                baccalaureate students to practice quizzes
-                and enhance their knowledge. With a user-friendly interface and a wide range of subjects to choose from,
-                students can test their understanding and track their progress. Join now and boost your exam preparation
-                with our interactive quizzes!The app provides a comprehensive platform for baccalaureate students to
-                practice quizzes and enhance their knowledge. With a user-friendly interface and a wide range of
-                subjects to
-                choose from, students can test their understanding and track their progress. Join now and boost your
-                exam
-                preparation with our interactive quizzes!
-                <span class="font-bold">(the previous text is auto generated)</span>
-            </p>
-            <div class="w-full flex justify-end items-center gap-4">
-                <a href="/swagger/documentation" class="btn btn-primary">
-                    go to swagger
+    <div class="flex items-center justify-center h-screen w-full max-w-2xl mx-auto px-3">
+        <div class="flex flex-col gap-8 justify-center items-center card card-body card-bordered bg-base-200">
+            <!-- Logo and App Name -->
+            <div class="flex flex-col items-center gap-4">
+                {{-- <x-logo /> --}}
+                <h1 class="text-4xl font-bold text-center">{{ config('app.name') }}</h1>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex flex-col gap-3 w-full max-w-sm">
+                <a href="/dashboard" class="btn text-white bg-cyan-500">
+                    Admin Space
                 </a>
-                <a href="/dashboard" class="btn btn-primary">
-                    go to dashboard
+                <a href="/promoter"
+                    class="btn text-white bg-pink-500 tooltip tooltip-top tooltip-primary flex justify-center items-center"
+                    data-tip="{{ config('app.url') }}/promoter">
+                    Promoter Space
+                </a>
+                <a href="/swagger/documentation"
+                    class="btn text-white bg-lime-600 tooltip tooltip-top tooltip-primary flex justify-center items-center"
+                    data-tip="Old Swagger docs - contains both v1, v2 APIs, not recommanded to use">
+                    Old Swagger
+                </a>
+                <a href="/docs/v1"
+                    class="btn btn-neutral tooltip tooltip-top tooltip-primary flex justify-center items-center"
+                    data-tip="Same APIs, no change">
+                    New Documentation (v1)
+                </a>
+                <a href="/docs/v2"
+                    class="btn btn-neutral tooltip tooltip-top tooltip-primary flex justify-center items-center"
+                    data-tip="All APIs included in the v2 that Require Auth - Requires email verification">
+                    New Documentation (v2)
                 </a>
             </div>
         </div>

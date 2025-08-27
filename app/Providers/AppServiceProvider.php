@@ -11,6 +11,10 @@ use Filament\Support\Facades\FilamentView;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Dedoc\Scramble\Scramble;
+use Dedoc\Scramble\Support\Generator\OpenApi;
+use Dedoc\Scramble\Support\Generator\SecurityScheme;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        FilamentView::registerRenderHook('panels::body.end', fn (): string => Blade::render("@vite('resources/js/app.js')"));
+        FilamentView::registerRenderHook('panels::body.end', fn(): string => Blade::render("@vite('resources/js/app.js')"));
     }
 
     /**
@@ -27,11 +31,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Card::observe(CardObserver::class);
-        User::observe(UserObserver::class);
+        $this->configureObservers();
+        $this->configureFilament();
+        $this->configureScramble();
+
         if ($this->app->environment('production')) {
             URL::forceScheme('https');
         }
+    }
+
+    private function configureObservers(): void
+    {
+        Card::observe(CardObserver::class);
+        User::observe(UserObserver::class);
+    }
+
+    private function configureFilament(): void
+    {
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
             $switch
                 ->locales(['ar', 'en', 'fr']); // also accepts a closure
@@ -42,5 +58,27 @@ class AppServiceProvider extends ServiceProvider
             // ])
             // ->circular()
         });
+    }
+
+    private function configureScramble(): void
+    {
+        Scramble::registerApi('default', ['api_path' => 'api/default'])
+            ->withDocumentTransformers(function (OpenApi $openApi) {
+                $openApi->secure(SecurityScheme::http('bearer'));
+            });
+
+        Scramble::registerApi('v1', ['api_path' => 'api/v1'])
+            ->withDocumentTransformers(function (OpenApi $openApi) {
+                $openApi->secure(SecurityScheme::http('bearer'));
+            });
+
+        Scramble::registerApi('v2', ['api_path' => 'api/v2'])
+            ->withDocumentTransformers(function (OpenApi $openApi) {
+                $openApi->secure(SecurityScheme::http('bearer'));
+            });
+
+        Scramble::registerUiRoute('docs/default', api: 'default');
+        Scramble::registerUiRoute('docs/v1', api: 'v1');
+        Scramble::registerUiRoute('docs/v2', api: 'v2');
     }
 }
