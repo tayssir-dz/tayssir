@@ -27,14 +27,14 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
 {
     use HasApiTokens;
     use HasFactory;
-    use HasProgress;
-    use HasRoles;
-    use HasSubscriptions;
-    use HasWilayaAndCommune;
-    use InteractsWithContent;
-    use InteractsWithMedia;
-    use IsPanelUser;
     use Notifiable;
+    use HasRoles;
+    use InteractsWithMedia;
+    use HasWilayaAndCommune;
+    use HasSubscriptions;
+    use InteractsWithContent;
+    use HasProgress;
+    use IsPanelUser;
 
     protected $fillable = [
         'name',
