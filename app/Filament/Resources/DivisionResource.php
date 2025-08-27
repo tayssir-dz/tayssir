@@ -5,8 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\DivisionResource\Pages;
 use App\Filament\Resources\DivisionResource\RelationManagers\MaterialsRelationManager;
 use App\Models\Division;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
@@ -18,15 +16,13 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class DivisionResource extends Resource implements HasShieldPermissions
+class DivisionResource extends Resource
 {
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getNavigationGroup(): ?string
     {
-        return Utils::isResourceNavigationGroupEnabled()
-            ? __('custom.nav.section.content')
-            : '';
+        return  __('custom.nav.section.content');
     }
 
     public static function getModelLabel(): string
@@ -37,18 +33,6 @@ class DivisionResource extends Resource implements HasShieldPermissions
     public static function getPluralModelLabel(): string
     {
         return __('custom.models.divisions');
-    }
-
-    public static function getPermissionPrefixes(): array
-    {
-        return [
-            'view',
-            'view_any',
-            'create',
-            'update',
-            'delete',
-            'delete_any',
-        ];
     }
 
     protected static ?string $model = Division::class;

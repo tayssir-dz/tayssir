@@ -4,20 +4,16 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\LeaderBoardResource\Pages;
 use App\Models\LeaderBoard;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class LeaderBoardResource extends Resource implements HasShieldPermissions
+class LeaderBoardResource extends Resource
 {
     public static function getNavigationGroup(): ?string
     {
-        return Utils::isResourceNavigationGroupEnabled()
-            ? __('custom.nav.section.management')
-            : '';
+        return __('custom.nav.section.management');
     }
 
     public static function getModelLabel(): string
@@ -28,14 +24,6 @@ class LeaderBoardResource extends Resource implements HasShieldPermissions
     public static function getPluralModelLabel(): string
     {
         return __('custom.models.leaderboard');
-    }
-
-    public static function getPermissionPrefixes(): array
-    {
-        return [
-            'view',
-            'view_any',
-        ];
     }
 
     protected static ?string $model = LeaderBoard::class;
@@ -66,13 +54,13 @@ class LeaderBoardResource extends Resource implements HasShieldPermissions
                     ->html()
                     ->width('60px')
                     ->alignment('center')
-                    ->getStateUsing(fn ($record) => view('components.filament-ui.avatar', [
+                    ->getStateUsing(fn($record) => view('components.filament-ui.avatar', [
                         'name' => $record->user->name,
                         'avatar_url' => $record->user->avatar_url,
                     ])->render()),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label(__('custom.models.leaderboard.user'))
-                    ->url(fn ($record) => UserResource::getUrl('edit', ['record' => $record->user_id]))
+                    ->url(fn($record) => UserResource::getUrl('edit', ['record' => $record->user_id]))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('points')
                     ->badge()
@@ -86,14 +74,14 @@ class LeaderBoardResource extends Resource implements HasShieldPermissions
                     ->sortable(),
                 Tables\Columns\TextColumn::make('progress')
                     ->badge()
-                    ->color(fn ($state) => match (true) {
+                    ->color(fn($state) => match (true) {
                         $state >= 80 => 'success',
                         $state >= 50 => 'warning',
                         $state < 20 => 'danger',
                         default => 'gray',
                     })
                     ->label(__('custom.models.leaderboard.progress'))
-                    ->getStateUsing(fn ($record) => number_format($record->user->progress_percentage, 1).'%'),
+                    ->getStateUsing(fn($record) => number_format($record->user->progress_percentage, 1) . '%'),
             ])
             ->filters([
                 //
@@ -101,7 +89,7 @@ class LeaderBoardResource extends Resource implements HasShieldPermissions
             ->actions([
                 Tables\Actions\Action::make('view_user')
                     ->label(__('custom.models.user'))
-                    ->url(fn ($record) => UserResource::getUrl('edit', ['record' => $record->user_id]))
+                    ->url(fn($record) => UserResource::getUrl('edit', ['record' => $record->user_id]))
                     ->icon('heroicon-o-user'),
             ])
             ->bulkActions([

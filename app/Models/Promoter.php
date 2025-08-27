@@ -34,7 +34,7 @@ class Promoter extends Authenticatable implements FilamentUser, HasAvatar, HasMe
 
     public function getRecordTitleAttribute()
     {
-        return $this->name.' ('.$this->email.')';
+        return $this->name . ' (' . $this->email . ')';
     }
 
     public function registerMediaCollections(): void
@@ -48,7 +48,7 @@ class Promoter extends Authenticatable implements FilamentUser, HasAvatar, HasMe
     {
         $media = $this->getFirstMedia('avatar');
 
-        return $media ? $media->getUrl() : 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=FFFFFF&background=111827';
+        return $media ? $media->getUrl() : 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=FFFFFF&background=111827';
     }
 
     public function getFilamentAvatarUrl(): ?string

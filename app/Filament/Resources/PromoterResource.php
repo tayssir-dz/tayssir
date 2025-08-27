@@ -5,8 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PromoterResource\Pages;
 use App\Filament\Resources\PromoterResource\RelationManagers\PromoCodesRelationManager;
 use App\Models\Promoter;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -21,13 +19,11 @@ use Filament\Tables\Table;
 use Kossa\AlgerianCities\Commune;
 use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
 
-class PromoterResource extends Resource implements HasShieldPermissions
+class PromoterResource extends Resource
 {
     public static function getNavigationGroup(): ?string
     {
-        return Utils::isResourceNavigationGroupEnabled()
-            ? __('custom.nav.section.platform')
-            : '';
+        return __('custom.nav.section.platform');
     }
 
     public static function getModelLabel(): string
@@ -38,18 +34,6 @@ class PromoterResource extends Resource implements HasShieldPermissions
     public static function getPluralModelLabel(): string
     {
         return __('custom.models.promoters');
-    }
-
-    public static function getPermissionPrefixes(): array
-    {
-        return [
-            'view',
-            'view_any',
-            'create',
-            'update',
-            'delete',
-            'delete_any',
-        ];
     }
 
     protected static ?string $model = Promoter::class;
@@ -101,7 +85,7 @@ class PromoterResource extends Resource implements HasShieldPermissions
                             ->searchable()
                             ->preload()
                             ->reactive()  // Makes it reactive to changes
-                            ->afterStateUpdated(fn (callable $set) => $set('commune_id', null)),  // Clear commune when wilaya changes
+                            ->afterStateUpdated(fn(callable $set) => $set('commune_id', null)),  // Clear commune when wilaya changes
 
                         Select::make('commune_id')
                             ->label(__('custom.models.promoter.commune'))
@@ -120,7 +104,7 @@ class PromoterResource extends Resource implements HasShieldPermissions
 
                                 return [];
                             })
-                            ->disabled(fn (callable $get) => ! $get('wilaya_id'))  // Disable if no Wilaya selected
+                            ->disabled(fn(callable $get) => ! $get('wilaya_id'))  // Disable if no Wilaya selected
                             ->searchable()
                             ->preload()
                             ->afterStateUpdated(function (callable $set, callable $get) {

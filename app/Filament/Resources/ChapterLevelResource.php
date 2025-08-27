@@ -4,8 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ChapterLevelResource\Pages;
 use App\Models\ChapterLevel;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -13,7 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class ChapterLevelResource extends Resource implements HasShieldPermissions
+class ChapterLevelResource extends Resource
 {
     protected static ?string $model = ChapterLevel::class;
 
@@ -25,23 +23,9 @@ class ChapterLevelResource extends Resource implements HasShieldPermissions
 
     protected static ?string $recordTitleAttribute = 'recordTitle';
 
-    public static function getPermissionPrefixes(): array
-    {
-        return [
-            'view',
-            'view_any',
-            'create',
-            'update',
-            'delete',
-            'delete_any',
-        ];
-    }
-
     public static function getNavigationGroup(): ?string
     {
-        return Utils::isResourceNavigationGroupEnabled()
-            ? __('custom.nav.section.points')
-            : '';
+        return __('custom.nav.section.points');
     }
 
     public static function getModelLabel(): string

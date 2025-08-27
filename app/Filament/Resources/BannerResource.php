@@ -4,8 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BannerResource\Pages;
 use App\Models\Banner;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -22,7 +20,7 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
-class BannerResource extends Resource implements HasShieldPermissions
+class BannerResource extends Resource
 {
     protected static ?string $model = Banner::class;
 
@@ -30,9 +28,7 @@ class BannerResource extends Resource implements HasShieldPermissions
 
     public static function getNavigationGroup(): ?string
     {
-        return Utils::isResourceNavigationGroupEnabled()
-            ? __('custom.nav.section.platform')
-            : '';
+        return  __('custom.nav.section.platform');
     }
 
     public static function getModelLabel(): string
@@ -43,18 +39,6 @@ class BannerResource extends Resource implements HasShieldPermissions
     public static function getPluralModelLabel(): string
     {
         return __('custom.models.banners');
-    }
-
-    public static function getPermissionPrefixes(): array
-    {
-        return [
-            'view',
-            'view_any',
-            'create',
-            'update',
-            'delete',
-            'delete_any',
-        ];
     }
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';

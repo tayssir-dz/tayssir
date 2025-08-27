@@ -31,10 +31,10 @@ class SubscriptionCardLib
     {
         return [
             Filter::make(__('custom.models.subscriptionCard.activated_cards'))
-                ->query(fn (Builder $query): Builder => $query->where('user_id', '!=', null))
+                ->query(fn(Builder $query): Builder => $query->where('user_id', '!=', null))
                 ->label(__('custom.models.subscriptionCard.activated_cards')),
             Filter::make(__('custom.models.subscriptionCard.unactivated_cards'))
-                ->query(fn (Builder $query): Builder => $query->where('user_id', '=', null))
+                ->query(fn(Builder $query): Builder => $query->where('user_id', '=', null))
                 ->label(__('custom.models.subscriptionCard.unactivated_cards')),
         ];
     }
@@ -45,7 +45,6 @@ class SubscriptionCardLib
             Action::make('create-cards')
                 // ->slideOver()
                 ->label(__('custom.models.subscriptionCard.create_subscriptionCards'))
-                ->visible(auth()->user()->can('create_subsciption_cards_subscription'))
                 ->form([
                     TextInput::make('number_of_cards')
                         ->label(__('custom.models.subscriptionCard.number_of_cards'))
@@ -53,7 +52,7 @@ class SubscriptionCardLib
                         ->minValue(0)
                         ->required(),
                 ])
-                ->action(fn (array $data) => SubscriptionCardLib::CreateSubscriptionCards($data, $ownedRecord)),
+                ->action(fn(array $data) => SubscriptionCardLib::CreateSubscriptionCards($data, $ownedRecord)),
         ];
     }
 
@@ -61,14 +60,13 @@ class SubscriptionCardLib
     {
         return [
             Tables\Actions\Action::make('copy code')
-                ->visible(auth()->user()->can('copy_card_code_subscription'))
                 ->label(__('custom.models.subscriptionCard.copy_code'))
                 ->icon('heroicon-s-clipboard-document-check')
                 ->color('gray')
                 ->action(function ($livewire, $record) {
                     // dd(["js" => 'window.navigator.clipboard.writeText("' . $record->code . '");']);
                     $livewire->js(
-                        'window.navigator.clipboard.writeText("'.$record->code.'");'
+                        'window.navigator.clipboard.writeText("' . $record->code . '");'
                     );
                     Notification::make()
                         ->title(__('custom.models.subscriptionCard.code_copied'))
@@ -77,7 +75,6 @@ class SubscriptionCardLib
                 }),
             Tables\Actions\ActionGroup::make([
                 Tables\Actions\Action::make('user')
-                    ->visible(fn ($record) => blank($record->user_id) && auth()->user()->can('attach_user_subscription'))
                     ->label(__('custom.models.subscriptionCard.attach_user'))
                     ->icon('heroicon-s-user')
                     ->color('primary')
@@ -112,7 +109,7 @@ class SubscriptionCardLib
                                 ->send();
                         }
                     }),
-                Tables\Actions\DeleteAction::make()->visible(auth()->user()->can('delete_card_subscription')),
+                Tables\Actions\DeleteAction::make(),
                 // Tables\Actions\EditAction::make(),
                 // Tables\Actions\ViewAction::make()
             ]),

@@ -34,8 +34,8 @@ class AdminPanelProvider extends PanelProvider
             ->path('dashboard')
             ->login()
             ->databaseTransactions()
-            ->brandLogo(fn () => view('components.brand'))
-            ->darkModeBrandLogo(fn () => view('components.brand-dark'))
+            ->brandLogo(fn() => view('components.brand'))
+            ->darkModeBrandLogo(fn() => view('components.brand-dark'))
             ->brandLogoHeight('2rem')
             ->favicon(asset(('favicon.svg')))
             ->colors(
@@ -80,11 +80,6 @@ class AdminPanelProvider extends PanelProvider
             ])->plugins([
                 GlobalSearchModalPlugin::make()
                     ->slideOver(),
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
-                    ->gridColumns(['default' => 1, 'sm' => 2, 'lg' => 3])
-                    ->sectionColumnSpan(1)
-                    ->checkboxListColumns(['default' => 1])
-                    ->resourceCheckboxListColumns(['default' => 1, 'sm' => 2]),
                 FilamentEditProfilePlugin::make()
                     ->shouldShowEditProfileForm(true)
                     // ->canAccess(fn() => auth()->user()->can('page_EditProfilePage'))
@@ -105,7 +100,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             // ->spa()
             // ->darkMode(false)
-            ->renderHook('panels::body.end', fn (): string => Blade::render("@vite('resources/js/app.js')"))
+            ->renderHook('panels::body.end', fn(): string => Blade::render("@vite('resources/js/app.js')"))
             ->viteTheme('resources/css/filament/dashboard/theme.css');
     }
 }

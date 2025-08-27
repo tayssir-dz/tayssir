@@ -5,8 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\SubscriptionResource\Pages;
 use App\Filament\Resources\SubscriptionResource\RelationManagers\SubscriptionCardsRelationManager;
 use App\Models\Subscription;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
@@ -21,13 +19,11 @@ use Filament\Tables\Table;
 use Pelmered\FilamentMoneyField\Forms\Components\MoneyInput;
 use Pelmered\FilamentMoneyField\Tables\Columns\MoneyColumn;
 
-class SubscriptionResource extends Resource implements HasShieldPermissions
+class SubscriptionResource extends Resource
 {
     public static function getNavigationGroup(): ?string
     {
-        return Utils::isResourceNavigationGroupEnabled()
-            ? __('custom.nav.section.platform')
-            : '';
+        return  __('custom.nav.section.platform');
     }
 
     public static function getModelLabel(): string
@@ -38,22 +34,6 @@ class SubscriptionResource extends Resource implements HasShieldPermissions
     public static function getPluralModelLabel(): string
     {
         return __('custom.models.subscriptions');
-    }
-
-    public static function getPermissionPrefixes(): array
-    {
-        return [
-            'view',
-            'view_any',
-            'create',
-            'update',
-            'delete',
-            'delete_any',
-            'create_subsciption_cards',
-            'copy_card_code',
-            'attach_user',
-            'delete_card',
-        ];
     }
 
     protected static ?int $navigationSort = 5;

@@ -57,7 +57,6 @@ class ListCards extends ListRecords
 
             Actions\Action::make('create-cards')
                 ->label(__('custom.models.card.create_cards'))
-                ->visible(auth()->user()->can('create_many_card'))
                 ->slideOver()
                 ->form([
                     Section::make(__('custom.models.card.tab.pricing'))->schema([
@@ -72,23 +71,23 @@ class ListCards extends ListRecords
                             ->label(__('custom.models.card.price'))
                             ->default(0)
                             ->required()
-                            ->afterStateUpdated(fn ($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
+                            ->afterStateUpdated(fn($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
                             ->live(onBlur: true),
 
                         Toggle::make('is_on_discount')
                             ->default(false)
                             ->label(__('custom.models.card.is_on_discount'))
-                            ->afterStateUpdated(fn ($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
+                            ->afterStateUpdated(fn($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
                             ->live(),
 
                         MoneyInput::make('discount_price')
                             ->locale(__('custom.currency.local.dzd'))
                             ->label(__('custom.models.card.discount_price'))
-                            ->visible(fn ($get) => $get('is_on_discount'))
+                            ->visible(fn($get) => $get('is_on_discount'))
                             ->default(0)
                             ->minValue(0)
                             ->required()
-                            ->afterStateUpdated(fn ($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
+                            ->afterStateUpdated(fn($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
                             ->live(onBlur: true),
 
                         TextInput::make('discount_percentage')
@@ -97,8 +96,8 @@ class ListCards extends ListRecords
                             ->default(0)
                             ->minValue(0)->maxValue(100)
                             ->label(__('custom.models.card.discount_percentage'))
-                            ->visible(fn ($get) => $get('is_on_discount'))
-                            ->afterStateUpdated(fn ($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
+                            ->visible(fn($get) => $get('is_on_discount'))
+                            ->afterStateUpdated(fn($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
                             ->live(onBlur: true),
 
                         MoneyInput::make('display_price')
@@ -124,7 +123,7 @@ class ListCards extends ListRecords
                                 ->required(),
                         ]),
                 ])
-                ->action(fn (array $data) => CardActions::createManyCards($data)),
+                ->action(fn(array $data) => CardActions::createManyCards($data)),
         ];
     }
 }

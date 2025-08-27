@@ -4,8 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Placeholder;
@@ -29,20 +27,18 @@ use Illuminate\Support\HtmlString;
 use Kossa\AlgerianCities\Commune;
 use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
 
-class UserResource extends Resource implements HasShieldPermissions
+class UserResource extends Resource
 {
     protected static ?string $recordTitleAttribute = 'recordTitle';
 
     public static function getGlobalSearchResultTitle(Model $record): string|Htmlable
     {
-        return $record->name.' ('.$record->email.')';
+        return $record->name . ' (' . $record->email . ')';
     }
 
     public static function getNavigationGroup(): ?string
     {
-        return Utils::isResourceNavigationGroupEnabled()
-            ? __('custom.nav.section.management')
-            : '';
+        return __('custom.nav.section.management');
     }
 
     public static function getModelLabel(): string
@@ -57,27 +53,7 @@ class UserResource extends Resource implements HasShieldPermissions
 
     public static function getNavigationBadge(): ?string
     {
-        return Utils::isResourceNavigationBadgeEnabled()
-            ? strval(static::getEloquentQuery()->count())
-            : null;
-    }
-
-    public static function getPermissionPrefixes(): array
-    {
-        return [
-            'view',
-            'view_any',
-            'create',
-            'update',
-            'delete',
-            'delete_any',
-            'assign_role',
-            'assign_division',
-            'verify_email',
-            'view_all',
-            'view_students',
-            'view_with_roles',
-        ];
+        return static::getModel()::count();
     }
 
     protected static ?string $model = User::class;
@@ -133,7 +109,7 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->searchable()
                             ->preload()
                             ->reactive()  // Makes it reactive to changes
-                            ->afterStateUpdated(fn (callable $set) => $set('commune_id', null)),  // Clear commune when wilaya changes
+                            ->afterStateUpdated(fn(callable $set) => $set('commune_id', null)),  // Clear commune when wilaya changes
 
                         Select::make('commune_id')
                             ->label(__('custom.models.user.commune'))
@@ -152,7 +128,7 @@ class UserResource extends Resource implements HasShieldPermissions
 
                                 return [];
                             })
-                            ->disabled(fn (callable $get) => ! $get('wilaya_id'))  // Disable if no Wilaya selected
+                            ->disabled(fn(callable $get) => ! $get('wilaya_id'))  // Disable if no Wilaya selected
                             ->searchable()
                             ->preload()
                             ->afterStateUpdated(function (callable $set, callable $get) {
@@ -166,7 +142,6 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->multiple()
                             ->preload()
                             ->searchable()
-                            ->visible(Auth::user()->can('assign_role_user'))
                             ->columnSpan(2),
 
                         Select::make('division')
@@ -174,7 +149,6 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->relationship('division', 'name')
                             ->preload()
                             ->searchable()
-                            ->visible(Auth::user()->can('assign_division_user'))
                             ->columnSpan(2),
 
                         Select::make('referral_source_id')
@@ -193,7 +167,7 @@ class UserResource extends Resource implements HasShieldPermissions
 
                                 return new HtmlString(
                                     $record->active_subscriptions
-                                        ->map(fn ($sub) => sprintf(
+                                        ->map(fn($sub) => sprintf(
                                             '<div class="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-primary-500 text-white">%s</div>',
                                             $sub->name
                                         ))
@@ -223,7 +197,7 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->toggleable()
                     ->label(__('custom.models.user.avatar'))
                     ->html()
-                    ->getStateUsing(fn ($record) => view('components.filament-ui.avatar', [
+                    ->getStateUsing(fn($record) => view('components.filament-ui.avatar', [
                         'name' => $record->name,
                         'avatar_url' => $record->avatar_url,
                     ])->render()),
@@ -284,20 +258,20 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->size('sm')
                     ->getStateUsing(function ($record) {
                         return $record->active_subscriptions
-                            ->map(fn ($sub) => $sub->name)
+                            ->map(fn($sub) => $sub->name)
                             ->values()
                             ->toArray() ?: ['-'];
                     })
                     ->wrap(),
 
-                TextColumn::make('wilaya.'.__('custom.models.user.wilaya.field'))
+                TextColumn::make('wilaya.' . __('custom.models.user.wilaya.field'))
                     ->label(__('custom.models.user.wilaya'))
                     ->searchable()
                     ->toggleable()
                     ->sortable()
                     ->size('sm')
                     ->default(__('custom.models.user.wilaya.empty'))
-                    ->description(fn ($record) => $record->commune?->{__('custom.models.user.commune.field')} ?? __('custom.models.user.commune.empty')),
+                    ->description(fn($record) => $record->commune?->{__('custom.models.user.commune.field')} ?? __('custom.models.user.commune.empty')),
 
                 ToggleColumn::make('email_verified_at')
                     ->label(__('custom.models.user.verified'))
@@ -336,8 +310,8 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->trueLabel(__('custom.models.user.email_verified'))
                     ->falseLabel(__('custom.models.user.email_not_verified'))
                     ->queries(
-                        true: fn (Builder $query) => $query->whereNotNull('email_verified_at'),
-                        false: fn (Builder $query) => $query->whereNull('email_verified_at'),
+                        true: fn(Builder $query) => $query->whereNotNull('email_verified_at'),
+                        false: fn(Builder $query) => $query->whereNull('email_verified_at'),
                     ),
             ])
             ->actions([

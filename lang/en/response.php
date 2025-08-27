@@ -41,4 +41,19 @@ return [
     'phone_not_exists' => 'Phone number does not exist',
     'account_already_exists' => 'Account already exists, please login instead',
     'account_not_registered' => 'Account not registered, please register first',
+
+    // Subscription / Cards
+    'user_already_has_subscription_card' => 'User already has a subscription card',
+    'invalid_code' => 'Invalid code',
+    'subscription_card_already_redeemed_by_user' => 'Subscription card already redeemed by this user',
+    'subscription_card_already_redeemed' => 'Subscription card already redeemed',
+    'subscription_card_redeemed_successfully' => 'Subscription card redeemed successfully',
+    'user_already_subscribed' => 'User already subscribed',
+    'an_error_occurred' => 'An error occurred',
+    'invalid_password' => 'Invalid password',
+    'user_not_subscribed_to_this_subscription' => 'User not subscribed to this subscription',
+    'subscription_already_expired' => 'Subscription already expired',
+    'subscription_unsubscribed_successfully' => 'Unsubscribed successfully',
+    'subscription_not_found' => 'Subscription not found',
+    'promo_code_not_active' => 'Promo code not active',
 ];

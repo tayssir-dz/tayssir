@@ -5,8 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CardResource\CardFormUtils;
 use App\Filament\Resources\CardResource\Pages;
 use App\Models\Card;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
@@ -23,7 +21,7 @@ use Filament\Tables\Table;
 use Pelmered\FilamentMoneyField\Forms\Components\MoneyInput;
 use Pelmered\FilamentMoneyField\Tables\Columns\MoneyColumn;
 
-class CardResource extends Resource implements HasShieldPermissions
+class CardResource extends Resource
 {
     public static function shouldRegisterNavigation(): bool
     {
@@ -50,22 +48,7 @@ class CardResource extends Resource implements HasShieldPermissions
 
     public static function getNavigationBadge(): ?string
     {
-        return Utils::isResourceNavigationBadgeEnabled()
-            ? strval(static::getEloquentQuery()->count())
-            : null;
-    }
-
-    public static function getPermissionPrefixes(): array
-    {
-        return [
-            'view',
-            'view_any',
-            'create',
-            'update',
-            'delete',
-            'delete_any',
-            'create_many',
-        ];
+        return static::getModel()::count();
     }
 
     protected static ?string $model = Card::class;
@@ -87,23 +70,23 @@ class CardResource extends Resource implements HasShieldPermissions
                                     ->label(__('custom.models.card.price'))
                                     ->default(0)
                                     ->required()
-                                    ->afterStateUpdated(fn ($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
+                                    ->afterStateUpdated(fn($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
                                     ->live(onBlur: true),
 
                                 Toggle::make('is_on_discount')
                                     ->default(false)
                                     ->label(__('custom.models.card.is_on_discount'))
-                                    ->afterStateUpdated(fn ($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
+                                    ->afterStateUpdated(fn($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
                                     ->live(onBlur: true),
 
                                 MoneyInput::make('discount_price')
                                     ->locale(__('custom.currency.local.dzd'))
                                     ->label(__('custom.models.card.discount_price'))
-                                    ->visible(fn ($get) => $get('is_on_discount'))
+                                    ->visible(fn($get) => $get('is_on_discount'))
                                     ->default(0)
                                     ->minValue(0)
                                     ->required()
-                                    ->afterStateUpdated(fn ($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
+                                    ->afterStateUpdated(fn($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
                                     ->live(onBlur: true),
 
                                 TextInput::make('discount_percentage')
@@ -112,8 +95,8 @@ class CardResource extends Resource implements HasShieldPermissions
                                     ->default(0)
                                     ->minValue(0)->maxValue(100)
                                     ->label(__('custom.models.card.discount_percentage'))
-                                    ->visible(fn ($get) => $get('is_on_discount'))
-                                    ->afterStateUpdated(fn ($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
+                                    ->visible(fn($get) => $get('is_on_discount'))
+                                    ->afterStateUpdated(fn($get, $set) => CardFormUtils::priceStateHandeler($get, $set))
                                     ->live(onBlur: true),
 
                                 // Display Price is calculated based on the discount price and the discount percentage, disabled for the user to edit
@@ -177,8 +160,8 @@ class CardResource extends Resource implements HasShieldPermissions
                 // column for status, badge with difference colors for those values 'idle', 'expired', 'active', 'done', 'problem (with translation)
                 BadgeColumn::make('status')
                     ->label(__('custom.models.card.status'))
-                    ->formatStateUsing(fn ($state) => __("custom.models.card.status.$state"))
-                    ->color(fn ($record) => match ($record->status) {
+                    ->formatStateUsing(fn($state) => __("custom.models.card.status.$state"))
+                    ->color(fn($record) => match ($record->status) {
                         'idle' => 'info',
                         'expired' => 'danger',
                         'active' => 'success',

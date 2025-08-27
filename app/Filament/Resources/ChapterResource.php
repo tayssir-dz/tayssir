@@ -6,8 +6,6 @@ use App\Enums\ContentDirection;
 use App\Filament\Resources\ChapterResource\Pages;
 use App\Filament\Resources\ChapterResource\RelationManagers\QuestionsRelationManager;
 use App\Models\Chapter;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -21,13 +19,11 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class ChapterResource extends Resource implements HasShieldPermissions
+class ChapterResource extends Resource
 {
     public static function getNavigationGroup(): ?string
     {
-        return Utils::isResourceNavigationGroupEnabled()
-            ? __('custom.nav.section.content')
-            : '';
+        return __('custom.nav.section.content');
     }
 
     public static function getModelLabel(): string
@@ -38,20 +34,6 @@ class ChapterResource extends Resource implements HasShieldPermissions
     public static function getPluralModelLabel(): string
     {
         return __('custom.models.chapters');
-    }
-
-    public static function getPermissionPrefixes(): array
-    {
-        return [
-            'view',
-            'view_any',
-            'create',
-            'update',
-            'delete',
-            'delete_any',
-            'upload_json',
-            'edit_json',
-        ];
     }
 
     protected static ?string $model = Chapter::class;

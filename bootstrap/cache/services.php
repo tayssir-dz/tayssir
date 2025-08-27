@@ -67,6 +67,7 @@
     63 => 'Ysfkaya\\FilamentPhoneInput\\FilamentPhoneInputServiceProvider',
     64 => 'App\\Providers\\AppServiceProvider',
     65 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    66 => 'App\\Providers\\Filament\\PromoterPanelProvider',
   ),
   'eager' => 
   array (
@@ -122,6 +123,7 @@
     49 => 'Ysfkaya\\FilamentPhoneInput\\FilamentPhoneInputServiceProvider',
     50 => 'App\\Providers\\AppServiceProvider',
     51 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    52 => 'App\\Providers\\Filament\\PromoterPanelProvider',
   ),
   'deferred' => 
   array (

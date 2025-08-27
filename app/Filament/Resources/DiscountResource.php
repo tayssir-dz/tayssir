@@ -4,8 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\DiscountResource\Pages;
 use App\Models\Discount;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
@@ -19,13 +17,11 @@ use Filament\Tables\Table;
 use Pelmered\FilamentMoneyField\Forms\Components\MoneyInput;
 use Pelmered\FilamentMoneyField\Tables\Columns\MoneyColumn;
 
-class DiscountResource extends Resource implements HasShieldPermissions
+class DiscountResource extends Resource
 {
     public static function getNavigationGroup(): ?string
     {
-        return Utils::isResourceNavigationGroupEnabled()
-            ? __('custom.nav.section.platform')
-            : '';
+        return  __('custom.nav.section.platform');
     }
 
     public static function getModelLabel(): string
@@ -39,18 +35,6 @@ class DiscountResource extends Resource implements HasShieldPermissions
     }
 
     protected static ?int $navigationSort = 6;
-
-    public static function getPermissionPrefixes(): array
-    {
-        return [
-            'view',
-            'view_any',
-            'create',
-            'update',
-            'delete',
-            'delete_any',
-        ];
-    }
 
     protected static ?string $model = Discount::class;
 

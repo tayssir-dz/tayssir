@@ -4,8 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReferralSourceResource\Pages;
 use App\Models\ReferralSource;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
@@ -16,7 +14,7 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class ReferralSourceResource extends Resource implements HasShieldPermissions
+class ReferralSourceResource extends Resource
 {
     protected static ?string $model = ReferralSource::class;
 
@@ -26,9 +24,7 @@ class ReferralSourceResource extends Resource implements HasShieldPermissions
 
     public static function getNavigationGroup(): ?string
     {
-        return Utils::isResourceNavigationGroupEnabled()
-            ? __('custom.nav.section.management')
-            : '';
+        return  __('custom.nav.section.management');
     }
 
     public static function getModelLabel(): string
@@ -39,18 +35,6 @@ class ReferralSourceResource extends Resource implements HasShieldPermissions
     public static function getPluralModelLabel(): string
     {
         return __('custom.models.referral_sources');
-    }
-
-    public static function getPermissionPrefixes(): array
-    {
-        return [
-            'view',
-            'view_any',
-            'create',
-            'update',
-            'delete',
-            'delete_any',
-        ];
     }
 
     public static function form(Form $form): Form
@@ -70,7 +54,7 @@ class ReferralSourceResource extends Resource implements HasShieldPermissions
                         SpatieMediaLibraryFileUpload::make('icon')
                             ->label(__('custom.models.referral_source.icon'))
                             ->collection('icon')
-                            ->getUploadedFileNameForStorageUsing(fn ($file) => str()->slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)).'.svg')
+                            ->getUploadedFileNameForStorageUsing(fn($file) => str()->slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.svg')
                             ->acceptedFileTypes(['image/svg+xml'])
                             ->rules(['mimetypes:image/svg+xml'])
                             ->imageEditor(false)
@@ -105,7 +89,7 @@ class ReferralSourceResource extends Resource implements HasShieldPermissions
                     ->sortable()
                     ->badge()
                     ->alignCenter()
-                    ->color(fn ($state) => $state > 0 ? 'success' : 'gray')
+                    ->color(fn($state) => $state > 0 ? 'success' : 'gray')
                     ->toggleable(),
                 TextColumn::make('created_at')
                     ->dateTime()

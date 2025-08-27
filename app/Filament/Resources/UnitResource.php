@@ -6,8 +6,6 @@ use App\Enums\ContentDirection;
 use App\Filament\Resources\UnitResource\Pages;
 use App\Filament\Resources\UnitResource\RelationManagers\ChaptersRelationManager;
 use App\Models\Unit;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -21,13 +19,11 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class UnitResource extends Resource implements HasShieldPermissions
+class UnitResource extends Resource
 {
     public static function getNavigationGroup(): ?string
     {
-        return Utils::isResourceNavigationGroupEnabled()
-            ? __('custom.nav.section.content')
-            : '';
+        return  __('custom.nav.section.content');
     }
 
     public static function getModelLabel(): string
@@ -38,18 +34,6 @@ class UnitResource extends Resource implements HasShieldPermissions
     public static function getPluralModelLabel(): string
     {
         return __('custom.models.units');
-    }
-
-    public static function getPermissionPrefixes(): array
-    {
-        return [
-            'view',
-            'view_any',
-            'create',
-            'update',
-            'delete',
-            'delete_any',
-        ];
     }
 
     protected static ?string $model = Unit::class;

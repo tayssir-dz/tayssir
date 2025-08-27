@@ -9,8 +9,6 @@ use App\Filament\Resources\MaterialResource\RelationManagers\FlashcardGroupsRela
 use App\Filament\Resources\MaterialResource\RelationManagers\SummariesRelationManager;
 use App\Filament\Resources\MaterialResource\RelationManagers\UnitsRelationManager;
 use App\Models\Material;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Section;
@@ -26,15 +24,13 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class MaterialResource extends Resource implements HasShieldPermissions
+class MaterialResource extends Resource
 {
     protected static ?string $recordTitleAttribute = 'code';
 
     public static function getNavigationGroup(): ?string
     {
-        return Utils::isResourceNavigationGroupEnabled()
-            ? __('custom.nav.section.content')
-            : '';
+        return __('custom.nav.section.content');
     }
 
     public static function getModelLabel(): string
@@ -45,18 +41,6 @@ class MaterialResource extends Resource implements HasShieldPermissions
     public static function getPluralModelLabel(): string
     {
         return __('custom.models.materials');
-    }
-
-    public static function getPermissionPrefixes(): array
-    {
-        return [
-            'view',
-            'view_any',
-            'create',
-            'update',
-            'delete',
-            'delete_any',
-        ];
     }
 
     protected static ?string $model = Material::class;

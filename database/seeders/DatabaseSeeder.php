@@ -13,21 +13,18 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // $this->call(WilayaCommuneSeeder::class);
-        // $this->call(IseedSeeder::class);
+        $this->call([
+            WilayaCommuneSeeder::class,
+            GuestSubscriptionSeeder::class,
+        ]);
 
-        // Promoter::truncate();
-        // Promoter::factory(10)
-        //     ->has(PromoCode::factory(2), 'promoCodes')
-        //     ->create();
-
-        // Create random number of users for each referral source
-        $referralSources = ReferralSource::all();
-        foreach ($referralSources as $source) {
-            $randomCount = rand(5, 15);
-            User::factory($randomCount)->create([
-                'referral_source_id' => $source->id,
-            ]);
-        }
+        ReferralSource::factory()->createMany([
+            ['name' => 'Facebook'],
+            ['name' => 'Instagram'],
+            ['name' => 'Twitter'],
+            ['name' => 'Friend'],
+            ['name' => 'Google Search'],
+            ['name' => 'Other'],
+        ]);
     }
 }
