@@ -9,7 +9,7 @@ use Dedoc\Scramble\Attributes\Group;
 use Ichtrojan\Otp\Otp;
 use Illuminate\Support\Facades\Mail;
 
-#[Group('Email Change APIs', weight: 14)]
+#[Group('Email Change APIs', weight: 5)]
 class ChangeEmailController extends BaseController
 {
     /**
