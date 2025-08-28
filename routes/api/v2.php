@@ -55,12 +55,13 @@ Route::prefix('v2')->group(function () {
 
     Route::prefix('email')->group(function () {
         Route::post('send-verification-mail', [EmailVerificationController::class, 'sendVerificationMail'])
+            ->middleware(['auth:sanctum', 'access'])
             ->summary('Send verification email')
             ->description('Send a verification email with OTP to verify user email');
 
-        Route::post('/verify-otp', [EmailVerificationController::class, 'verifyOtp'])
-            ->summary('Verify OTP')
-            ->description('this endpoint takes the user email and the otp and verifies the otp');
+        // Route::post('/verify-otp', [EmailVerificationController::class, 'verifyOtp'])
+        //     ->summary('Verify OTP')
+        //     ->description('this endpoint takes the user email and the otp and verifies the otp');
 
         Route::post('verify-email', [EmailVerificationController::class, 'verifyEmail'])
             ->middleware(['auth:sanctum', 'access'])

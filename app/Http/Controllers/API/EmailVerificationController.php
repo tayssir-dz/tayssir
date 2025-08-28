@@ -27,7 +27,7 @@ class EmailVerificationController extends BaseController
      */
     public function sendVerificationMail(SendVerificationMailRequest $request)
     {
-        $user = User::where('email', $request->email)->first();
+        $user = $request->user();
         if ($user->email_verified_at !== null) {
             return $this->sendError(__('response.email_already_verified'));
         }
@@ -102,6 +102,6 @@ class EmailVerificationController extends BaseController
             return $this->sendError(__('response.otp_has_expired'));
         }
 
-        return $this->sendResponse([], __('response.otp_is_valid'));
+        return $this->sendResponse(message: __('response.otp_is_valid'));
     }
 }
