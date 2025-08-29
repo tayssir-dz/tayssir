@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Models\Promoter;
 use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -16,6 +17,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Pages;
+use Filament\Widgets;
 
 class PromoterPanelProvider extends PanelProvider
 {
@@ -29,7 +32,6 @@ class PromoterPanelProvider extends PanelProvider
             ->colors(
                 [
                     'primary' => Color::hex('#F037A5'),
-                    // 'primary' => Color::Green,F037A5
                     'success' => Color::hex('#12D18E'),
                     'error' => Color::hex('#F85556'),
                     'warning' => Color::hex('#FF9500'),
@@ -38,6 +40,15 @@ class PromoterPanelProvider extends PanelProvider
                 ]
             )->font('Poppins')
             ->discoverPages(in: app_path('Filament/Promoter/Pages'), for: 'App\\Filament\\Promoter\\Pages')
+            ->discoverResources(in: app_path('Filament/Promoter/Resources'), for: 'App\\Filament\\Promoter\\Resources')
+            ->pages([
+                Pages\Dashboard::class,
+            ])
+            ->discoverWidgets(in: app_path('Filament/Promoter/Widgets'), for: 'App\\Filament\\Promoter\\Widgets')
+            ->widgets([
+                // Widgets\FilamentInfoWidget::class,
+                Widgets\AccountWidget::class,
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -53,11 +64,9 @@ class PromoterPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
-                FilamentDeveloperLoginsPlugin::make()
-                    ->enabled(config('app.debug', false))
-                    ->users([
-                        'wmayer' => 'wmayer@example.org',
-                    ]),
+                // FilamentDeveloperLoginsPlugin::make()
+                // ->enabled(config('app.debug', false))
+                // ->users($promoters->pluck('email', 'name')->toArray()),
             ]);
     }
 }

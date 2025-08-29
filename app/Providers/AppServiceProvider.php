@@ -64,6 +64,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Scramble::registerApi('default', [
             'api_path' => 'api/default',
+            'export_path' => 'public/default.json',
             "ui" => [
                 "title" => "Tayssir API default",
                 "theme" => "dark",
@@ -78,6 +79,7 @@ class AppServiceProvider extends ServiceProvider
 
         Scramble::registerApi('v1', [
             'api_path' => 'api/v1',
+            'export_path' => 'public/v1.json',
             "ui" => [
                 "title" => "Tayssir API v1",
                 "theme" => "dark",
@@ -92,6 +94,7 @@ class AppServiceProvider extends ServiceProvider
 
         Scramble::registerApi('v2', [
             'api_path' => 'api/v2',
+            'export_path' => 'public/v2.json',
             "ui" => [
                 "title" => "Tayssir API v2",
                 "theme" => "dark",

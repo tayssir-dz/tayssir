@@ -14,17 +14,18 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            WilayaCommuneSeeder::class,
-            GuestSubscriptionSeeder::class,
+            // WilayaCommuneSeeder::class,
+            // PromoterSeeder::class
+            // GuestSubscriptionSeeder::class,
         ]);
 
-        ReferralSource::factory()->createMany([
-            ['name' => 'Facebook'],
-            ['name' => 'Instagram'],
-            ['name' => 'Twitter'],
-            ['name' => 'Friend'],
-            ['name' => 'Google Search'],
-            ['name' => 'Other'],
-        ]);
+        // ReferralSource::factory()->createMany([
+        //     ['name' => 'Facebook'],
+        //     ['name' => 'Instagram'],
+        //     ['name' => 'Twitter'],
+        //     ['name' => 'Friend'],
+        //     ['name' => 'Google Search'],
+        //     ['name' => 'Other'],
+        // ]);
     }
 }

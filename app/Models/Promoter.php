@@ -6,6 +6,7 @@ use App\Traits\User\HasWilayaAndCommune;
 use App\Traits\User\IsPanelUser;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -18,7 +19,6 @@ class Promoter extends Authenticatable implements FilamentUser, HasAvatar, HasMe
     use HasFactory;
     use HasWilayaAndCommune;
     use InteractsWithMedia;
-    use IsPanelUser;
     use Notifiable;
 
     protected $fillable = ['name', 'phone_number', 'email', 'password', 'wilaya_id', 'commune_id'];
@@ -51,6 +51,10 @@ class Promoter extends Authenticatable implements FilamentUser, HasAvatar, HasMe
         return $media ? $media->getUrl() : 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=FFFFFF&background=111827';
     }
 
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
+    }
     public function getFilamentAvatarUrl(): ?string
     {
         return $this->getFirstMediaUrl('avatar');
