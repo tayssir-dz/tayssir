@@ -105,7 +105,7 @@ class SubscriptionController extends BaseController
     }
 
     /**
-     * Redeem a subscription.
+     * Redeem a subscription card.
      *
      * This endpoint takes the code of the card and redeems it for the user, it errors if the card is already used by the user, if its used by another user, if the user already subscribed to the same subscription so there is no need to subscribe again.
      */

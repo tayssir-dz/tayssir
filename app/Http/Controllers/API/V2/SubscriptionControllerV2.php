@@ -15,13 +15,13 @@ use G4T\Swagger\Attributes\SwaggerSection;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Facades\Hash;
 
-#[Group('Subscription Management APIs', weight: 5)]
+#[Group('Subscription Management APIs', weight: 1)]
 class SubscriptionControllerV2 extends BaseController
 {
     /**
      * Display a listing of all subscriptions.
      *
-     * @return \Illuminate\Http\Response
+     * this endpoint returns all the subscriptions available in the system, with their discounts if any, and the price after discount
      */
     public function index()
     {
@@ -110,7 +110,7 @@ class SubscriptionControllerV2 extends BaseController
     }
 
     /**
-     * Redeem a subscription.
+     * Redeem a subscription card.
      *
      * This endpoint takes the code of the card and redeems it for the user, it errors if the card is already used by the user, if its used by another user, if the user already subscribed to the same subscription so there is no need to subscribe again.
      */

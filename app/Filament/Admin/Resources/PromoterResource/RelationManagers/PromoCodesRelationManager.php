@@ -151,11 +151,6 @@ class PromoCodesRelationManager extends RelationManager
                 IconColumn::make('is_active')
                     ->label(__('custom.models.promoCode.is_active'))
                     ->boolean()
-                    ->getStateUsing(function ($record) {
-                        $now = Carbon::now()->toDateString();
-
-                        return $record->start_date <= $now && $record->end_date >= $now;
-                    })
                     ->trueIcon('heroicon-o-check-circle')
                     ->falseIcon('heroicon-o-x-circle')
                     ->trueColor('success')

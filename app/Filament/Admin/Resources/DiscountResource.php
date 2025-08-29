@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\DiscountResource\Pages;
 use App\Models\Discount;
+use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
@@ -12,6 +13,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Pelmered\FilamentMoneyField\Forms\Components\MoneyInput;
@@ -82,10 +84,12 @@ class DiscountResource extends Resource
                     Tab::make(__('custom.models.discount.tabs.period'))
                         ->schema([
                             DatePicker::make('from')
+                                ->native(false)
                                 ->label(__('custom.models.discount.from'))
                                 ->required(),
 
                             DatePicker::make('to')
+                                ->native(false)
                                 ->label(__('custom.models.discount.to'))
                                 ->required(),
                         ]),
@@ -120,6 +124,17 @@ class DiscountResource extends Resource
                     ->color('gray')
                     ->formatStateUsing(fn($state) => $state . '%')
                     ->label(__('custom.models.discount.percentage')),
+
+                IconColumn::make('is_active')
+                    ->label(__('custom.models.promoCode.is_active'))
+                    ->boolean()
+                    ->trueIcon('heroicon-o-check-circle')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->falseColor('danger')
+                    ->sortable()
+                    ->toggleable()
+                    ->alignCenter(),
             ])
             ->filters([
                 //

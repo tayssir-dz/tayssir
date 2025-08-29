@@ -65,6 +65,7 @@ class SubscriptionResource extends Resource
                         ->default(0)
                         ->locale(__('custom.currency.local.dzd')),
                     DatePicker::make('ending_date')
+                        ->native(false)
                         ->label(__('custom.models.subscription.ending_date')),
 
                     Select::make('discounts')

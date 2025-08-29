@@ -123,7 +123,7 @@ Route::prefix('v1')->group(function () {
 
         Route::post('/redeem', [SubscriptionController::class, 'redeem'])
             ->middleware(['auth:sanctum', 'access'])
-            ->summary('Redeem a subscription')
+            ->summary('Redeem a subscription card')
             ->description('this endpoint takes the code of the card and redeems it for the user, it errors if the card is already used by the user, if its used by another user, if the user already subscribed to the same subscription so there is no need to subscribe again');
 
         Route::post('/unsibscribe', [SubscriptionController::class, 'unsubscribe'])
