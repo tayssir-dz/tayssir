@@ -37,6 +37,7 @@ class AuthController extends BaseController
         }
         $googleEmail = $payload['email'] ?? null;
         $googleId = $payload['sub'] ?? null;
+        $avatarUrl = $payload['picture'] ?? null;
         if (! $googleEmail || ! $googleId) {
             return $this->sendError(__('response.unauthorised'), ['error' => 'Google token missing email or sub'], 401);
         }
@@ -57,6 +58,8 @@ class AuthController extends BaseController
             'division_id' => $data['division_id'] ?? null,
             'age' => $data['age'] ?? null,
             'referral_source_id' => $data['referral_source_id'] ?? null,
+            'email_verified_at' => Carbon::now(),
+            'avatar_url' => $avatarUrl,
         ]);
         $role = Role::firstOrCreate(['name' => 'student']);
         $user->assignRole($role);
