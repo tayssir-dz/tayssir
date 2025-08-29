@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\V2;
 
+use App\Http\Controllers\API\BaseController;
+use Illuminate\Http\Request;
 use App\Http\Requests\API\Subscription\RedeemRequest;
 use App\Http\Requests\API\Subscription\UnsubscribeRequest;
 use App\Models\Subscription;
@@ -11,10 +13,8 @@ use Dedoc\Scramble\Attributes\Group;
 use Exception;
 use G4T\Swagger\Attributes\SwaggerSection;
 use Illuminate\Database\UniqueConstraintViolationException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-// #[SwaggerSection("This section oversees subscription management, allowing users to view their subscriptions, redeem subscription cards, and unsubscribe from active subscriptions. It enforces checks to ensure valid subscriptions and handles user-specific subscription actions securely, including error handling for invalid or already used subscription codes.")]
 #[Group('Subscription Management APIs', weight: 5)]
 class SubscriptionController extends BaseController
 {
@@ -43,6 +43,9 @@ class SubscriptionController extends BaseController
                 'name' => $subscription->name,
                 'description' => $subscription->description,
                 'price' => $subscription->price / 100,
+                'price_after_discount' => $subscription->price_after_discount / 100,
+                'discount_amount' => $subscription->discount_amount / 100,
+                'discount_percentage' => $subscription->discount_percentage,
                 'ending_date' => $subscription->ending_date,
                 'gradiant_start' => $subscription->gradiant_start,
                 'gradiant_end' => $subscription->gradiant_end,
@@ -83,6 +86,9 @@ class SubscriptionController extends BaseController
             'name' => $subscription->name,
             'description' => $subscription->description,
             'price' => $subscription->price / 100,
+            'price_after_discount' => $subscription->price_after_discount / 100,
+            'discount_amount' => $subscription->discount_amount / 100,
+            'discount_percentage' => $subscription->discount_percentage,
             'ending_date' => $subscription->ending_date,
             'gradiant_start' => $subscription->gradiant_start,
             'gradiant_end' => $subscription->gradiant_end,
@@ -159,35 +165,5 @@ class SubscriptionController extends BaseController
         })->toArray();
 
         return $this->sendResponse(['subscriptions' => $subscriptions]);
-    }
-
-    /**
-     * Unsubscribe from a subscription.
-     *
-     * This endpoint takes the subscription id and the user's password and unsubscribes the user from the subscription.
-     */
-    public function unsubscribe(UnsubscribeRequest $request)
-    {
-        $subscription_id = $request->input('subscription_id');
-        $password = $request->input('password');
-        $user = $request->user();
-
-        if (! Hash::check($password, $user->password)) {
-            return $this->sendError(__('response.invalid_password'));
-        }
-
-        $subscriptionCard = $user->subscriptionCards->where('subscription_id', $subscription_id)->first();
-
-        if ($subscriptionCard === null) {
-            return $this->sendError(__('response.user_not_subscribed_to_this_subscription'));
-        }
-
-        if ($subscriptionCard->subscription->ending_date->lessThan(Carbon::now())) {
-            return $this->sendError(__('response.subscription_already_expired'));
-        }
-
-        $subscriptionCard->delete();
-
-        return $this->sendResponse(__('response.subscription_unsubscribed_successfully'));
     }
 }

@@ -52,7 +52,7 @@ class DiscountResource extends Resource
                     Tab::make(__('custom.models.discount.tabs.informations'))
                         ->schema([
                             TextInput::make('name')
-                                ->unique()
+                                ->unique(ignoreRecord: true)
                                 ->label(__('custom.models.discount.name'))
                                 ->required()
                                 ->columnSpan(2),
@@ -64,17 +64,18 @@ class DiscountResource extends Resource
                         ]),
                     Tab::make(__('custom.models.discount.tabs.reduction'))
                         ->schema([
-                            MoneyInput::make('amount')
-                                ->label(__('custom.models.discount.amount'))
-                                ->default(0)
-                                ->required()
-                                ->locale(__('custom.currency.local.dzd'))
-                                ->columnSpan(2),
+                            // MoneyInput::make('amount')
+                            //     ->label(__('custom.models.discount.amount'))
+                            //     ->default(0)
+                            //     ->required()
+                            //     ->locale(__('custom.currency.local.dzd'))
+                            //     ->columnSpan(2),
 
                             TextInput::make('percentage')
                                 ->label(__('custom.models.discount.percentage'))
                                 ->numeric()
                                 ->default(0)
+                                ->rules(['min:0', 'max:100'])
                                 ->required()
                                 ->columnSpan(2),
                         ]),
@@ -109,14 +110,15 @@ class DiscountResource extends Resource
                     ->searchable()
                     ->label(__('custom.models.discount.subscriptions')),
 
-                MoneyColumn::make('amount')
-                    ->badge()->color('gray')
-                    ->locale(__('custom.currency.local.dzd'))
-                    ->label(__('custom.models.discount.amount')),
+                // MoneyColumn::make('amount')
+                //     ->badge()->color('gray')
+                //     ->locale(__('custom.currency.local.dzd'))
+                //     ->label(__('custom.models.discount.amount')),
 
                 TextColumn::make('percentage')
                     ->badge()
                     ->color('gray')
+                    ->formatStateUsing(fn($state) => $state . '%')
                     ->label(__('custom.models.discount.percentage')),
             ])
             ->filters([

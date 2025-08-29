@@ -53,7 +53,6 @@ class SubscriptionResource extends Resource
                 Section::make()->schema([
                     TextInput::make('name')
                         ->label(__('custom.models.subscription.name'))
-                        ->unique()
                         ->unique(ignoreRecord: true)
                         ->required(),
 
@@ -115,7 +114,11 @@ class SubscriptionResource extends Resource
                     ->color('success')
                     ->locale(__('custom.currency.local.dzd')),
 
-                MoneyColumn::make('price_after_discount')->badge()->color('success'),
+                MoneyColumn::make('price_after_discount')
+                    ->badge()
+                    ->sortable()
+                    ->color('success')
+                    ->locale(__('custom.currency.local.dzd')),
                 // MoneyColumn::make("discount_amount")->badge()->color("success"),
                 // TextColumn::make("discount_percentage")->badge()->color("success"),
                 // TextColumn::make("ending_date")

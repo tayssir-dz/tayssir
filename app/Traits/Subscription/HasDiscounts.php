@@ -24,30 +24,19 @@ trait HasDiscounts
         }
 
         $finalPrice = $originalPrice;
-        $totalFixedDiscount = 0;
         $totalPercentageDiscount = 0;
 
         // Collect all discounts
         foreach ($activeDiscounts as $discount) {
-            // Add up all fixed amount discounts
-            if ($discount->amount && $discount->amount > 0) {
-                $totalFixedDiscount += $discount->amount;
-            }
-
             // Add up all percentage discounts
             if ($discount->percentage && $discount->percentage > 0) {
                 $totalPercentageDiscount += $discount->percentage;
             }
         }
 
-        // Apply percentage discounts first (from original price)
+        // Apply percentage discounts
         if ($totalPercentageDiscount > 0) {
             $finalPrice = $originalPrice * (1 - ($totalPercentageDiscount / 100));
-        }
-
-        // Then apply fixed amount discounts
-        if ($totalFixedDiscount > 0) {
-            $finalPrice = max(0, $finalPrice - $totalFixedDiscount);
         }
 
         return $finalPrice;

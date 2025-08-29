@@ -11,7 +11,7 @@ class ReferralSourcesBarChart extends ChartWidget
 {
     protected static ?string $maxHeight = '300px';
 
-    protected int|string|array $columnSpan = 'full';
+    protected int|string|array $columnSpan = '3';
 
     public ?string $filter = 'year';
 

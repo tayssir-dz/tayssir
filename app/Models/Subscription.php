@@ -38,7 +38,6 @@ class Subscription extends Model
         parent::boot();
 
         static::deleting(function ($subscription) {
-            // Prevent deletion of guest subscription
             if ($subscription->id === self::GUEST_ID) {
                 return false;
             }
