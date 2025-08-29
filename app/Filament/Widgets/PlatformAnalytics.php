@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\UserResource\Widgets;
+namespace App\Filament\Widgets;
 
 use App\Enums\QuestionScope;
 use App\Models\Chapter;
@@ -16,11 +16,10 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Spatie\FilamentSimpleStats\SimpleStat;
 
-class UsersCard extends BaseWidget
+class PlatformAnalytics extends BaseWidget
 {
-
-    // Set the maximum columns to 3 for better display
     protected string|array|int $columnSpan = 3;
+    protected static ?int $sort = 2;
 
     protected function getStats(): array
     {

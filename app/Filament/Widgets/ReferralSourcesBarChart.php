@@ -10,9 +10,8 @@ use Illuminate\Support\Facades\DB;
 class ReferralSourcesBarChart extends ChartWidget
 {
     protected static ?string $maxHeight = '300px';
-
-    protected int|string|array $columnSpan = '3';
-
+    protected int|string|array $columnSpan = 3;
+    protected static ?int $sort = 1;
     public ?string $filter = 'year';
 
     protected function getType(): string
