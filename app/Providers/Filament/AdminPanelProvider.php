@@ -40,14 +40,15 @@ class AdminPanelProvider extends PanelProvider
             ->colors(
                 [
                     'primary' => Color::hex('#00C4F6'),
-                    // 'primary' => Color::Green,
                     'success' => Color::hex('#12D18E'),
                     'error' => Color::hex('#F85556'),
                     'warning' => Color::hex('#FF9500'),
                     'info' => Color::hex('#F037A5'),
                     'neutral' => Color::hex('#E5E7EB'),
                 ]
-            )->font('Poppins')
+            )
+            ->databaseNotifications()
+            ->font('Poppins')
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
             ->pages([

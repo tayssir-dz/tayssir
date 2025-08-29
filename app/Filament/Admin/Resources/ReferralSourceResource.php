@@ -37,6 +37,11 @@ class ReferralSourceResource extends Resource
         return __('custom.models.referral_sources');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form

@@ -36,6 +36,11 @@ class PromoterResource extends Resource
         return __('custom.models.promoters');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     protected static ?string $model = Promoter::class;
 
     protected static ?int $navigationSort = 7;

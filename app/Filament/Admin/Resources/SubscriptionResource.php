@@ -36,6 +36,11 @@ class SubscriptionResource extends Resource
         return __('custom.models.subscriptions');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     protected static ?int $navigationSort = 5;
 
     protected static ?string $model = Subscription::class;

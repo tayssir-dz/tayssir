@@ -36,6 +36,11 @@ class DiscountResource extends Resource
         return __('custom.models.discounts');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     protected static ?int $navigationSort = 6;
 
     protected static ?string $model = Discount::class;

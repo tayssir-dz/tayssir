@@ -41,6 +41,11 @@ class BannerResource extends Resource
         return __('custom.models.banners');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     protected static ?string $navigationIcon = 'heroicon-o-photo';
 
     protected static ?int $navigationSort = 8;
