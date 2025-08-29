@@ -92,16 +92,16 @@ class ReferralSourcesBarChart extends ChartWidget
 
         // Simple color palette (repeat if needed)
         $baseColors = [
-            '#3b82f6',
-            '#10b981',
-            '#f59e0b',
-            '#ef4444',
-            '#6366f1',
-            '#8b5cf6',
-            '#ec4899',
-            '#14b8a6',
-            '#0ea5e9',
-            '#84cc16',
+            '#00C4F6',
+            '#12D18E',
+            '#F85556',
+            '#FF9500',
+            '#F037A5',
+            '#E5E7EB',
+            // '#ec4899',
+            // '#14b8a6',
+            // '#0ea5e9',
+            // '#84cc16',
         ];
         $colors = [];
         $countLabels = count($labels);
