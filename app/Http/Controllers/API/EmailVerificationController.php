@@ -36,10 +36,13 @@ class EmailVerificationController extends BaseController
             return $this->sendError(__('response.failed_to_generate_otp'));
         }
         //TODO
-        // Mail::to($user->email)->send(new EmailVerificationMail([
-        //     'otp' => $verification_otp->token,
-        //     'name' => $user->name,
-        // ]));
+        try {
+            Mail::to($user->email)->send(new EmailVerificationMail([
+                'otp' => $verification_otp->token,
+                'name' => $user->name,
+            ]));
+        } catch (\Exception $e) {
+        }
 
         return $this->sendResponse(["otp" => $verification_otp->token], message: __('response.email_sent_successfully'));
     }
