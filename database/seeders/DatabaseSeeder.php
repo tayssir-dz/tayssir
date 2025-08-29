@@ -17,15 +17,7 @@ class DatabaseSeeder extends Seeder
             // WilayaCommuneSeeder::class,
             // PromoterSeeder::class
             // GuestSubscriptionSeeder::class,
+            // ReferralSourceSeeder::class
         ]);
-
-        // ReferralSource::factory()->createMany([
-        //     ['name' => 'Facebook'],
-        //     ['name' => 'Instagram'],
-        //     ['name' => 'Twitter'],
-        //     ['name' => 'Friend'],
-        //     ['name' => 'Google Search'],
-        //     ['name' => 'Other'],
-        // ]);
     }
 }
