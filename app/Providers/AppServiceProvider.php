@@ -66,6 +66,7 @@ class AppServiceProvider extends ServiceProvider
             'api_path' => 'api/default',
             "ui" => [
                 "title" => "Tayssir API default",
+                "theme" => "dark",
                 'hide_schemas' => true,
                 'logo' => '/favicon.svg',
                 'layout' => 'responsive',
@@ -79,6 +80,7 @@ class AppServiceProvider extends ServiceProvider
             'api_path' => 'api/v1',
             "ui" => [
                 "title" => "Tayssir API v1",
+                "theme" => "dark",
                 'hide_schemas' => true,
                 'logo' => '/favicon.svg',
                 'layout' => 'responsive',
@@ -92,6 +94,7 @@ class AppServiceProvider extends ServiceProvider
             'api_path' => 'api/v2',
             "ui" => [
                 "title" => "Tayssir API v2",
+                "theme" => "dark",
                 'hide_schemas' => true,
                 'logo' => '/favicon.svg',
                 'layout' => 'responsive',
