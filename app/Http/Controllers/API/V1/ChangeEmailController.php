@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\V1;
 
+use App\Http\Controllers\API\BaseController;
 use App\Http\Requests\API\ChangeEmail\ChangeEmailRequest;
 use App\Http\Requests\API\ChangeEmail\VerifyChangeEmailRequest;
 use App\Mail\ChangeEmailMail;

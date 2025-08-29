@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\V1;
 
-use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\API\BaseController;
+use App\Http\Controllers\API\ResponseController;
 use App\Http\Requests\API\User\UpdateProfileRequest;
 use Dedoc\Scramble\Attributes\Group;
-use G4T\Swagger\Attributes\SwaggerSection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;

@@ -54,11 +54,6 @@
                     data-tip="All APIs included in the v2 that Require Auth - Requires email verification">
                     New Documentation (v2)
                 </a>
-                <a href="/docs/default"
-                    class="btn btn-neutral tooltip tooltip-top tooltip-primary flex justify-center items-center"
-                    data-tip="ignore these for now">
-                    New Documentation (default)
-                </a>
             </div>
         </div>
     </div>

@@ -16,7 +16,7 @@ use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Facades\Hash;
 
 #[Group('Subscription Management APIs', weight: 5)]
-class SubscriptionController extends BaseController
+class SubscriptionControllerV2 extends BaseController
 {
     /**
      * Display a listing of all subscriptions.

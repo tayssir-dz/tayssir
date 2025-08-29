@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\V1;
 
+use App\Http\Controllers\API\BaseController;
 use App\Models\Bac;
 use Dedoc\Scramble\Attributes\Group;
 use Illuminate\Http\Request;

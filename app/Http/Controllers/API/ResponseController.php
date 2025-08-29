@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use Carbon\Carbon;
 
@@ -31,7 +31,7 @@ class ResponseController
             'name' => $user->name,
             'email' => $user->email,
             'age' => $user->age ? $user->age : null,
-            'image_url' => config('app.url').'/storage/'.$user->avatar_url,
+            'image_url' => config('app.url') . '/storage/' . $user->avatar_url,
             'phone_number' => $user->phone_number,
             'email_verified' => $user->email_verified_at !== null,
             'wilaya' => $user->wilaya ? ResponseController::WilayaRes($user->wilaya) : null,

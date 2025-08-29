@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\V1;
 
+use App\Http\Controllers\API\BaseController;
 use App\Models\LeaderBoard;
 use App\Models\User;
 use Dedoc\Scramble\Attributes\Group;

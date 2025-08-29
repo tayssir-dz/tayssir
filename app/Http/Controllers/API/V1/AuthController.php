@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\V1;
 
 use App\Enums\TokenAbility;
-use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\API\BaseController;
+use App\Http\Controllers\API\ResponseController;
 use App\Http\Requests\API\Auth\CheckEmailRequest;
 use App\Http\Requests\API\Auth\CheckPhoneNumberRequest;
 use App\Http\Requests\API\Auth\GoogleLoginRequest;

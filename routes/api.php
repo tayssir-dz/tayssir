@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\API\DivisionController;
-use App\Http\Controllers\API\ReferralSourceController;
-use App\Http\Controllers\API\SubscriptionController;
+use App\Http\Controllers\API\V1\DivisionController;
+use App\Http\Controllers\API\V1\ReferralSourceController;
+use App\Http\Controllers\API\V1\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 

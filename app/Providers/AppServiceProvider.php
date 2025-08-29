@@ -62,21 +62,6 @@ class AppServiceProvider extends ServiceProvider
 
     private function configureScramble(): void
     {
-        Scramble::registerApi('default', [
-            'api_path' => 'api/default',
-            'export_path' => 'public/default.json',
-            "ui" => [
-                "title" => "Tayssir API default",
-                "theme" => "dark",
-                'hide_schemas' => true,
-                'logo' => '/favicon.svg',
-                'layout' => 'responsive',
-            ],
-        ])
-            ->withDocumentTransformers(function (OpenApi $openApi) {
-                $openApi->secure(SecurityScheme::http('bearer'));
-            });
-
         Scramble::registerApi('v1', [
             'api_path' => 'api/v1',
             'export_path' => 'public/v1.json',
@@ -107,7 +92,6 @@ class AppServiceProvider extends ServiceProvider
                 $openApi->secure(SecurityScheme::http('bearer'));
             });
 
-        Scramble::registerUiRoute('docs/default', api: 'default');
         Scramble::registerUiRoute('docs/v1', api: 'v1');
         Scramble::registerUiRoute('docs/v2', api: 'v2');
     }

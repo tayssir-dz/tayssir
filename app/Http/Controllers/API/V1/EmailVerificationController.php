@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\V1;
 
-use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\API\BaseController;
+use App\Http\Controllers\API\ResponseController;
 use App\Http\Requests\API\EmailVerification\SendVerificationMailRequest;
 use App\Http\Requests\API\EmailVerification\VerifyEmailRequest;
 use App\Http\Requests\API\ForgotPassword\VerifyOtpRequest;

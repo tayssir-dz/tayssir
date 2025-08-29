@@ -1,19 +1,19 @@
 <?php
 
-use App\Http\Controllers\API\AppSettingsController;
-use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\BacController;
-use App\Http\Controllers\API\BannerController;
-use App\Http\Controllers\API\ChangeEmailController;
-use App\Http\Controllers\API\ContentController;
-use App\Http\Controllers\API\ContentWebController;
-use App\Http\Controllers\API\EmailVerificationController;
-use App\Http\Controllers\API\FlashCardsController;
-use App\Http\Controllers\API\ForgotPasswordController;
-use App\Http\Controllers\API\LeaderBoardController;
-use App\Http\Controllers\API\SubscriptionController;
-use App\Http\Controllers\API\SummaryController;
-use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\V1\AppSettingsController;
+use App\Http\Controllers\API\V1\AuthController;
+use App\Http\Controllers\API\V1\BacController;
+use App\Http\Controllers\API\V1\BannerController;
+use App\Http\Controllers\API\V1\ChangeEmailController;
+use App\Http\Controllers\API\V1\ContentController;
+use App\Http\Controllers\API\V1\ContentWebController;
+use App\Http\Controllers\API\V1\EmailVerificationController;
+use App\Http\Controllers\API\V1\FlashCardsController;
+use App\Http\Controllers\API\V1\ForgotPasswordController;
+use App\Http\Controllers\API\V1\LeaderBoardController;
+use App\Http\Controllers\API\V1\SubscriptionController;
+use App\Http\Controllers\API\V1\SummaryController;
+use App\Http\Controllers\API\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
 // MENNADOS PEDADAA

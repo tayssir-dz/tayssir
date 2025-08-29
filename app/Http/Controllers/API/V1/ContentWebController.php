@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\V1;
 
+use App\Http\Controllers\API\BaseController;
 use App\Models\Chapter;
 use App\Models\Material;
 use App\Models\Unit;
