@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Auth;
 
 use Google\Client as GoogleClient;
 use Illuminate\Support\Facades\Log;

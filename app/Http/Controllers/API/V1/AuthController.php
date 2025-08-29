@@ -13,7 +13,7 @@ use App\Http\Requests\API\Auth\LoginRequest;
 use App\Http\Requests\API\Auth\RegisterRequest;
 use App\Mail\WelcomeMail;
 use App\Models\User;
-use App\Services\GoogleAuthService;
+use App\Services\Auth\GoogleAuthService;
 use Carbon\Carbon;
 use Dedoc\Scramble\Attributes\Group;
 use G4T\Swagger\Attributes\SwaggerSection;

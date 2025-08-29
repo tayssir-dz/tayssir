@@ -24,9 +24,9 @@
     <div class="flex items-center justify-center h-screen w-full max-w-2xl mx-auto px-3">
         <div class="flex flex-col gap-8 justify-center items-center card card-body card-bordered bg-base-200">
             <!-- Logo and App Name -->
-            <div class="flex flex-col items-center gap-4">
-                {{-- <x-logo /> --}}
-                <h1 class="text-4xl font-bold text-center">{{ config('app.name') }}</h1>
+            <div class="flex flex-col items-center gap-4 scale-50">
+                <x-logo />
+                {{-- <h1 class="text-4xl font-bold text-center">{{ config('app.name') }}</h1> --}}
             </div>
 
             <!-- Buttons -->

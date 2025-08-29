@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Content;
 
 use App\Models\Chapter;
 use App\Models\User;

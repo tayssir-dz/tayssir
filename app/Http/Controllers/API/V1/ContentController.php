@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\API\BaseController;
 use App\Http\Requests\API\SubmitChapterAnswersRequest;
-use App\Services\AnswerSubmissionService;
+use App\Services\Content\AnswerSubmissionService;
 use Dedoc\Scramble\Attributes\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
