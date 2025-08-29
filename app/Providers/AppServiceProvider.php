@@ -62,17 +62,41 @@ class AppServiceProvider extends ServiceProvider
 
     private function configureScramble(): void
     {
-        Scramble::registerApi('default', ['api_path' => 'api/default'])
+        Scramble::registerApi('default', [
+            'api_path' => 'api/default',
+            "ui" => [
+                "title" => "Tayssir API default",
+                'hide_schemas' => true,
+                'logo' => '/favicon.svg',
+                'layout' => 'responsive',
+            ],
+        ])
             ->withDocumentTransformers(function (OpenApi $openApi) {
                 $openApi->secure(SecurityScheme::http('bearer'));
             });
 
-        Scramble::registerApi('v1', ['api_path' => 'api/v1'])
+        Scramble::registerApi('v1', [
+            'api_path' => 'api/v1',
+            "ui" => [
+                "title" => "Tayssir API v1",
+                'hide_schemas' => true,
+                'logo' => '/favicon.svg',
+                'layout' => 'responsive',
+            ],
+        ])
             ->withDocumentTransformers(function (OpenApi $openApi) {
                 $openApi->secure(SecurityScheme::http('bearer'));
             });
 
-        Scramble::registerApi('v2', ['api_path' => 'api/v2'])
+        Scramble::registerApi('v2', [
+            'api_path' => 'api/v2',
+            "ui" => [
+                "title" => "Tayssir API v2",
+                'hide_schemas' => true,
+                'logo' => '/favicon.svg',
+                'layout' => 'responsive',
+            ],
+        ])
             ->withDocumentTransformers(function (OpenApi $openApi) {
                 $openApi->secure(SecurityScheme::http('bearer'));
             });
