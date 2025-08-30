@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('subscription_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('promo_code_id')->nullable()->constrained('promo_codes')->nullOnDelete();
             $table->string('status')->default('pending');
+            $table->string('rejection_reason')->nullable();
             $table->decimal('price', 10, 2);
             $table->decimal('discount_percentage', 5, 2)->nullable();
             $table->decimal('discount_amount', 10, 2)->nullable();
