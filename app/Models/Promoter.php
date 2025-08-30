@@ -9,6 +9,7 @@ use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
@@ -63,5 +64,17 @@ class Promoter extends Authenticatable implements FilamentUser, HasAvatar, HasMe
     public function promoCodes(): HasMany
     {
         return $this->hasMany(PromoCode::class);
+    }
+
+    public function manualPayments(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            ManualPayment::class,
+            PromoCode::class,
+            'promoter_id', // Foreign key on promo_codes referencing promoters
+            'promo_code_id', // Foreign key on manual_payments referencing promo_codes
+            'id', // Local key on promoters
+            'id' // Local key on promo_codes
+        );
     }
 }

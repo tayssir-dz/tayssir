@@ -27,6 +27,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'access' => CheckForAnyAbility::class . ':' . TokenAbility::ACCESS_API->value,
             'refresh' => CheckForAnyAbility::class . ':' . TokenAbility::REFRESH_ACCESS_TOKEN->value,
             'email-verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
+            'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+            'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

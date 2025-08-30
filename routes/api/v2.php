@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\V2\NotificationControllerV2;
 use App\Http\Controllers\API\V2\PurchaseControllerV2;
 use App\Http\Controllers\API\V2\SubscriptionControllerV2;
 use Illuminate\Support\Facades\Route;
@@ -24,5 +25,21 @@ Route::prefix('v2')->group(function () {
             ->middleware(['auth:sanctum', 'access'])
             ->summary('Check subscription price with discounts & promo code')
             ->description('Returns original price, subscription discount (percentage & amount), promo code discount (percentage & amount), and combined discount (percentage & amount). Promo code applied only if active within its date range.');
+    });
+
+    Route::prefix("notifications")->group(function () {
+        Route::get("/", [NotificationControllerV2::class, 'index'])
+            ->middleware(['auth:sanctum', 'access',])
+            ->summary("Get All Notifications")
+            ->description("This endpoint returns all user notifications");
+        Route::post("/mark-as-read", [NotificationControllerV2::class, 'markAsRead'])
+            ->middleware(['auth:sanctum', 'access'])
+            ->summary("Mark Notifications as Read")
+            ->description("This endpoint marks one or many notifications as read.");
+
+        Route::post("/mark-as-unread", [NotificationControllerV2::class, 'markAsUnread'])
+            ->middleware(['auth:sanctum', 'access'])
+            ->summary("Mark Notifications as Unread")
+            ->description("This endpoint marks one or many notifications as unread.");
     });
 });

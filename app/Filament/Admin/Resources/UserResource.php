@@ -136,13 +136,13 @@ class UserResource extends Resource
                                     $set('commune_id', null);
                                 }
                             }),
-                        Select::make('role')
-                            ->label(__('custom.models.user.roles'))
-                            ->relationship('roles', 'name')
-                            ->multiple()
-                            ->preload()
-                            ->searchable()
-                            ->columnSpan(2),
+                        // Select::make('role')
+                        //     ->label(__('custom.models.user.roles'))
+                        //     ->relationship('roles', 'name')
+                        //     ->multiple()
+                        //     ->preload()
+                        //     ->searchable()
+                        //     ->columnSpan(2),
 
                         Select::make('division')
                             ->label(__('custom.models.division'))
