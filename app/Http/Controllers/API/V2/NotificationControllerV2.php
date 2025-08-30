@@ -37,7 +37,7 @@ class NotificationControllerV2 extends BaseController
 
         $unreadCount = $user->unreadNotifications()->count();
 
-        return response()->json([
+        return $this->sendResponse([
             'has_notifications' => $paginator->total() > 0,
             'has_unread' => $unreadCount > 0,
             'unread_count' => $unreadCount,
@@ -70,9 +70,11 @@ class NotificationControllerV2 extends BaseController
             ->whereIn('id', $validated['ids'])
             ->update(['read_at' => now()]);
 
-        return response()->json([
-            'message' => 'Notifications marked as read successfully.',
-        ]);
+
+        return $this->sendResponse();
+        // return response()->json([
+        //     'message' => 'Notifications marked as read successfully.',
+        // ]);
     }
 
 
@@ -94,8 +96,6 @@ class NotificationControllerV2 extends BaseController
             ->whereIn('id', $validated['ids'])
             ->update(['read_at' => null]);
 
-        return response()->json([
-            'message' => 'Notifications marked as unread successfully.',
-        ]);
+        return $this->sendResponse();
     }
 }
