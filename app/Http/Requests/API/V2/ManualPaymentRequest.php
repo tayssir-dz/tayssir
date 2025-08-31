@@ -4,6 +4,7 @@ namespace App\Http\Requests\API\V2;
 
 use App\Models\PromoCode;
 use App\Models\ManualPayment;
+use App\Models\Payment;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -34,7 +35,7 @@ class ManualPaymentRequest extends FormRequest
                     if (! $user) {
                         return; // Auth middleware should enforce, but guard anyway
                     }
-                    $hasPending = ManualPayment::where('user_id', $user->id)
+                    $hasPending = Payment::where('user_id', $user->id)
                         ->where('status', 'pending')
                         ->exists();
                     if ($hasPending) {

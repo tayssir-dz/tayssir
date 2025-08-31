@@ -44,6 +44,6 @@ class PromoCode extends Model
 
     public function manualPayments()
     {
-        return $this->hasMany(ManualPayment::class);
+        return $this->hasMany(Payment::class);
     }
 }

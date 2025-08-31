@@ -2,7 +2,7 @@
 
 namespace App\Services\Purchase;
 
-use App\Models\ManualPayment;
+use App\Models\Payment;
 use App\Models\PromoCode;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
@@ -44,10 +44,10 @@ class ManualPaymentService
      * @param int $subscriptionId The ID of the subscription being purchased.
      * @param ?string $promoCodeCode An optional promo code.
      * @param UploadedFile $attachment The payment proof attachment.
-     * @return ManualPayment The created manual payment record.
+     * @return Payment The created manual payment record.
      * @throws \InvalidArgumentException If promo code is invalid or inactive (though validation should catch most).
      */
-    public function initiatePayment(User $user, int $subscriptionId, ?string $promoCodeCode, UploadedFile $attachment): ManualPayment
+    public function initiatePayment(User $user, int $subscriptionId, ?string $promoCodeCode, UploadedFile $attachment): Payment
     {
         return DB::transaction(function () use ($user, $subscriptionId, $promoCodeCode, $attachment) {
             // 1. Get pricing details using PriceCheckerService (do not modify this service)
@@ -68,8 +68,8 @@ class ManualPaymentService
             [$promoterMarginPercentage, $promoterMarginAmount] = $this->computePromoterMargin($pricingDetails, $promoCode);
 
 
-            // 4. Create the ManualPayment record
-            $manualPayment = ManualPayment::create([
+            // 4. Create the Payment record
+            $payment = Payment::create([
                 'user_id' => $user->id,
                 'subscription_id' => $subscriptionId,
                 'promo_code_id' => $promoCodeId,
@@ -87,12 +87,12 @@ class ManualPaymentService
             ]);
 
             // 5. Attach the file using Spatie Media Library (collection name: attachment)
-            $manualPayment->addMedia($attachment)->toMediaCollection('attachment');
+            $payment->addMedia($attachment)->toMediaCollection('attachment');
 
             // Refresh to get the attachment URL if needed immediately
-            $manualPayment->refresh();
+            $payment->refresh();
 
-            return $manualPayment;
+            return $payment;
         });
     }
 }

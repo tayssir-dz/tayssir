@@ -1,6 +1,12 @@
 <?php
 
 return [
+    // Manual Payment Statuses
+    'manual_payment.status.pending' => 'Pending',
+    'manual_payment.status.accepted' => 'Accepted',
+    'manual_payment.status.rejected' => 'Rejected',
+    'manual_payment.status.succeeded' => 'Succeeded',
+    'manual_payment.status.failed' => 'Failed',
     // ------------------------ CUSTOM --------------------------
     'nav.section.platform' => 'Platform',
     'nav.section.content' => 'Content',

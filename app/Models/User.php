@@ -96,7 +96,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
 
     public function manualPayments()
     {
-        return $this->hasMany(ManualPayment::class);
+        return $this->hasMany(Payment::class);
     }
 
     public function getRecordTitleAttribute()

@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Enums\Purchase\PaymentRequestStatus;
+use App\Enums\Purchase\PaymentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class ManualPayment extends Model implements HasMedia
+class Payment extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
@@ -34,7 +34,7 @@ class ManualPayment extends Model implements HasMedia
     protected function casts(): array
     {
         return [
-            'status' => PaymentRequestStatus::class,
+            'status' => PaymentStatus::class,
             'price' => 'decimal:2',
             'discount_percentage' => 'decimal:2',
             'discount_amount' => 'decimal:2',

@@ -1,6 +1,12 @@
 <?php
 
 return [
+    // حالات الدفع اليدوي
+    'manual_payment.status.pending' => 'قيد المراجعة',
+    'manual_payment.status.accepted' => 'مقبول',
+    'manual_payment.status.rejected' => 'مرفوض',
+    'manual_payment.status.succeeded' => 'ناجح',
+    'manual_payment.status.failed' => 'فشل',
     // ------------------------ CUSTOM --------------------------
     'nav.section.platform' => 'المنصة',
     'nav.section.content' => 'المحتوى',

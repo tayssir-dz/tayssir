@@ -55,17 +55,17 @@ class PurchaseControllerV2 extends BaseController
     public function initiateManualPayment(ManualPaymentRequest $request)
     {
         $current_user = $request->user();
-        $manualPayment = $this->manualPaymentService->initiatePayment(
+        $payment = $this->manualPaymentService->initiatePayment(
             user: $current_user, // Get the authenticated user
             subscriptionId: $request->integer('subscription_id'),
             promoCodeCode: $request->string('promocode')?->toString(),
             attachment: $request->file('attachment')
         );
 
-        $data = $manualPayment->toArray();
-        // $data['attachment_url'] = $manualPayment->attachment_url;
+        $data = $payment->toArray();
+        // $data['attachment_url'] = $payment->attachment_url;
 
-        AdminNotifications::newManualPayment($current_user, $manualPayment->subscription->name, "https://google.com");
+        AdminNotifications::newManualPayment($current_user, $payment->subscription->name, "https://google.com");
 
         return $this->sendResponse($data, 'Manual payment request initiated successfully and is pending review.');
     }
