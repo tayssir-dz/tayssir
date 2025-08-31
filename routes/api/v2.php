@@ -46,5 +46,10 @@ Route::prefix('v2')->group(function () {
             ->middleware(['auth:sanctum', 'access'])
             ->summary("Mark Notifications as Unread")
             ->description("This endpoint marks one or many notifications as unread.");
+
+        Route::post("/delete", [NotificationControllerV2::class, 'delete'])
+            ->middleware(['auth:sanctum', 'access'])
+            ->summary("Delete Notifications")
+            ->description("This endpoint deletes one or many notifications for the authenticated user.");
     });
 });

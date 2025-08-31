@@ -99,4 +99,26 @@ class NotificationControllerV2 extends BaseController
 
         return $this->sendResponse();
     }
+
+    /**
+     * Delete Notifications.
+     *
+     * This endpoint deletes one or many notifications for the authenticated user.
+     */
+    public function delete(Request $request)
+    {
+        $validated = $request->validate([
+            'ids' => 'required|array|min:1',
+            'ids.*' => 'uuid|exists:notifications,id',
+        ]);
+
+        $user = $request->user();
+
+        // Ensure only user's own notifications are deleted
+        $user->notifications()
+            ->whereIn('id', $validated['ids'])
+            ->delete();
+
+        return $this->sendResponse();
+    }
 }
