@@ -66,7 +66,7 @@ class ManualPayment extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('attachment')
-            ->useDisk('public')
+            ->useDisk('private')
             ->singleFile();
     }
 

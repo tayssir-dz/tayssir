@@ -62,9 +62,8 @@ class PurchaseControllerV2 extends BaseController
             attachment: $request->file('attachment')
         );
 
-        // Append the attachment URL for the response if desired
         $data = $manualPayment->toArray();
-        $data['attachment_url'] = $manualPayment->attachment_url;
+        // $data['attachment_url'] = $manualPayment->attachment_url;
 
         AdminNotifications::newManualPayment($current_user, $manualPayment->subscription->name, "https://google.com");
 
