@@ -8,6 +8,7 @@ use App\Models\ReferralSource;
 use App\Models\User;
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
+use Faker\Factory as Faker;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,21 +23,20 @@ class DatabaseSeeder extends Seeder
             // ReferralSourceSeeder::class
         ]);
 
-        // get user with id 1 and send him a filament notification to database with message "welcome to tayssir" in arabic and 1 action button primary with go too google
-        // $user = User::find(1);
-        // if ($user) {
-        //     Notification::make()
-        //         ->title('دفعة جديدة')
-        //         ->success()
-        //         ->body('لديك دفعة جديدة من المستخدم (اسم المستخدم) باستخدام شارجيلي للاشتراك (اسم الاشتراك)')
-        //         ->actions([
-        //             Action::make('عرض الفاتورة')
-        //                 ->url('#')
-        //                 ->button()
-        //                 ->color("primary")
-        //                 // ->markAsRead()
-        //         ])
-        //         ->sendToDatabase($user);
-        // }
+        $user = \App\Models\User::where('email', 'fbekkouche14@gmail.com')->first();
+        if ($user) {
+            $faker = Faker::create('ar_SA');
+            for ($i = 0; $i < 20; $i++) {
+                $user->notifications()->create([
+                    'id' => \Illuminate\Support\Str::uuid()->toString(),
+                    'type' => 'App\Notifications\WelcomeNotification', // optional, can put anything
+                    'data' => [
+                        'title' => $faker->name(), // random Arabic title
+                        'body'  => $faker->company() . " - " . $faker->city(), // random Arabic body
+                    ],
+                    'read_at' => null,
+                ]);
+            }
+        }
     }
 }

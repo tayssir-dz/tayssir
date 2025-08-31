@@ -23,7 +23,7 @@ class AdminNotifications
             ->body(__('لديك دفعة يدوية جديدة من المستخدم (:user) للاشتراك (:subscription) مع إثبات دفع مرفوع يتطلب المراجعة', ['user' => $user->name, 'subscription' => $subscriptionName], app()->getLocale()))
             ->actions([
                 Action::make('view-invoice')
-                    ->label(__("عرض الفاتورة"))
+                    ->label(__("عرض التفاصيل"))
                     ->button()
                     ->color('primary')
                     ->url($invoiceUrl)
