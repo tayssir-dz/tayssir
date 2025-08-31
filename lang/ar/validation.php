@@ -203,6 +203,8 @@ return [
         'card_code' => 'رمز البطاقة',
         'subscription_id' => 'رقم الاشتراك',
         'profile_picture' => 'الصورة الشخصية',
+        'promocode' => 'رمز الترويج',
+        'attachment' => 'المرفق',
     ],
 
 ];

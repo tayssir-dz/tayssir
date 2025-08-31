@@ -69,4 +69,9 @@ class ManualPayment extends Model implements HasMedia
             ->useDisk('public')
             ->singleFile();
     }
+
+    public function getAttachmentUrlAttribute(): ?string
+    {
+        return $this->getFirstMediaUrl('attachment');
+    }
 }

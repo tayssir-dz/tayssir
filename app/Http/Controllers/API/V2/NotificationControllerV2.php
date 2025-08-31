@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V2;
 
 use App\Http\Controllers\API\BaseController;
 use App\Http\Resources\NotificationResource;
+use App\Models\Promoter;
 use Illuminate\Http\Request;
 use Dedoc\Scramble\Attributes\Group;
 
@@ -71,7 +72,7 @@ class NotificationControllerV2 extends BaseController
             ->update(['read_at' => now()]);
 
 
-        return $this->sendResponse();
+        return $this->sendResponse(["a" => "b"]);
         // return response()->json([
         //     'message' => 'Notifications marked as read successfully.',
         // ]);

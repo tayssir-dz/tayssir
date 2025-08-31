@@ -7,7 +7,7 @@ use App\Http\Controllers\API\ResponseController;
 use App\Http\Requests\API\EmailVerification\SendVerificationMailRequest;
 use App\Http\Requests\API\EmailVerification\VerifyEmailRequest;
 use App\Http\Requests\API\ForgotPassword\VerifyOtpRequest;
-use App\Mail\EmailVerificationMail;
+use App\Notifications\EmailVerificationNotification;
 use App\Models\User;
 use Carbon\Carbon;
 use Dedoc\Scramble\Attributes\Group;
@@ -15,7 +15,6 @@ use G4T\Swagger\Attributes\SwaggerSection;
 use Ichtrojan\Otp\Otp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 
 // #[SwaggerSection("This section is responsible for managing user email verification processes. It includes sending verification emails, verifying the user's email based on a code, and providing testing functionality to unverify emails. It helps maintain a verified email system, ensuring only verified users access specific features.")]
 #[Group('Email Verification APIs', weight: 2)]
@@ -36,14 +35,7 @@ class EmailVerificationController extends BaseController
         if (! $verification_otp->status) {
             return $this->sendError(__('response.failed_to_generate_otp'));
         }
-        //TODO
-        try {
-            Mail::to($user->email)->send(new EmailVerificationMail([
-                'otp' => $verification_otp->token,
-                'name' => $user->name,
-            ]));
-        } catch (\Exception $e) {
-        }
+        $user->notify(new EmailVerificationNotification($verification_otp->token));
 
         return $this->sendResponse(["otp" => $verification_otp->token], message: __('response.email_sent_successfully'));
     }

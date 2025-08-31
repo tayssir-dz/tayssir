@@ -25,6 +25,11 @@ Route::prefix('v2')->group(function () {
             ->middleware(['auth:sanctum', 'access'])
             ->summary('Check subscription price with discounts & promo code')
             ->description('Returns original price, subscription discount (percentage & amount), promo code discount (percentage & amount), and combined discount (percentage & amount). Promo code applied only if active within its date range.');
+
+        Route::post('/initiate-manual-payment', [PurchaseControllerV2::class, 'initiateManualPayment'])
+            ->middleware(['auth:sanctum', 'access'])
+            ->summary('Initiate a manual payment for a subscription')
+            ->description('This endpoint allows an authenticated user to submit a manual payment request for a subscription. It requires a subscription ID, an optional promo code, and a mandatory file attachment (e.g., a photo of the bank transfer or receipt). The request will be set to "pending" for administrator review.');
     });
 
     Route::prefix("notifications")->group(function () {

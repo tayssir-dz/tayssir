@@ -15,6 +15,8 @@ class EditUser extends EditRecord
 
     protected function getHeaderActions(): array
     {
+        $routeName = static::getRouteName();
+        $currentRoute = request()->route()->getName();
         return [
             Actions\DeleteAction::make(),
         ];

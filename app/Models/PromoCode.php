@@ -41,4 +41,9 @@ class PromoCode extends Model
 
         return $this->start_date <= $now && $this->end_date >= $now;
     }
+
+    public function manualPayments()
+    {
+        return $this->hasMany(ManualPayment::class);
+    }
 }

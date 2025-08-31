@@ -6,14 +6,13 @@ use App\Http\Controllers\API\BaseController;
 use App\Http\Requests\API\ForgotPassword\ForgotPasswordRequest;
 use App\Http\Requests\API\ForgotPassword\ResetPasswordRequest;
 use App\Http\Requests\API\ForgotPassword\VerifyOtpRequest;
-use App\Mail\ForgotPasswordMail;
+use App\Notifications\ForgotPasswordNotification;
 use App\Models\User;
 use Carbon\Carbon;
 use Dedoc\Scramble\Attributes\Group;
 use G4T\Swagger\Attributes\SwaggerSection;
 use Ichtrojan\Otp\Otp;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 
 // #[SwaggerSection("This section manages the password recovery process. It handles sending password reset emails, verifying OTPs, and resetting passwords through a secure multi-step process, ensuring that users can regain access to their accounts while maintaining security.")]
 #[Group('Password Recovery APIs', weight: 4)]
@@ -32,10 +31,7 @@ class ForgotPasswordController extends BaseController
             if (! $forgot_password_otp->status) {
                 return $this->sendError(__('response.failed_to_generate_otp'));
             }
-            Mail::to($user->email)->send(new ForgotPasswordMail([
-                'otp' => $forgot_password_otp->token,
-                'name' => $user->name,
-            ]));
+            $user->notify(new ForgotPasswordNotification($forgot_password_otp->token));
         }
 
         return $this->sendResponse(message: __('response.email_sent_successfully'));

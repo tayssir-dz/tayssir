@@ -94,6 +94,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
         return $this->hasOne(LeaderBoard::class);
     }
 
+    public function manualPayments()
+    {
+        return $this->hasMany(ManualPayment::class);
+    }
+
     public function getRecordTitleAttribute()
     {
         return $this->name . ' (' . $this->email . ')';
@@ -107,5 +112,24 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
         }
 
         return ($leaderboard->points / $leaderboard->max_points) * 100;
+    }
+
+    /**
+     * Route mail notifications. Use the pending new email for the change email verification notification.
+     */
+    public function routeNotificationForMail($notification)
+    {
+        if ($this->new_email && $notification instanceof \App\Notifications\ChangeEmailVerificationNotification) {
+            return $this->new_email;
+        }
+
+        return $this->email;
+    }
+
+
+    // scope admins, with role super_admin
+    public function scopeAdmins($query)
+    {
+        return $query->role(['super_admin']);
     }
 }

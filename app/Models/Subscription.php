@@ -68,4 +68,9 @@ class Subscription extends Model
     {
         return $this->belongsToMany(Unit::class);
     }
+
+    public function manualPayments()
+    {
+        return $this->hasMany(ManualPayment::class);
+    }
 }

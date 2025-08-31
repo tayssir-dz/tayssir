@@ -5,10 +5,9 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\API\BaseController;
 use App\Http\Requests\API\ChangeEmail\ChangeEmailRequest;
 use App\Http\Requests\API\ChangeEmail\VerifyChangeEmailRequest;
-use App\Mail\ChangeEmailMail;
+use App\Notifications\ChangeEmailVerificationNotification;
 use Dedoc\Scramble\Attributes\Group;
 use Ichtrojan\Otp\Otp;
-use Illuminate\Support\Facades\Mail;
 
 #[Group('Email Change APIs', weight: 5)]
 class ChangeEmailController extends BaseController
@@ -32,11 +31,8 @@ class ChangeEmailController extends BaseController
             return $this->sendError(__('response.failed_to_generate_otp'));
         }
 
-        // Send verification email to new email address
-        Mail::to($user->new_email)->send(new ChangeEmailMail([
-            'otp' => $verification_otp->token,
-            'name' => $user->name,
-        ]));
+        // Notify user (routes to new_email via routeNotificationForMail)
+        $user->notify(new ChangeEmailVerificationNotification($verification_otp->token));
 
         return $this->sendResponse(message: __('response.email_change_verification_sent'));
     }
