@@ -28,7 +28,7 @@ class BannerResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return  __('custom.nav.section.platform');
+        return  __('custom.nav.section.app');
     }
 
     public static function getModelLabel(): string

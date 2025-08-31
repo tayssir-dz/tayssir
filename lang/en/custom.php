@@ -12,6 +12,7 @@ return [
     'nav.section.content' => 'Content',
     'nav.section.management' => 'Management',
     'nav.section.points' => 'Points',
+    'nav.section.app' => 'The Application',
 
     'models.cards' => 'Cards (old)',
     'models.card' => 'Card',

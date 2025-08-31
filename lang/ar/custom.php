@@ -12,6 +12,7 @@ return [
     'nav.section.content' => 'المحتوى',
     'nav.section.management' => 'الإدارة',
     'nav.section.points' => 'النقاط',
+    'nav.section.app' => 'التطبيق',
 
     'models.cards' => 'البطاقات (قديم)',
     'models.card' => 'بطاقة',

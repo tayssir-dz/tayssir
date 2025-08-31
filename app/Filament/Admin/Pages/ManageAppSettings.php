@@ -30,6 +30,11 @@ class ManageAppSettings extends SettingsPage
         return Lang::get('custom.settings.app.title');
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return  __('custom.nav.section.app');
+    }
+
     public function form(Form $form): Form
     {
         return $form
