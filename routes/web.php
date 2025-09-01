@@ -2,24 +2,29 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Route::get('/emails', function () {
+//     return view('emails.preview-wrapper', [
+//         'iframeSrc' => route('emails.preview', 'welcome')
+//     ]);
+// })->name('emails.index');
+
+// Route::get('/emails/{type}', function (string $type) {
+//     $mailData = [
+//         'name' => 'مستخدم تجريبي',
+//         'otp' => '596853',
+//     ];
+
+//     $view = match ($type) {
+//         'welcome' => 'emails.welcome-mail',
+//         'verify' => 'emails.email-verification-mail',
+//         'forgot' => 'emails.forgot-password-mail',
+//         'change' => 'emails.change-email-mail',
+//         default => abort(404)
+//     };
+
+//     return view($view, compact('mailData'));
+// })->name('emails.preview');
+
 Route::get('/', function () {
     return view('home');
-
-    // admin user
-    // $user = \App\Models\User::find(1);
-
-    // $division = \App\Models\Division::find(1);
-    // $user->division()->associate($division);
-    // $user->save();
-
-    // dd([
-    //     "email" => $user->email,
-    //     "division" => $user->division->name,
-    //     "subscriptions" => $user->subscriptions->pluck("name")->toArray(),
-    //     "materials" => $user->accessibleMaterials,
-    // ]);
 })->name('login');
-
-Route::get('/testing', function () {
-    // return view('testing');
-})->name('testing');
