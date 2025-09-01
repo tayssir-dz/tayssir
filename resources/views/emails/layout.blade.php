@@ -139,7 +139,7 @@
                             @include('emails.components.divider-accent')
                             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                    <td class="content">
+                                    <td class="content" dir="rtl" style="text-align: right;">
                                         {{ $slot }}
                                     </td>
                                 </tr>
