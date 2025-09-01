@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\AdminNavigation;
 use App\Filament\Admin\Resources\DiscountResource\Pages;
 use App\Models\Discount;
 use Carbon\Carbon;
@@ -23,7 +24,7 @@ class DiscountResource extends Resource
 {
     public static function getNavigationGroup(): ?string
     {
-        return  __('custom.nav.section.platform');
+        return  __(AdminNavigation::DISCOUNT_RESOURCE['group']);
     }
 
     public static function getModelLabel(): string
@@ -41,7 +42,7 @@ class DiscountResource extends Resource
         return static::getModel()::count();
     }
 
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = AdminNavigation::DISCOUNT_RESOURCE['sort'];
 
     protected static ?string $model = Discount::class;
 
@@ -49,7 +50,7 @@ class DiscountResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationIcon = 'heroicon-o-percent-badge';
+    protected static ?string $navigationIcon = AdminNavigation::DISCOUNT_RESOURCE['icon'];
 
     public static function form(Form $form): Form
     {

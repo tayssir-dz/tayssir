@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Enums\ContentDirection;
+use App\Filament\Admin\AdminNavigation;
 use App\Filament\Admin\Resources\UnitResource\Pages;
 use App\Filament\Admin\Resources\UnitResource\RelationManagers\ChaptersRelationManager;
 use App\Models\Unit;
@@ -23,7 +24,7 @@ class UnitResource extends Resource
 {
     public static function getNavigationGroup(): ?string
     {
-        return  __('custom.nav.section.content');
+        return  __(AdminNavigation::UNIT_RESOURCE['group']);
     }
 
     public static function getModelLabel(): string
@@ -42,9 +43,9 @@ class UnitResource extends Resource
 
     protected static bool $isGloballySearchable = true;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
+    protected static ?string $navigationIcon = AdminNavigation::UNIT_RESOURCE['icon'];
 
-    protected static ?int $navigationSort = 11;
+    protected static ?int $navigationSort = AdminNavigation::UNIT_RESOURCE['sort'];
 
     public static function form(Form $form): Form
     {

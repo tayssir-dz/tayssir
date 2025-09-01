@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\AdminNavigation;
 use App\Filament\Admin\Resources\PromoterResource\Pages;
 use App\Filament\Admin\Resources\PromoterResource\RelationManagers\PromoCodesRelationManager;
 use App\Models\Promoter;
@@ -23,7 +24,7 @@ class PromoterResource extends Resource
 {
     public static function getNavigationGroup(): ?string
     {
-        return __('custom.nav.section.platform');
+        return __(AdminNavigation::PROMOTER_RESOURCE['group']);
     }
 
     public static function getModelLabel(): string
@@ -43,9 +44,9 @@ class PromoterResource extends Resource
 
     protected static ?string $model = Promoter::class;
 
-    protected static ?int $navigationSort = 7;
+    protected static ?int $navigationSort = AdminNavigation::PROMOTER_RESOURCE['sort'];
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = AdminNavigation::PROMOTER_RESOURCE['icon'];
 
     protected static bool $isGloballySearchable = true;
 

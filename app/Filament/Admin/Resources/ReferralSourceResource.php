@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\AdminNavigation;
 use App\Filament\Admin\Resources\ReferralSourceResource\Pages;
 use App\Models\ReferralSource;
 use Filament\Forms\Components\Section;
@@ -18,13 +19,13 @@ class ReferralSourceResource extends Resource
 {
     protected static ?string $model = ReferralSource::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-share';
+    protected static ?string $navigationIcon = AdminNavigation::REFERRAL_SOURCE_RESOURCE['icon'];
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = AdminNavigation::REFERRAL_SOURCE_RESOURCE['sort'];
 
     public static function getNavigationGroup(): ?string
     {
-        return  __('custom.nav.section.management');
+        return  __(AdminNavigation::REFERRAL_SOURCE_RESOURCE['group']);
     }
 
     public static function getModelLabel(): string

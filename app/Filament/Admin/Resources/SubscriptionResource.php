@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\AdminNavigation;
 use App\Filament\Admin\Resources\SubscriptionResource\Pages;
 use App\Filament\Admin\Resources\SubscriptionResource\RelationManagers\SubscriptionCardsRelationManager;
 use App\Models\Subscription;
@@ -23,7 +24,7 @@ class SubscriptionResource extends Resource
 {
     public static function getNavigationGroup(): ?string
     {
-        return  __('custom.nav.section.platform');
+        return  __(AdminNavigation::SUBSCRIPTION_RESOURCE['group']);
     }
 
     public static function getModelLabel(): string
@@ -41,7 +42,7 @@ class SubscriptionResource extends Resource
         return static::getModel()::count();
     }
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = AdminNavigation::SUBSCRIPTION_RESOURCE['sort'];
 
     protected static ?string $model = Subscription::class;
 
@@ -49,7 +50,7 @@ class SubscriptionResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
+    protected static ?string $navigationIcon = AdminNavigation::SUBSCRIPTION_RESOURCE['icon'];
 
     public static function form(Form $form): Form
     {

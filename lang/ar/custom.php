@@ -9,6 +9,7 @@ return [
     'manual_payment.status.failed' => 'فشل',
     // ------------------------ CUSTOM --------------------------
     'nav.section.platform' => 'المنصة',
+    'nav.section.subscription_and_payment' => 'الاشتراك والدفع',
     'nav.section.content' => 'المحتوى',
     'nav.section.management' => 'الإدارة',
     'nav.section.points' => 'النقاط',
@@ -456,4 +457,18 @@ return [
     'settings.app.resumes' => 'السير الذاتية نشطة',
     'settings.app.bac_solutions' => 'حلول البكالوريا نشطة',
     'settings.app.cards_tools' => 'أدوات البطاقات نشطة',
+
+    // # Platform Settings
+    'settings.platform.title' => 'إعدادات المنصة',
+    'settings.platform.section.social_media' => 'وسائل التواصل الاجتماعي',
+    'settings.platform.instagram.url' => 'رابط الانستغرام',
+    'settings.platform.instagram.active' => 'نشط',
+    'settings.platform.facebook.url' => 'رابط الفيسبوك',
+    'settings.platform.facebook.active' => 'نشط',
+    'settings.platform.tiktok.url' => 'رابط التيك توك',
+    'settings.platform.tiktok.active' => 'نشط',
+    'settings.platform.youtube.url' => 'رابط اليوتيوب',
+    'settings.platform.youtube.active' => 'نشط',
+    'settings.platform.linkedin.url' => 'رابط لينكد إن',
+    'settings.platform.linkedin.active' => 'نشط',
 ];

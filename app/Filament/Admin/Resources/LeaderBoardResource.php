@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\AdminNavigation;
 use App\Filament\Admin\Resources\LeaderBoardResource\Pages;
 use App\Models\LeaderBoard;
 use Filament\Forms\Form;
@@ -13,7 +14,7 @@ class LeaderBoardResource extends Resource
 {
     public static function getNavigationGroup(): ?string
     {
-        return __('custom.nav.section.management');
+        return __(AdminNavigation::LEADER_BOARD_RESOURCE['group']);
     }
 
     public static function getModelLabel(): string
@@ -28,9 +29,9 @@ class LeaderBoardResource extends Resource
 
     protected static ?string $model = LeaderBoard::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-numbered-list';
+    protected static ?string $navigationIcon = AdminNavigation::LEADER_BOARD_RESOURCE['icon'];
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = AdminNavigation::LEADER_BOARD_RESOURCE['sort'];
 
     public static function form(Form $form): Form
     {

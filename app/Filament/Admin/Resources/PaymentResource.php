@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\AdminNavigation;
 use App\Filament\Admin\Resources\PaymentResource\Pages;
 use App\Filament\Admin\Resources\PaymentResource\RelationManagers;
 use App\Models\Payment;
@@ -17,12 +18,12 @@ class PaymentResource extends Resource
 {
     protected static ?string $model = Payment::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
+    protected static ?string $navigationIcon = AdminNavigation::PAYMENT_RESOURCE['icon'];
 
 
     public static function getNavigationGroup(): ?string
     {
-        return  __('custom.nav.section.platform');
+        return  __(AdminNavigation::PAYMENT_RESOURCE['group']);
     }
 
     public static function getModelLabel(): string
@@ -43,7 +44,7 @@ class PaymentResource extends Resource
         return static::getModel()::count();
     }
 
-    protected static ?int $navigationSort = 8;
+    protected static ?int $navigationSort = AdminNavigation::PAYMENT_RESOURCE['sort'];
 
     // protected static ?string $recordTitleAttribute = 'id';
 

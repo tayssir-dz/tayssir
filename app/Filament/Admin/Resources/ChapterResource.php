@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Enums\ContentDirection;
+use App\Filament\Admin\AdminNavigation;
 use App\Filament\Admin\Resources\ChapterResource\Pages;
 use App\Filament\Admin\Resources\ChapterResource\RelationManagers\QuestionsRelationManager;
 use App\Models\Chapter;
@@ -23,7 +24,7 @@ class ChapterResource extends Resource
 {
     public static function getNavigationGroup(): ?string
     {
-        return __('custom.nav.section.content');
+        return __(AdminNavigation::CHAPTER_RESOURCE['group']);
     }
 
     public static function getModelLabel(): string
@@ -42,9 +43,9 @@ class ChapterResource extends Resource
 
     protected static bool $isGloballySearchable = true;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = AdminNavigation::CHAPTER_RESOURCE['icon'];
 
-    protected static ?int $navigationSort = 12;
+    protected static ?int $navigationSort = AdminNavigation::CHAPTER_RESOURCE['sort'];
 
     public static function form(Form $form): Form
     {

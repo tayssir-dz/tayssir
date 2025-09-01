@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Pages;
 
+use App\Filament\Admin\AdminNavigation;
 use App\Settings\AppSettings;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -12,11 +13,11 @@ use Illuminate\Support\Facades\Lang;
 
 class ManageAppSettings extends SettingsPage
 {
-    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+    protected static ?string $navigationIcon = AdminNavigation::APP_SETTINGS['icon'];
 
     protected static ?string $title = null;
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = AdminNavigation::APP_SETTINGS['sort'];
 
     protected static string $settings = AppSettings::class;
 
@@ -32,7 +33,7 @@ class ManageAppSettings extends SettingsPage
 
     public static function getNavigationGroup(): ?string
     {
-        return  __('custom.nav.section.app');
+        return  __(AdminNavigation::APP_SETTINGS['group']);
     }
 
     public function form(Form $form): Form

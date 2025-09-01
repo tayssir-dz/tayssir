@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\AdminNavigation;
 use App\Filament\Admin\Resources\ChapterLevelResource\Pages;
 use App\Models\ChapterLevel;
 use Filament\Forms\Components\Section;
@@ -15,9 +16,9 @@ class ChapterLevelResource extends Resource
 {
     protected static ?string $model = ChapterLevel::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = AdminNavigation::CHAPTER_LEVEL_RESOURCE['icon'];
 
-    protected static ?int $navigationSort = 7;
+    protected static ?int $navigationSort = AdminNavigation::CHAPTER_LEVEL_RESOURCE['sort'];
 
     protected static bool $isGloballySearchable = true;
 
@@ -25,7 +26,7 @@ class ChapterLevelResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('custom.nav.section.points');
+        return __(AdminNavigation::CHAPTER_LEVEL_RESOURCE['group']);
     }
 
     public static function getModelLabel(): string

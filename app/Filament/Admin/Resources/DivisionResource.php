@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\AdminNavigation;
 use App\Filament\Admin\Resources\DivisionResource\Pages;
 use App\Filament\Admin\Resources\DivisionResource\RelationManagers\MaterialsRelationManager;
 use App\Models\Division;
@@ -22,7 +23,7 @@ class DivisionResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return  __('custom.nav.section.content');
+        return  __(AdminNavigation::DIVISION_RESOURCE['group']);
     }
 
     public static function getModelLabel(): string
@@ -37,9 +38,9 @@ class DivisionResource extends Resource
 
     protected static ?string $model = Division::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static ?string $navigationIcon = AdminNavigation::DIVISION_RESOURCE['icon'];
 
-    protected static ?int $navigationSort = 9;
+    protected static ?int $navigationSort = AdminNavigation::DIVISION_RESOURCE['sort'];
 
     public static function form(Form $form): Form
     {

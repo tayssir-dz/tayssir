@@ -9,6 +9,7 @@ return [
     'manual_payment.status.failed' => 'Échoué',
     // ------------------------ CUSTOM --------------------------
     'nav.section.platform' => 'Plateforme',
+    'nav.section.subscription_and_payment' => 'Abonnement et Paiement',
     'nav.section.content' => 'Contenu',
     'nav.section.management' => 'Gestion',
     'nav.section.points' => 'Points',
@@ -459,4 +460,18 @@ return [
     'settings.app.resumes' => 'CV Actifs',
     'settings.app.bac_solutions' => 'Solutions BAC Actives',
     'settings.app.cards_tools' => 'Outils de Cartes Actifs',
+
+    // # Platform Settings
+    'settings.platform.title' => 'Paramètres de la Plateforme',
+    'settings.platform.section.social_media' => 'Réseaux Sociaux',
+    'settings.platform.instagram.url' => 'URL Instagram',
+    'settings.platform.instagram.active' => 'Actif',
+    'settings.platform.facebook.url' => 'URL Facebook',
+    'settings.platform.facebook.active' => 'Actif',
+    'settings.platform.tiktok.url' => 'URL TikTok',
+    'settings.platform.tiktok.active' => 'Actif',
+    'settings.platform.youtube.url' => 'URL YouTube',
+    'settings.platform.youtube.active' => 'Actif',
+    'settings.platform.linkedin.url' => 'URL LinkedIn',
+    'settings.platform.linkedin.active' => 'Actif',
 ];

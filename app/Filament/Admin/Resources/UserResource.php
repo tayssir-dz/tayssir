@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\AdminNavigation;
 use App\Filament\Admin\Resources\UserResource\Pages;
 use App\Models\User;
 use Filament\Forms\Components\FileUpload;
@@ -38,7 +39,7 @@ class UserResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('custom.nav.section.management');
+        return __(AdminNavigation::USERS['group']);
     }
 
     public static function getModelLabel(): string
@@ -58,9 +59,9 @@ class UserResource extends Resource
 
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = AdminNavigation::USERS['icon'];
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = AdminNavigation::USERS['sort'];
 
     protected static bool $isGloballySearchable = true;
 

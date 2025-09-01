@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Enums\ContentDirection;
+use App\Filament\Admin\AdminNavigation;
 use App\Filament\Admin\Resources\MaterialResource\Pages;
 use App\Filament\Admin\Resources\MaterialResource\RelationManagers\BacsRelationManager;
 use App\Filament\Admin\Resources\MaterialResource\RelationManagers\FlashcardGroupsRelationManager;
@@ -30,7 +31,7 @@ class MaterialResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('custom.nav.section.content');
+        return __(AdminNavigation::MATERIAL_RESOURCE['group']);
     }
 
     public static function getModelLabel(): string
@@ -45,9 +46,9 @@ class MaterialResource extends Resource
 
     protected static ?string $model = Material::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-book-open';
+    protected static ?string $navigationIcon = AdminNavigation::MATERIAL_RESOURCE['icon'];
 
-    protected static ?int $navigationSort = 10;
+    protected static ?int $navigationSort = AdminNavigation::MATERIAL_RESOURCE['sort'];
 
     protected static bool $isGloballySearchable = true;
 
