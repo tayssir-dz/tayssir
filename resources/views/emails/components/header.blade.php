@@ -9,7 +9,7 @@
                 </div>
             @else
                 <!-- Production: Use actual domain URL -->
-                <img src="{{ asset('tayssir.svg') }}" alt="{{ config('app.name') }}" width="114"
+                <img src="{{ asset('tayssir.png') }}" alt="{{ config('app.name') }}" width="114"
                     style="display:block;margin:0 auto;" />
             @endif
         </td>

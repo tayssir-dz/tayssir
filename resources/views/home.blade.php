@@ -35,23 +35,23 @@
                         Admin Space
                     </a>
                     <a href="/promoter"
-                        class="btn btn-accent text-white tooltip tooltip-top tooltip-primary flex justify-center items-center"
+                        class="btn btn-accent text-white tooltip tooltip-top tooltip-accent flex justify-center items-center"
                         data-tip="{{ config('app.url') }}/promoter">
                         Promoter Space
                     </a>
                     <a href="/swagger/documentation"
                         class="btn btn-secondary tooltip tooltip-top tooltip-primary flex justify-center items-center"
-                        data-tip="Old Swagger docs - contains both v1, v2 APIs, not recommanded to use">
+                        {{-- data-tip="Old Swagger docs - contains both v1, v2 APIs, not recommanded to use" --}}>
                         Old Swagger
                     </a>
                     <a href="/docs/v1"
                         class="btn btn-neutral tooltip tooltip-top tooltip-primary flex justify-center items-center"
-                        data-tip="Same APIs, no change">
+                        {{-- data-tip="Same APIs, no change" --}}>
                         Documentation (v1)
                     </a>
                     <a href="/docs/v2"
                         class="btn btn-neutral tooltip tooltip-top tooltip-primary flex justify-center items-center"
-                        data-tip="All APIs included in the v2 that Require Auth - Requires email verification">
+                        {{-- data-tip="All APIs included in the v2 that Require Auth - Requires email verification" --}}>
                         Documentation (v2)
                     </a>
                 </div>
