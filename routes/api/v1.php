@@ -68,10 +68,10 @@ Route::prefix('v1')->group(function () {
             ->summary('Verify user email')
             ->description('this endpoint takes the verification code and verifies the user email');
 
-        Route::post('unverify-me', [EmailVerificationController::class, 'unverifyMe'])
-            ->middleware(['auth:sanctum', 'access'])
-            ->summary('Unverify user email (testing)')
-            ->description('this endpoint unverifies the user email (testing)');
+        // Route::post('unverify-me', [EmailVerificationController::class, 'unverifyMe'])
+        //     ->middleware(['auth:sanctum', 'access'])
+        //     ->summary('Unverify user email (testing)')
+        //     ->description('this endpoint unverifies the user email (testing)');
 
         Route::post('change', [ChangeEmailController::class, 'changeEmail'])
             ->middleware(['auth:sanctum', 'access'])

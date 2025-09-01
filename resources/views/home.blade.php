@@ -47,12 +47,12 @@
                     <a href="/docs/v1"
                         class="btn btn-neutral tooltip tooltip-top tooltip-primary flex justify-center items-center"
                         data-tip="Same APIs, no change">
-                        New Documentation (v1)
+                        Documentation (v1)
                     </a>
                     <a href="/docs/v2"
                         class="btn btn-neutral tooltip tooltip-top tooltip-primary flex justify-center items-center"
                         data-tip="All APIs included in the v2 that Require Auth - Requires email verification">
-                        New Documentation (v2)
+                        Documentation (v2)
                     </a>
                 </div>
             </div>
