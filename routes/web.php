@@ -28,3 +28,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 })->name('login');
+
+
+// Route::get("/testing", function () {
+//     // find user with email m_keziz@estin.dz
+//     $user = \App\Models\User::where("email", "m_keziz@estin.dz")->first();
+//     // notify him with WelcomeNotification (takes 1 arm is name)
+//     $user->notify(new \App\Notifications\WelcomeNotification($user->name));
+//     return "Notification sent!";
+// });
