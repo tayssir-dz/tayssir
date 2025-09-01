@@ -5,12 +5,12 @@ namespace App\Filament\Admin;
 class AdminNavigation
 {
 
-    public const string PLATFORM_GROUP = 'custom.nav.section.platform';
-    public const string SUBSCRIPTION_AND_PAYMENT_GROUP = 'custom.nav.section.subscription_and_payment';
-    public const string CONTENT_GROUP = 'custom.nav.section.content';
-    public const string MANAGEMENT_GROUP = 'custom.nav.section.management';
-    public const string POINTS_GROUP = 'custom.nav.section.points';
-    public const string APP_GROUP = 'custom.nav.section.app';
+    public const PLATFORM_GROUP = 'custom.nav.section.platform';
+    public const SUBSCRIPTION_AND_PAYMENT_GROUP = 'custom.nav.section.subscription_and_payment';
+    public const CONTENT_GROUP = 'custom.nav.section.content';
+    public const MANAGEMENT_GROUP = 'custom.nav.section.management';
+    public const POINTS_GROUP = 'custom.nav.section.points';
+    public const APP_GROUP = 'custom.nav.section.app';
 
     public const array PLATFORM_SETTINGS = [
         'icon' => 'heroicon-o-globe-alt',
