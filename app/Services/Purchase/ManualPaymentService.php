@@ -2,6 +2,8 @@
 
 namespace App\Services\Purchase;
 
+use App\Enums\Purchase\PaymentStatus;
+use App\Enums\Purchase\PaymentType;
 use App\Models\Payment;
 use App\Models\PromoCode;
 use App\Models\User;
@@ -73,7 +75,8 @@ class ManualPaymentService
                 'user_id' => $user->id,
                 'subscription_id' => $subscriptionId,
                 'promo_code_id' => $promoCodeId,
-                'status' => 'pending', // Default status
+                'status' => PaymentStatus::PENDING,
+                'type' =>  PaymentType::MANUAL,
                 'price' => $pricingDetails['original_price'],
                 'discount_percentage' => $pricingDetails['subscription_discount']['percentage'],
                 'discount_amount' => $pricingDetails['subscription_discount']['amount'],

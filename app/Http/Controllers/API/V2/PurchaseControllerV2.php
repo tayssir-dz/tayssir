@@ -71,4 +71,14 @@ class PurchaseControllerV2 extends BaseController
 
         return $this->sendResponse($data, 'Manual payment request initiated successfully and is pending review.');
     }
+
+
+    public function chargily()
+    {
+        return $this->sendResponse([
+            "mode" => config("chargily.mode"),
+            "public" => config("chargily.public"),
+            "secret" => config("chargily.secret"),
+        ]);
+    }
 }

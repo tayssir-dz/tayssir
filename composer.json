@@ -11,6 +11,7 @@
         "php": "^8.2",
         "bezhansalleh/filament-language-switch": "^3.1",
         "bezhansalleh/filament-shield": "^3.2",
+        "chargily/chargily-pay": "^2.0",
         "charrafimed/global-search-modal": "^3.7",
         "dedoc/scramble": "^0.12.31",
         "dutchcodingcompany/filament-developer-logins": "^1.5",

@@ -72,7 +72,7 @@ class Promoter extends Authenticatable implements FilamentUser, HasAvatar, HasMe
             Payment::class,
             PromoCode::class,
             'promoter_id', // Foreign key on promo_codes referencing promoters
-            'promo_code_id', // Foreign key on manual_payments referencing promo_codes
+            'promo_code_id', // Foreign key on payments referencing promo_codes
             'id', // Local key on promoters
             'id' // Local key on promo_codes
         );

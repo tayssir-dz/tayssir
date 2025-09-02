@@ -2,11 +2,15 @@
 
 return [
     // Manual Payment Statuses
-    'manual_payment.status.pending' => 'Pending',
-    'manual_payment.status.accepted' => 'Accepted',
-    'manual_payment.status.rejected' => 'Rejected',
-    'manual_payment.status.succeeded' => 'Succeeded',
-    'manual_payment.status.failed' => 'Failed',
+    'payment.status.pending' => 'Pending',
+    'payment.status.accepted' => 'Accepted',
+    'payment.status.rejected' => 'Rejected',
+    'payment.status.succeeded' => 'Succeeded',
+    'payment.status.failed' => 'Failed',
+
+    'payment.type.chargily' => "Chargily",
+    'payment.type.manual' => "Manual",
+
     // ------------------------ CUSTOM --------------------------
     'nav.section.platform' => 'Platform',
     'nav.section.subscription_and_payment' => 'Subscription & Payment',

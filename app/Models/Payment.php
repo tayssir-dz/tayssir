@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Purchase\PaymentStatus;
+use App\Enums\Purchase\PaymentType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,6 +20,7 @@ class Payment extends Model implements HasMedia
         'subscription_id',
         'promo_code_id',
         'status',
+        'payment_type',
         'price',
         'discount_percentage',
         'discount_amount',
@@ -29,12 +31,14 @@ class Payment extends Model implements HasMedia
         'final_price',
         'promoter_margin_percentage',
         'promoter_margin_amount',
+        'metadata',
     ];
 
     protected function casts(): array
     {
         return [
             'status' => PaymentStatus::class,
+            'payment_type' => PaymentType::class,
             'price' => 'decimal:2',
             'discount_percentage' => 'decimal:2',
             'discount_amount' => 'decimal:2',
@@ -45,6 +49,7 @@ class Payment extends Model implements HasMedia
             'final_price' => 'decimal:2',
             'promoter_margin_percentage' => 'decimal:2',
             'promoter_margin_amount' => 'decimal:2',
+            'metadata' => 'array',
         ];
     }
 

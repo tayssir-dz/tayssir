@@ -19,11 +19,11 @@ enum PaymentStatus: string implements HasColor, HasIcon, HasLabel
     public function getLabel(): ?string
     {
         return match ($this) {
-            self::PENDING => __('custom.manual_payment.status.pending') ?: ucfirst($this->value),
-            self::ACCEPTED => __('custom.manual_payment.status.accepted') ?: ucfirst($this->value),
-            self::REJECTED => __('custom.manual_payment.status.rejected') ?: ucfirst($this->value),
-            self::SUCCEEDED => __('custom.manual_payment.status.succeeded') ?: ucfirst($this->value),
-            self::FAILED => __('custom.manual_payment.status.failed') ?: ucfirst($this->value),
+            self::PENDING => __('custom.payment.status.pending') ?: ucfirst($this->value),
+            self::ACCEPTED => __('custom.payment.status.accepted') ?: ucfirst($this->value),
+            self::REJECTED => __('custom.payment.status.rejected') ?: ucfirst($this->value),
+            self::SUCCEEDED => __('custom.payment.status.succeeded') ?: ucfirst($this->value),
+            self::FAILED => __('custom.payment.status.failed') ?: ucfirst($this->value),
         };
     }
 

@@ -2,11 +2,18 @@
 
 return [
     // حالات الدفع اليدوي
-    'manual_payment.status.pending' => 'قيد المراجعة',
-    'manual_payment.status.accepted' => 'مقبول',
-    'manual_payment.status.rejected' => 'مرفوض',
-    'manual_payment.status.succeeded' => 'ناجح',
-    'manual_payment.status.failed' => 'فشل',
+    'payment.status.pending' => 'قيد المراجعة',
+    'payment.status.accepted' => 'مقبول',
+    'payment.status.rejected' => 'مرفوض',
+    'payment.status.succeeded' => 'ناجح',
+    'payment.status.failed' => 'فشل',
+
+    'payment.type.chargily' => "شارجيلي",
+    'payment.type.manual' => "يدوي",
+
+    'payment.type.chargily.description' => "الدفع الإلكتروني عبد خدمة شارجيلي",
+    'payment.type.manual.description' => "عبر رفع ملف إثبات الدفع",
+
     // ------------------------ CUSTOM --------------------------
     'nav.section.platform' => 'المنصة',
     'nav.section.subscription_and_payment' => 'الاشتراك والدفع',
