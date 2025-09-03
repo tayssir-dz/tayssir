@@ -70,12 +70,13 @@ class PaymentResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultGroup('payment_type')
             ->columns([
                 TextColumn::make("id")->toggleable(),
                 TextColumn::make("user.email")->toggleable(),
                 TextColumn::make("subscription.name")->toggleable(),
-                TextColumn::make("status")->toggleable(),
-                TextColumn::make("status")->toggleable(),
+                TextColumn::make("status")->badge()->toggleable(),
+                TextColumn::make("status")->badge()->toggleable(),
                 TextColumn::make("payment_type")->toggleable(),
                 TextColumn::make('price')->toggleable(),
                 TextColumn::make('discount_percentage')->toggleable(),
