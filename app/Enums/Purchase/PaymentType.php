@@ -31,7 +31,7 @@ enum PaymentType: string implements HasColor, HasIcon, HasLabel
     public function getColor(): string|array|null
     {
         return match ($this) {
-            self::MANUAL => 'secondary',
+            self::MANUAL => 'warning',
             self::CHARGILY => 'primary',
         };
     }
