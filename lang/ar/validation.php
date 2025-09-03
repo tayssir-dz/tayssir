@@ -205,6 +205,7 @@ return [
         'profile_picture' => 'الصورة الشخصية',
         'promocode' => 'رمز الترويج',
         'attachment' => 'المرفق',
+        'payment_type' => 'نوع الدفع',
     ],
 
 ];
