@@ -31,6 +31,11 @@ Route::prefix('v2')->group(function () {
             ->summary('Initiate a manual payment for a subscription')
             ->description('This endpoint allows an authenticated user to submit a manual payment request for a subscription. It requires a subscription ID, an optional promo code, and a mandatory file attachment (e.g., a photo of the bank transfer or receipt). The request will be set to "pending" for administrator review.');
 
+        Route::post('/initiate-chargily', [PurchaseControllerV2::class, 'initiateChargily'])
+            ->middleware(['auth:sanctum', 'access', 'email-verified'])
+            ->summary('Initiate a Chargily payment and get checkout URL')
+            ->description('Creates a pending payment record and Chargily checkout, returning the checkout URL and ID. Client should redirect user to the checkout_url returned.');
+
         Route::get("/chargily", [PurchaseControllerV2::class, 'chargily']);
     });
 

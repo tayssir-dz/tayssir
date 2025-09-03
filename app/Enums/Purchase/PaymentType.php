@@ -10,7 +10,7 @@ enum PaymentType: string implements HasColor, HasIcon, HasLabel
 {
 
     case MANUAL = 'manual';
-    case CHARGILY = 'manual';
+    case CHARGILY = 'chargily';
 
     public function getLabel(): ?string
     {

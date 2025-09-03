@@ -8,6 +8,7 @@ use App\Http\Requests\API\V2\ManualPaymentRequest;
 use App\Notifications\ManualPaymentRequestSuccess;
 use App\Services\Notification\AdminNotifications;
 use App\Services\Purchase\ManualPaymentService;
+use App\Services\Purchase\ChargilyPaymentService;
 use App\Services\Purchase\PriceCheckerService;
 use Dedoc\Scramble\Attributes\Group;
 
@@ -18,7 +19,8 @@ class PurchaseControllerV2 extends BaseController
     // Constructor for dependency injection
     public function __construct(
         protected PriceCheckerService $priceCheckerService,
-        protected ManualPaymentService $manualPaymentService // Inject the new service
+        protected ManualPaymentService $manualPaymentService, // Inject the new service
+        protected ChargilyPaymentService $chargilyPaymentService,
     ) {}
 
     /**
@@ -80,5 +82,27 @@ class PurchaseControllerV2 extends BaseController
             "public" => config("chargily.public"),
             "secret" => config("chargily.secret"),
         ]);
+    }
+
+    /**
+     * Start a Chargily checkout for a subscription and return checkout URL.
+     */
+    public function initiateChargily(CheckPriceRequest $request)
+    {
+        $user = $request->user();
+        [$payment, $checkout] = $this->chargilyPaymentService->createCheckout(
+            user: $user,
+            subscriptionId: $request->integer('subscription_id'),
+            promoCodeCode: $request->filled('promocode') ? $request->string('promocode')->toString() : null,
+            locale: "ar"
+        );
+
+        return $this->sendResponse([
+            'payment_id' => $payment->id,
+            'status' => $payment->status,
+            'final_price' => (string) $payment->final_price,
+            'checkout_url' => $checkout->getUrl(),
+            'checkout_id' => $checkout->getId(),
+        ], 'Chargily checkout created. Redirect the user to checkout_url.');
     }
 }

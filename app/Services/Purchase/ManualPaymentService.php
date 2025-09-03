@@ -76,7 +76,7 @@ class ManualPaymentService
                 'subscription_id' => $subscriptionId,
                 'promo_code_id' => $promoCodeId,
                 'status' => PaymentStatus::PENDING,
-                'type' =>  PaymentType::MANUAL,
+                'payment_type' =>  PaymentType::MANUAL,
                 'price' => $pricingDetails['original_price'],
                 'discount_percentage' => $pricingDetails['subscription_discount']['percentage'],
                 'discount_amount' => $pricingDetails['subscription_discount']['amount'],
