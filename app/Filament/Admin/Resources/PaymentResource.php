@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Enums\Purchase\PaymentStatus;
+use App\Enums\Purchase\PaymentType;
 use App\Filament\Admin\AdminNavigation;
 use App\Filament\Admin\Resources\PaymentResource\Pages;
 use App\Filament\Admin\Resources\PaymentResource\RelationManagers;
@@ -61,6 +62,7 @@ class PaymentResource extends Resource
             ->schema([
                 Section::make()->columns(3)->schema([
                     Select::make("status")->options(PaymentStatus::class),
+                    Select::make("payment_type")->options(PaymentType::class),
                 ])
             ]);
     }
@@ -69,12 +71,22 @@ class PaymentResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make("id"),
-                TextColumn::make("user.email"),
-                TextColumn::make("subscription.name"),
-                TextColumn::make("status"),
-                TextColumn::make("price")->label("Original price"),
-                TextColumn::make("final_price"),
+                TextColumn::make("id")->toggleable(),
+                TextColumn::make("user.email")->toggleable(),
+                TextColumn::make("subscription.name")->toggleable(),
+                TextColumn::make("status")->toggleable(),
+                TextColumn::make("status")->toggleable(),
+                TextColumn::make("payment_type")->toggleable(),
+                TextColumn::make('price')->toggleable(),
+                TextColumn::make('discount_percentage')->toggleable(),
+                TextColumn::make('discount_amount')->toggleable(),
+                TextColumn::make('promocode_percentage')->toggleable(),
+                TextColumn::make('promocode_amount')->toggleable(),
+                TextColumn::make('combined_discount_percentage')->toggleable(),
+                TextColumn::make('combined_discount_amount')->toggleable(),
+                TextColumn::make('final_price')->toggleable(),
+                TextColumn::make('promoter_margin_percentage')->toggleable(),
+                TextColumn::make('promoter_margin_amount'),
             ])
             ->filters([
                 //
