@@ -42,7 +42,7 @@ enum PaymentStatus: string implements HasColor, HasIcon, HasLabel
             self::PENDING => 'heroicon-o-clock',
             self::ACCEPTED => 'heroicon-o-check-circle',
             self::REJECTED => 'heroicon-o-x-circle',
-            self::SUCCEEDED => 'heroicon-o-badge-check',
+            self::SUCCEEDED => 'heroicon-o-check',
             self::FAILED => 'heroicon-o-exclamation-triangle',
         };
     }

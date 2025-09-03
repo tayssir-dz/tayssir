@@ -64,6 +64,16 @@ class ChargilyPaymentService
             $checkout = $this->client()->checkouts()->create([
                 'metadata' => [
                     'payment_id' => $payment->id,
+                    'subscription_id' => $payment->subscription_id,
+                    'subscription_name' => $payment->subscription->name,
+                    'subscription_description' => $payment->subscription->description,
+                    'price' => $pricing['original_price'],
+                    'discount_percentage' => $pricing['subscription_discount']['percentage'],
+                    'promocode_percentage' => $pricing['promocode_discount']['percentage'],
+                    'combined_discount_percentage' => $pricing['combined_discount']['percentage'],
+                    'final_price' => $pricing['final_price'],
+                    'promoter_margin_percentage' => $promoterMarginPercentage,
+                    'promoter_margin_amount' => $promoterMarginAmount,
                 ],
                 'locale' => $locale,
                 'amount' => (string) $payment->final_price, // Chargily expects string
