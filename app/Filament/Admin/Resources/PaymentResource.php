@@ -70,7 +70,7 @@ class PaymentResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->defaultGroup('payment_type')
+            // ->defaultGroup('payment_type')
             ->columns([
                 TextColumn::make("id")->toggleable(),
                 TextColumn::make("user.email")->toggleable(),

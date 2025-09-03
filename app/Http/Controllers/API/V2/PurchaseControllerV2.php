@@ -68,7 +68,7 @@ class PurchaseControllerV2 extends BaseController
         $data = $payment->toArray();
         // $data['attachment_url'] = $payment->attachment_url;
 
-        AdminNotifications::newManualPayment($current_user, $payment->subscription->name, "https://google.com");
+        AdminNotifications::newManualPayment($current_user, $payment->subscription->name, route('filament.dashboard.resources.payments.edit', $payment->id));
         $current_user->notify(new ManualPaymentRequestSuccess($current_user->name));
 
         return $this->sendResponse($data, 'Manual payment request initiated successfully and is pending review.');
@@ -96,6 +96,8 @@ class PurchaseControllerV2 extends BaseController
             promoCodeCode: $request->filled('promocode') ? $request->string('promocode')->toString() : null,
             locale: "ar"
         );
+
+        AdminNotifications::newChargilyPayment($user, $payment->subscription->name, route('filament.dashboard.resources.payments.edit', $payment->id));
 
         return $this->sendResponse([
             'payment_id' => $payment->id,
