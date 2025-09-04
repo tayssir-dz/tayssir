@@ -43,26 +43,37 @@ class ManageAppSettings extends SettingsPage
         return $form
             ->schema([
                 Tabs::make('settings_tabs')
+                    ->persistTabInQueryString()
                     ->columnSpanFull()
                     ->tabs([
                         Tab::make(Lang::get('custom.settings.app.section.information'))
                             ->schema([
                                 TextInput::make('app_version')
+                                    ->required()
                                     ->label(Lang::get('custom.settings.app.version')),
                                 Toggle::make('resumes_active')
+                                    ->required()
                                     ->label(Lang::get('custom.settings.app.resumes')),
                                 Toggle::make('bac_solutions_active')
+                                    ->required()
                                     ->label(Lang::get('custom.settings.app.bac_solutions')),
                                 Toggle::make('cards_tools_active')
+                                    ->required()
                                     ->label(Lang::get('custom.settings.app.cards_tools')),
                             ]),
                         Tab::make(Lang::get('custom.settings.payment.section.information'))
                             ->schema([
 
                                 TextInput::make('payment_name')
+                                    ->required()
                                     ->label(Lang::get('custom.settings.payment.name')),
                                 TextInput::make('payment_number')
+                                    ->required()
+                                    ->rules(['numeric', 'digits:20'])
                                     ->label(Lang::get('custom.settings.payment.number')),
+                                Toggle::make('payment_active')
+                                    ->required()
+                                    ->label(Lang::get('custom.settings.payment.active')),
                             ]),
                     ]),
             ]);

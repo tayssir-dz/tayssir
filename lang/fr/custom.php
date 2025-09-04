@@ -487,4 +487,5 @@ return [
     'settings.payment.section.information' => 'Informations de paiement',
     'settings.payment.name' => 'Nom du paiement',
     'settings.payment.number' => 'Numéro de paiement',
+    'settings.payment.active' => 'Actif'
 ];

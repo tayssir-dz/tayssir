@@ -483,4 +483,5 @@ return [
     'settings.payment.section.information' => 'معلومات الدفع',
     'settings.payment.name' => 'اسم جهة الدفع',
     'settings.payment.number' => 'رقم جهة الدفع',
+    'settings.payment.active' => 'نشط',
 ];

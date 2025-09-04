@@ -487,4 +487,5 @@ return [
     'settings.payment.section.information' => 'Payment Information',
     'settings.payment.name' => 'Payment Name',
     'settings.payment.number' => 'Payment Number',
+    'settings.payment.active' => 'Active',
 ];
