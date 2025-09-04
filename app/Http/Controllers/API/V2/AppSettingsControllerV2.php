@@ -25,6 +25,7 @@ class AppSettingsControllerV2 extends BaseController
             'cards_tools_active' => app(AppSettings::class)->cards_tools_active,
             'payment_name' => app(AppSettings::class)->payment_name,
             'payment_number' => app(AppSettings::class)->payment_number,
+            'payment_active' => app(AppSettings::class)->payment_active,
         ]);
     }
 }
