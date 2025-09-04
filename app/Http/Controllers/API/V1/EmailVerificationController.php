@@ -37,7 +37,8 @@ class EmailVerificationController extends BaseController
         }
         $user->notify(new EmailVerificationNotification($verification_otp->token));
 
-        return $this->sendResponse(["otp" => $verification_otp->token], message: __('response.email_sent_successfully'));
+        // return $this->sendResponse(["otp" => $verification_otp->token], message: __('response.email_sent_successfully'));
+        return $this->sendResponse(message: __('response.email_sent_successfully'));
     }
 
     /**
