@@ -5,6 +5,8 @@ namespace App\Filament\Admin\Pages;
 use App\Filament\Admin\AdminNavigation;
 use App\Settings\AppSettings;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -40,16 +42,28 @@ class ManageAppSettings extends SettingsPage
     {
         return $form
             ->schema([
-                Section::make(Lang::get('custom.settings.app.section.information'))
-                    ->schema([
-                        TextInput::make('app_version')
-                            ->label(Lang::get('custom.settings.app.version')),
-                        Toggle::make('resumes_active')
-                            ->label(Lang::get('custom.settings.app.resumes')),
-                        Toggle::make('bac_solutions_active')
-                            ->label(Lang::get('custom.settings.app.bac_solutions')),
-                        Toggle::make('cards_tools_active')
-                            ->label(Lang::get('custom.settings.app.cards_tools')),
+                Tabs::make('settings_tabs')
+                    ->columnSpanFull()
+                    ->tabs([
+                        Tab::make(Lang::get('custom.settings.app.section.information'))
+                            ->schema([
+                                TextInput::make('app_version')
+                                    ->label(Lang::get('custom.settings.app.version')),
+                                Toggle::make('resumes_active')
+                                    ->label(Lang::get('custom.settings.app.resumes')),
+                                Toggle::make('bac_solutions_active')
+                                    ->label(Lang::get('custom.settings.app.bac_solutions')),
+                                Toggle::make('cards_tools_active')
+                                    ->label(Lang::get('custom.settings.app.cards_tools')),
+                            ]),
+                        Tab::make(Lang::get('custom.settings.payment.section.information'))
+                            ->schema([
+
+                                TextInput::make('payment_name')
+                                    ->label(Lang::get('custom.settings.payment.name')),
+                                TextInput::make('payment_number')
+                                    ->label(Lang::get('custom.settings.payment.number')),
+                            ]),
                     ]),
             ]);
     }

@@ -478,4 +478,9 @@ return [
     'settings.platform.youtube.active' => 'نشط',
     'settings.platform.linkedin.url' => 'رابط لينكد إن',
     'settings.platform.linkedin.active' => 'نشط',
+
+    // # Payment Settings
+    'settings.payment.section.information' => 'معلومات الدفع',
+    'settings.payment.name' => 'اسم جهة الدفع',
+    'settings.payment.number' => 'رقم جهة الدفع',
 ];

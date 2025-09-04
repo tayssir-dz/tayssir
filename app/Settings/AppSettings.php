@@ -14,6 +14,10 @@ class AppSettings extends Settings
 
     public bool $cards_tools_active;
 
+    public string $payment_name;
+
+    public string $payment_number;
+
     public static function group(): string
     {
         return 'default';

@@ -149,7 +149,6 @@ Route::prefix('v1')->group(function () {
     });
     Route::prefix('settings')->group(function () {
         Route::get('/', [AppSettingsController::class, 'index'])
-            // ->middleware(["auth:sanctum", "access"])
             ->summary('app settings')
             ->description('This endpoint returns an object containing app settings.');
     });

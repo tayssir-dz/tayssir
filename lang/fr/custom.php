@@ -478,4 +478,13 @@ return [
     'settings.platform.youtube.active' => 'Actif',
     'settings.platform.linkedin.url' => 'URL LinkedIn',
     'settings.platform.linkedin.active' => 'Actif',
+
+    // # Settings Tabs
+    'settings.tabs.app' => 'Application',
+    'settings.tabs.payment' => 'Paiement',
+
+    // # Payment Settings
+    'settings.payment.section.information' => 'Informations de paiement',
+    'settings.payment.name' => 'Nom du paiement',
+    'settings.payment.number' => 'Numéro de paiement',
 ];

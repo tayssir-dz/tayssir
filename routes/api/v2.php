@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\V2\AppSettingsControllerV2;
 use App\Http\Controllers\API\V2\NotificationControllerV2;
 use App\Http\Controllers\API\V2\PurchaseControllerV2;
 use App\Http\Controllers\API\V2\SubscriptionControllerV2;
@@ -58,5 +59,11 @@ Route::prefix('v2')->group(function () {
             ->middleware(['auth:sanctum', 'access'])
             ->summary("Delete Notifications")
             ->description("This endpoint deletes one or many notifications for the authenticated user.");
+    });
+
+    Route::prefix('settings')->group(function () {
+        Route::get('/', [AppSettingsControllerV2::class, 'index'])
+            ->summary('app settings')
+            ->description('This endpoint returns an object containing app settings.');
     });
 });

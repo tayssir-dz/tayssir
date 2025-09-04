@@ -478,4 +478,13 @@ return [
     'settings.platform.youtube.active' => 'Active',
     'settings.platform.linkedin.url' => 'LinkedIn URL',
     'settings.platform.linkedin.active' => 'Active',
+
+    // # Settings Tabs
+    'settings.tabs.app' => 'App',
+    'settings.tabs.payment' => 'Payment',
+
+    // # Payment Settings
+    'settings.payment.section.information' => 'Payment Information',
+    'settings.payment.name' => 'Payment Name',
+    'settings.payment.number' => 'Payment Number',
 ];
