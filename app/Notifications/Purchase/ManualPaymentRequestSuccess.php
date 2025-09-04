@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Purchase;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,7 +11,7 @@ class ManualPaymentRequestSuccess extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(public string $name) {}
+    public function __construct() {}
 
 
     public function via(object $notifiable): array
@@ -30,9 +30,10 @@ class ManualPaymentRequestSuccess extends Notification implements ShouldQueue
 
     public function toArray(object $notifiable): array
     {
+        $name = $notifiable->name;
         return [
             'title' => 'تم استلام طلب الدفع',
-            'body' => 'مرحباً ' . $this->name . '، لقد تم استلام طلب الدفع اليدوي الخاص بك بنجاح. يقوم فريقنا حالياً بمراجعة التفاصيل وسيتم معالجته قريباً. سيتم إشعارك فور اكتمال عملية التحقق.'
+            'body' => 'مرحباً ' . $name . '، لقد تم استلام طلب الدفع اليدوي الخاص بك بنجاح. يقوم فريقنا حالياً بمراجعة التفاصيل وسيتم معالجته قريباً. سيتم إشعارك فور اكتمال عملية التحقق.'
         ];
     }
 }

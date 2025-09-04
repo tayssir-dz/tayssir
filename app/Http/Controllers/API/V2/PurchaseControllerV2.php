@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API\V2;
 use App\Http\Controllers\API\BaseController;
 use App\Http\Requests\API\V2\CheckPriceRequest;
 use App\Http\Requests\API\V2\ManualPaymentRequest;
-use App\Notifications\ManualPaymentRequestSuccess;
+use App\Notifications\Purchase\ManualPaymentRequestSuccess;
 use App\Services\Notification\AdminNotifications;
 use App\Services\Purchase\ManualPaymentService;
 use App\Services\Purchase\ChargilyPaymentService;
@@ -69,7 +69,7 @@ class PurchaseControllerV2 extends BaseController
         // $data['attachment_url'] = $payment->attachment_url;
 
         AdminNotifications::newManualPayment($current_user, $payment->subscription->name, route('filament.dashboard.resources.payments.edit', $payment->id));
-        $current_user->notify(new ManualPaymentRequestSuccess($current_user->name));
+        $current_user->notify(new ManualPaymentRequestSuccess());
 
         return $this->sendResponse($data, 'Manual payment request initiated successfully and is pending review.');
     }
