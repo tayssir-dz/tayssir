@@ -60,10 +60,37 @@ class PaymentResource extends Resource
     {
         return $form
             ->schema([
-                Section::make()->columns(3)->schema([
-                    Select::make("status")->options(PaymentStatus::class),
-                    Select::make("payment_type")->options(PaymentType::class),
-                ])
+                Section::make('Status')
+                    ->columns(2)
+                    ->schema([
+                        Select::make('status')
+                            ->options(PaymentStatus::class),
+                    ]),
+                Section::make('Payment Info')
+                    ->columns(2)
+                    ->schema([
+                        Select::make('payment_type')
+                            ->options(PaymentType::class)
+                            ->disabled(true),
+                        TextInput::make('price')->disabled(true),
+                        TextInput::make('final_price')->disabled(true),
+                    ]),
+                Section::make('Discounts')
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('discount_percentage')->disabled(true),
+                        TextInput::make('discount_amount')->disabled(true),
+                        TextInput::make('promocode_percentage')->disabled(true),
+                        TextInput::make('promocode_amount')->disabled(true),
+                        TextInput::make('combined_discount_percentage')->disabled(true),
+                        TextInput::make('combined_discount_amount')->disabled(true),
+                    ]),
+                Section::make('Promoter Margin')
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('promoter_margin_percentage')->disabled(true),
+                        TextInput::make('promoter_margin_amount')->disabled(true),
+                    ]),
             ]);
     }
 
