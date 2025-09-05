@@ -8,6 +8,8 @@ use App\Models\Payment;
 use App\Models\PromoCode;
 use App\Models\Subscription;
 use App\Models\User;
+use App\Notifications\Purchase\ChargilyPaymentFailed;
+use App\Notifications\Purchase\ChargilyPaymentSucceeded;
 use Chargily\ChargilyPay\Auth\Credentials;
 use Chargily\ChargilyPay\ChargilyPay;
 use Illuminate\Support\Facades\DB;
@@ -117,8 +119,15 @@ class ChargilyPaymentService
         $status = $checkout->getStatus();
         if ($status === 'paid') {
             $payment->status = PaymentStatus::SUCCEEDED;
+            $success = SubscriptionActivationService::ActivateSubscriptionForUser($payment->subscription_id, $payment->user_id);
+            if ($success) {
+                $payment->user->notify(new ChargilyPaymentSucceeded($payment->subscription->name));
+            } else {
+                $payment->user->notify(new ChargilyPaymentFailed($payment->subscription->name));
+            }
         } elseif (in_array($status, ['failed', 'canceled'])) {
             $payment->status = PaymentStatus::FAILED;
+            $payment->user->notify(new ChargilyPaymentFailed($payment->subscription->name));
         }
         $payment->metadata = array_merge($payment->metadata ?? [], [
             'chargily_checkout_id' => $checkout->getId(),

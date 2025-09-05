@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers\API\V2;
 
+use App\Filament\Admin\Resources\SubscriptionResource\RelationManagers\SubscriptionCardLib;
 use App\Http\Controllers\API\BaseController;
 use App\Http\Requests\API\V2\CheckPriceRequest;
 use App\Http\Requests\API\V2\ManualPaymentRequest;
+use App\Models\Subscription;
 use App\Notifications\Purchase\ManualPaymentRequestSuccess;
 use App\Services\Notification\AdminNotifications;
 use App\Services\Purchase\ManualPaymentService;
 use App\Services\Purchase\ChargilyPaymentService;
 use App\Services\Purchase\PriceCheckerService;
+use App\Services\Purchase\SubscriptionActivationService;
+use Carbon\Carbon;
 use Dedoc\Scramble\Attributes\Group;
+use Illuminate\Http\Request;
 
 #[Group('Subscription Purchase APIs', weight: 2)]
 class PurchaseControllerV2 extends BaseController
@@ -75,12 +80,25 @@ class PurchaseControllerV2 extends BaseController
     }
 
 
-    public function chargily()
+    public function chargily(Request $request)
     {
+
+        // $request->validate([
+        //     'subscription_id' => 'required|integer|exists:subscriptions,id',
+        // ]);
+
+        // $subscription = Subscription::find($request->input("subscription_id"));
+        // $user = $request->user();
+        // $success = SubscriptionActivationService::ActivateSubscriptionForUser($request->input("subscription_id"), $user->id);
+
         return $this->sendResponse([
+            // "now" => now()->format('Y/m/d - H:i')
+            // "user" => $user->email,
+            // "subscription" => $subscription->name,
+            // "success" => $success,
             "mode" => config("chargily.mode"),
-            "public" => config("chargily.public"),
-            "secret" => config("chargily.secret"),
+            // "public" => config("chargily.public"),
+            // "secret" => config("chargily.secret"),
         ]);
     }
 

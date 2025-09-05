@@ -37,7 +37,8 @@ Route::prefix('v2')->group(function () {
             ->summary('Initiate a Chargily payment and get checkout URL')
             ->description('Creates a pending payment record and Chargily checkout, returning the checkout URL and ID. Client should redirect user to the checkout_url returned.');
 
-        Route::get("/chargily", [PurchaseControllerV2::class, 'chargily']);
+        Route::get("/chargily", [PurchaseControllerV2::class, 'chargily'])
+            ->middleware(["auth:sanctum", "access"]);
     });
 
     Route::prefix("notifications")->group(function () {
@@ -65,5 +66,8 @@ Route::prefix('v2')->group(function () {
         Route::get('/', [AppSettingsControllerV2::class, 'index'])
             ->summary('app settings')
             ->description('This endpoint returns an object containing app settings.');
+        Route::get('/separated', [AppSettingsControllerV2::class, 'separated'])
+            ->summary('app settings (structured)')
+            ->description('This endpoint returns an object containing app settings, same content as the the previous endpoint, but app variables and payment variables are separated.');
     });
 });

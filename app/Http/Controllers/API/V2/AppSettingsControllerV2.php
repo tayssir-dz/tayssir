@@ -28,4 +28,26 @@ class AppSettingsControllerV2 extends BaseController
             'payment_active' => app(AppSettings::class)->payment_active,
         ]);
     }
+
+    /**
+     * Get app settings (structured).
+     *
+     * This endpoint returns an object containing app settings, same content as the the previous endpoint, but app variables and payment variables are separated.
+     */
+    public function separated()
+    {
+        return $this->sendResponse([
+            'app' => [
+                'app_version' => app(AppSettings::class)->app_version,
+                'resumes_active' => app(AppSettings::class)->resumes_active,
+                'bac_solutions_active' => app(AppSettings::class)->bac_solutions_active,
+                'cards_tools_active' => app(AppSettings::class)->cards_tools_active,
+            ],
+            'payment' => [
+                'payment_name' => app(AppSettings::class)->payment_name,
+                'payment_number' => app(AppSettings::class)->payment_number,
+                'payment_active' => app(AppSettings::class)->payment_active,
+            ],
+        ]);
+    }
 }

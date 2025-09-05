@@ -77,6 +77,9 @@ class SubscriptionCardLib
                 Tables\Actions\Action::make('user')
                     ->label(__('custom.models.subscriptionCard.attach_user'))
                     ->icon('heroicon-s-user')
+                    ->visible(function ($record) {
+                        return is_null($record->redeemed_at);
+                    })
                     ->color('primary')
                     ->form([
                         TextInput::make('email')
