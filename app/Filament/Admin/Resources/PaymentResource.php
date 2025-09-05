@@ -115,6 +115,7 @@ class PaymentResource extends Resource
                 TextColumn::make('promoter_margin_percentage')->toggleable(),
                 TextColumn::make('promoter_margin_amount'),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])
