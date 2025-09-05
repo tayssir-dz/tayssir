@@ -53,7 +53,7 @@ class AdminNotifications
     protected static function sendNewChargilyPaymentNotification(User $admin, User $user, string $subscriptionName, string $invoiceUrl)
     {
         Notification::make()
-            ->title('دفعة تشارجيلي جديدة')
+            ->title('دفعة شارجيلي جديدة')
             ->success()
             ->body(__('لديك دفعة جديدة عبر شارجيلي من المستخدم (:user) للاشتراك (:subscription)', ['user' => $user->name, 'subscription' => $subscriptionName], app()->getLocale()))
             ->actions([
