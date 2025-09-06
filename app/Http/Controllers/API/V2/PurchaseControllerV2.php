@@ -82,23 +82,8 @@ class PurchaseControllerV2 extends BaseController
 
     public function chargily(Request $request)
     {
-
-        // $request->validate([
-        //     'subscription_id' => 'required|integer|exists:subscriptions,id',
-        // ]);
-
-        // $subscription = Subscription::find($request->input("subscription_id"));
-        // $user = $request->user();
-        // $success = SubscriptionActivationService::ActivateSubscriptionForUser($request->input("subscription_id"), $user->id);
-
         return $this->sendResponse([
-            // "now" => now()->format('Y/m/d - H:i')
-            // "user" => $user->email,
-            // "subscription" => $subscription->name,
-            // "success" => $success,
             "mode" => config("chargily.mode"),
-            // "public" => config("chargily.public"),
-            // "secret" => config("chargily.secret"),
         ]);
     }
 
