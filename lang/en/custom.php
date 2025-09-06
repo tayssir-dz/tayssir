@@ -1,6 +1,36 @@
 <?php
 
 return [
+    // Generic tabs
+    'tabs.all' => 'All',
+    // Payments
+    'models.payments' => 'Payments',
+    'models.payment' => 'Payment',
+    'models.payment.status' => 'Status',
+    'models.payment.type' => 'Payment Type',
+    'models.payment.price' => 'Price',
+    'models.payment.discount_percentage' => 'Discount %',
+    'models.payment.discount_amount' => 'Discount Amount',
+    'models.payment.promocode_percentage' => 'Promo Code %',
+    'models.payment.promocode_amount' => 'Promo Code Amount',
+    'models.payment.combined_discount_percentage' => 'Combined Discount %',
+    'models.payment.combined_discount_amount' => 'Combined Discount Amount',
+    'models.payment.final_price' => 'Final Price',
+    'models.payment.promoter_margin_percentage' => 'Promoter Margin %',
+    'models.payment.promoter_margin_amount' => 'Promoter Margin Amount',
+    'models.payment.attachment' => 'Attachment',
+    'models.payment.view_attachment' => 'View attachment',
+    'models.payment.rejection_reason' => 'Rejection reason',
+    'models.payment.metadata' => 'Metadata',
+    'models.payment.sections.basic_info' => 'Basic Information',
+    'models.payment.sections.amounts' => 'Amounts & Discounts',
+    'models.payment.sections.promoter' => 'Promoter Margin',
+    'models.payment.sections.extras' => 'Extra Information',
+    'models.payment.sections.metadata' => 'Metadata',
+    'models.payment.actions.accept' => 'Accept',
+    'models.payment.actions.reject' => 'Reject',
+    'models.payment.notices.accepted' => 'Payment accepted.',
+    'models.payment.notices.rejected' => 'Payment rejected.',
     // Manual Payment Statuses
     'payment.status.pending' => 'Pending',
     'payment.status.accepted' => 'Accepted',

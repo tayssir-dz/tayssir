@@ -1,6 +1,36 @@
 <?php
 
 return [
+    // تبويبات عامة
+    'tabs.all' => 'الكل',
+    // المدفوعات
+    'models.payments' => 'المدفوعات',
+    'models.payment' => 'دفعة',
+    'models.payment.status' => 'الحالة',
+    'models.payment.type' => 'نوع الدفع',
+    'models.payment.price' => 'السعر',
+    'models.payment.discount_percentage' => 'نسبة التخفيض',
+    'models.payment.discount_amount' => 'مبلغ التخفيض',
+    'models.payment.promocode_percentage' => 'نسبة رمز الترويج',
+    'models.payment.promocode_amount' => 'مبلغ رمز الترويج',
+    'models.payment.combined_discount_percentage' => 'نسبة التخفيض المجمعة',
+    'models.payment.combined_discount_amount' => 'مبلغ التخفيض المجمعة',
+    'models.payment.final_price' => 'السعر النهائي',
+    'models.payment.promoter_margin_percentage' => 'نسبة هامش المروج',
+    'models.payment.promoter_margin_amount' => 'مبلغ هامش المروج',
+    'models.payment.attachment' => 'المرفق',
+    'models.payment.view_attachment' => 'عرض المرفق',
+    'models.payment.rejection_reason' => 'سبب الرفض',
+    'models.payment.metadata' => 'البيانات الإضافية',
+    'models.payment.sections.basic_info' => 'المعلومات الأساسية',
+    'models.payment.sections.amounts' => 'المبالغ والتخفيضات',
+    'models.payment.sections.promoter' => 'هامش المروج',
+    'models.payment.sections.extras' => 'معلومات إضافية',
+    'models.payment.sections.metadata' => 'البيانات الإضافية',
+    'models.payment.actions.accept' => 'قبول',
+    'models.payment.actions.reject' => 'رفض',
+    'models.payment.notices.accepted' => 'تم قبول الدفع.',
+    'models.payment.notices.rejected' => 'تم رفض الدفع.',
     // حالات الدفع اليدوي
     'payment.status.pending' => 'قيد المراجعة',
     'payment.status.accepted' => 'مقبول',

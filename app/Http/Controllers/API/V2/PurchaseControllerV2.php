@@ -92,15 +92,15 @@ class PurchaseControllerV2 extends BaseController
      */
     public function initiateChargily(CheckPriceRequest $request)
     {
-        $user = $request->user();
+        $current_user = $request->user();
         [$payment, $checkout] = $this->chargilyPaymentService->createCheckout(
-            user: $user,
+            user: $current_user,
             subscriptionId: $request->integer('subscription_id'),
             promoCodeCode: $request->filled('promocode') ? $request->string('promocode')->toString() : null,
             locale: "ar"
         );
 
-        AdminNotifications::newChargilyPayment($user, $payment->subscription->name, route('filament.dashboard.resources.payments.edit', $payment->id));
+        AdminNotifications::newChargilyPayment($current_user, $payment->subscription->name, route('filament.dashboard.resources.payments.edit', $payment->id));
 
         return $this->sendResponse([
             'payment_id' => $payment->id,

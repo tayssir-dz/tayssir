@@ -1,6 +1,36 @@
 <?php
 
 return [
+    // Onglets génériques
+    'tabs.all' => 'Tous',
+    // Paiements
+    'models.payments' => 'Paiements',
+    'models.payment' => 'Paiement',
+    'models.payment.status' => 'Statut',
+    'models.payment.type' => 'Type de paiement',
+    'models.payment.price' => 'Prix',
+    'models.payment.discount_percentage' => 'Remise %',
+    'models.payment.discount_amount' => 'Montant de la remise',
+    'models.payment.promocode_percentage' => 'Code promo %',
+    'models.payment.promocode_amount' => 'Montant du code promo',
+    'models.payment.combined_discount_percentage' => 'Remise combinée %',
+    'models.payment.combined_discount_amount' => 'Montant remise combinée',
+    'models.payment.final_price' => 'Prix final',
+    'models.payment.promoter_margin_percentage' => 'Marge promoteur %',
+    'models.payment.promoter_margin_amount' => 'Montant marge promoteur',
+    'models.payment.attachment' => 'Pièce jointe',
+    'models.payment.view_attachment' => 'Voir la pièce jointe',
+    'models.payment.rejection_reason' => 'Raison du refus',
+    'models.payment.metadata' => 'Méta-données',
+    'models.payment.sections.basic_info' => 'Informations de base',
+    'models.payment.sections.amounts' => 'Montants et remises',
+    'models.payment.sections.promoter' => 'Marge promoteur',
+    'models.payment.sections.extras' => 'Informations supplémentaires',
+    'models.payment.sections.metadata' => 'Méta-données',
+    'models.payment.actions.accept' => 'Accepter',
+    'models.payment.actions.reject' => 'Refuser',
+    'models.payment.notices.accepted' => 'Paiement accepté.',
+    'models.payment.notices.rejected' => 'Paiement refusé.',
     // Statuts de paiement manuel
     'payment.status.pending' => 'En attente',
     'payment.status.accepted' => 'Accepté',

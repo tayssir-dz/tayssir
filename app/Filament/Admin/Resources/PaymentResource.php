@@ -18,6 +18,9 @@ use Filament\Tables;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -30,20 +33,17 @@ class PaymentResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return  __(AdminNavigation::PAYMENT_RESOURCE['group']);
+        return  __(AdminNavigation::SUBSCRIPTION_AND_PAYMENT_GROUP);
     }
 
     public static function getModelLabel(): string
     {
-
-        // return __('custom.models.subscription');
-        return "payment";
+        return __('custom.models.payment');
     }
 
     public static function getPluralModelLabel(): string
     {
-        // return __('custom.models.subscriptions');
-        return "payments";
+        return __('custom.models.payments');
     }
 
     public static function getNavigationBadge(): ?string
@@ -99,29 +99,97 @@ class PaymentResource extends Resource
         return $table
             // ->defaultGroup('payment_type')
             ->columns([
-                TextColumn::make("id")->toggleable(),
-                TextColumn::make("user.email")->toggleable(),
-                TextColumn::make("subscription.name")->toggleable(),
-                TextColumn::make("status")->badge()->toggleable(),
-                TextColumn::make("payment_type")->badge()->toggleable(),
-                TextColumn::make('price')->toggleable(),
-                TextColumn::make('discount_percentage')->toggleable(),
-                TextColumn::make('discount_amount')->toggleable(),
-                TextColumn::make('promocode_percentage')->toggleable(),
-                TextColumn::make('promocode_amount')->toggleable(),
-                TextColumn::make('combined_discount_percentage')->toggleable(),
-                TextColumn::make('combined_discount_amount')->toggleable(),
-                TextColumn::make('final_price')->toggleable(),
-                TextColumn::make('promoter_margin_percentage')->toggleable(),
-                TextColumn::make('promoter_margin_amount'),
+                TextColumn::make('id')
+                    ->label('ID')
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable(),
+                TextColumn::make('user.email')
+                    ->label(__('custom.models.user.email'))
+                    ->searchable()
+                    ->toggleable(),
+                TextColumn::make('subscription.name')
+                    ->label(__('custom.models.subscription'))
+                    ->searchable()
+                    ->toggleable(),
+                TextColumn::make('status')
+                    ->label(__('custom.models.payment.status'))
+                    ->badge()
+                    ->toggleable(),
+                TextColumn::make('payment_type')
+                    ->label(__('custom.models.payment.type'))
+                    ->badge()
+                    ->toggleable(),
+                TextColumn::make('price')
+                    ->label(__('custom.models.payment.price'))
+                    ->numeric(2)
+                    ->sortable()
+                    ->suffix(' DZD')
+                    ->toggleable(),
+                TextColumn::make('discount_percentage')
+                    ->label(__('custom.models.payment.discount_percentage'))
+                    ->numeric(2)
+                    ->suffix('%')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('discount_amount')
+                    ->label(__('custom.models.payment.discount_amount'))
+                    ->numeric(2)
+                    ->suffix(' DZD')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('promocode_percentage')
+                    ->label(__('custom.models.payment.promocode_percentage'))
+                    ->numeric(2)
+                    ->suffix('%')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('promocode_amount')
+                    ->label(__('custom.models.payment.promocode_amount'))
+                    ->numeric(2)
+                    ->suffix(' DZD')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('combined_discount_percentage')
+                    ->label(__('custom.models.payment.combined_discount_percentage'))
+                    ->numeric(2)
+                    ->suffix('%')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('combined_discount_amount')
+                    ->label(__('custom.models.payment.combined_discount_amount'))
+                    ->numeric(2)
+                    ->suffix(' DZD')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('final_price')
+                    ->label(__('custom.models.payment.final_price'))
+                    ->numeric(2)
+                    ->sortable()
+                    ->suffix(' DZD')
+                    ->toggleable(),
+                TextColumn::make('promoter_margin_percentage')
+                    ->label(__('custom.models.payment.promoter_margin_percentage'))
+                    ->numeric(2)
+                    ->suffix('%')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('promoter_margin_amount')
+                    ->label(__('custom.models.payment.promoter_margin_amount'))
+                    ->numeric(2)
+                    ->suffix(' DZD')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('created_at')
+                    ->label(__('custom.table.created_at'))
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->label(__('custom.models.payment.status'))
+                    ->options(\App\Enums\Purchase\PaymentStatus::class),
+                SelectFilter::make('payment_type')
+                    ->label(__('custom.models.payment.type'))
+                    ->options(\App\Enums\Purchase\PaymentType::class),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                ViewAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -141,8 +209,7 @@ class PaymentResource extends Resource
     {
         return [
             'index' => Pages\ListPayments::route('/'),
-            'create' => Pages\CreatePayment::route('/create'),
-            'edit' => Pages\EditPayment::route('/{record}/edit'),
+            'view' => Pages\ViewPayment::route('/{record}'),
         ];
     }
 }

@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Payment;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 // Route::get('/emails', function () {
 //     return view('emails.preview-wrapper', [
@@ -28,6 +31,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 })->name('login');
+
+// Secure route to view payment attachment (super_admin only)
+Route::middleware(['web', 'auth', 'role:super_admin'])->group(function () {
+    Route::get('/admin/payments/{payment}/attachment', function (Request $request, Payment $payment) {
+        $media = $payment->getFirstMedia('attachment');
+        abort_unless($media, 404);
+
+        $stream = Storage::disk($media->disk)->readStream($media->getPathRelativeToRoot());
+        return response()->stream(function () use ($stream) {
+            fpassthru($stream);
+        }, 200, [
+            'Content-Type' => $media->mime_type,
+            'Content-Disposition' => 'inline; filename="' . $media->file_name . '"',
+        ]);
+    })->name('admin.payments.attachment');
+});
 
 
 // Route::get("/testing", function () {
