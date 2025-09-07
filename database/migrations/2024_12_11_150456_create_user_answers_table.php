@@ -20,8 +20,15 @@ return new class extends Migration
             $table->foreignId('material_id')->constrained()->onDelete('cascade');
             $table->integer('points_earned')->default(0);
 
-            $table->unique(['user_id', 'question_id', 'chapter_id', 'unit_id', 'material_id']);
-            $table->index(['user_id', 'question_id', 'chapter_id', 'unit_id', 'material_id']);
+            // Use shorter, explicit names to avoid MySQL's 64-char identifier limit
+            $table->unique(
+                ['user_id', 'question_id', 'chapter_id', 'unit_id', 'material_id'],
+                'user_answers_user_question_chapter_unit_material_unique'
+            );
+            $table->index(
+                ['user_id', 'question_id', 'chapter_id', 'unit_id', 'material_id'],
+                'user_answers_user_question_chapter_unit_material_index'
+            );
             $table->timestamps();
         });
     }
