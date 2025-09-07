@@ -9,7 +9,6 @@ trait InteractsWithContent
     public function getContentAttribute()
     {
         $subscriptionIds = $this->subscriptions->pluck('id');
-
         // Get all progress data efficiently in a single call
         $progressData = $this->getAllProgressData();
 

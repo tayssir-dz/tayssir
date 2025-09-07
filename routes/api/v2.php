@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\V2\AppSettingsControllerV2;
+use App\Http\Controllers\API\V2\ContentControllerV2;
 use App\Http\Controllers\API\V2\NotificationControllerV2;
 use App\Http\Controllers\API\V2\PurchaseControllerV2;
 use App\Http\Controllers\API\V2\SubscriptionControllerV2;
@@ -69,5 +70,12 @@ Route::prefix('v2')->group(function () {
         Route::get('/separated', [AppSettingsControllerV2::class, 'separated'])
             ->summary('app settings (structured)')
             ->description('This endpoint returns an object containing app settings, same content as the the previous endpoint, but app variables and payment variables are separated.');
+    });
+
+    Route::prefix('content')->group(function () {
+        Route::get('/', [ContentControllerV2::class, 'getUserContent'])
+            ->middleware(['auth:sanctum', 'access'])
+            ->summary('Get user content')
+            ->description('This endpoint returns the content associated with the authenticated user.');
     });
 });
