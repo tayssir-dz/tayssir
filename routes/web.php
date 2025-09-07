@@ -70,4 +70,4 @@ Route::get('/download-backup', function () {
     return response()->download($filePath, 'database-backup.sqlite', [
         'Content-Type' => 'application/sqlite',
     ]);
-})->middleware(['auth', 'role:super_admin'])->name('download-backup');
+});
