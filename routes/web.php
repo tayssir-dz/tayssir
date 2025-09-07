@@ -56,18 +56,3 @@ Route::middleware(['web', 'auth', 'role:super_admin'])->group(function () {
 //     $user->notify(new \App\Notifications\WelcomeNotification($user->name));
 //     return "Notification sent!";
 // });
-
-
-
-// create endpoint that downloads the file in storage/app/private/database-backup.sqlite
-Route::get('/download-backup', function () {
-    $filePath = storage_path('app/private/database-backup.sqlite');
-
-    if (!file_exists($filePath)) {
-        abort(404, 'File not found.');
-    }
-
-    return response()->download($filePath, 'database-backup.sqlite', [
-        'Content-Type' => 'application/sqlite',
-    ]);
-});
