@@ -57,6 +57,7 @@ class ViewPayment extends ViewRecord
                 ->requiresConfirmation()
                 ->action(function (array $data) use ($record) {
                     $record->status = PaymentStatus::REJECTED;
+                    $record->rejection_reason = $data['rejection_reason'];
                     $record->save();
 
                     $record->user->notify(new ManualPaymentFailed($data['rejection_reason'] ?? null, $record->subscription->name ?? ''));

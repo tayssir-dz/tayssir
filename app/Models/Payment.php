@@ -21,6 +21,7 @@ class Payment extends Model implements HasMedia
         'promo_code_id',
         'status',
         'payment_type',
+        'rejection_reason',
         'price',
         'discount_percentage',
         'discount_amount',
