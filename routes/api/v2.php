@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\V2\AppSettingsControllerV2;
 use App\Http\Controllers\API\V2\ContentControllerV2;
 use App\Http\Controllers\API\V2\NotificationControllerV2;
+use App\Http\Controllers\API\V2\ReportControllerV2;
 use App\Http\Controllers\API\V2\PurchaseControllerV2;
 use App\Http\Controllers\API\V2\SubscriptionControllerV2;
 use Illuminate\Support\Facades\Route;
@@ -77,5 +78,12 @@ Route::prefix('v2')->group(function () {
             ->middleware(['auth:sanctum', 'access'])
             ->summary('Get user content')
             ->description('This endpoint returns the content associated with the authenticated user.');
+    });
+
+    Route::prefix('reports')->group(function () {
+        Route::post('/question', [ReportControllerV2::class, 'reportQuestion'])
+            ->middleware(['auth:sanctum', 'access'])
+            ->summary('Report a question')
+            ->description('Creates a report entry for a question with an optional description.');
     });
 });

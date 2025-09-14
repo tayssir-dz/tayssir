@@ -7,7 +7,7 @@ use App\Services\Content\ContentService;
 use Dedoc\Scramble\Attributes\Group;
 use Illuminate\Http\Request;
 
-#[Group('Content Management APIs V2', weight: 6)]
+#[Group('Content Management APIs V2', weight: 5)]
 class ContentControllerV2 extends BaseController
 {
     public function __construct(private ContentService $contentService) {}
