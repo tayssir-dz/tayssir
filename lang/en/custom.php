@@ -186,6 +186,26 @@ return [
     'models.flashcard.title' => 'Title',
     'models.flashcard.description' => 'Description',
 
+    // Question Reports
+    'models.question_reports' => 'Question Reports',
+    'models.question_report' => 'Question Report',
+    'models.question_report.read_status' => 'Read',
+    'models.question_report.read' => 'Read',
+    'models.question_report.unread' => 'Unread',
+    'models.question_report.description' => 'Description',
+    'models.question_report.user' => 'User',
+    'models.question_report.chapter' => 'Chapter',
+    'models.question_report.question' => 'Question',
+    'models.question_report.sections.report_info' => 'Report Information',
+    'models.question_report.sections.references' => 'References',
+    'models.question_report.actions.mark_as_read' => 'Mark as read',
+    'models.question_report.actions.mark_as_unread' => 'Mark as unread',
+
+    // Generic
+    'models.generic.empty' => '—',
+    'models.generic.delete' => 'Delete',
+    'models.generic.delete_selected' => 'Delete selected',
+
     // # Division
     'forms.division.create.section.infos' => 'Division informations',
     'forms.division.create.section.image' => 'Division image',

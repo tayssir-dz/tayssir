@@ -13,6 +13,10 @@ class QuestionReport extends Model
         'description',
     ];
 
+    protected $casts = [
+        'read_at' => 'datetime',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -21,5 +25,22 @@ class QuestionReport extends Model
     public function question(): BelongsTo
     {
         return $this->belongsTo(Question::class);
+    }
+
+    public function getIsReadAttribute(): bool
+    {
+        return (bool) $this->read_at;
+    }
+
+    public function markAsRead(): void
+    {
+        $this->read_at = now();
+        $this->save();
+    }
+
+    public function markAsUnread(): void
+    {
+        $this->read_at = null;
+        $this->save();
     }
 }

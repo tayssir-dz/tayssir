@@ -97,6 +97,11 @@ class Question extends Model implements HasMedia
             ->limit(1);  // Ensure only one chapter is returned
     }
 
+    public function getChapterNameAttribute(): ?string
+    {
+        return $this->chapter()->first()?->name;
+    }
+
     /**
      * Get the effective direction based on inheritance rules.
      */

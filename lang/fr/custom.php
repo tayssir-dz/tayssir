@@ -186,6 +186,26 @@ return [
     'models.flashcard.title' => 'Titre',
     'models.flashcard.description' => 'Description',
 
+    // Question Reports
+    'models.question_reports' => 'Signalements de question',
+    'models.question_report' => 'Signalement de question',
+    'models.question_report.read_status' => 'Lecture',
+    'models.question_report.read' => 'Lu',
+    'models.question_report.unread' => 'Non lu',
+    'models.question_report.description' => 'Description',
+    'models.question_report.user' => 'Utilisateur',
+    'models.question_report.chapter' => 'Chapitre',
+    'models.question_report.question' => 'Question',
+    'models.question_report.sections.report_info' => 'Informations du signalement',
+    'models.question_report.sections.references' => 'Références',
+    'models.question_report.actions.mark_as_read' => 'Marquer comme lu',
+    'models.question_report.actions.mark_as_unread' => 'Marquer comme non lu',
+
+    // Generic
+    'models.generic.empty' => '—',
+    'models.generic.delete' => 'Supprimer',
+    'models.generic.delete_selected' => 'Supprimer la sélection',
+
     // # Division
     'forms.division.create.section.infos' => 'Informations de la filière',
     'forms.division.create.section.image' => 'Image de la filière',

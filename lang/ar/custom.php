@@ -226,6 +226,26 @@ return [
     'models.user.password' => 'كلمة المرور',
     'models.user.phone' => 'رقم الهاتف',
     'models.user.phone.empty' => 'لا يوجد رقم هاتف',
+
+    // تقارير الأسئلة
+    'models.question_reports' => 'تقارير الأسئلة',
+    'models.question_report' => 'تقرير سؤال',
+    'models.question_report.read_status' => 'الحالة',
+    'models.question_report.read' => 'مقروء',
+    'models.question_report.unread' => 'غير مقروء',
+    'models.question_report.description' => 'الوصف',
+    'models.question_report.user' => 'المستخدم',
+    'models.question_report.chapter' => 'الفصل',
+    'models.question_report.question' => 'السؤال',
+    'models.question_report.sections.report_info' => 'معلومات التقرير',
+    'models.question_report.sections.references' => 'المراجع',
+    'models.question_report.actions.mark_as_read' => 'تعيين كمقروء',
+    'models.question_report.actions.mark_as_unread' => 'تعيين كغير مقروء',
+
+    // عام
+    'models.generic.empty' => '—',
+    'models.generic.delete' => 'حذف',
+    'models.generic.delete_selected' => 'حذف المحدد',
     'models.user.roles' => 'الأدوار',
     'models.user.roles.empty' => 'لا توجد أدوار',
     'models.user.verified' => 'مفعل',
