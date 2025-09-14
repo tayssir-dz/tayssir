@@ -114,8 +114,8 @@ class QuestionsRelationManager extends RelationManager
                                         ->image()
                                         ->label(__('custom.models.question.question_image'))
                                         ->imageEditor(),
-                                    Forms\Components\SpatieMediaLibraryFileUpload::make('explaination_asset')
-                                        ->collection('explaination_asset')
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('explanation_asset')
+                                        ->collection('explanation_asset')
                                         ->multiple(false)
                                         ->label(__('custom.models.question.explaination_asset')),
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('hint_image')
