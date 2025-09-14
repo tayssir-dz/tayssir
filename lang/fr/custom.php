@@ -48,6 +48,7 @@ return [
     'nav.section.management' => 'Gestion',
     'nav.section.points' => 'Points',
     'nav.section.app' => 'L\'application',
+    'nav.section.reports' => 'Rapports',
 
     'models.cards' => 'Cartes (ancien)',
     'models.card' => 'Carte',

@@ -51,6 +51,7 @@ return [
     'nav.section.management' => 'الإدارة',
     'nav.section.points' => 'النقاط',
     'nav.section.app' => 'التطبيق',
+    'nav.section.reports' =>  'التقارير',
 
     'models.cards' => 'البطاقات (قديم)',
     'models.card' => 'بطاقة',

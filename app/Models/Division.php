@@ -54,4 +54,9 @@ class Division extends Model implements HasMedia
             ->withPivot('sort')
             ->orderBy('division_material.sort');
     }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

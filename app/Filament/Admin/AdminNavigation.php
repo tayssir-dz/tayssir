@@ -11,6 +11,7 @@ class AdminNavigation
     public const MANAGEMENT_GROUP = 'custom.nav.section.management';
     public const POINTS_GROUP = 'custom.nav.section.points';
     public const APP_GROUP = 'custom.nav.section.app';
+    public const REPORTS_GROUP = 'custom.nav.section.reports';
 
     public const PLATFORM_SETTINGS = [
         'icon' => 'heroicon-o-globe-alt',
@@ -100,5 +101,11 @@ class AdminNavigation
         'icon' => "heroicon-o-rectangle-stack",
         'sort' => 15,
         'group' => self::CONTENT_GROUP,
+    ];
+
+    public const QUESTION_REPORT_RESOURCE = [
+        'icon' => "heroicon-o-rectangle-stack",
+        'sort' => 16,
+        'group' => self::REPORTS_GROUP,
     ];
 }
