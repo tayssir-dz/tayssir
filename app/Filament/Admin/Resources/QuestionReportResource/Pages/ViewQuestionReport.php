@@ -15,19 +15,19 @@ class ViewQuestionReport extends ViewRecord
         return [
             Actions\ActionGroup::make([
                 Actions\Action::make('markAsRead')
-                    ->label(__('models.question_report.actions.mark_as_read'))
+                    ->label(__('custom.models.question_report.actions.mark_as_read'))
                     ->visible(fn($record) => ! $record->is_read)
                     ->action(fn($record) => $record->markAsRead())
                     ->color('success')
                     ->requiresConfirmation(),
                 Actions\Action::make('markAsUnread')
-                    ->label(__('models.question_report.actions.mark_as_unread'))
+                    ->label(__('custom.models.question_report.actions.mark_as_unread'))
                     ->visible(fn($record) => $record->is_read)
                     ->action(fn($record) => $record->markAsUnread())
                     ->color('warning')
                     ->requiresConfirmation(),
                 Actions\DeleteAction::make()
-                    ->label(__('models.generic.delete')),
+                    ->label(__('custom.models.generic.delete')),
             ]),
         ];
     }
