@@ -67,7 +67,7 @@ class AppServiceProvider extends ServiceProvider
             'export_path' => 'public/v1.json',
             "ui" => [
                 "title" => "Tayssir API v1",
-                "theme" => "dark",
+                "theme" => "light",
                 'hide_schemas' => true,
                 'logo' => '/favicon.svg',
                 'layout' => 'responsive',
@@ -82,7 +82,7 @@ class AppServiceProvider extends ServiceProvider
             'export_path' => 'public/v2.json',
             "ui" => [
                 "title" => "Tayssir API v2",
-                "theme" => "dark",
+                "theme" => "light",
                 'hide_schemas' => true,
                 'logo' => '/favicon.svg',
                 'layout' => 'responsive',
