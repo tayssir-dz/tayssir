@@ -206,6 +206,7 @@ return [
         'promocode' => 'رمز الترويج',
         'attachment' => 'المرفق',
         'payment_type' => 'نوع الدفع',
+        'question_id' => "السؤال",
     ],
 
 ];
