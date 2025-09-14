@@ -76,17 +76,17 @@ class Question extends Model implements HasMedia
 
     public function getImageAttribute()
     {
-        return $this->getFirstMediaUrl('image');
+        return $this->hasMedia('image') ? $this->getFirstMediaUrl('image') : null;
     }
 
     public function getExplanationAssetAttribute()
     {
-        return $this->getFirstMediaUrl('explanation_asset');
+        return $this->hasMedia('explanation_asset') ? $this->getFirstMediaUrl('explanation_asset') : null;
     }
 
     public function getHintImageAttribute()
     {
-        return $this->getFirstMediaUrl('hint_image');
+        return $this->hasMedia('hint_image') ? $this->getFirstMediaUrl('hint_image') : null;
     }
 
     public function chapter()
