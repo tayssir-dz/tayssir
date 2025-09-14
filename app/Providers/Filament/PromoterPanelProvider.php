@@ -2,6 +2,9 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Promoter\Widgets\MostUsedPromoCode;
+use App\Filament\Promoter\Widgets\PromoterStats;
+use App\Filament\Promoter\Widgets\PromoterWidgets;
 use App\Models\Promoter;
 use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Http\Middleware\Authenticate;
@@ -49,7 +52,10 @@ class PromoterPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Promoter/Widgets'), for: 'App\\Filament\\Promoter\\Widgets')
             ->widgets([
                 // Widgets\FilamentInfoWidget::class,
-                Widgets\AccountWidget::class,
+                // Widgets\AccountWidget::class,
+                PromoterStats::class,
+                MostUsedPromoCode::class,
+                // PromoterWidgets::class
             ])
             ->middleware([
                 EncryptCookies::class,

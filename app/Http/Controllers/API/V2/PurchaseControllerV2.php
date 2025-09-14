@@ -73,7 +73,7 @@ class PurchaseControllerV2 extends BaseController
         $data = $payment->toArray();
         // $data['attachment_url'] = $payment->attachment_url;
 
-        AdminNotifications::newManualPayment($current_user, $payment->subscription->name, route('filament.dashboard.resources.payments.edit', $payment->id));
+        AdminNotifications::newManualPayment($current_user, $payment->subscription->name, route('filament.dashboard.resources.payments.view', $payment->id));
         $current_user->notify(new ManualPaymentRequestSuccess());
 
         return $this->sendResponse($data, 'Manual payment request initiated successfully and is pending review.');
@@ -100,7 +100,7 @@ class PurchaseControllerV2 extends BaseController
             locale: "ar"
         );
 
-        AdminNotifications::newChargilyPayment($current_user, $payment->subscription->name, route('filament.dashboard.resources.payments.edit', $payment->id));
+        AdminNotifications::newChargilyPayment($current_user, $payment->subscription->name, route('filament.dashboard.resources.payments.view', $payment->id));
 
         return $this->sendResponse([
             'payment_id' => $payment->id,
