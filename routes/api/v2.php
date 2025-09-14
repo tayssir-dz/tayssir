@@ -85,5 +85,10 @@ Route::prefix('v2')->group(function () {
             ->middleware(['auth:sanctum', 'access'])
             ->summary('Report a question')
             ->description('Creates a report entry for a question with an optional description.');
+
+        Route::post('/contact', [ReportControllerV2::class, 'submitContactForm'])
+            ->middleware(['auth:sanctum', 'access'])
+            ->summary('Submit a contact form')
+            ->description('Submits a contact form with optional subject and metadata. Auth optional; user_id is stored when available.');
     });
 });
