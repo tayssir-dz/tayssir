@@ -74,6 +74,21 @@ class Question extends Model implements HasMedia
             ->singleFile();
     }
 
+    public function getImageAttribute()
+    {
+        return $this->getFirstMediaUrl('image');
+    }
+
+    public function getExplanationAssetAttribute()
+    {
+        return $this->getFirstMediaUrl('explanation_asset');
+    }
+
+    public function getHintImageAttribute()
+    {
+        return $this->getFirstMediaUrl('hint_image');
+    }
+
     public function chapter()
     {
         return $this->belongsToMany(related: Chapter::class)
