@@ -100,6 +100,10 @@ class QuestionReportResource extends Resource
                         ->action(fn($record) => $record->markAsUnread())
                         ->color('warning')
                         ->requiresConfirmation(),
+                    Tables\Actions\Action::make("goToChapter")
+                        ->label("GOTO")
+                        ->url(fn($record) => ChapterResource::getUrl('edit', ['record' => $record->question->chapter()->first()]))
+                        ->color("info"),
                     Tables\Actions\DeleteAction::make()
                         ->label(__('custom.models.generic.delete')),
                 ]),
