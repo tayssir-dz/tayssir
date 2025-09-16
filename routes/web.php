@@ -49,10 +49,22 @@ Route::middleware(['web', 'auth', 'role:super_admin'])->group(function () {
 });
 
 
-// Route::get("/testing", function () {
-//     // find user with email m_keziz@estin.dz
-//     $user = \App\Models\User::where("email", "m_keziz@estin.dz")->first();
-//     // notify him with WelcomeNotification (takes 1 arm is name)
-//     $user->notify(new \App\Notifications\WelcomeNotification($user->name));
-//     return "Notification sent!";
-// });
+
+
+Route::middleware(['web', 'auth', 'role:super_admin'])->group(function () {
+    Route::get('database/backup', function (Request $request) {
+        $path = 'private/database-backup.sqlite';
+
+        if (!Storage::disk('local')->exists($path)) {
+            abort(404);
+        }
+
+        $stream = Storage::disk('local')->readStream($path);
+        return response()->stream(function () use ($stream) {
+            fpassthru($stream);
+        }, 200, [
+            'Content-Type' => 'application/octet-stream',
+            'Content-Disposition' => 'attachment; filename="databasee.sqlite"',
+        ]);
+    })->name('api.database.backup.download');
+});
