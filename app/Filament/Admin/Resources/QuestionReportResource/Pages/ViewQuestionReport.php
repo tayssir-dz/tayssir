@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\QuestionReportResource\Pages;
 
+use App\Filament\Admin\Resources\ChapterResource;
 use App\Filament\Admin\Resources\QuestionReportResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
@@ -26,6 +27,10 @@ class ViewQuestionReport extends ViewRecord
                     ->action(fn($record) => $record->markAsUnread())
                     ->color('warning')
                     ->requiresConfirmation(),
+                Actions\Action::make("goToChapter")
+                    ->label("GOTO")
+                    ->url(fn($record) => ChapterResource::getUrl('edit', ['record' => $record->question->chapter()->first()]))
+                    ->color("info"),
                 Actions\DeleteAction::make()
                     ->label(__('custom.models.generic.delete')),
             ]),
