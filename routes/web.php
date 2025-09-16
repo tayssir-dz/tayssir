@@ -51,20 +51,20 @@ Route::middleware(['web', 'auth', 'role:super_admin'])->group(function () {
 
 
 
-Route::middleware(['web', 'auth', 'role:super_admin'])->group(function () {
-    Route::get('database/backup', function (Request $request) {
-        $path = 'private/database-backup.sqlite';
+// Route::middleware(['web', 'auth', 'role:super_admin'])->group(function () {
+//     Route::get('database/backup', function (Request $request) {
+//         $path = 'private/database-backup.sqlite';
 
-        if (!Storage::disk('local')->exists($path)) {
-            abort(404);
-        }
+//         if (!Storage::disk('local')->exists($path)) {
+//             abort(404);
+//         }
 
-        $stream = Storage::disk('local')->readStream($path);
-        return response()->stream(function () use ($stream) {
-            fpassthru($stream);
-        }, 200, [
-            'Content-Type' => 'application/octet-stream',
-            'Content-Disposition' => 'attachment; filename="databasee.sqlite"',
-        ]);
-    })->name('api.database.backup.download');
-});
+//         $stream = Storage::disk('local')->readStream($path);
+//         return response()->stream(function () use ($stream) {
+//             fpassthru($stream);
+//         }, 200, [
+//             'Content-Type' => 'application/octet-stream',
+//             'Content-Disposition' => 'attachment; filename="databasee.sqlite"',
+//         ]);
+//     })->name('api.database.backup.download');
+// });
