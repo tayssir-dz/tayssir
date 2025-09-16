@@ -18,8 +18,3 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-
-
-# ignore
-/migrate_sqlite_to_mysql.sh
-/migration_progress.log
