@@ -60,6 +60,11 @@ class Chapter extends Model implements HasMedia
             ->limit(1);
     }
 
+    public function getSortAttribute()
+    {
+        return $this->unit()->first()?->pivot?->sort ?? null;
+    }
+
     /**
      * Get the questions for the chapter.
      */
