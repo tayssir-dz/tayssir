@@ -15,8 +15,9 @@ class EditUser extends EditRecord
 
     protected function getHeaderActions(): array
     {
-        $routeName = static::getRouteName();
-        $currentRoute = request()->route()->getName();
+        // $routeName = static::getRouteName();
+        // $currentRoute = request()->route()->getName();
+        $record = $this->getRecord();
         return [
             Actions\DeleteAction::make(),
             Actions\Action::make("sendCustomNotification")
@@ -31,9 +32,8 @@ class EditUser extends EditRecord
                         ->required()
                         ->maxLength(65535),
                 ])
-                ->action(function (array $data) {
-                    $this->record->notify(new \App\Notifications\CustomUserNotification($data['
-title'], $data['body']));
+                ->action(function (array $data) use ($record): void {
+                    $record->notify(new \App\Notifications\CustomUserNotification($data['title'], $data['body']));
                 })
                 ->color('success')
         ];
