@@ -22,7 +22,7 @@ class EditUser extends EditRecord
         return [
             Actions\DeleteAction::make(),
             Actions\Action::make("sendCustomNotification")
-                ->label("send custom notification")
+                ->label("send notification")
                 ->icon('heroicon-o-bell')
                 // form for title and body
                 ->form([
