@@ -20,7 +20,6 @@ class EditUser extends EditRecord
         // $currentRoute = request()->route()->getName();
         $record = $this->getRecord();
         return [
-            Actions\DeleteAction::make(),
             Actions\Action::make("sendCustomNotification")
                 ->label("send notification")
                 ->icon('heroicon-o-bell')
@@ -40,7 +39,8 @@ class EditUser extends EditRecord
                         ->success()
                         ->send();
                 })
-                ->color('info')
+                ->color(color: 'warning'),
+            Actions\DeleteAction::make(),
         ];
     }
 }
