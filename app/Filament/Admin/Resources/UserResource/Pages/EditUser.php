@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources\UserResource\Pages;
 
 use App\Filament\Admin\Resources\UserResource;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Howdu\FilamentRecordSwitcher\Filament\Concerns\HasRecordSwitcher;
 
@@ -34,6 +35,10 @@ class EditUser extends EditRecord
                 ])
                 ->action(function (array $data) use ($record): void {
                     $record->notify(new \App\Notifications\CustomUserNotification($data['title'], $data['body']));
+                    Notification::make()
+                        ->title('Notification sent successfully')
+                        ->success()
+                        ->send();
                 })
                 ->color('success')
         ];
