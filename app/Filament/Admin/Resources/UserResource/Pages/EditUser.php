@@ -19,6 +19,23 @@ class EditUser extends EditRecord
         $currentRoute = request()->route()->getName();
         return [
             Actions\DeleteAction::make(),
+            Actions\Action::make("sendCustomNotification")
+                ->label("send custom notification")
+                ->icon('heroicon-o-bell')
+                // form for title and body
+                ->form([
+                    \Filament\Forms\Components\TextInput::make('title')
+                        ->required()
+                        ->maxLength(255),
+                    \Filament\Forms\Components\Textarea::make('body')
+                        ->required()
+                        ->maxLength(65535),
+                ])
+                ->action(function (array $data) {
+                    $this->record->notify(new \App\Notifications\CustomUserNotification($data['
+title'], $data['body']));
+                })
+                ->color('success')
         ];
     }
 }
