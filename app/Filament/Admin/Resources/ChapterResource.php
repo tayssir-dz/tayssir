@@ -60,7 +60,7 @@ class ChapterResource extends Resource
                     Select::make('unit')
                         ->relationship('unit', 'name')
                         ->searchable()
-                        ->preload()
+                        // ->preload()
                         ->required()
                         ->label(__('custom.models.chapter.unit')),
 

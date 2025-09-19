@@ -111,8 +111,8 @@ class ChaptersRelationManager extends RelationManager
             ->reorderable('sort')
             ->recordTitleAttribute('name')
             ->columns([
-                TextColumn::make('id'),
-                TextColumn::make('sort'),
+                // TextColumn::make('id'),
+                // TextColumn::make('sort'),
                 SpatieMediaLibraryImageColumn::make('photo')
                     ->placeholder(__('custom.table.image.empty'))
                     ->collection('chapter_photos')
