@@ -60,7 +60,7 @@ class UnitResource extends Resource
                     Select::make('material')
                         ->relationship('material', 'code')
                         ->searchable()
-                        ->preload()
+                        // ->preload()
                         ->required()
                         ->label(__('custom.models.unit.material')),
 

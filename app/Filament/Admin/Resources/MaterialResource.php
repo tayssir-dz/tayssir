@@ -79,7 +79,7 @@ class MaterialResource extends Resource
                         ->relationship('divisions', 'name')
                         ->multiple()
                         ->required()
-                        ->preload()
+                        // ->preload()
                         ->label(__('custom.models.material.division')),
 
                     // Forms\Components\Toggle::make('rtl')
