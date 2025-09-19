@@ -288,6 +288,13 @@ class UserResource extends Resource
                             $record->save();
                         }
                     }),
+                TextColumn::make('created_at')
+                    ->label(__('custom.table.created_at'))
+                    ->getStateUsing(fn($record) => $record->created_at?->diffForHumans())
+                    ->tooltip(fn($record) => $record->created_at?->format('Y-m-d H:i:s'))
+                    ->sortable()
+                    ->toggleable()
+                    ->size('sm'),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
