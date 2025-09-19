@@ -40,7 +40,7 @@ class EditUser extends EditRecord
                         ->success()
                         ->send();
                 })
-                ->color('success')
+                ->color('info')
         ];
     }
 }
