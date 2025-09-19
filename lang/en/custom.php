@@ -539,4 +539,8 @@ return [
     'settings.payment.name' => 'Payment Name',
     'settings.payment.number' => 'Payment Number',
     'settings.payment.active' => 'Active',
+
+    // User custom notification action
+    'models.user.actions.send_custom_notification' => 'Send notification',
+    'models.user.notices.custom_notification_sent' => 'Notification sent successfully',
 ];

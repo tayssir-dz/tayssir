@@ -538,5 +538,9 @@ return [
     'settings.payment.section.information' => 'Informations de paiement',
     'settings.payment.name' => 'Nom du paiement',
     'settings.payment.number' => 'Numéro de paiement',
-    'settings.payment.active' => 'Actif'
+    'settings.payment.active' => 'Actif',
+
+    // User custom notification action
+    'models.user.actions.send_custom_notification' => 'Envoyer une notification',
+    'models.user.notices.custom_notification_sent' => 'Notification envoyée avec succès'
 ];

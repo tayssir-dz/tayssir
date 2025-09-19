@@ -20,8 +20,8 @@ class EditUser extends EditRecord
         // $currentRoute = request()->route()->getName();
         $record = $this->getRecord();
         return [
-            Actions\Action::make("sendCustomNotification")
-                ->label("send notification")
+            Actions\Action::make('sendCustomNotification')
+                ->label(__('custom.models.user.actions.send_custom_notification'))
                 ->icon('heroicon-o-bell')
                 // form for title and body
                 ->form([
@@ -35,7 +35,7 @@ class EditUser extends EditRecord
                 ->action(function (array $data) use ($record): void {
                     $record->notify(new \App\Notifications\CustomUserNotification($data['title'], $data['body']));
                     Notification::make()
-                        ->title('Notification sent successfully')
+                        ->title(__('custom.models.user.notices.custom_notification_sent'))
                         ->success()
                         ->send();
                 })

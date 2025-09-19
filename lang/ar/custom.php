@@ -535,4 +535,8 @@ return [
     'settings.payment.name' => 'اسم جهة الدفع',
     'settings.payment.number' => 'رقم جهة الدفع',
     'settings.payment.active' => 'نشط',
+
+    // User custom notification action
+    'models.user.actions.send_custom_notification' => 'إرسال إشعار',
+    'models.user.notices.custom_notification_sent' => 'تم إرسال الإشعار بنجاح',
 ];
