@@ -5,7 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Observers\UserObserver;
-use App\Settings\PlatformSettings;
 use App\Traits\User\HasProgress;
 use App\Traits\User\HasSubscriptions;
 use App\Traits\User\HasWilayaAndCommune;
