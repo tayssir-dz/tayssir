@@ -6,6 +6,9 @@ use Spatie\LaravelSettings\Settings;
 
 class PlatformSettings extends Settings
 {
+    public ?string $platform_active_from;
+    public ?string $platform_active_to;
+
     public string $instagram_url;
     public bool $instagram_active;
 

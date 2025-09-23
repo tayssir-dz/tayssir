@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Pages;
 
 use App\Filament\Admin\AdminNavigation;
 use App\Settings\PlatformSettings;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -96,6 +97,21 @@ class ManagePlatformSettings extends SettingsPage
                                     ->label(__('custom.settings.platform.linkedin.active')),
                             ])
                             ->columns(4),
+                        Tabs\Tab::make(__('users scope'))
+                            ->schema([
+                                DatePicker::make('platform_active_from')
+                                    ->label(__('platform users active from'))
+                                    ->native(false)
+                                    ->closeOnDateSelection()
+                                    ->placeholder('YYYY-MM-DD'),
+                                DatePicker::make('platform_active_to')
+                                    ->label(__('platform users active to'))
+                                    ->native(false)
+                                    ->closeOnDateSelection()
+                                    ->placeholder('YYYY-MM-DD'),
+                            ])
+                            ->columns(2),
+
                     ]),
             ]);
     }

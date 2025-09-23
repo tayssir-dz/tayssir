@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Observers\UserObserver;
+use App\Settings\PlatformSettings;
 use App\Traits\User\HasProgress;
 use App\Traits\User\HasSubscriptions;
 use App\Traits\User\HasWilayaAndCommune;
@@ -15,6 +16,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -132,5 +134,25 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
     public function scopeAdmins($query)
     {
         return $query->role(['super_admin']);
+    }
+
+    public function scopeWithinPlatformPeriod(Builder $query): Builder
+    {
+        $settings = app(PlatformSettings::class);
+        $from = $settings->platform_active_from ? Carbon::parse($settings->platform_active_from) : null;
+        $to   = $settings->platform_active_to ? Carbon::parse($settings->platform_active_to) : null;
+
+        if ($from && $to) {
+            return $query->whereBetween('created_at', [$from, $to]);
+        }
+
+        if ($from) {
+            return $query->where('created_at', '>=', $from);
+        }
+
+        if ($to) {
+            return $query->where('created_at', '<=', $to);
+        }
+        return $query;
     }
 }
