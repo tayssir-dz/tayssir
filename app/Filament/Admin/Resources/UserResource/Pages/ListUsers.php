@@ -40,11 +40,11 @@ class ListUsers extends ListRecords
                 });
             });
 
-        $arr['scoped'] = Tab::make()->label(__('Scoped users'))
-            ->icon("heroicon-o-user-group")
-            ->modifyQueryUsing(function (Builder $query) {
-                $query->withinPlatformPeriod();
-            });
+        // $arr['scoped'] = Tab::make()->label(__('Scoped users'))
+        //     ->icon("heroicon-o-user-group")
+        //     ->modifyQueryUsing(function (Builder $query) {
+        //         $query->withinPlatformPeriod();
+        //     });
 
         return $arr;
     }
