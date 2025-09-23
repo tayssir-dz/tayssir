@@ -63,7 +63,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
     protected function casts(): array
     {
         return [
-            'email_verified_at' => Carbon::class,
+            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
