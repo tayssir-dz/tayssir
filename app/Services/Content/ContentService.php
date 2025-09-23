@@ -101,6 +101,10 @@ class ContentService
                         'unit_id' => $unit->id,
                         'bonus_points' => $chapter->chapter_level ? $chapter->chapter_level->bonus : 0,
                         'earned_bonus' => $bonusPoints,
+                        // Progress & points were missing causing frontend to treat all chapters uniformly
+                        // For non-subscribed (premium) chapters, progressData won't have entries => default 0
+                        'progress' => $progressData['chapters'][$chapter->id] ?? 0,
+                        'points' => $progressData['points']['chapters'][$chapter->id] ?? 0,
                         'visibility' => $visibility,
                     ];
 
