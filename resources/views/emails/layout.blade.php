@@ -147,6 +147,7 @@
                         </td>
                     </tr>
                 </table>
+                 @include('emails.components.footer', ['margin' => '0'])
                 @isset($legal)
                     <p class="footer-note">{!! $legal !!}</p>
                 @endisset
