@@ -194,7 +194,7 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                // TextColumn::make('id')
+                TextColumn::make('id'),
                 // TextColumn::make('avatar_url')
                 //     ->toggleable()
                 //     ->label(__('custom.models.user.avatar'))
@@ -203,23 +203,23 @@ class UserResource extends Resource
                 //         'name' => $record->name,
                 //         'avatar_url' => $record->avatar_url,
                 //     ])->render()),
-                // TextColumn::make('email')
-                //     ->label(__('custom.models.user.email'))
-                //     ->searchable()
-                //     ->sortable()
-                //     ->toggleable()
-                //     ->weight(FontWeight::Bold)
-                //     ->size('sm'),
-                // TextColumn::make('name')
-                //     ->label(__('custom.models.user.name'))
-                //     ->searchable()
-                //     ->sortable()
-                //     ->toggleable()
-                //     ->weight(FontWeight::Bold)
-                //     ->size('sm'),
-                // // ->description(fn($record) => view('components.small-text')->with([
-                // //     'text' => $record->email
-                // // ])),
+                TextColumn::make('email')
+                    ->label(__('custom.models.user.email'))
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable()
+                    ->weight(FontWeight::Bold)
+                    ->size('sm'),
+                TextColumn::make('name')
+                    ->label(__('custom.models.user.name'))
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable()
+                    ->weight(FontWeight::Bold)
+                    ->size('sm'),
+                // ->description(fn($record) => view('components.small-text')->with([
+                //     'text' => $record->email
+                // ])),
 
                 // PhoneColumn::make('phone_number')
                 //     ->label(__('custom.models.user.phone'))
