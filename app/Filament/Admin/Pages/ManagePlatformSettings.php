@@ -97,15 +97,15 @@ class ManagePlatformSettings extends SettingsPage
                                     ->label(__('custom.settings.platform.linkedin.active')),
                             ])
                             ->columns(4),
-                        Tabs\Tab::make(__('users scope'))
+                        Tabs\Tab::make(__('custom.settings.platform.section.users_scope'))
                             ->schema([
                                 DatePicker::make('platform_active_from')
-                                    ->label(__('platform users active from'))
+                                    ->label(__('custom.settings.platform.users_scope.active_from'))
                                     ->native(false)
                                     ->closeOnDateSelection()
                                     ->placeholder('YYYY-MM-DD'),
                                 DatePicker::make('platform_active_to')
-                                    ->label(__('platform users active to'))
+                                    ->label(__('custom.settings.platform.users_scope.active_to'))
                                     ->native(false)
                                     ->closeOnDateSelection()
                                     ->placeholder('YYYY-MM-DD'),

@@ -26,9 +26,11 @@ class EditUser extends EditRecord
                 // form for title and body
                 ->form([
                     \Filament\Forms\Components\TextInput::make('title')
+                        ->label(__('custom.models.user.actions.send_custom_notification.title'))
                         ->required()
                         ->maxLength(255),
                     \Filament\Forms\Components\Textarea::make('body')
+                        ->label(__('custom.models.user.actions.send_custom_notification.body'))
                         ->required()
                         ->maxLength(65535),
                 ])

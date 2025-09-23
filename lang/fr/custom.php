@@ -264,6 +264,7 @@ return [
     'models.user.tabs.all' => 'Tous',
     'models.user.tabs.students' => 'Étudiants',
     'models.user.tabs.with_roles' => 'Avec rôles',
+    'models.user.tabs.scoped' => 'Utilisateurs ciblés',
 
     'models.user.perfonal_info' => 'Informations personnelles',
     'models.user.subscribtion' => 'Abonnement',
@@ -531,6 +532,10 @@ return [
     'settings.platform.youtube.active' => 'Actif',
     'settings.platform.linkedin.url' => 'URL LinkedIn',
     'settings.platform.linkedin.active' => 'Actif',
+    // Users scope tab and fields
+    'settings.platform.section.users_scope' => 'Portée des utilisateurs',
+    'settings.platform.users_scope.active_from' => 'Utilisateurs actifs de la plateforme à partir du',
+    'settings.platform.users_scope.active_to' => 'Utilisateurs actifs de la plateforme jusqu’au',
 
     // # Settings Tabs
     'settings.tabs.app' => 'Application',
@@ -544,5 +549,7 @@ return [
 
     // User custom notification action
     'models.user.actions.send_custom_notification' => 'Envoyer une notification',
-    'models.user.notices.custom_notification_sent' => 'Notification envoyée avec succès'
+    'models.user.notices.custom_notification_sent' => 'Notification envoyée avec succès',
+    'models.user.actions.send_custom_notification.title' => 'Titre',
+    'models.user.actions.send_custom_notification.body' => 'Contenu',
 ];

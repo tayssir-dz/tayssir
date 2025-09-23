@@ -265,6 +265,7 @@ return [
     'models.user.tabs.all' => 'الكل',
     'models.user.tabs.students' => 'الطلاب',
     'models.user.tabs.with_roles' => 'ذوي الأدوار',
+    'models.user.tabs.scoped' => 'المستخدمون ضمن النطاق',
 
     'models.user.perfonal_info' => 'المعلومات الشخصية',
     'models.user.subscribtion' => 'حالة الاشتراك',
@@ -531,6 +532,10 @@ return [
     'settings.platform.youtube.active' => 'نشط',
     'settings.platform.linkedin.url' => 'رابط لينكد إن',
     'settings.platform.linkedin.active' => 'نشط',
+    // Users scope tab and fields
+    'settings.platform.section.users_scope' => 'نطاق المستخدمين',
+    'settings.platform.users_scope.active_from' => 'تفعيل المستخدمين من تاريخ',
+    'settings.platform.users_scope.active_to' => 'تفعيل المستخدمين إلى تاريخ',
 
     // # Payment Settings
     'settings.payment.section.information' => 'معلومات الدفع',
@@ -541,4 +546,6 @@ return [
     // User custom notification action
     'models.user.actions.send_custom_notification' => 'إرسال إشعار',
     'models.user.notices.custom_notification_sent' => 'تم إرسال الإشعار بنجاح',
+    'models.user.actions.send_custom_notification.title' => 'العنوان',
+    'models.user.actions.send_custom_notification.body' => 'المحتوى',
 ];

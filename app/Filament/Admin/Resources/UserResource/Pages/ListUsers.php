@@ -40,7 +40,7 @@ class ListUsers extends ListRecords
                 });
             });
 
-        $arr['scoped'] = Tab::make()->label(__('Scoped Users'))
+        $arr['scoped'] = Tab::make()->label(__('custom.models.user.tabs.scoped'))
             ->icon('heroicon-o-user-group')
             ->modifyQueryUsing(function (Builder $query) {
                 $query->withinPlatformPeriod();

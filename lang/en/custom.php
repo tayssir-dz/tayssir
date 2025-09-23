@@ -265,6 +265,7 @@ return [
     'models.user.tabs.all' => 'All',
     'models.user.tabs.students' => 'Students',
     'models.user.tabs.with_roles' => 'With roles',
+    'models.user.tabs.scoped' => 'Scoped users',
 
     'models.user.perfonal_info' => 'Personal informations',
     'models.user.subscribtion' => 'Subscription',
@@ -531,6 +532,10 @@ return [
     'settings.platform.youtube.active' => 'Active',
     'settings.platform.linkedin.url' => 'LinkedIn URL',
     'settings.platform.linkedin.active' => 'Active',
+    // Users scope tab and fields
+    'settings.platform.section.users_scope' => 'Users scope',
+    'settings.platform.users_scope.active_from' => 'Platform users active from',
+    'settings.platform.users_scope.active_to' => 'Platform users active to',
 
     // # Settings Tabs
     'settings.tabs.app' => 'App',
@@ -545,4 +550,6 @@ return [
     // User custom notification action
     'models.user.actions.send_custom_notification' => 'Send notification',
     'models.user.notices.custom_notification_sent' => 'Notification sent successfully',
+    'models.user.actions.send_custom_notification.title' => 'Title',
+    'models.user.actions.send_custom_notification.body' => 'Body',
 ];
