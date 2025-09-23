@@ -11,7 +11,6 @@ use App\Http\Requests\API\Auth\GoogleLoginRequest;
 use App\Http\Requests\API\Auth\GoogleRegisterRequest;
 use App\Http\Requests\API\Auth\LoginRequest;
 use App\Http\Requests\API\Auth\RegisterRequest;
-use App\Notifications\WelcomeNotification;
 use App\Models\User;
 use App\Services\Auth\GoogleAuthService;
 use Carbon\Carbon;
@@ -139,9 +138,6 @@ class AuthController extends BaseController
         ]);
         $role = Role::firstOrCreate(['name' => 'student']);
         $user->assignRole($role);
-
-        // Send welcome notification (mail + database)
-        $user->notify(new WelcomeNotification($user->name));
 
         // $token = $user->createToken($input["device_name"])->plainTextToken;
         $accessToken = $user->createToken('access_token', [TokenAbility::ACCESS_API->value], Carbon::now()->addMinutes(config('sanctum.access_token_expiration')));

@@ -15,7 +15,7 @@ class EmailVerificationNotification extends Notification implements ShouldQueue
 
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     public function toMail(object $notifiable): MailMessage
@@ -26,7 +26,15 @@ class EmailVerificationNotification extends Notification implements ShouldQueue
         ];
 
         return (new MailMessage)
-            ->subject(config('app.name') . ' - تحقق من البريد الإلكتروني')
+            ->subject('شكرًا لانضمامك إلى ' . config('app.name') . '! تحقق من حسابك بهذا الرمز')
             ->view('emails.email-verification-mail', compact('mailData'));
+    }
+
+    public function toDatabase(object $notifiable): array
+    {
+        return [
+            'title' => 'مرحبا بك في ' . config('app.name'),
+            'body' => 'نرحب بانضمامك إلى ' . config('app.name') . ' . نتمنى لك تجربة ممتعة.',
+        ];
     }
 }
