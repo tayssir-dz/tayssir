@@ -24,6 +24,7 @@ use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Notifications\Notification;
 
 class MaterialResource extends Resource
 {
@@ -200,6 +201,18 @@ class MaterialResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('clone')
+                    ->label('Clone')
+                    ->icon('heroicon-o-document-duplicate')
+                    ->requiresConfirmation()
+                    ->action(function (Material $record) {
+                        $cloned = $record->deepClone();
+                        Notification::make()
+                            ->title('Material cloned')
+                            ->body('New material: ' . $cloned->name)
+                            ->success()
+                            ->send();
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
