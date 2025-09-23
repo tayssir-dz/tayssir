@@ -54,7 +54,7 @@ class UserResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::withinPlatformPeriod()->count();
+        return static::getModel()::count();
     }
 
     protected static ?string $model = User::class;
