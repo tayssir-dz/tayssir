@@ -120,4 +120,13 @@ class Chapter extends Model implements HasMedia
     {
         return $query->where('active', true);
     }
+
+    protected static function booted()
+    {
+        static::deleting(function ($chapter) {
+            foreach ($chapter->questions as $question) {
+                $question->delete();
+            }
+        });
+    }
 }

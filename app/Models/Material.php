@@ -272,4 +272,13 @@ class Material extends Model implements HasMedia
             return $cloned->fresh(['units.chapters.questions']);
         });
     }
+
+    protected static function booted()
+    {
+        static::deleting(function ($material) {
+            foreach ($material->units as $unit) {
+                $unit->delete();
+            }
+        });
+    }
 }

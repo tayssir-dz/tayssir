@@ -124,4 +124,13 @@ class Unit extends Model implements HasMedia
     {
         return $query->where('active', true);
     }
+
+    protected static function booted()
+    {
+        static::deleting(function ($unit) {
+            foreach ($unit->chapters as $chapter) {
+                $chapter->delete();
+            }
+        });
+    }
 }
