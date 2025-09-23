@@ -43,7 +43,7 @@ class ResponseController
             'commune' => $user->wilaya && $user->commune ? ResponseController::CommuneRes($user->commune) : null,
             'division' => $user->division,
             'subscriptions' => $user->subscriptions,
-            'points' => $user->points(),
+            // 'points' => $user->points(),
             "has_new_notifications"  => $user->unreadNotifications()->exists(),
             "new_notifications_count"  => $user->unreadNotifications()->count(),
             // 'subscribed' => $subscriptionCard && $subscriptionCard->subscription && Carbon::now()->lessThan($user->subscriptionCard->subscription->ending_date),
