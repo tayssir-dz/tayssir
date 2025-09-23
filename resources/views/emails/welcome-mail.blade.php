@@ -26,4 +26,6 @@
     @component('emails.components.paragraph', ['margin' => '0'])
         فريق {{ config('app.name') }}
     @endcomponent
+
+    @include('emails.components.footer', ['margin' => '0'])
 @endcomponent
