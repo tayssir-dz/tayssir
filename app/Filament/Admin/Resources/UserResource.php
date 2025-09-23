@@ -194,110 +194,110 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')
-                // TextColumn::make('avatar_url')
-                //     ->toggleable()
-                //     ->label(__('custom.models.user.avatar'))
-                //     ->html()
-                //     ->getStateUsing(fn($record) => view('components.filament-ui.avatar', [
-                //         'name' => $record->name,
-                //         'avatar_url' => $record->avatar_url,
-                //     ])->render()),
-                // TextColumn::make('email')
-                //     ->label(__('custom.models.user.email'))
-                //     ->searchable()
-                //     ->sortable()
-                //     ->toggleable()
-                //     ->weight(FontWeight::Bold)
-                //     ->size('sm'),
-                // TextColumn::make('name')
-                //     ->label(__('custom.models.user.name'))
-                //     ->searchable()
-                //     ->sortable()
-                //     ->toggleable()
-                //     ->weight(FontWeight::Bold)
-                //     ->size('sm'),
-                // // ->description(fn($record) => view('components.small-text')->with([
-                // //     'text' => $record->email
-                // // ])),
+                // TextColumn::make('id')
+                TextColumn::make('avatar_url')
+                    ->toggleable()
+                    ->label(__('custom.models.user.avatar'))
+                    ->html()
+                    ->getStateUsing(fn($record) => view('components.filament-ui.avatar', [
+                        'name' => $record->name,
+                        'avatar_url' => $record->avatar_url,
+                    ])->render()),
+                TextColumn::make('email')
+                    ->label(__('custom.models.user.email'))
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable()
+                    ->weight(FontWeight::Bold)
+                    ->size('sm'),
+                TextColumn::make('name')
+                    ->label(__('custom.models.user.name'))
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable()
+                    ->weight(FontWeight::Bold)
+                    ->size('sm'),
+                // ->description(fn($record) => view('components.small-text')->with([
+                //     'text' => $record->email
+                // ])),
 
-                // PhoneColumn::make('phone_number')
-                //     ->label(__('custom.models.user.phone'))
-                //     ->default(__('custom.models.user.phone.empty'))
-                //     ->searchable()
-                //     ->toggleable()
-                //     ->copyable()
-                //     ->size('sm')
-                //     ->copyMessage('Phone number copied')
-                //     ->copyMessageDuration(1500),
+                PhoneColumn::make('phone_number')
+                    ->label(__('custom.models.user.phone'))
+                    ->default(__('custom.models.user.phone.empty'))
+                    ->searchable()
+                    ->toggleable()
+                    ->copyable()
+                    ->size('sm')
+                    ->copyMessage('Phone number copied')
+                    ->copyMessageDuration(1500),
 
-                // // TextColumn::make('points')
-                // //     ->label(__('custom.models.user.points'))
-                // //     ->badge()
-                // //     ->color(fn($state) => $state > 1000 ? 'success' : 'warning')
-                // //     ->alignCenter()
-                // //     ->sortable()
-                // //     ->toggleable()
-                // //     ->size('sm')
-                // //     ->numeric(),
-
-                // TextColumn::make('roles.name')
-                //     ->label(__('custom.models.user.roles'))
+                // TextColumn::make('points')
+                //     ->label(__('custom.models.user.points'))
                 //     ->badge()
-                //     ->toggleable()
-                //     ->color('primary')
-                //     ->separator(', ')
-                //     ->size('sm')
-                //     ->default(__('custom.models.user.roles.empty'))
-                //     ->wrap(),
-
-                // TextColumn::make('subscriptions')
-                //     ->label(__('custom.models.user.subscribtion'))
-                //     ->badge()
-                //     ->wrap()
-                //     ->toggleable()
-                //     ->color('success')
-                //     ->size('sm')
-                //     ->getStateUsing(function ($record) {
-                //         return $record->active_subscriptions
-                //             ->map(fn($sub) => $sub->name)
-                //             ->values()
-                //             ->toArray() ?: ['-'];
-                //     })
-                //     ->wrap(),
-
-                // TextColumn::make('wilaya.' . __('custom.models.user.wilaya.field'))
-                //     ->label(__('custom.models.user.wilaya'))
-                //     ->searchable()
-                //     ->toggleable()
-                //     ->sortable()
-                //     ->size('sm')
-                //     ->default(__('custom.models.user.wilaya.empty'))
-                //     ->description(fn($record) => $record->commune?->{__('custom.models.user.commune.field')} ?? __('custom.models.user.commune.empty')),
-
-                // ToggleColumn::make('email_verified_at')
-                //     ->label(__('custom.models.user.verified'))
-                //     ->sortable()
-                //     ->toggleable()
+                //     ->color(fn($state) => $state > 1000 ? 'success' : 'warning')
                 //     ->alignCenter()
-                //     ->afterStateUpdated(function ($state, $record) {
-                //         if ($state) {
-                //             $record->email_verified_at = Date::now();
-                //             $record->save();
-                //         } else {
-                //             // $record->forceFill(['email_verified_at' => null])->save();
-
-                //             $record->email_verified_at = null;
-                //             $record->save();
-                //         }
-                //     }),
-                // TextColumn::make('created_at')
-                //     ->label(__('custom.table.created_at'))
-                //     ->getStateUsing(fn($record) => $record->created_at?->diffForHumans())
-                //     ->tooltip(fn($record) => $record->created_at?->format('Y-m-d H:i:s'))
                 //     ->sortable()
                 //     ->toggleable()
-                //     ->size('sm'),
+                //     ->size('sm')
+                //     ->numeric(),
+
+                TextColumn::make('roles.name')
+                    ->label(__('custom.models.user.roles'))
+                    ->badge()
+                    ->toggleable()
+                    ->color('primary')
+                    ->separator(', ')
+                    ->size('sm')
+                    ->default(__('custom.models.user.roles.empty'))
+                    ->wrap(),
+
+                TextColumn::make('subscriptions')
+                    ->label(__('custom.models.user.subscribtion'))
+                    ->badge()
+                    ->wrap()
+                    ->toggleable()
+                    ->color('success')
+                    ->size('sm')
+                    ->getStateUsing(function ($record) {
+                        return $record->active_subscriptions
+                            ->map(fn($sub) => $sub->name)
+                            ->values()
+                            ->toArray() ?: ['-'];
+                    })
+                    ->wrap(),
+
+                TextColumn::make('wilaya.' . __('custom.models.user.wilaya.field'))
+                    ->label(__('custom.models.user.wilaya'))
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable()
+                    ->size('sm')
+                    ->default(__('custom.models.user.wilaya.empty'))
+                    ->description(fn($record) => $record->commune?->{__('custom.models.user.commune.field')} ?? __('custom.models.user.commune.empty')),
+
+                ToggleColumn::make('email_verified_at')
+                    ->label(__('custom.models.user.verified'))
+                    ->sortable()
+                    ->toggleable()
+                    ->alignCenter()
+                    ->afterStateUpdated(function ($state, $record) {
+                        if ($state) {
+                            $record->email_verified_at = Date::now();
+                            $record->save();
+                        } else {
+                            // $record->forceFill(['email_verified_at' => null])->save();
+
+                            $record->email_verified_at = null;
+                            $record->save();
+                        }
+                    }),
+                TextColumn::make('created_at')
+                    ->label(__('custom.table.created_at'))
+                    ->getStateUsing(fn($record) => $record->created_at?->diffForHumans())
+                    ->tooltip(fn($record) => $record->created_at?->format('Y-m-d H:i:s'))
+                    ->sortable()
+                    ->toggleable()
+                    ->size('sm'),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
