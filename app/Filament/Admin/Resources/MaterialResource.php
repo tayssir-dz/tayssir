@@ -202,14 +202,14 @@ class MaterialResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('clone')
-                    ->label('Clone')
+                    ->label(__('custom.models.material.actions.clone'))
                     ->icon('heroicon-o-document-duplicate')
                     ->requiresConfirmation()
                     ->action(function (Material $record) {
                         $cloned = $record->deepClone();
                         Notification::make()
-                            ->title('Material cloned')
-                            ->body('New material: ' . $cloned->name)
+                            ->title(__('custom.models.material.actions.clone'))
+                            ->body(__('custom.models.material') . ': ' . $cloned->name)
                             ->success()
                             ->send();
                     }),

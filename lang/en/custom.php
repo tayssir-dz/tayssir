@@ -227,6 +227,8 @@ return [
     'models.material.action.details' => 'Material details',
     'models.material.image' => 'Material image list',
     'models.material.image_grid' => 'Material grid image',
+    // Material actions
+    'models.material.actions.clone' => 'Clone',
 
     // # Unit
     'models.unit.name' => 'Unit name',

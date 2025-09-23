@@ -227,6 +227,8 @@ return [
     'models.material.action.details' => 'Détails de la matière',
     'models.material.image' => 'Liste d\'images de la matière',
     'models.material.image_grid' => 'Image grille de la matière',
+    // Material actions
+    'models.material.actions.clone' => 'Cloner',
     // # Unit
     'models.unit.name' => 'Nom de l\'unité',
     'models.unit.description' => 'Description de l\'unité',

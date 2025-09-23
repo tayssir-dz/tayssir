@@ -209,6 +209,8 @@ return [
     'models.material.action.details' => 'تفاصيل المادة',
     'models.material.image' => 'قائمة صور المادة',
     'models.material.image_grid' => 'صورة شبكة المادة',
+    // Material actions
+    'models.material.actions.clone' => 'استنساخ',
     // # Unit
     'models.unit.name' => 'اسم الوحدة',
     'models.unit.description' => 'وصف الوحدة',
