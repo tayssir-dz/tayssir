@@ -42,6 +42,7 @@ class PromoterPanelProvider extends PanelProvider
                     'neutral' => Color::hex('#E5E7EB'),
                 ]
             )
+            ->spa()
             ->databaseNotifications()
             ->font('Poppins')
             ->discoverPages(in: app_path('Filament/Promoter/Pages'), for: 'App\\Filament\\Promoter\\Pages')
