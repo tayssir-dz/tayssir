@@ -11,9 +11,9 @@
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" class="footer">
     <tr>
         <td style="padding:20px; text-align:center; background:#ffffff;">
-            <p style="margin:0 0 12px; font-size:14px; line-height:24px; color:#374151;">
+            {{-- <p style="margin:0 0 12px; font-size:14px; line-height:24px; color:#374151;">
                 {{ $footerText ?? 'لن نطلب منك أبدًا مشاركة كلمة المرور أو البيانات الحساسة عبر البريد الإلكتروني.' }}
-            </p>
+            </p> --}}
 
             @if($anyActive)
                 <div style="margin-top:12px;">
