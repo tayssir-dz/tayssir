@@ -168,11 +168,14 @@ class Material extends Model implements HasMedia
             // Copy material media (single file collections)
             foreach (['image', 'image_grid'] as $collection) {
                 if ($media = $this->getFirstMedia($collection)) {
-                    $cloned
-                        ->addMedia($media->getPath())
-                        ->usingName($media->name)
-                        ->usingFileName($media->file_name)
-                        ->toMediaCollection($collection);
+                    $path = $media->getPath();
+                    if ($path && file_exists($path)) {
+                        $cloned
+                            ->addMedia($path)
+                            ->usingName($media->name)
+                            ->usingFileName($media->file_name)
+                            ->toMediaCollection($collection);
+                    }
                 }
             }
 
@@ -192,11 +195,14 @@ class Material extends Model implements HasMedia
 
                 // Copy unit media
                 if ($uMedia = $unit->getFirstMedia('image')) {
-                    $newUnit
-                        ->addMedia($uMedia->getPath())
-                        ->usingName($uMedia->name)
-                        ->usingFileName($uMedia->file_name)
-                        ->toMediaCollection('image');
+                    $uPath = $uMedia->getPath();
+                    if ($uPath && file_exists($uPath)) {
+                        $newUnit
+                            ->addMedia($uPath)
+                            ->usingName($uMedia->name)
+                            ->usingFileName($uMedia->file_name)
+                            ->toMediaCollection('image');
+                    }
                 }
 
                 // Attach unit to cloned material preserving pivot sort
@@ -213,11 +219,14 @@ class Material extends Model implements HasMedia
 
                     // Copy all chapter photos (could be multiple)
                     foreach ($chapter->getMedia('chapter_photos') as $cMedia) {
-                        $newChapter
-                            ->addMedia($cMedia->getPath())
-                            ->usingName($cMedia->name)
-                            ->usingFileName($cMedia->file_name)
-                            ->toMediaCollection('chapter_photos');
+                        $cPath = $cMedia->getPath();
+                        if ($cPath && file_exists($cPath)) {
+                            $newChapter
+                                ->addMedia($cPath)
+                                ->usingName($cMedia->name)
+                                ->usingFileName($cMedia->file_name)
+                                ->toMediaCollection('chapter_photos');
+                        }
                     }
 
                     // Attach chapter to new unit preserving sort
@@ -234,11 +243,14 @@ class Material extends Model implements HasMedia
 
                         foreach (['image', 'explanation_asset', 'hint_image'] as $qCollection) {
                             if ($qMedia = $question->getFirstMedia($qCollection)) {
-                                $newQuestion
-                                    ->addMedia($qMedia->getPath())
-                                    ->usingName($qMedia->name)
-                                    ->usingFileName($qMedia->file_name)
-                                    ->toMediaCollection($qCollection);
+                                $qPath = $qMedia->getPath();
+                                if ($qPath && file_exists($qPath)) {
+                                    $newQuestion
+                                        ->addMedia($qPath)
+                                        ->usingName($qMedia->name)
+                                        ->usingFileName($qMedia->file_name)
+                                        ->toMediaCollection($qCollection);
+                                }
                             }
                         }
 
