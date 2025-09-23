@@ -8,6 +8,7 @@ use App\Models\Pivot\MaterialUnit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -152,17 +153,24 @@ class Material extends Model implements HasMedia
     public function deepClone(): self
     {
         return DB::transaction(function () {
-            $stripCounts = function (Model $model) {
-                foreach ($model->getAttributes() as $key => $value) {
-                    if (str_ends_with($key, '_count')) {
-                        unset($model->$key);
+            $columnsCache = [];
+            $sanitize = function (Model $model) use (&$columnsCache) {
+                $table = $model->getTable();
+                if (! isset($columnsCache[$table])) {
+                    $columnsCache[$table] = Schema::getColumnListing($table);
+                }
+                $valid = $columnsCache[$table];
+                foreach (array_keys($model->getAttributes()) as $attr) {
+                    if (! in_array($attr, $valid, true)) {
+                        unset($model->$attr);
                     }
                 }
             };
             // Clone material core attributes
             $cloned = $this->replicate();
             $cloned->name = $this->name . ' (cloned)';
-            $stripCounts($cloned);
+            $cloned->code = $this->code . ' (cloned)';
+            $sanitize($cloned);
             $cloned->push(); // save
 
             // Copy material media (single file collections)
@@ -190,7 +198,7 @@ class Material extends Model implements HasMedia
                 if ($newUnit->isFillable('material_id')) {
                     $newUnit->material_id = null; // relationship handled by pivot
                 }
-                $stripCounts($newUnit);
+                $sanitize($newUnit); // remove material_id if not real column + counts
                 $newUnit->push();
 
                 // Copy unit media
@@ -214,7 +222,7 @@ class Material extends Model implements HasMedia
                 $chapters = $unit->chapters()->with('questions')->get();
                 foreach ($chapters as $chapter) {
                     $newChapter = $chapter->replicate();
-                    $stripCounts($newChapter);
+                    $sanitize($newChapter);
                     $newChapter->push();
 
                     // Copy all chapter photos (could be multiple)
@@ -238,7 +246,7 @@ class Material extends Model implements HasMedia
                     $questions = $chapter->questions()->get();
                     foreach ($questions as $question) {
                         $newQuestion = $question->replicate();
-                        $stripCounts($newQuestion);
+                        $sanitize($newQuestion);
                         $newQuestion->push();
 
                         foreach (['image', 'explanation_asset', 'hint_image'] as $qCollection) {
