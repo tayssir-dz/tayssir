@@ -136,23 +136,23 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
         return $query->role(['super_admin']);
     }
 
-    public function scopeWithinPlatformPeriod(Builder $query): Builder
-    {
-        $settings = app(PlatformSettings::class);
-        $from = $settings->platform_active_from ? Carbon::parse($settings->platform_active_from) : null;
-        $to   = $settings->platform_active_to ? Carbon::parse($settings->platform_active_to) : null;
+    // public function scopeWithinPlatformPeriod(Builder $query): Builder
+    // {
+    //     $settings = app(PlatformSettings::class);
+    //     $from = $settings->platform_active_from ? Carbon::parse($settings->platform_active_from) : null;
+    //     $to   = $settings->platform_active_to ? Carbon::parse($settings->platform_active_to) : null;
 
-        if ($from && $to) {
-            return $query->whereBetween('created_at', [$from, $to]);
-        }
+    //     if ($from && $to) {
+    //         return $query->whereBetween('created_at', [$from, $to]);
+    //     }
 
-        if ($from) {
-            return $query->where('created_at', '>=', $from);
-        }
+    //     if ($from) {
+    //         return $query->where('created_at', '>=', $from);
+    //     }
 
-        if ($to) {
-            return $query->where('created_at', '<=', $to);
-        }
-        return $query;
-    }
+    //     if ($to) {
+    //         return $query->where('created_at', '<=', $to);
+    //     }
+    //     return $query;
+    // }
 }
