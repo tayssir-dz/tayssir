@@ -9,6 +9,7 @@ use App\Http\Requests\API\EmailVerification\VerifyEmailRequest;
 use App\Http\Requests\API\ForgotPassword\VerifyOtpRequest;
 use App\Notifications\EmailVerificationNotification;
 use App\Models\User;
+use App\Notifications\WelcomeNotification;
 use Carbon\Carbon;
 use Dedoc\Scramble\Attributes\Group;
 use G4T\Swagger\Attributes\SwaggerSection;
@@ -58,6 +59,8 @@ class EmailVerificationController extends BaseController
         }
         $user->email_verified_at = now();
         $user->save();
+
+        $user->notify(new WelcomeNotification($user->name));
 
         return $this->sendResponse(['user' => ResponseController::userRes($user)], __('response.email_verified_successfully'));
     }

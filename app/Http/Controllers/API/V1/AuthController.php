@@ -64,7 +64,6 @@ class AuthController extends BaseController
         $role = Role::firstOrCreate(['name' => 'student']);
         $user->assignRole($role);
 
-        // Send welcome notification (mail + database)
         $user->notify(new WelcomeNotification($user->name));
 
         $user->tokens()->delete();

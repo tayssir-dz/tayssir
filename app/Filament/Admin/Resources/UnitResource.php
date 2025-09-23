@@ -61,7 +61,6 @@ class UnitResource extends Resource
                         ->relationship('material', 'code')
                         ->searchable()
                         // ->preload()
-                        ->multiple()
                         ->required()
                         ->label(__('custom.models.unit.material')),
 
