@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Http\Controllers\SocialRedirectController;
 
 // Route::get('/emails', function () {
 //     return view('emails.preview-wrapper', [
@@ -31,6 +32,11 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('home');
 })->name('login');
+
+// Public social media redirection routes (clean & stable for emails)
+Route::get('/social/{platform}', SocialRedirectController::class)
+    ->where('platform', 'instagram|facebook|tiktok|youtube|linkedin')
+    ->name('social.redirect');
 
 // Secure route to view payment attachment (super_admin only)
 Route::middleware(['web', 'auth', 'role:super_admin'])->group(function () {

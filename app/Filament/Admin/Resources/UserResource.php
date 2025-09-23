@@ -284,6 +284,8 @@ class UserResource extends Resource
                             $record->email_verified_at = Date::now();
                             $record->save();
                         } else {
+                            // $record->forceFill(['email_verified_at' => null])->save();
+
                             $record->email_verified_at = null;
                             $record->save();
                         }

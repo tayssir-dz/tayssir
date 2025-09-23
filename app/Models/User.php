@@ -10,6 +10,7 @@ use App\Traits\User\HasSubscriptions;
 use App\Traits\User\HasWilayaAndCommune;
 use App\Traits\User\InteractsWithContent;
 use App\Traits\User\IsPanelUser;
+use Carbon\Carbon;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -61,7 +62,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
+            'email_verified_at' => Carbon::class,
             'password' => 'hashed',
         ];
     }
