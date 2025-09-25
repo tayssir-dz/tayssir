@@ -152,6 +152,7 @@ class MaterialResource extends Resource
                     ->sortable()
                     ->toggleable()
                     ->badge()
+                    ->alignCenter()
                     ->colors(['primary'])
                     ->label(__('custom.models.material.code')),
 
