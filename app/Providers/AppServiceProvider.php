@@ -15,6 +15,14 @@ use Dedoc\Scramble\Scramble;
 use Dedoc\Scramble\Support\Generator\OpenApi;
 use Dedoc\Scramble\Support\Generator\SecurityScheme;
 
+use Spatie\Health\Facades\Health;
+
+use Spatie\Health\Checks\Checks\DatabaseCheck;
+use Spatie\Health\Checks\Checks\DebugModeCheck;
+use Spatie\Health\Checks\Checks\EnvironmentCheck;
+use Spatie\Health\Checks\Checks\UsedDiskSpaceCheck;
+use Spatie\Health\Checks\Checks\CacheCheck;
+use Spatie\Health\Checks\Checks\OptimizedAppCheck;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
         $this->configureObservers();
         $this->configureFilament();
         $this->configureScramble();
+        $this->configureHealthChecks();
 
         if ($this->app->environment('production')) {
             URL::forceScheme('https');
@@ -94,5 +103,17 @@ class AppServiceProvider extends ServiceProvider
 
         Scramble::registerUiRoute('docs/v1', api: 'v1');
         Scramble::registerUiRoute('docs/v2', api: 'v2');
+    }
+
+    private function configureHealthChecks(): void
+    {
+        Health::checks([
+            UsedDiskSpaceCheck::new(),
+            DatabaseCheck::new(),
+            CacheCheck::new(),
+            OptimizedAppCheck::new(),
+            DebugModeCheck::new(),
+            EnvironmentCheck::new(),
+        ]);
     }
 }

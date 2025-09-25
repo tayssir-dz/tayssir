@@ -5,6 +5,7 @@ use App\Models\Payment;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SocialRedirectController;
+use Spatie\Health\Http\Controllers\HealthCheckResultsController;
 
 // Route::get('/emails', function () {
 //     return view('emails.preview-wrapper', [
@@ -55,7 +56,8 @@ Route::middleware(['web', 'auth', 'role:super_admin'])->group(function () {
 });
 
 
-
+Route::get('health', HealthCheckResultsController::class)
+    ->middleware(["auth:web", "role:super_admin"]);
 
 // Route::middleware(['web', 'auth', 'role:super_admin'])->group(function () {
 //     Route::get('database/backup', function (Request $request) {
