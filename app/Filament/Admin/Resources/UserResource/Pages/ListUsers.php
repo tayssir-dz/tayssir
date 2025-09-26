@@ -40,6 +40,14 @@ class ListUsers extends ListRecords
                 });
             });
 
+
+        $arr['google_users'] = Tab::make()->label(__('google users'))
+            ->icon('heroicon-o-user-group')
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->googleUsers();
+            });
+
+
         $arr['scoped'] = Tab::make()->label(__('custom.models.user.tabs.scoped'))
             ->icon('heroicon-o-user-group')
             ->modifyQueryUsing(function (Builder $query) {

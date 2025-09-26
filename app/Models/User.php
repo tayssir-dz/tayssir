@@ -136,6 +136,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
         return $query->role(['super_admin']);
     }
 
+    public function scopeGoogleUsers($query)
+    {
+        return $query->whereNotNull('google_id');
+    }
+
     public function scopeWithinPlatformPeriod(Builder $query): Builder
     {
         $settings = app(PlatformSettings::class);
@@ -154,5 +159,30 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia,
             return $query->where('created_at', '<=', $to);
         }
         return $query;
+    }
+
+    public function getAvatarImageAttribute(): ?string
+    {
+        $mediaUrl = $this->getFirstMediaUrl('avatar');
+        if (!empty($mediaUrl)) {
+            return $mediaUrl;
+        }
+
+        if ($this->avatar_url) {
+            if (filter_var($this->avatar_url, FILTER_VALIDATE_URL)) {
+                return $this->avatar_url;
+            }
+
+            $base = rtrim(config('app.url'), '/');
+            $path = ltrim($this->avatar_url, '/');
+
+            if (str_starts_with($path, 'storage/')) {
+                return $base . '/' . $path;
+            }
+
+            return $base . '/storage/' . $path;
+        }
+
+        return null;
     }
 }
