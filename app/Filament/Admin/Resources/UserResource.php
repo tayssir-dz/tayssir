@@ -195,14 +195,14 @@ class UserResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('avatar_image')->copyable(),
-                TextColumn::make('avatar_image')
-                    ->toggleable()
-                    ->label(__('custom.models.user.avatar'))
-                    ->html()
-                    ->getStateUsing(fn($record) => view('components.filament-ui.avatar', [
-                        'name' => $record->name,
-                        'avatar_url' => $record->avatar_url,
-                    ])->render()),
+                // TextColumn::make('avatar_image')
+                //     ->toggleable()
+                //     ->label(__('custom.models.user.avatar'))
+                //     ->html()
+                //     ->getStateUsing(fn($record) => view('components.filament-ui.avatar', [
+                //         'name' => $record->name,
+                //         'avatar_url' => $record->avatar_url,
+                //     ])->render()),
                 TextColumn::make('email')
                     ->label(__('custom.models.user.email'))
                     ->searchable()
