@@ -48,6 +48,7 @@ class AppSettingsControllerV2 extends BaseController
                 'payment_name' => app(AppSettings::class)->payment_name,
                 'payment_number' => app(AppSettings::class)->payment_number,
                 'payment_active' => app(AppSettings::class)->payment_active,
+                'chargily_payment_active' => app(AppSettings::class)->chargily_payment_active,
             ],
         ]);
     }
