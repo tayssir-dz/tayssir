@@ -194,6 +194,7 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('avatar_image')->copyable(),
                 TextColumn::make('avatar_image')
                     ->toggleable()
                     ->label(__('custom.models.user.avatar'))
