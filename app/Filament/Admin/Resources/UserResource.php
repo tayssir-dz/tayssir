@@ -201,7 +201,7 @@ class UserResource extends Resource
                     ->html()
                     ->getStateUsing(fn($record) => view('components.filament-ui.avatar', [
                         'name' => $record->name,
-                        'avatar_url' => $record->avatar_url,
+                        'avatar_url' => $record->avatar_image,
                     ])->render()),
                 TextColumn::make('email')
                     ->label(__('custom.models.user.email'))
