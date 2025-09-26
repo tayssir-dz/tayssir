@@ -20,6 +20,8 @@ class AppSettings extends Settings
 
     public bool $payment_active;
 
+    public bool $chargily_payment_active;
+
     public static function group(): string
     {
         return 'default';

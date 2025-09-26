@@ -74,6 +74,9 @@ class ManageAppSettings extends SettingsPage
                                 Toggle::make('payment_active')
                                     ->required()
                                     ->label(Lang::get('custom.settings.payment.active')),
+                                Toggle::make('chargily_payment_active')
+                                    ->required()
+                                    ->label(Lang::get('chargily payment active')),
                             ]),
                     ]),
             ]);
