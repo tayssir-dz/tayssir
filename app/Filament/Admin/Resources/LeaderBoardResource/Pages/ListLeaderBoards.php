@@ -5,6 +5,8 @@ namespace App\Filament\Admin\Resources\LeaderBoardResource\Pages;
 use App\Filament\Admin\Resources\LeaderBoardResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Components\Tab;
+use Illuminate\Database\Eloquent\Builder;
 
 class ListLeaderBoards extends ListRecords
 {
@@ -15,5 +17,18 @@ class ListLeaderBoards extends ListRecords
         return [
             // Actions\CreateAction::make(),
         ];
+    }
+
+    public function getTabs(): array
+    {
+        $arr = [];
+
+        $arr['all'] = Tab::make()->label(__('all'));
+
+        $arr['scoped'] = Tab::make()->label(__('scoped'))
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->withinPlatformPeriod();
+            });
+        return $arr;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class LeaderBoard extends Model
 {
@@ -11,6 +12,14 @@ class LeaderBoard extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    // Scope: filter leaderboard entries whose users fall within the platform period
+    public function scopeWithinPlatformPeriod(Builder $query): Builder
+    {
+        return $query->whereHas('user', function (Builder $q) {
+            $q->withinPlatformPeriod();
+        });
     }
 
     public function getMaxAttribute(): int
