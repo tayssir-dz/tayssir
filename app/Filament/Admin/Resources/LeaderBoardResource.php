@@ -49,7 +49,7 @@ class LeaderBoardResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('index')->label('')
                     ->rowIndex(),
-                Tables\Columns\TextColumn::make('user.avatar_url')
+                Tables\Columns\TextColumn::make('user.avatar_image')
                     ->toggleable()
                     ->label(__('custom.models.user.avatar'))
                     ->html()
@@ -57,7 +57,7 @@ class LeaderBoardResource extends Resource
                     ->alignment('center')
                     ->getStateUsing(fn($record) => view('components.filament-ui.avatar', [
                         'name' => $record->user->name,
-                        'avatar_url' => $record->user->avatar_url,
+                        'avatar_url' => $record->user->avatar_image,
                     ])->render()),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label(__('custom.models.leaderboard.user'))
