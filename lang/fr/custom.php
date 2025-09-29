@@ -555,4 +555,9 @@ return [
     'models.user.notices.custom_notification_sent' => 'Notification envoyée avec succès',
     'models.user.actions.send_custom_notification.title' => 'Titre',
     'models.user.actions.send_custom_notification.body' => 'Contenu',
+
+    // Gestion des abonnements utilisateur
+    'models.user.actions.remove_subscription' => "Supprimer l'abonnement",
+    'models.user.actions.remove_subscription.confirm_description' => "Cela supprimera cet abonnement de l'utilisateur en supprimant sa carte d'abonnement. Continuer ?",
+    'models.user.notices.subscription_removed' => 'Abonnement supprimé avec succès',
 ];

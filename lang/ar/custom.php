@@ -551,4 +551,9 @@ return [
     'models.user.notices.custom_notification_sent' => 'تم إرسال الإشعار بنجاح',
     'models.user.actions.send_custom_notification.title' => 'العنوان',
     'models.user.actions.send_custom_notification.body' => 'المحتوى',
+
+    // إدارة اشتراكات المستخدم
+    'models.user.actions.remove_subscription' => 'إزالة الاشتراك',
+    'models.user.actions.remove_subscription.confirm_description' => 'سيتم إزالة هذا الاشتراك من المستخدم عبر حذف بطاقة الاشتراك الخاصة به. هل تريد المتابعة؟',
+    'models.user.notices.subscription_removed' => 'تمت إزالة الاشتراك بنجاح',
 ];

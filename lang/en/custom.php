@@ -557,4 +557,9 @@ return [
     'models.user.notices.custom_notification_sent' => 'Notification sent successfully',
     'models.user.actions.send_custom_notification.title' => 'Title',
     'models.user.actions.send_custom_notification.body' => 'Body',
+
+    // User subscriptions management
+    'models.user.actions.remove_subscription' => 'Remove subscription',
+    'models.user.actions.remove_subscription.confirm_description' => 'This will remove this subscription from the user by deleting its subscription card. Proceed?',
+    'models.user.notices.subscription_removed' => 'Subscription removed successfully',
 ];
