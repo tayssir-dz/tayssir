@@ -23,9 +23,9 @@ class ListLeaderBoards extends ListRecords
     {
         $arr = [];
 
-        $arr['all'] = Tab::make()->label(__('all'));
+        $arr['all'] = Tab::make()->label(__('custom.tabs.all'));
 
-        $arr['scoped'] = Tab::make()->label(__('scoped'))
+        $arr['scoped'] = Tab::make()->label(__('custom.models.leaderboard.tabs.scoped'))
             ->modifyQueryUsing(function (Builder $query) {
                 $query->withinPlatformPeriod();
             });

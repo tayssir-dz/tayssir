@@ -265,6 +265,7 @@ return [
     'models.user.tabs.students' => 'Étudiants',
     'models.user.tabs.with_roles' => 'Avec rôles',
     'models.user.tabs.scoped' => 'Utilisateurs ciblés',
+    'models.user.tabs.google_users' => 'Utilisateurs Google',
 
     'models.user.perfonal_info' => 'Informations personnelles',
     'models.user.subscribtion' => 'Abonnement',
@@ -435,6 +436,7 @@ return [
     'models.leaderboard.max' => 'Points Max',
     'models.leaderboard.user' => 'Utilisateur',
     'models.leaderboard.progress' => 'Progrès',
+    'models.leaderboard.tabs.scoped' => 'Ciblé',
 
     'direction.label' => 'Direction du texte',
     'direction.rtl' => 'De droite à gauche (rtl)',
@@ -546,6 +548,7 @@ return [
     'settings.payment.name' => 'Nom du paiement',
     'settings.payment.number' => 'Numéro de paiement',
     'settings.payment.active' => 'Actif',
+    'settings.payment.chargily_active' => 'Chargily Pay actif',
 
     // User custom notification action
     'models.user.actions.send_custom_notification' => 'Envoyer une notification',

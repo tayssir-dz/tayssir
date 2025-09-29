@@ -266,6 +266,7 @@ return [
     'models.user.tabs.students' => 'الطلاب',
     'models.user.tabs.with_roles' => 'ذوي الأدوار',
     'models.user.tabs.scoped' => 'المستخدمون ضمن النطاق',
+    'models.user.tabs.google_users' => 'مستخدمو Google',
 
     'models.user.perfonal_info' => 'المعلومات الشخصية',
     'models.user.subscribtion' => 'حالة الاشتراك',
@@ -449,6 +450,7 @@ return [
     'models.leaderboard.points' => 'النقاط',
     'models.leaderboard.max' => 'النقاط القصوى',
     'models.leaderboard.progress' => 'التقدم',
+    'models.leaderboard.tabs.scoped' => 'ضمن النطاق',
 
     // # Active field
     'models.active' => 'نشط',
@@ -542,6 +544,7 @@ return [
     'settings.payment.name' => 'اسم جهة الدفع',
     'settings.payment.number' => 'رقم جهة الدفع',
     'settings.payment.active' => 'نشط',
+    'settings.payment.chargily_active' => 'الدفع عبر Chargily مفعل',
 
     // User custom notification action
     'models.user.actions.send_custom_notification' => 'إرسال إشعار',

@@ -41,7 +41,7 @@ class ListUsers extends ListRecords
             });
 
 
-        $arr['google_users'] = Tab::make()->label(__('google users'))
+        $arr['google_users'] = Tab::make()->label(__('custom.models.user.tabs.google_users'))
             ->icon('heroicon-o-user-group')
             ->modifyQueryUsing(function (Builder $query) {
                 $query->googleUsers();

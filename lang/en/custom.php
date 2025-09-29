@@ -3,6 +3,7 @@
 return [
     // Generic tabs
     'tabs.all' => 'All',
+    'tabs.scoped' => 'Scoped',
     // Payments
     'models.payments' => 'Payments',
     'models.payment' => 'Payment',
@@ -70,6 +71,11 @@ return [
 
     'models.users' => 'Users',
     'models.user' => 'User',
+    'models.user.tabs.all' => 'All',
+    'models.user.tabs.students' => 'Students',
+    'models.user.tabs.with_roles' => 'With roles',
+    'models.user.tabs.google_users' => 'Google users',
+    'models.user.tabs.scoped' => 'Scoped',
 
     'models.subscriptions' => 'Subscriptions',
     'models.subscription' => 'Subscription',
@@ -149,6 +155,7 @@ return [
 
     'models.bacs' => 'Bacs',
     'models.bac' => 'Bac',
+    'models.leaderboard.tabs.scoped' => 'Scoped',
 
     // # Bac
     'forms.bac.create.section.infos' => 'Bac Information',
@@ -262,10 +269,7 @@ return [
     'models.user.commune.empty' => 'No commune selected',
     'models.user.commune.field' => 'name',
 
-    'models.user.tabs.all' => 'All',
-    'models.user.tabs.students' => 'Students',
-    'models.user.tabs.with_roles' => 'With roles',
-    'models.user.tabs.scoped' => 'Scoped users',
+
 
     'models.user.perfonal_info' => 'Personal informations',
     'models.user.subscribtion' => 'Subscription',
@@ -546,6 +550,7 @@ return [
     'settings.payment.name' => 'Payment Name',
     'settings.payment.number' => 'Payment Number',
     'settings.payment.active' => 'Active',
+    'settings.payment.chargily_active' => 'Chargily Pay active',
 
     // User custom notification action
     'models.user.actions.send_custom_notification' => 'Send notification',
