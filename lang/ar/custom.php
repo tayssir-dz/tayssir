@@ -556,4 +556,18 @@ return [
     'models.user.actions.remove_subscription' => 'إزالة الاشتراك',
     'models.user.actions.remove_subscription.confirm_description' => 'سيتم إزالة هذا الاشتراك من المستخدم عبر حذف بطاقة الاشتراك الخاصة به. هل تريد المتابعة؟',
     'models.user.notices.subscription_removed' => 'تمت إزالة الاشتراك بنجاح',
+
+    // Contact Forms
+    'models.contact_forms' => 'نماذج الاتصال',
+    'models.contact_form' => 'نموذج اتصال',
+    'models.contact_form.name' => 'الاسم',
+    'models.contact_form.email' => 'البريد الإلكتروني',
+    'models.contact_form.subject' => 'الموضوع',
+    'models.contact_form.message' => 'الرسالة',
+    'models.contact_form.user' => 'المستخدم',
+    'models.contact_form.metadata' => 'البيانات الإضافية',
+    'models.contact_form.sections.contact_info' => 'معلومات الاتصال',
+    'models.contact_form.sections.content' => 'محتوى الرسالة',
+    'models.contact_form.sections.metadata' => 'بيانات إضافية',
+    'models.contact_form.actions.reply' => 'رد',
 ];

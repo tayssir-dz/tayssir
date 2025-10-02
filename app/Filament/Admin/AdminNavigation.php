@@ -108,4 +108,10 @@ class AdminNavigation
         'sort' => 16,
         'group' => self::REPORTS_GROUP,
     ];
+
+    public const CONTACT_FORM_RESOURCE = [
+        'icon' => 'heroicon-o-envelope',
+        'sort' => 17,
+        'group' => self::REPORTS_GROUP,
+    ];
 }
