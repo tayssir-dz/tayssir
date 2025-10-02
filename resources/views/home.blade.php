@@ -54,6 +54,9 @@
                         {{-- data-tip="All APIs included in the v2 that Require Auth - Requires email verification" --}}>
                         Documentation (v2)
                     </a>
+                    <a href="/health" class="btn btn-accent">
+                        Health
+                    </a>
                 </div>
             </div>
         </div>
