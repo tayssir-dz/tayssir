@@ -53,16 +53,6 @@ class AnswersRelationManager extends RelationManager
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('question.question')
-                    ->label(__('custom.models.question.question'))
-                    ->limit(50)
-                    ->searchable()
-                    ->toggleable(),
-                Tables\Columns\TextColumn::make('points_earned')
-                    ->label(__('custom.models.question.points'))
-                    ->badge()
-                    ->sortable()
-                    ->toggleable(),
                 Tables\Columns\TextColumn::make('material.name')
                     ->label(__('custom.models.material'))
                     ->searchable()
@@ -84,6 +74,16 @@ class AnswersRelationManager extends RelationManager
                     ->toggleable()
                     ->url(fn($record) => ChapterResource::getUrl('edit', ['record' => $record->chapter_id], panel: 'dashboard'))
                     ->openUrlInNewTab(),
+                Tables\Columns\TextColumn::make('question.question')
+                    ->label(__('custom.models.question.question'))
+                    ->limit(50)
+                    ->searchable()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('points_earned')
+                    ->label(__('custom.models.question.points'))
+                    ->badge()
+                    ->sortable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(__('custom.table.created_at'))
                     ->getStateUsing(fn($record) => $record->created_at?->diffForHumans())
