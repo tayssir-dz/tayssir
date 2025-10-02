@@ -60,6 +60,7 @@ class AnswersRelationManager extends RelationManager
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('points_earned')
                     ->label(__('custom.models.question.points'))
+                    ->badge()
                     ->sortable()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('material.name')
