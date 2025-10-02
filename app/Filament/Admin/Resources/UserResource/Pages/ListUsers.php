@@ -22,6 +22,7 @@ class ListUsers extends ListRecords
                 ->label(__('custom.models.user.actions.send_custom_notification'))
                 ->icon('heroicon-o-bell')
                 ->color("warning")
+                ->disabled(true)
                 ->form([
                     \Filament\Forms\Components\TextInput::make('title')
                         ->label(__('custom.models.user.actions.send_custom_notification.title'))
