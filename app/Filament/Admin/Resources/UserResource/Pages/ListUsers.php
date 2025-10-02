@@ -34,7 +34,9 @@ class ListUsers extends ListRecords
                 ])
                 ->action(function (array $data): void {
                     // chunk and notify
-                    User::chunk(100, function ($users) use ($data) {
+                    User::whereHas('roles', function ($q) {
+                        $q->where('name', 'student');
+                    })->chunk(100, function ($users) use ($data) {
                         foreach ($users as $user) {
                             $user->notify(new \App\Notifications\CustomUserNotification($data['title'], $data['body']));
                         }
