@@ -339,6 +339,7 @@ class UserResource extends Resource
     {
         return [
             \App\Filament\Admin\Resources\UserResource\RelationManagers\SubscriptionCardsRelationManager::class,
+            \App\Filament\Admin\Resources\UserResource\RelationManagers\AnswersRelationManager::class,
         ];
     }
 
