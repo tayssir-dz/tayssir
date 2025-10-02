@@ -27,9 +27,17 @@ class ContentService
         // Load all materials with units (no subscription filter), and chapters for units
         $division = $user->division->load([
             'materials' => function ($q) {
-                $q->where('active', true)->with(['units' => function ($uq) {
-                    $uq->with(['chapters']);
-                }]);
+                $q->where('active', true)
+                    ->with([
+                        'units' => function ($uq) {
+                            $uq->where('active', true)
+                                ->with([
+                                    'chapters' => function ($cq) {
+                                        $cq->where('active', true);
+                                    },
+                                ]);
+                        },
+                    ]);
             },
         ]);
 
