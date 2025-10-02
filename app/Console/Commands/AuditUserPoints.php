@@ -34,7 +34,7 @@ class AuditUserPoints extends Command
         $limit = (int) $this->option('limit');
 
         /** @var User|null $user */
-        $user = User::with(['division', 'subscriptions', 'leaderboard'])->find($userId);
+        $user = User::with(['division', 'leaderboard'])->find($userId);
         if (! $user) {
             $this->error("User with ID {$userId} not found.");
             return self::FAILURE;

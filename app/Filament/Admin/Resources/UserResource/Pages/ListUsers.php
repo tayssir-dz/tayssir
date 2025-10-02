@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources\UserResource\Pages;
 
 use App\Filament\Admin\Resources\UserResource;
+use App\Models\User;
 use Filament\Actions;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
@@ -16,6 +17,17 @@ class ListUsers extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+            Actions\Action::make('send_notification_to_all_users')
+            ->label("global notification")
+            ->icon('heroicon-o-bell')
+            ->action(function () {
+                // chunk and notify
+                User::chunk(100, function ($users) {
+                    foreach ($users as $user) {
+                        $user->notify()
+                    }
+                });
+            })
         ];
     }
 
