@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources\UserResource\Pages;
 use App\Filament\Admin\Resources\UserResource;
 use App\Models\User;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
@@ -18,16 +19,31 @@ class ListUsers extends ListRecords
         return [
             Actions\CreateAction::make(),
             Actions\Action::make('send_notification_to_all_users')
-            ->label("global notification")
-            ->icon('heroicon-o-bell')
-            ->action(function () {
-                // chunk and notify
-                User::chunk(100, function ($users) {
-                    foreach ($users as $user) {
-                        $user->notify()
-                    }
-                });
-            })
+                ->label("global notification")
+                ->icon('heroicon-o-bell')
+                ->color("warning")
+                ->form([
+                    \Filament\Forms\Components\TextInput::make('title')
+                        ->label(__('custom.models.user.actions.send_custom_notification.title'))
+                        ->required()
+                        ->maxLength(255),
+                    \Filament\Forms\Components\Textarea::make('body')
+                        ->label(__('custom.models.user.actions.send_custom_notification.body'))
+                        ->required()
+                        ->maxLength(65535),
+                ])
+                ->action(function (array $data): void {
+                    // chunk and notify
+                    User::chunk(100, function ($users) use ($data) {
+                        foreach ($users as $user) {
+                            $user->notify(new \App\Notifications\CustomUserNotification($data['title'], $data['body']));
+                        }
+                    });
+                    Notification::make()
+                        ->title(__('custom.models.user.notices.custom_notification_sent'))
+                        ->success()
+                        ->send();
+                })
         ];
     }
 
