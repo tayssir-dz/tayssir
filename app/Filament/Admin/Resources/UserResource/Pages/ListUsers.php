@@ -19,7 +19,7 @@ class ListUsers extends ListRecords
         return [
             Actions\CreateAction::make(),
             Actions\Action::make('send_notification_to_all_users')
-                ->label("global notification")
+                ->label(__('custom.models.user.actions.send_custom_notification'))
                 ->icon('heroicon-o-bell')
                 ->color("warning")
                 ->form([
