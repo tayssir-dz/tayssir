@@ -58,8 +58,7 @@ class Unit extends Model implements HasMedia
         if ($media && $media->collection_name === 'image') {
             $this->addMediaConversion('thumb')
                 ->width(250)
-                ->height(250)
-                ->sharpen(10);
+                ->height(250);
         }
     }
 

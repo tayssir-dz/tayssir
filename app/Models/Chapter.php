@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Chapter extends Model implements HasMedia
 {
@@ -46,6 +47,20 @@ class Chapter extends Model implements HasMedia
     protected $casts = [
         'direction' => ContentDirection::class,
     ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('chapter_photos')
+            ->singleFile();
+    }
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        if ($media && $media->collection_name === 'chapter_photos') {
+            $this->addMediaConversion('thumb')
+                ->width(250)
+                ->height(250);
+        }
+    }
 
     public function getImageAttribute()
     {

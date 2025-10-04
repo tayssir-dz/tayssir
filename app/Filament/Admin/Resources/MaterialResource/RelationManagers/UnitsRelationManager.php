@@ -94,6 +94,7 @@ class UnitsRelationManager extends RelationManager
                     ->placeholder(__('custom.table.image.empty'))
                     ->label(__('custom.forms.unit.create.section.image'))
                     ->collection('image')
+                    ->conversion('thumb')
                     ->rounded(),
 
                 TextColumn::make('name')
