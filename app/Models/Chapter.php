@@ -57,8 +57,8 @@ class Chapter extends Model implements HasMedia
     {
         if ($media && $media->collection_name === 'chapter_photos') {
             $this->addMediaConversion('thumb')
-                ->width(150)
-                ->height(150);
+                ->width(100)
+                ->height(100);
         }
     }
 

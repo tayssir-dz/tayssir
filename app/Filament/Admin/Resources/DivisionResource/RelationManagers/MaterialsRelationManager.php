@@ -101,7 +101,8 @@ class MaterialsRelationManager extends RelationManager
                 SpatieMediaLibraryImageColumn::make('image')
                     ->label(__('custom.forms.material.create.section.image'))
                     ->placeholder(__('custom.table.image.empty'))
-                    ->collection('image'),
+                    ->collection('image')
+                    ->conversion('thumb'),
                 TextColumn::make('name')->label(__('custom.models.material.name')),
                 TextColumn::make('code')
                     ->badge()

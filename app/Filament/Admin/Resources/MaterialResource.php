@@ -133,7 +133,8 @@ class MaterialResource extends Resource
                     ->toggleable()
                     ->placeholder(__('custom.table.image.empty'))
                     ->label(__('custom.models.material.image'))
-                    ->collection('image'),
+                    ->collection('image')
+                    ->conversion('thumb'),
 
                 SpatieMediaLibraryImageColumn::make('image_grid')
                     ->toggleable()

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Material extends Model implements HasMedia
 {
@@ -64,6 +65,20 @@ class Material extends Model implements HasMedia
             ->singleFile();
     }
 
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        if ($media && $media->collection_name === 'image') {
+            $this->addMediaConversion('thumb')
+                ->width(100)
+                ->height(100);
+        }
+        if ($media && $media->collection_name === 'image_grid') {
+            $this->addMediaConversion('thumb')
+                ->width(100)
+                ->height(100);
+        }
+    }
+
     /**
      * Get the image attribute.
      */
@@ -72,12 +87,22 @@ class Material extends Model implements HasMedia
         return $this->getFirstMediaUrl('image') ? $this->getFirstMediaUrl('image') : null;
     }
 
+    public function getImageThumbAttribute()
+    {
+        return $this->getFirstMediaUrl('image', 'thumb') ?: null;
+    }
+
     /**
      * Get the image_grid attribute.
      */
     public function getImageGridAttribute()
     {
         return $this->getFirstMediaUrl('image_grid') ? $this->getFirstMediaUrl('image_grid') : null;
+    }
+
+    public function getImageGridThumbAttribute()
+    {
+        return $this->getFirstMediaUrl('image_grid', 'thumb') ?: null;
     }
 
     /**
