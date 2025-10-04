@@ -94,7 +94,6 @@ class UnitResource extends Resource
                     SpatieMediaLibraryFileUpload::make('image')
                         ->multiple(false)
                         ->label('')
-                        ->conversion("thumb")
                         ->collection('image')
                         ->image()
                         ->imageEditor(),
@@ -108,6 +107,7 @@ class UnitResource extends Resource
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')
                     ->toggleable()
+                    ->conversion('thumb')
                     ->placeholder(__('custom.table.image.empty'))
                     ->label(__('custom.forms.unit.create.section.image'))
                     ->collection('image')
