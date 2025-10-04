@@ -14,11 +14,14 @@
     @apply bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-950/5 dark:ring-white/10 my-1 rounded-sm;
 }
 
-.fi-btn {}
+.fi-btn {
+}
 
-.fi-badge {}
+.fi-badge {
+}
 
-.fi-body {}
+.fi-body {
+}
 
 /* fi-body fi-panel-dashboard {
 
@@ -26,7 +29,6 @@
 .fi-panel-dashboard {
     @apply bg-[#eceff2] dark:bg-[#000000] !important;
 }
-
 
 /* .fi-ta-table>thead>tr {
     @apply divide-x divide-gray-200 dark:divide-white/5;
