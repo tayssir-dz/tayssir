@@ -140,7 +140,8 @@ class MaterialResource extends Resource
                     ->toggleable()
                     ->placeholder(__('custom.table.image.empty'))
                     ->label(__('custom.models.material.image_grid'))
-                    ->collection('image_grid'),
+                    ->collection('image_grid')
+                    ->conversion('thumb'),
 
                 TextColumn::make('name')
                     ->label(__('custom.models.material.name'))

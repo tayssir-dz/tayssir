@@ -67,12 +67,7 @@ class Material extends Model implements HasMedia
 
     public function registerMediaConversions(?Media $media = null): void
     {
-        if ($media && $media->collection_name === 'image') {
-            $this->addMediaConversion('thumb')
-                ->width(100)
-                ->height(100);
-        }
-        if ($media && $media->collection_name === 'image_grid') {
+        if ($media && (($media->collection_name === 'image') || ($media->collection_name === 'image_grid'))) {
             $this->addMediaConversion('thumb')
                 ->width(100)
                 ->height(100);
