@@ -134,7 +134,7 @@ class ChapterResource extends Resource
             ->columns([
                 SpatieMediaLibraryImageColumn::make('photo')
                     ->collection('chapter_photos')
-                    // ->conversion('thumb')
+                    ->conversion('thumb')
                     ->placeholder(__('custom.table.image.empty'))
                     ->circular()
                     ->label(__('custom.models.chapter.photo')),
