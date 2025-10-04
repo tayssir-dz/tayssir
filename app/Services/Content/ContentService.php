@@ -72,7 +72,8 @@ class ContentService
                     'id' => $unit->id,
                     'name' => $unit->name,
                     'description' => $unit->description,
-                    'image' => $unit->image,
+                    // 'image' => $unit->image
+                    'image' => $unit->image_thumb,
                     'direction' => $unit->getEffectiveDirection()->value,
                     'material_id' => $material->id,
                     'progress' => $progressData['units'][$unit->id] ?? 0,

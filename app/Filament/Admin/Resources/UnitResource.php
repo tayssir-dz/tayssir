@@ -94,6 +94,7 @@ class UnitResource extends Resource
                     SpatieMediaLibraryFileUpload::make('image')
                         ->multiple(false)
                         ->label('')
+                        ->conversion("thumb")
                         ->collection('image')
                         ->image()
                         ->imageEditor(),

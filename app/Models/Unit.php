@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Unit extends Model implements HasMedia
 {
@@ -47,26 +48,32 @@ class Unit extends Model implements HasMedia
         'direction' => ContentDirection::class,
     ];
 
-    /**
-     * Register the media collections.
-     */
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('image')
             ->singleFile();
     }
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        if ($media && $media->collection_name === 'image') {
+            $this->addMediaConversion('thumb')
+                ->width(250)
+                ->height(250)
+                ->sharpen(10);
+        }
+    }
 
-    /**
-     * Get the image attribute.
-     */
     public function getImageAttribute()
     {
         return $this->getFirstMediaUrl('image') ? $this->getFirstMediaUrl('image') : null;
     }
 
-    /**
-     * Get the materials for the unit.
-     */
+    public function getImageThumbAttribute()
+    {
+        return $this->getFirstMediaUrl('image', 'thumb') ?: null;
+    }
+
+
     public function material()
     {
         return $this->belongsToMany(Material::class)
