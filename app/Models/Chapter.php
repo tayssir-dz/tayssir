@@ -67,6 +67,11 @@ class Chapter extends Model implements HasMedia
         return $this->getFirstMediaUrl('chapter_photos') ? $this->getFirstMediaUrl('chapter_photos') : null;
     }
 
+    public function getImageThumbAttribute()
+    {
+        return $this->getFirstMediaUrl('chapter_photos', 'thumb') ?: null;
+    }
+
     public function unit()
     {
         return $this->belongsToMany(Unit::class, 'chapter_unit')

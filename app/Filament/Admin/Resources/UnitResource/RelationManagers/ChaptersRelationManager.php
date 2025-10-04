@@ -116,6 +116,7 @@ class ChaptersRelationManager extends RelationManager
                 SpatieMediaLibraryImageColumn::make('photo')
                     ->placeholder(__('custom.table.image.empty'))
                     ->collection('chapter_photos')
+                    ->conversion('thumb')
                     ->label(__('custom.models.chapter.photo')),
 
                 TextColumn::make('name')
