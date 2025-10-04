@@ -28,6 +28,7 @@ class AdminNotifications
         Notification::make()
             ->title('دفعة جديدة')
             ->success()
+            ->icon("heroicon-o-document-currency-dollar")
             ->body(__('لديك دفعة يدوية جديدة من المستخدم (:user) للاشتراك (:subscription) مع إثبات دفع مرفوع يتطلب المراجعة', ['user' => $user->name, 'subscription' => $subscriptionName], app()->getLocale()))
             ->actions([
                 Action::make('view-invoice')
@@ -55,6 +56,7 @@ class AdminNotifications
         Notification::make()
             ->title('دفعة شارجيلي جديدة')
             ->success()
+            ->icon('heroicon-o-credit-card')
             ->body(__('لديك دفعة جديدة عبر شارجيلي من المستخدم (:user) للاشتراك (:subscription)', ['user' => $user->name, 'subscription' => $subscriptionName], app()->getLocale()))
             ->actions([
                 Action::make('view-invoice')
