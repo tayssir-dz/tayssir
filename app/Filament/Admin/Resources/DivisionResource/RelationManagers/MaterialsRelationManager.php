@@ -99,6 +99,7 @@ class MaterialsRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')
+                    ->circular()
                     ->label(__('custom.forms.material.create.section.image'))
                     ->placeholder(__('custom.table.image.empty'))
                     ->collection('image')

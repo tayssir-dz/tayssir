@@ -131,6 +131,7 @@ class MaterialResource extends Resource
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')
                     ->toggleable()
+                    ->circular()
                     ->placeholder(__('custom.table.image.empty'))
                     ->label(__('custom.models.material.image'))
                     ->collection('image')
@@ -138,6 +139,7 @@ class MaterialResource extends Resource
 
                 SpatieMediaLibraryImageColumn::make('image_grid')
                     ->toggleable()
+                    ->circular()
                     ->placeholder(__('custom.table.image.empty'))
                     ->label(__('custom.models.material.image_grid'))
                     ->collection('image_grid')

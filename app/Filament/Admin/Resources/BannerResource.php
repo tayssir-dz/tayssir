@@ -108,7 +108,7 @@ class BannerResource extends Resource
                     ->label(__('custom.models.banner.image'))
                     ->placeholder(__('custom.table.image.empty'))
                     ->collection('image')
-                    ->rounded(),
+                    ->circular(),
 
                 TextColumn::make('title')
                     ->label(__('custom.models.banner.title'))

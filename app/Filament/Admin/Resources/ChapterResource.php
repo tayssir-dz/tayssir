@@ -136,7 +136,7 @@ class ChapterResource extends Resource
                     ->collection('chapter_photos')
                     ->conversion('thumb')
                     ->placeholder(__('custom.table.image.empty'))
-                    ->rounded()
+                    ->circular()
                     ->label(__('custom.models.chapter.photo')),
 
                 TextColumn::make('name')

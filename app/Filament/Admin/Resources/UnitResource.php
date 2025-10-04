@@ -111,7 +111,7 @@ class UnitResource extends Resource
                     ->placeholder(__('custom.table.image.empty'))
                     ->label(__('custom.forms.unit.create.section.image'))
                     ->collection('image')
-                    ->rounded(),
+                    ->circular(),
 
                 TextColumn::make('name')
                     ->label(__('custom.models.unit.name'))
