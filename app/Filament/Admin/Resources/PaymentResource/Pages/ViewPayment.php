@@ -7,6 +7,7 @@ use App\Enums\Purchase\PaymentType;
 use App\Filament\Admin\Resources\PaymentResource;
 use App\Notifications\Purchase\ManualPaymentSucceeded;
 use App\Notifications\Purchase\ManualPaymentFailed;
+use App\Services\Purchase\SubscriptionActivationService;
 use Filament\Actions;
 use Filament\Infolists\Components\Grid;
 use Filament\Infolists\Components\KeyValueEntry;
@@ -38,11 +39,21 @@ class ViewPayment extends ViewRecord
                 ->action(function () use ($record) {
                     $record->status = PaymentStatus::ACCEPTED;
                     $record->save();
-                    $record->user->notify(new ManualPaymentSucceeded($record->subscription->name));
-                    Notification::make()
-                        ->title(__('custom.models.payment.notices.accepted'))
-                        ->success()
-                        ->send();
+                    $success = SubscriptionActivationService::ActivateSubscriptionForUser($record->subscription_id, $record->user_id);
+                    if ($success) {
+                        $record->user->notify(new ManualPaymentSucceeded($record->subscription->name));
+                        Notification::make()
+                            ->title(__('custom.models.payment.notices.accepted'))
+                            ->success()
+                            ->send();
+                    } else {
+                        $record->status = PaymentStatus::PENDING;
+                        $record->save();
+                        Notification::make()
+                            ->title(__('something went wrong'))
+                            ->danger()
+                            ->send();
+                    }
                 }),
 
             Actions\Action::make('reject')
