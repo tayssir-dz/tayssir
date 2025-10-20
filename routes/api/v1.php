@@ -232,6 +232,11 @@ Route::prefix('v1')->group(function () {
             ->summary('List units by material (paginated)')
             ->description('Returns units for the specified material if accessible to the user. Supports pagination via per_page (1-100, default 15) and page.');
 
+        Route::get('units/{unitId}', [ContentWebController::class, 'unitWithChapters'])
+            ->whereNumber('unitId')
+            ->summary('Get unit with chapters')
+            ->description('Returns unit data with all chapters at once. Includes progress, points and visibility for both unit and chapters.');
+
         Route::get('units/{unitId}/chapters', [ContentWebController::class, 'chapters'])
             ->whereNumber('unitId')
             ->summary('List chapters by unit (paginated)')

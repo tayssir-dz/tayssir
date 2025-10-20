@@ -152,6 +152,65 @@ class ContentWebController extends BaseController
     }
 
     /**
+     * Get unit with chapters.
+     *
+     * Returns unit data with all chapters at once. Includes progress, points and visibility for both unit and chapters.
+     */
+    public function unitWithChapters(Request $request, int $unitId)
+    {
+        $user = $request->user();
+        $progressData = $user->getAllProgressData();
+        $subscriptionIds = $user->subscriptions->pluck('id');
+
+        $unit = Unit::active()->findOrFail($unitId);
+        $material = $unit->material()->first();
+
+        // Get chapters without pagination
+        $chapters = $unit
+            ->chapters()
+            ->active()
+            ->whereHas('subscriptions', function ($query) use ($subscriptionIds) {
+                $query->whereIn('subscriptions.id', $subscriptionIds);
+            })
+            ->with('chapter_level')
+            ->get();
+
+        $chapterVisibility = $user->getChapterVisibility($unit->id);
+
+        $chaptersData = $chapters->map(function ($chapter) use ($progressData, $unit, $chapterVisibility) {
+            $bonusPoints = $progressData['points']['bonuses'][$chapter->id] ?? 0;
+
+            return [
+                'id' => $chapter->id,
+                'name' => $chapter->name,
+                'direction' => $chapter->getEffectiveDirection()->value,
+                'description' => $chapter->description,
+                'image' => $chapter->image,
+                'unit_id' => $unit->id,
+                'bonus_points' => $chapter->chapter_level ? $chapter->chapter_level->bonus : 0,
+                'earned_bonus' => $bonusPoints,
+                'progress' => $progressData['chapters'][$chapter->id] ?? 0,
+                'points' => $progressData['points']['chapters'][$chapter->id] ?? 0,
+                'visibility' => $chapterVisibility[$chapter->id] ?? \App\Enums\ChapterVisibility::LOCKED->value,
+            ];
+        });
+
+        $unitData = [
+            'id' => $unit->id,
+            'name' => $unit->name,
+            'description' => $unit->description,
+            'image' => $unit->image,
+            'direction' => $unit->getEffectiveDirection()->value,
+            'material_id' => $material->id,
+            'progress' => $progressData['units'][$unit->id] ?? 0,
+            'points' => $progressData['points']['units'][$unit->id] ?? 0,
+            'chapters' => $chaptersData,
+        ];
+
+        return $this->sendResponse($unitData);
+    }
+
+    /**
      * List chapters by unit (paginated).
      *
      * Returns chapters for the specified unit if accessible to the user. Includes progress, points and visibility. Supports pagination via per_page (1-100, default 15) and page.
