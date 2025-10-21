@@ -98,4 +98,12 @@ return [
         'peak_hours' => 'Heures d\'Utilisation de Pointe',
         'peak_hours_desc' => 'Heures et jours d\'activité les plus élevés',
     ],
+    'content_quality' => [
+        'title' => 'Indicateurs de Qualité du Contenu',
+        'top_materials_title' => 'Matériels Les Plus Engageants',
+        'top_materials_desc' => 'Top 3 matériels par interaction utilisateur',
+        'bottom_materials_title' => 'Matériels Les Moins Engageants',
+        'bottom_materials_desc' => 'Matériels avec les taux d\'engagement les plus faibles',
+        'no_data' => 'Aucune donnée disponible',
+    ],
 ];

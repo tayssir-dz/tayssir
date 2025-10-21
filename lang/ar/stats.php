@@ -98,4 +98,12 @@ return [
         'peak_hours' => 'أوقات الذروة لاستخدام التطبيق',
         'peak_hours_desc' => 'ساعات وأيام النشاط الأعلى',
     ],
+    'content_quality' => [
+        'title' => 'مؤشرات جودة المحتوى',
+        'top_materials_title' => 'أفضل المواد تفاعلًا',
+        'top_materials_desc' => 'أفضل 3 مواد حسب تفاعل المستخدمين',
+        'bottom_materials_title' => 'المواد الأقل تفاعلًا',
+        'bottom_materials_desc' => 'المواد ذات أقل معدلات تفاعل',
+        'no_data' => 'لا تتوفر بيانات',
+    ],
 ];

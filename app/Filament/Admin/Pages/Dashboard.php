@@ -52,6 +52,7 @@ class Dashboard extends Page
             Widgets\ReferralSourcesBarChart::class,
             Widgets\EngagementMetrics::class,
             Widgets\RevenueMetrics::class,
+            Widgets\ContentQualityMetrics::class,
             Widgets\SuggestionsMetrics::class,
             Widgets\TopWilayasBarChart::class,
             // Widgets\PlatformAnalytics::class,

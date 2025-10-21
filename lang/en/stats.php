@@ -98,4 +98,12 @@ return [
         'peak_hours' => 'Peak Usage Hours',
         'peak_hours_desc' => 'Highest activity hours and days',
     ],
+    'content_quality' => [
+        'title' => 'Content Quality Indicators',
+        'top_materials_title' => 'Most Engaged Materials',
+        'top_materials_desc' => 'Top 3 materials by user interactions',
+        'bottom_materials_title' => 'Least Engaged Materials',
+        'bottom_materials_desc' => 'Materials with lowest engagement rates',
+        'no_data' => 'No data available',
+    ],
 ];

@@ -60,9 +60,9 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 // Widgets\FilamentInfoWidget::class,
                 // Widgets\AccountWidget::class,
-                Widgets\ReferralSourcesBarChart::class,
-                Widgets\GeneralInfos::class,
-                Widgets\PlatformAnalytics::class,
+                // Widgets\ReferralSourcesBarChart::class,
+                // Widgets\GeneralInfos::class,
+                // Widgets\PlatformAnalytics::class,
             ])
             ->middleware([
                 EncryptCookies::class,
