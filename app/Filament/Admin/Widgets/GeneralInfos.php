@@ -8,7 +8,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class GeneralInfos extends BaseWidget
 {
-    protected string|array|int $columnSpan = 3;
+    protected string|array|int $columnSpan = 4;
     protected static ?int $sort = 1;
 
     public function getHeading(): ?string
@@ -33,7 +33,7 @@ class GeneralInfos extends BaseWidget
                 $stats['new_users_this_week']['count']
             )
                 ->description(
-                    __('stats.general.new_users_this_week_desc') . ' ▲ +' . $stats['new_users_this_week']['growth'] . '%'
+                    __('stats.general.new_users_this_week_desc') . ' ' . $stats['new_users_this_week']['growth'] . '%'
                 )
                 ->color('success'),
 

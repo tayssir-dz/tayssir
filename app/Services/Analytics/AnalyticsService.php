@@ -46,6 +46,13 @@ class AnalyticsService
             ->count();
 
         $growth = $lastWeek > 0 ? round((($thisWeek - $lastWeek) / $lastWeek) * 100) : 0;
+        if ($growth < 0) {
+            $growth = '▼ -' . abs($growth);
+        } elseif ($growth > 0) {
+            $growth = '▲ +' . $growth;
+        } else {
+            $growth = '0';
+        }
 
         return [
             'count' => $thisWeek,
