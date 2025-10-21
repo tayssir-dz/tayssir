@@ -4,9 +4,6 @@ namespace App\Providers\Filament;
 
 use App\Filament\Promoter\Widgets\MostUsedPromoCode;
 use App\Filament\Promoter\Widgets\PromoterStats;
-use App\Filament\Promoter\Widgets\PromoterWidgets;
-use App\Models\Promoter;
-use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -56,7 +53,6 @@ class PromoterPanelProvider extends PanelProvider
                 // Widgets\AccountWidget::class,
                 PromoterStats::class,
                 MostUsedPromoCode::class,
-                // PromoterWidgets::class
             ])
             ->middleware([
                 EncryptCookies::class,

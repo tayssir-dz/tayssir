@@ -73,7 +73,7 @@ class SuggestionsAnalyticsService
         $formatted = collect($wilayas)->map(function ($wilaya) use ($useArabic) {
             $name = $useArabic ? $wilaya['arabic_name'] : $wilaya['name'];
             return "{$name}: {$wilaya['count']}";
-        })->join(', ');
+        })->join(' ');
 
         return $formatted;
     }
