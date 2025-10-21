@@ -18,7 +18,7 @@ use Spatie\FilamentSimpleStats\SimpleStat;
 
 class PlatformAnalytics extends BaseWidget
 {
-    protected string|array|int $columnSpan = 3;
+    protected string|array|int $columnSpan = 4;
     protected static ?int $sort = 2;
 
     protected function getStats(): array

@@ -61,6 +61,7 @@ class AdminPanelProvider extends PanelProvider
                 // Widgets\FilamentInfoWidget::class,
                 // Widgets\AccountWidget::class,
                 Widgets\ReferralSourcesBarChart::class,
+                Widgets\GeneralInfos::class,
                 Widgets\PlatformAnalytics::class,
             ])
             ->middleware([

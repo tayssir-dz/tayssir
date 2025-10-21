@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\DB;
 class ReferralSourcesBarChart extends ChartWidget
 {
     protected static ?string $maxHeight = '300px';
-    protected int|string|array $columnSpan = 3;
+    protected int|string|array $columnSpan = 4;
     protected static ?int $sort = 1;
     public ?string $filter = 'year';
+
 
     protected function getType(): string
     {
@@ -108,7 +109,6 @@ class ReferralSourcesBarChart extends ChartWidget
         for ($i = 0; $i < $countLabels; $i++) {
             $colors[] = $baseColors[$i % count($baseColors)];
         }
-
         return [
             'datasets' => [[
                 'label' => __('custom.stats.referral_sources.dataset.users'),

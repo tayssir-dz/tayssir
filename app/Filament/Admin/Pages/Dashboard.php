@@ -47,8 +47,11 @@ class Dashboard extends Page
         return [
             // Widgets\FilamentInfoWidget::class,
             // Widgets\AccountWidget::class,
-            Widgets\ReferralSourcesBarChart::class,
-            Widgets\PlatformAnalytics::class,
+            Widgets\GeneralInfos::class,
+            Widgets\GrowthMetrics::class,
+            Widgets\EngagementMetrics::class,
+            // Widgets\ReferralSourcesBarChart::class,
+            // Widgets\PlatformAnalytics::class,
         ];
         // return Filament::getWidgets();
     }
