@@ -1,63 +1,41 @@
-<?php
+<!-- <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Models\Payment;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
-use App\Http\Controllers\SocialRedirectController;
-use Spatie\Health\Http\Controllers\HealthCheckResultsController;
+// use Illuminate\Support\Facades\Route;
+// use App\Models\Payment;
+// use Illuminate\Support\Facades\Storage;
+// use Illuminate\Http\Request;
+// use App\Http\Controllers\SocialRedirectController;
+// use Spatie\Health\Http\Controllers\HealthCheckResultsController;
 
-// Route::get('/emails', function () {
-//     return view('emails.preview-wrapper', [
-//         'iframeSrc' => route('emails.preview', 'welcome')
-//     ]);
-// })->name('emails.index');
 
-// Route::get('/emails/{type}', function (string $type) {
-//     $mailData = [
-//         'name' => 'مستخدم تجريبي',
-//         'otp' => '596853',
-//     ];
-
-//     $view = match ($type) {
-//         'welcome' => 'emails.welcome-mail',
-//         'verify' => 'emails.email-verification-mail',
-//         'forgot' => 'emails.forgot-password-mail',
-//         'change' => 'emails.change-email-mail',
-//         default => abort(404)
-//     };
-
-//     return view($view, compact('mailData'));
-// })->name('emails.preview');
-
-Route::get('/', function () {
-    return view('home');
-})->name('login');
+// Route::get('/', function () {
+//     return view('home');
+// })->name('login');
 
 // Public social media redirection routes (clean & stable for emails)
-Route::get('/social/{platform}', SocialRedirectController::class)
-    ->where('platform', 'instagram|facebook|tiktok|youtube|linkedin')
-    ->name('social.redirect');
+// Route::get('/social/{platform}', SocialRedirectController::class)
+//     ->where('platform', 'instagram|facebook|tiktok|youtube|linkedin')
+//     ->name('social.redirect');
 
 // Secure route to view payment attachment (super_admin only)
-Route::middleware(['web', 'auth', 'role:super_admin'])->group(function () {
-    Route::get('/admin/payments/{payment}/attachment', function (Request $request, Payment $payment) {
-        $media = $payment->getFirstMedia('attachment');
-        abort_unless($media, 404);
+// Route::middleware(['web', 'auth', 'role:super_admin'])->group(function () {
+//     Route::get('/admin/payments/{payment}/attachment', function (Request $request, Payment $payment) {
+//         $media = $payment->getFirstMedia('attachment');
+//         abort_unless($media, 404);
 
-        $stream = Storage::disk($media->disk)->readStream($media->getPathRelativeToRoot());
-        return response()->stream(function () use ($stream) {
-            fpassthru($stream);
-        }, 200, [
-            'Content-Type' => $media->mime_type,
-            'Content-Disposition' => 'inline; filename="' . $media->file_name . '"',
-        ]);
-    })->name('admin.payments.attachment');
-});
+//         $stream = Storage::disk($media->disk)->readStream($media->getPathRelativeToRoot());
+//         return response()->stream(function () use ($stream) {
+//             fpassthru($stream);
+//         }, 200, [
+//             'Content-Type' => $media->mime_type,
+//             'Content-Disposition' => 'inline; filename="' . $media->file_name . '"',
+//         ]);
+//     })->name('admin.payments.attachment');
+// });
 
 
-Route::get('health', HealthCheckResultsController::class)
-    ->middleware(["auth:web", "role:super_admin"]);
+// Route::get('health', HealthCheckResultsController::class)
+//     ->middleware(["auth:web", "role:super_admin"]);
 
 // Route::middleware(['web', 'auth', 'role:super_admin'])->group(function () {
 //     Route::get('database/backup', function (Request $request) {
@@ -75,4 +53,4 @@ Route::get('health', HealthCheckResultsController::class)
 //             'Content-Disposition' => 'attachment; filename="databasee.sqlite"',
 //         ]);
 //     })->name('api.database.backup.download');
-// });
+// }); -->
