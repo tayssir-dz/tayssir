@@ -122,6 +122,60 @@ trait InteractsWithContent
     }
 
     /**
+     * Normalize hint data to ensure consistent array of objects format.
+     * Handles cases where hints might be stored as plain strings or already as proper objects.
+     *
+     * @param mixed $hint The hint data (could be array, string, or null)
+     * @return array Array of hint objects with 'value' and 'is_latex' properties
+     */
+    private function normalizeHint($hint)
+    {
+        // If no hint, return empty array
+        if (empty($hint)) {
+            return [];
+        }
+
+        // If it's already an array
+        if (is_array($hint)) {
+            // If it's an empty array, return it
+            if (count($hint) === 0) {
+                return [];
+            }
+
+            // If first element is already an object with 'value' key, return as-is
+            if (isset($hint[0]) && is_array($hint[0]) && isset($hint[0]['value'])) {
+                return $hint;
+            }
+
+            // If array contains plain strings, convert each to proper object
+            $normalized = [];
+            foreach ($hint as $item) {
+                if (is_string($item) && ! empty($item)) {
+                    $normalized[] = [
+                        'value' => $item,
+                        'is_latex' => false,
+                    ];
+                } elseif (is_array($item) && isset($item['value'])) {
+                    $normalized[] = $item;
+                }
+            }
+            return $normalized;
+        }
+
+        // If it's a plain string, wrap it in the proper format
+        if (is_string($hint) && ! empty($hint)) {
+            return [
+                [
+                    'value' => $hint,
+                    'is_latex' => false,
+                ],
+            ];
+        }
+
+        return [];
+    }
+
+    /**
      * Transform a single question based on its type.
      * Returns the transformed question.
      */
@@ -135,7 +189,7 @@ trait InteractsWithContent
             'difficulty' => 'medium', // TODO: remove this cuz its not used anymore, its here so that the mobile client will not crash
             'points' => $question->points,
             'scope' => $question->scope,
-            'hint' => $question->hint ?? [],
+            'hint' => $this->normalizeHint($question->hint ?? []),
             'explanation_text' => [
                 'value' => ! empty($question->explanation_text) ? $question->explanation_text : null,
                 'is_latex' => $question->explanation_text_is_latex ?? false,
