@@ -8,7 +8,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class ContentQualityMetrics extends BaseWidget
 {
-    protected string|array|int $columnSpan = 4;
+    protected string|array|int $columnSpan = 3;
     protected static ?int $sort = 5;
 
     public function getHeading(): ?string
