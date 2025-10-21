@@ -50,10 +50,10 @@ class Dashboard extends Page
             Widgets\GeneralInfos::class,
             Widgets\GrowthMetrics::class,
             Widgets\ReferralSourcesBarChart::class,
-            Widgets\TopWilayasBarChart::class,
             Widgets\EngagementMetrics::class,
             Widgets\RevenueMetrics::class,
             Widgets\SuggestionsMetrics::class,
+            Widgets\TopWilayasBarChart::class,
             // Widgets\PlatformAnalytics::class,
         ];
         // return Filament::getWidgets();
