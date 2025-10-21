@@ -2,14 +2,14 @@
 
 namespace App\Filament\Admin\Widgets;
 
-use App\Services\Analytics\ReferralSourcesChartService;
+use App\Services\Analytics\TopWilayasChartService;
 use Filament\Widgets\ChartWidget;
 
-class ReferralSourcesBarChart extends ChartWidget
+class TopWilayasBarChart extends ChartWidget
 {
     protected static ?string $maxHeight = '300px';
     protected int|string|array $columnSpan = 4;
-    protected static ?int $sort = 1;
+    protected static ?int $sort = 2;
     public ?string $filter = 'year';
 
     protected function getType(): string
@@ -19,7 +19,7 @@ class ReferralSourcesBarChart extends ChartWidget
 
     public function getHeading(): string
     {
-        return __('custom.stats.referral_sources.widget.title');
+        return __('stats.suggestions.top_wilayas');
     }
 
     protected function getFilters(): array
@@ -35,7 +35,7 @@ class ReferralSourcesBarChart extends ChartWidget
 
     protected function getData(): array
     {
-        $service = new ReferralSourcesChartService();
+        $service = new TopWilayasChartService();
         return $service->getChartData($this->filter);
     }
 }
