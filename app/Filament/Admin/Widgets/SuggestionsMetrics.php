@@ -32,13 +32,13 @@ class SuggestionsMetrics extends BaseWidget
                 ->color('info'),
 
             // Peak Hours Card
-            Stat::make(
-                __('stats.suggestions.peak_hours'),
-                $stats['peak_hours']
-            )
-                ->description(__('stats.suggestions.peak_hours_desc'))
-                // ->descriptionIcon('heroicon-o-clock')
-                ->color('warning'),
+            // Stat::make(
+            //     __('stats.suggestions.peak_hours'),
+            //     $stats['peak_hours']
+            // )
+            //     ->description(__('stats.suggestions.peak_hours_desc'))
+            //     // ->descriptionIcon('heroicon-o-clock')
+            //     ->color('warning'),
         ];
     }
 }
