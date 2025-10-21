@@ -14,6 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Promoter extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
 {
@@ -44,12 +45,21 @@ class Promoter extends Authenticatable implements FilamentUser, HasAvatar, HasMe
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
             ->singleFile();
     }
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        if ($media && $media->collection_name === 'avatar') {
+            $this->addMediaConversion('thumb')
+                ->width(100)
+                ->height(100);
+        }
+    }
 
     public function getAvatarAttribute(): ?string
     {
-        $media = $this->getFirstMedia('avatar');
-
-        return $media ? $media->getUrl() : 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=FFFFFF&background=111827';
+        $media = $this->getFirstMedia('avatar');;
+        return $media
+            ? $this->getFirstMediaUrl('avatar', 'thumb')
+            : 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=FFFFFF&background=111827';
     }
 
     public function canAccessPanel(Panel $panel): bool
