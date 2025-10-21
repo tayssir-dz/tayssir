@@ -49,8 +49,10 @@ class Dashboard extends Page
             // Widgets\AccountWidget::class,
             Widgets\GeneralInfos::class,
             Widgets\GrowthMetrics::class,
+            Widgets\ReferralSourcesBarChart::class,
             Widgets\EngagementMetrics::class,
-            // Widgets\ReferralSourcesBarChart::class,
+            Widgets\RevenueMetrics::class,
+            Widgets\SuggestionsMetrics::class,
             // Widgets\PlatformAnalytics::class,
         ];
         // return Filament::getWidgets();
@@ -69,7 +71,7 @@ class Dashboard extends Page
      */
     public function getColumns(): int | string | array
     {
-        return 3;
+        return 4;
     }
 
     public function getTitle(): string | Htmlable

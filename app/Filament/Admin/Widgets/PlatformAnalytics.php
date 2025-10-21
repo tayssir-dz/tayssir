@@ -30,12 +30,12 @@ class PlatformAnalytics extends BaseWidget
                 ->dailyCount()
                 ->label(__('stats.users.new'))
                 ->description(__('stats.users.last30Days'))
-                ->descriptionIcon('heroicon-o-users')
+                // ->descriptionIcon('heroicon-o-users')
                 ->color('success'),
 
             Stat::make(__('stats.users.total'), User::count())
                 ->description(__('stats.users.overall'))
-                ->descriptionIcon('heroicon-o-user-group')
+                // ->descriptionIcon('heroicon-o-user-group')
                 ->chart([7, 10, 12, 15, 18, 20, User::count()])
                 ->color('primary'),
 
@@ -44,7 +44,7 @@ class PlatformAnalytics extends BaseWidget
                 ->dailyCount()
                 ->label(__('stats.users.thisWeek'))
                 ->description(__('stats.users.last7Days'))
-                ->descriptionIcon('heroicon-o-user-plus')
+                // ->descriptionIcon('heroicon-o-user-plus')
                 ->color('info'),
 
             // Subscription statistics
@@ -53,7 +53,7 @@ class PlatformAnalytics extends BaseWidget
                 ->dailyCount()
                 ->label(__('stats.subscriptions.active'))
                 ->description(__('stats.subscriptions.plans'))
-                ->descriptionIcon('heroicon-o-credit-card')
+                // ->descriptionIcon('heroicon-o-credit-card')
                 ->color('success'),
 
             SimpleStat::make(SubscriptionCard::class)
@@ -61,35 +61,35 @@ class PlatformAnalytics extends BaseWidget
                 ->dailyCount()
                 ->label(__('stats.subscriptions.cards'))
                 ->description(__('stats.subscriptions.created'))
-                ->descriptionIcon('heroicon-o-ticket')
+                // ->descriptionIcon('heroicon-o-ticket')
                 ->color('warning'),
 
             Stat::make(__('stats.subscriptions.redeemed'), SubscriptionCard::whereNotNull('redeemed_at')->count())
                 ->description(__('stats.subscriptions.total_redeemed'))
-                ->descriptionIcon('heroicon-o-check-badge')
+                // ->descriptionIcon('heroicon-o-check-badge')
                 ->chart([2, 5, 8, 10, 15, SubscriptionCard::whereNotNull('redeemed_at')->count()])
                 ->color('success'),
 
             // Material, Unit, and Chapter statistics
             Stat::make(__('stats.materials.total'), Material::count())
                 ->description(__('stats.materials.available'))
-                ->descriptionIcon('heroicon-o-book-open')
+                // ->descriptionIcon('heroicon-o-book-open')
                 ->color('primary'),
 
             Stat::make(__('stats.units.total'), Unit::count())
                 ->description(__('stats.units.available'))
-                ->descriptionIcon('heroicon-o-academic-cap')
+                // ->descriptionIcon('heroicon-o-academic-cap')
                 ->color('info'),
 
             Stat::make(__('stats.chapters.total'), Chapter::count())
                 ->description(__('stats.chapters.available'))
-                ->descriptionIcon('heroicon-o-document-text')
+                // ->descriptionIcon('heroicon-o-document-text')
                 ->color('success'),
 
             // Question statistics
             Stat::make(__('stats.questions.total'), Question::count())
                 ->description(__('stats.questions.all'))
-                ->descriptionIcon('heroicon-o-question-mark-circle')
+                // ->descriptionIcon('heroicon-o-question-mark-circle')
                 ->chart([10, 20, 30, Question::count()])
                 ->color('warning'),
 
@@ -98,7 +98,7 @@ class PlatformAnalytics extends BaseWidget
                 Question::where('scope', QuestionScope::LESSON)->count()
             )
                 ->description(__('stats.questions.lesson_desc'))
-                ->descriptionIcon('heroicon-o-bookmark')
+                // ->descriptionIcon('heroicon-o-bookmark')
                 ->color('info'),
 
             Stat::make(
@@ -106,7 +106,7 @@ class PlatformAnalytics extends BaseWidget
                 Question::where('scope', QuestionScope::EXERCICE)->count()
             )
                 ->description(__('stats.questions.exercise_desc'))
-                ->descriptionIcon('heroicon-o-clipboard-document-list')
+                // ->descriptionIcon('heroicon-o-clipboard-document-list')
                 ->color('success'),
 
             // User engagement statistics
@@ -115,7 +115,7 @@ class PlatformAnalytics extends BaseWidget
                 ->dailyCount()
                 ->label(__('stats.answers.recent'))
                 ->description(__('stats.answers.last30Days'))
-                ->descriptionIcon('heroicon-o-pencil-square')
+                // ->descriptionIcon('heroicon-o-pencil-square')
                 ->color('primary'),
 
             Stat::make(
@@ -123,13 +123,13 @@ class PlatformAnalytics extends BaseWidget
                 UserAnswer::sum('points_earned')
             )
                 ->description(__('stats.answers.points_desc'))
-                ->descriptionIcon('heroicon-o-trophy')
+                // ->descriptionIcon('heroicon-o-trophy')
                 ->color('success'),
 
             // Division statistics
             Stat::make(__('stats.divisions.total'), Division::count())
                 ->description(__('stats.divisions.available'))
-                ->descriptionIcon('heroicon-o-building-library')
+                // ->descriptionIcon('heroicon-o-building-library')
                 ->color('info'),
 
         ];

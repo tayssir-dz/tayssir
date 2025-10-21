@@ -8,7 +8,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class EngagementMetrics extends BaseWidget
 {
-    protected string|array|int $columnSpan = 4;
+    protected string|array|int $columnSpan = 3;
     protected static ?int $sort = 4;
 
     public function getHeading(): ?string
@@ -28,7 +28,7 @@ class EngagementMetrics extends BaseWidget
                 $stats['lesson_completion_rate']
             )
                 ->description(__('stats.engagement.lesson_completion_rate_desc'))
-                ->descriptionIcon('heroicon-o-check-circle')
+                // ->descriptionIcon('heroicon-o-check-circle')
                 ->color('success'),
 
             // Streak Count Card
@@ -37,7 +37,7 @@ class EngagementMetrics extends BaseWidget
                 $stats['streak_count']
             )
                 ->description(__('stats.engagement.streak_count_desc'))
-                ->descriptionIcon('heroicon-o-fire')
+                // ->descriptionIcon('heroicon-o-fire')
                 ->color('warning'),
 
             // Notification Open Rate Card
@@ -46,7 +46,7 @@ class EngagementMetrics extends BaseWidget
                 $stats['notification_open_rate']
             )
                 ->description(__('stats.engagement.notification_open_rate_desc'))
-                ->descriptionIcon('heroicon-o-bell')
+                // ->descriptionIcon('heroicon-o-bell')
                 ->color('info'),
         ];
     }

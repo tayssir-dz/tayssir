@@ -86,4 +86,16 @@ return [
         'notification_open_rate' => 'Notification Open Rate',
         'notification_open_rate_desc' => 'Coming soon - System notification open rate',
     ],
+    'revenue' => [
+        'title' => 'Revenue and Subscriptions',
+        'active_subscriptions' => 'Active Subscriptions',
+        'active_subscriptions_desc' => 'Number of paid subscriptions',
+    ],
+    'suggestions' => [
+        'title' => 'Suggested Additions',
+        'top_wilayas' => 'Top Regions by Usage',
+        'top_wilayas_desc' => 'Most active regions by user count',
+        'peak_hours' => 'Peak Usage Hours',
+        'peak_hours_desc' => 'Highest activity hours and days',
+    ],
 ];

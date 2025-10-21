@@ -86,4 +86,16 @@ return [
         'notification_open_rate' => 'Taux d\'Ouverture des Notifications',
         'notification_open_rate_desc' => 'Bientôt - Taux d\'ouverture des notifications système',
     ],
+    'revenue' => [
+        'title' => 'Revenus et Abonnements',
+        'active_subscriptions' => 'Abonnements Actifs',
+        'active_subscriptions_desc' => 'Nombre d\'abonnements payants',
+    ],
+    'suggestions' => [
+        'title' => 'Ajouts Suggérés',
+        'top_wilayas' => 'Régions les Plus Utilisées',
+        'top_wilayas_desc' => 'Régions les plus actives par nombre d\'utilisateurs',
+        'peak_hours' => 'Heures d\'Utilisation de Pointe',
+        'peak_hours_desc' => 'Heures et jours d\'activité les plus élevés',
+    ],
 ];

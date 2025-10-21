@@ -8,7 +8,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class GeneralInfos extends BaseWidget
 {
-    protected string|array|int $columnSpan = 4;
+    protected string|array|int $columnSpan = 3;
     protected static ?int $sort = 1;
 
     public function getHeading(): ?string
@@ -46,12 +46,12 @@ class GeneralInfos extends BaseWidget
                 ->color('info'),
 
             // Average Learning Time Card
-            Stat::make(
-                __('stats.general.avg_learning_time') . "testing",
-                $stats['average_learning_time'] . ' ' . __('stats.general.avg_learning_time_minutes')
-            )
-                ->description(__('stats.general.avg_learning_time_desc'))
-                ->color('warning'),
+            // Stat::make(
+            //     __('stats.general.avg_learning_time') . "testing",
+            //     $stats['average_learning_time'] . ' ' . __('stats.general.avg_learning_time_minutes')
+            // )
+            //     ->description(__('stats.general.avg_learning_time_desc'))
+            //     ->color('warning'),
         ];
     }
 }

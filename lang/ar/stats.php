@@ -86,4 +86,16 @@ return [
         'notification_open_rate' => 'معدل فتح الإشعارات',
         'notification_open_rate_desc' => 'مستقبلًا - نسبة فتح إشعارات النظام',
     ],
+    'revenue' => [
+        'title' => 'الإيرادات والاشتراكات',
+        'active_subscriptions' => 'الاشتراكات النشطة',
+        'active_subscriptions_desc' => 'عدد الاشتراكات المدفوعة',
+    ],
+    'suggestions' => [
+        'title' => 'إضافات مقترحة',
+        'top_wilayas' => 'أكثر الولايات استعمالًا للتطبيق',
+        'top_wilayas_desc' => 'الولايات الأعلى نشاطًا حسب عدد المستخدمين',
+        'peak_hours' => 'أوقات الذروة لاستخدام التطبيق',
+        'peak_hours_desc' => 'ساعات وأيام النشاط الأعلى',
+    ],
 ];
