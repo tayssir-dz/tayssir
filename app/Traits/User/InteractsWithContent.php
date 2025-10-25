@@ -278,22 +278,47 @@ trait InteractsWithContent
     {
         $data = $question->options ?? [];
         $paragraph = $data['paragraph'] ?? '';
+        $paragraphIsLatex = $data['paragraph_is_latex'] ?? false;
         $blanks = $data['blanks'] ?? [];
         $suggestions = $data['suggestions'] ?? [];
 
         $transformedBlanks = [];
+        $transformedSuggestions = [];
 
         foreach ($blanks as $blank) {
             $transformedBlanks[] = [
-                'correct_word' => $blank['correct_word'],
+                'correct_word' => [
+                    'value' => $blank['correct_word'] ?? null,
+                    'is_latex' => $blank['correct_word_is_latex'] ?? false,
+                ],
                 'position' => $blank['position'],
             ];
         }
 
+        // Handle suggestions - support both old format (simple strings) and new format (with is_latex)
+        foreach ($suggestions as $suggestion) {
+            if (is_string($suggestion)) {
+                // Old format: simple string
+                $transformedSuggestions[] = [
+                    'value' => $suggestion,
+                    'is_latex' => false,
+                ];
+            } else {
+                // New format: object with value and is_latex
+                $transformedSuggestions[] = [
+                    'value' => $suggestion['value'] ?? null,
+                    'is_latex' => $suggestion['is_latex'] ?? false,
+                ];
+            }
+        }
+
         return [
-            'paragraph' => $paragraph,
+            'paragraph' => [
+                'value' => $paragraph,
+                'is_latex' => $paragraphIsLatex,
+            ],
             'blanks' => $transformedBlanks,
-            'suggestions' => $suggestions,
+            'suggestions' => $transformedSuggestions,
         ];
     }
 
