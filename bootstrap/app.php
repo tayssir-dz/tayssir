@@ -29,7 +29,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->trustProxies(at: '*', headers: Request::HEADER_X_FORWARDED_AWS_ELB);
         $middleware->validateCsrfTokens(except: [
             'chargilypay/webhook',
+            'api/*',
         ]);
+        $middleware->append(\Illuminate\Http\Middleware\HandleCors::class);
         $middleware->alias([
             // 'abilities' => CheckAbilities::class,
             // 'ability' => CheckForAnyAbility::class,
