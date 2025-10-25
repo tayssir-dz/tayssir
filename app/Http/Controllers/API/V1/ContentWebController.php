@@ -155,6 +155,7 @@ class ContentWebController extends BaseController
      * Get unit with chapters.
      *
      * Returns unit data with all chapters at once. Includes progress, points and visibility for both unit and chapters.
+     * Premium chapters (not in user's subscriptions) are included with premium visibility.
      */
     public function unitWithChapters(Request $request, int $unitId)
     {
@@ -165,19 +166,24 @@ class ContentWebController extends BaseController
         $unit = Unit::active()->findOrFail($unitId);
         $material = $unit->material()->first();
 
-        // Get chapters without pagination
+        // Get chapters without pagination (including premium ones)
         $chapters = $unit
             ->chapters()
             ->active()
-            ->whereHas('subscriptions', function ($query) use ($subscriptionIds) {
-                $query->whereIn('subscriptions.id', $subscriptionIds);
-            })
             ->with('chapter_level')
             ->get();
 
         $chapterVisibility = $user->getChapterVisibility($unit->id);
 
-        $chaptersData = $chapters->map(function ($chapter) use ($progressData, $unit, $chapterVisibility) {
+        $chaptersData = $chapters->map(function ($chapter) use ($progressData, $unit, $chapterVisibility, $subscriptionIds) {
+            $chapterSubscribed = $chapter->subscriptions()->whereIn('subscriptions.id', $subscriptionIds)->exists();
+
+            // If chapter not subscribed, mark as premium
+            // Otherwise use calculated visibility (done/current/locked)
+            $visibility = ! $chapterSubscribed
+                ? \App\Enums\ChapterVisibility::PREMIUM->value
+                : ($chapterVisibility[$chapter->id] ?? \App\Enums\ChapterVisibility::LOCKED->value);
+
             $bonusPoints = $progressData['points']['bonuses'][$chapter->id] ?? 0;
 
             return [
@@ -191,7 +197,7 @@ class ContentWebController extends BaseController
                 'earned_bonus' => $bonusPoints,
                 'progress' => $progressData['chapters'][$chapter->id] ?? 0,
                 'points' => $progressData['points']['chapters'][$chapter->id] ?? 0,
-                'visibility' => $chapterVisibility[$chapter->id] ?? \App\Enums\ChapterVisibility::LOCKED->value,
+                'visibility' => $visibility,
             ];
         });
 
@@ -213,7 +219,9 @@ class ContentWebController extends BaseController
     /**
      * List chapters by unit (paginated).
      *
-     * Returns chapters for the specified unit if accessible to the user. Includes progress, points and visibility. Supports pagination via per_page (1-100, default 15) and page.
+     * Returns chapters for the specified unit if accessible to the user. Includes progress, points and visibility.
+     * Premium chapters (not in user's subscriptions) are included with premium visibility.
+     * Supports pagination via per_page (1-100, default 15) and page.
      */
     public function chapters(Request $request, int $unitId)
     {
@@ -227,16 +235,21 @@ class ContentWebController extends BaseController
         $chapters = $unit
             ->chapters()
             ->active()
-            ->whereHas('subscriptions', function ($query) use ($subscriptionIds) {
-                $query->whereIn('subscriptions.id', $subscriptionIds);
-            })
             ->with('chapter_level')
             ->paginate($this->perPage($request));
 
         $chapterVisibility = $user->getChapterVisibility($unit->id);
 
         $chapters->setCollection(
-            $chapters->getCollection()->map(function ($chapter) use ($progressData, $unit, $chapterVisibility) {
+            $chapters->getCollection()->map(function ($chapter) use ($progressData, $unit, $chapterVisibility, $subscriptionIds) {
+                $chapterSubscribed = $chapter->subscriptions()->whereIn('subscriptions.id', $subscriptionIds)->exists();
+
+                // If chapter not subscribed, mark as premium
+                // Otherwise use calculated visibility (done/current/locked)
+                $visibility = ! $chapterSubscribed
+                    ? \App\Enums\ChapterVisibility::PREMIUM->value
+                    : ($chapterVisibility[$chapter->id] ?? \App\Enums\ChapterVisibility::LOCKED->value);
+
                 $bonusPoints = $progressData['points']['bonuses'][$chapter->id] ?? 0;
 
                 return [
@@ -250,7 +263,7 @@ class ContentWebController extends BaseController
                     'earned_bonus' => $bonusPoints,
                     'progress' => $progressData['chapters'][$chapter->id] ?? 0,
                     'points' => $progressData['points']['chapters'][$chapter->id] ?? 0,
-                    'visibility' => $chapterVisibility[$chapter->id] ?? \App\Enums\ChapterVisibility::LOCKED->value,
+                    'visibility' => $visibility,
                 ];
             })
         );
