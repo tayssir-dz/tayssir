@@ -57,7 +57,6 @@ class BannerResource extends Resource
             ->schema([
                 Section::make(__('custom.forms.banner.create.section.infos'))->schema([
                     TextInput::make('title')
-                        ->required()
                         ->minLength(3)
                         ->label(__('custom.models.banner.title'))
                         ->columnSpan(2),
@@ -112,6 +111,7 @@ class BannerResource extends Resource
                     ->circular(),
 
                 TextColumn::make('title')
+                    ->placeholder('-')
                     ->label(__('custom.models.banner.title'))
                     ->searchable()
                     ->sortable(),
