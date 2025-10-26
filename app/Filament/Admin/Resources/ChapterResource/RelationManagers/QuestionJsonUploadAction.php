@@ -176,27 +176,9 @@ class QuestionJsonUploadAction
                                         }
                                     }
                                     break;
-
-                                case QuestionType::FILL_IN_THE_BLANKS->value:
-                                    if (isset($validatedData['options']['paragraph_is_latex']) && is_string($validatedData['options']['paragraph_is_latex'])) {
-                                        $validatedData['options']['paragraph_is_latex'] = filter_var($validatedData['options']['paragraph_is_latex'], FILTER_VALIDATE_BOOLEAN);
-                                    }
-                                    if (isset($validatedData['options']['blanks']) && is_array($validatedData['options']['blanks'])) {
-                                        foreach ($validatedData['options']['blanks'] as $key => $blank) {
-                                            if (isset($blank['correct_word_is_latex']) && is_string($blank['correct_word_is_latex'])) {
-                                                $validatedData['options']['blanks'][$key]['correct_word_is_latex'] = filter_var($blank['correct_word_is_latex'], FILTER_VALIDATE_BOOLEAN);
-                                            }
-                                        }
-                                    }
-                                    if (isset($validatedData['options']['suggestions']) && is_array($validatedData['options']['suggestions'])) {
-                                        foreach ($validatedData['options']['suggestions'] as $key => $suggestion) {
-                                            if (isset($suggestion['is_latex']) && is_string($suggestion['is_latex'])) {
-                                                $validatedData['options']['suggestions'][$key]['is_latex'] = filter_var($suggestion['is_latex'], FILTER_VALIDATE_BOOLEAN);
-                                            }
-                                        }
-                                    }
-                                    break;
                             }
+
+                            // Create the question
                             $question = new Question($validatedData);
 
                             // Save the question and attach it to the chapter
@@ -301,36 +283,10 @@ class QuestionJsonUploadAction
 
             case QuestionType::FILL_IN_THE_BLANKS->value:
                 $rules['options.paragraph'] = 'required|string';
-                $rules['options.paragraph_is_latex'] = 'boolean';
                 $rules['options.blanks'] = 'required|array|min:1';
                 $rules['options.blanks.*.correct_word'] = 'required|string';
-                $rules['options.blanks.*.correct_word_is_latex'] = 'boolean';
                 $rules['options.blanks.*.position'] = 'required|integer|min:1';
                 $rules['options.suggestions'] = 'nullable|array';
-                $rules['options.suggestions.*.value'] = 'required|string';
-                $rules['options.suggestions.*.is_latex'] = 'boolean';
-
-                // Convert string booleans to actual booleans in blanks
-                if (isset($data['options']['paragraph_is_latex']) && is_string($data['options']['paragraph_is_latex'])) {
-                    $data['options']['paragraph_is_latex'] = filter_var($data['options']['paragraph_is_latex'], FILTER_VALIDATE_BOOLEAN);
-                }
-
-                if (isset($data['options']['blanks']) && is_array($data['options']['blanks'])) {
-                    foreach ($data['options']['blanks'] as $key => $blank) {
-                        if (isset($blank['correct_word_is_latex']) && is_string($blank['correct_word_is_latex'])) {
-                            $data['options']['blanks'][$key]['correct_word_is_latex'] = filter_var($blank['correct_word_is_latex'], FILTER_VALIDATE_BOOLEAN);
-                        }
-                    }
-                }
-
-                // Convert string booleans to actual booleans in suggestions
-                if (isset($data['options']['suggestions']) && is_array($data['options']['suggestions'])) {
-                    foreach ($data['options']['suggestions'] as $key => $suggestion) {
-                        if (isset($suggestion['is_latex']) && is_string($suggestion['is_latex'])) {
-                            $data['options']['suggestions'][$key]['is_latex'] = filter_var($suggestion['is_latex'], FILTER_VALIDATE_BOOLEAN);
-                        }
-                    }
-                }
                 break;
 
             case QuestionType::PICK_THE_INTRUDER->value:

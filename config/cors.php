@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may configure your settings for cross-origin resource sharing
-    | or "CORS". This determines what cross-origin operations may execute
+    | or "CORS". This determines what cross-origin operations may be executed
     | in web browsers. You are free to adjust these settings as needed.
     |
     | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
@@ -19,16 +19,20 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [
+        'http://localhost:3000',
+        'https://tayssir-bac.com',
+        'https://tayssir-bac.vercel.app'
+    ],
 
     'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+    'exposed_headers' => ['Content-Length', 'X-JSON-Response'],
 
-    'max_age' => 0,
+    'max_age' => 86400,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];
