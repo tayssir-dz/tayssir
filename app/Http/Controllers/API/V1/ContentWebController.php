@@ -274,13 +274,20 @@ class ContentWebController extends BaseController
     /**
      * List questions by chapter (paginated).
      *
-     * Returns transformed questions for the specified chapter. Supports pagination via per_page (1-100, default 15) and page.
+     * Returns transformed questions for the specified chapter only if the chapter is in user's subscriptions. Supports pagination via per_page (1-100, default 15) and page.
      */
     public function questions(Request $request, int $chapterId)
     {
         $user = $request->user();
+        $subscriptionIds = $user->subscriptions->pluck('id');
 
         $chapter = Chapter::active()->findOrFail($chapterId);
+
+        // Verify chapter belongs to an allowed subscription
+        $chapterSubscribed = $chapter->subscriptions()->whereIn('subscriptions.id', $subscriptionIds)->exists();
+        if (! $chapterSubscribed) {
+            return $this->sendError(__('response.an_error_occurred'));
+        }
 
         $questions = $chapter
             ->questions()
