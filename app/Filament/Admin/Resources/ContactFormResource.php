@@ -12,6 +12,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -67,6 +68,10 @@ class ContactFormResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
+                TextColumn::make('user.phone_number')
+                    ->label(__('custom.models.contact_form.phone_number'))
+                    ->placeholder(__('custom.models.generic.empty'))
+                    ->toggleable(),
                 TextColumn::make('subject')
                     ->label(__('custom.models.contact_form.subject'))
                     ->limit(40)
@@ -84,6 +89,10 @@ class ContactFormResource extends Resource
                     ->label(__('custom.models.contact_form.user'))
                     ->placeholder(__('custom.models.generic.empty'))
                     ->toggleable(),
+                IconColumn::make('is_solved')
+                    ->label(__('custom.models.contact_form.is_solved'))
+                    ->sortable()
+                    ->boolean(),
                 TextColumn::make('created_at')
                     ->label(__('custom.table.created_at'))
                     ->dateTime()
@@ -92,6 +101,8 @@ class ContactFormResource extends Resource
                     ->toggleable(),
             ])
             ->filters([
+                Tables\Filters\TernaryFilter::make('is_solved')
+                    ->label(__('is solved')),
                 // keep simple for now
             ])
             ->actions([
@@ -135,11 +146,16 @@ class ContactFormResource extends Resource
             ->schema([
                 InfoSection::make(__('custom.models.contact_form.sections.contact_info'))
                     ->schema([
+                        TextEntry::make('user.name'),
                         TextEntry::make('name')->label(__('custom.models.contact_form.name')),
                         TextEntry::make('email')->label(__('custom.models.contact_form.email')),
+                        TextEntry::make('user.phone_number')->label(__('custom.models.contact_form.phone_number')),
                         TextEntry::make('subject')
                             ->label(__('custom.models.contact_form.subject'))
                             ->placeholder(__('custom.models.generic.empty')),
+                        TextEntry::make('is_solved')
+                            ->label(__('custom.models.contact_form.is_solved'))
+                            ->formatStateUsing(fn($state) => $state ? __('Yes') : __('No')),
                         TextEntry::make('created_at')
                             ->dateTime()
                             ->label(__('custom.table.created_at')),

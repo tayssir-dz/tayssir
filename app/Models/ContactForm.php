@@ -15,10 +15,12 @@ class ContactForm extends Model
         'subject',
         'message',
         'metadata',
+        'is_solved'
     ];
 
     protected $casts = [
         'metadata' => 'array',
+        'is_solved' => 'boolean',
     ];
 
     public function user(): BelongsTo

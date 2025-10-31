@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources\ContactFormResource\Pages;
 
 use App\Filament\Admin\Resources\ContactFormResource;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewContactForm extends ViewRecord
@@ -21,6 +22,16 @@ class ViewContactForm extends ViewRecord
             //     ->openUrlInNewTab(),
             Actions\DeleteAction::make()
                 ->label(__('custom.models.generic.delete')),
+            Actions\Action::make('markAsSolved')
+                ->label(fn(): string => $this->record->is_solved ? __('custom.models.contact_form.actions.mark_as_unsolved') : __('custom.models.contact_form.actions.mark_as_solved'))
+                ->action(function () {
+                    $this->record->is_solved = ! $this->record->is_solved;
+                    $this->record->save();
+                    Notification::make()
+                        ->success()
+                        ->title(__('The contact form status has been updated successfully.'))
+                        ->send();
+                }),
             // ]),
         ];
     }
