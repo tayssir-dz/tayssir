@@ -25,6 +25,7 @@ class ViewContactForm extends ViewRecord
             Actions\Action::make('markAsSolved')
                 ->icon(fn(): string => $this->record->is_solved ? 'heroicon-o-x-circle' : 'heroicon-o-check-circle')
                 ->label(fn(): string => $this->record->is_solved ? __('custom.models.contact_form.actions.mark_as_unsolved') : __('custom.models.contact_form.actions.mark_as_solved'))
+                ->color(fn(): string => $this->record->is_solved ? 'danger' : 'success')
                 ->action(function () {
                     $this->record->is_solved = ! $this->record->is_solved;
                     $this->record->save();
