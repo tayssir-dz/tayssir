@@ -21,6 +21,7 @@ class ViewContactForm extends ViewRecord
             //     ->url(fn($record) => 'mailto:' . $record->email . '?subject=' . rawurlencode($record->subject))
             //     ->openUrlInNewTab(),
             Actions\DeleteAction::make()
+                ->icon('heroicon-o-trash')
                 ->label(__('custom.models.generic.delete')),
             Actions\Action::make('markAsSolved')
                 ->icon(fn(): string => $this->record->is_solved ? 'heroicon-o-x-circle' : 'heroicon-o-check-circle')
