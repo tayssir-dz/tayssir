@@ -76,16 +76,19 @@ class ChapterLevelResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('exercice_points')
+                    ->alignCenter()
                     ->badge()
                     ->label(__('custom.models.chapter_level.exercice_points'))
                     ->toggleable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('lesson_points')
+                    ->alignCenter()
                     ->badge()
                     ->label(__('custom.models.chapter_level.lesson_points'))
                     ->toggleable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('bonus')
+                    ->alignCenter()
                     ->badge()
                     ->label(__('custom.models.chapter_level.bonus'))
                     ->toggleable()
