@@ -23,6 +23,7 @@ class ViewContactForm extends ViewRecord
             Actions\DeleteAction::make()
                 ->label(__('custom.models.generic.delete')),
             Actions\Action::make('markAsSolved')
+                ->icon(fn(): string => $this->record->is_solved ? 'heroicon-o-x-circle' : 'heroicon-o-check-circle')
                 ->label(fn(): string => $this->record->is_solved ? __('custom.models.contact_form.actions.mark_as_unsolved') : __('custom.models.contact_form.actions.mark_as_solved'))
                 ->action(function () {
                     $this->record->is_solved = ! $this->record->is_solved;
