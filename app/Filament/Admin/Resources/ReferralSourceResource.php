@@ -60,6 +60,7 @@ class ReferralSourceResource extends Resource
                         SpatieMediaLibraryFileUpload::make('icon')
                             ->label(__('custom.models.referral_source.icon'))
                             ->collection('icon')
+                            ->conversion('thumb')
                             ->getUploadedFileNameForStorageUsing(fn($file) => str()->slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.svg')
                             ->acceptedFileTypes(['image/svg+xml'])
                             ->rules(['mimetypes:image/svg+xml'])
