@@ -214,10 +214,16 @@ return [
     'models.question_report.user' => 'Utilisateur',
     'models.question_report.chapter' => 'Chapitre',
     'models.question_report.question' => 'Question',
+    'models.question_report.is_solved' => 'Résolu',
+    'models.question_report.is_contacted' => 'Contacté',
     'models.question_report.sections.report_info' => 'Informations du signalement',
     'models.question_report.sections.references' => 'Références',
     'models.question_report.actions.mark_as_read' => 'Marquer comme lu',
     'models.question_report.actions.mark_as_unread' => 'Marquer comme non lu',
+    'models.question_report.actions.mark_as_solved' => 'Marquer comme résolu',
+    'models.question_report.actions.mark_as_unsolved' => 'Marquer comme non résolu',
+    'models.question_report.actions.mark_as_contacted' => 'Marquer comme contacté',
+    'models.question_report.actions.mark_as_not_contacted' => 'Marquer comme non contacté',
 
     // Generic
     'models.generic.empty' => '—',

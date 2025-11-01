@@ -8,12 +8,15 @@ use App\Filament\Admin\Resources\QuestionReportResource\RelationManagers;
 use App\Models\QuestionReport;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\IconEntry;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components\Section as InfoSection;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -57,20 +60,15 @@ class QuestionReportResource extends Resource
             ->recordUrl(fn($record) => static::getUrl('view', ['record' => $record]))
             ->modifyQueryUsing(fn(Builder $query) => $query->with(['user', 'question']))
             ->columns([
-                TextColumn::make('is_read')
-                    ->label(__('custom.models.question_report.read_status'))
-                    ->formatStateUsing(fn($state) => $state ? __('custom.models.question_report.read') : __('custom.models.question_report.unread'))
-                    ->badge()
-                    ->color(fn($state) => $state ? 'success' : 'warning')
+                TextColumn::make('user.name')
+                    ->label(__('custom.models.question_report.user'))
+                    ->placeholder(__('custom.models.generic.empty'))
                     ->toggleable(),
                 TextColumn::make('description')
                     ->label(__('custom.models.question_report.description'))
                     ->limit(40)
                     ->placeholder(__('custom.models.generic.empty'))
-                    ->wrap(),
-                TextColumn::make('user.name')
-                    ->label(__('custom.models.question_report.user'))
-                    ->placeholder(__('custom.models.generic.empty'))
+                    ->wrap()
                     ->toggleable(),
                 TextColumn::make('question.chapter_name')
                     ->label(__('custom.models.question_report.chapter'))
@@ -80,28 +78,73 @@ class QuestionReportResource extends Resource
                     ->label(__('custom.models.question_report.question'))
                     ->limit(50)
                     ->wrap()
+                    ->toggleable()
                     ->placeholder(__('custom.models.generic.empty')),
+                IconColumn::make('is_read')
+                    ->boolean()
+                    ->alignCenter()
+                    ->label(__('custom.models.question_report.read'))
+                    ->sortable()
+                    ->toggleable(),
+                IconColumn::make('is_solved')
+                    ->boolean()
+                    ->alignCenter()
+                    ->label(__('custom.models.question_report.is_solved'))
+                    ->sortable()
+                    ->toggleable(),
+                IconColumn::make('is_contacted')
+                    ->boolean()
+                    ->alignCenter()
+                    ->label(__('custom.models.question_report.is_contacted'))
+                    ->sortable()
+                    ->toggleable(),
             ])
             ->filters([
-                //
+                TernaryFilter::make('is_read')
+                    ->label(__('custom.models.question_report.read')),
+                TernaryFilter::make('is_solved')
+                    ->label(__("custom.models.question_report.is_solved")),
+                TernaryFilter::make('is_contacted')
+                    ->label(__("custom.models.question_report.is_contacted"))
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\Action::make('markAsRead')
+                        ->icon('heroicon-o-eye')
                         ->label(__('custom.models.question_report.actions.mark_as_read'))
                         ->visible(fn($record) => ! $record->is_read)
                         ->action(fn($record) => $record->markAsRead())
                         ->color('success')
                         ->requiresConfirmation(),
                     Tables\Actions\Action::make('markAsUnread')
+                        ->icon('heroicon-o-eye-slash')
                         ->label(__('custom.models.question_report.actions.mark_as_unread'))
                         ->visible(fn($record) => $record->is_read)
                         ->action(fn($record) => $record->markAsUnread())
                         ->color('warning')
                         ->requiresConfirmation(),
+                    Tables\Actions\Action::make('markAsSolved')
+                        ->icon(fn($record): string => $record->is_solved ? 'heroicon-o-x-circle' : 'heroicon-o-check-circle')
+                        ->label(fn($record): string => $record->is_solved ? __('custom.models.question_report.actions.mark_as_unsolved') : __('custom.models.question_report.actions.mark_as_solved'))
+                        ->color(fn($record): string => $record->is_solved ? 'danger' : 'success')
+                        ->action(function ($record) {
+                            $record->is_solved = ! $record->is_solved;
+                            $record->save();
+                        })
+                        ->requiresConfirmation(),
+                    Tables\Actions\Action::make('markAsContacted')
+                        ->icon(fn($record): string => $record->is_contacted ? 'heroicon-o-phone-x-mark' : 'heroicon-o-phone')
+                        ->label(fn($record): string => $record->is_contacted ? __('custom.models.question_report.actions.mark_as_not_contacted') : __('custom.models.question_report.actions.mark_as_contacted'))
+                        ->color(fn($record): string => $record->is_contacted ? 'danger' : 'info')
+                        ->action(function ($record) {
+                            $record->is_contacted = ! $record->is_contacted;
+                            $record->save();
+                        })
+                        ->requiresConfirmation(),
                     Tables\Actions\Action::make("goToChapter")
-                        ->label("GOTO")
+                        ->label(__("custom.models.question_report.question"))
+                        ->icon('heroicon-o-question-mark-circle')
                         ->url(fn($record) => ChapterResource::getUrl('edit', ['record' => $record->question->chapter()->first()]))
                         ->color("info"),
                     Tables\Actions\DeleteAction::make()
@@ -137,13 +180,19 @@ class QuestionReportResource extends Resource
             ->schema([
                 InfoSection::make(__('custom.models.question_report.sections.report_info'))
                     ->schema([
-                        TextEntry::make('is_read')
-                            ->label(__('custom.models.question_report.read_status'))
-                            ->formatStateUsing(fn($state) => $state ? __('custom.models.question_report.read') : __('custom.models.question_report.unread')),
                         TextEntry::make('description')
                             ->label(__('custom.models.question_report.description'))
                             ->placeholder(__('custom.models.generic.empty'))
                             ->columnSpanFull(),
+                        IconEntry::make('is_read')
+                            ->label(__('custom.models.question_report.read'))
+                            ->boolean(),
+                        IconEntry::make('is_solved')
+                            ->label(__('custom.models.question_report.is_solved'))
+                            ->boolean(),
+                        IconEntry::make('is_contacted')
+                            ->label(__('custom.models.question_report.is_contacted'))
+                            ->boolean(),
                     ]),
                 InfoSection::make(__('custom.models.question_report.sections.references'))
                     ->schema([

@@ -11,10 +11,14 @@ class QuestionReport extends Model
         'user_id',
         'question_id',
         'description',
+        'is_solved',
+        'is_contacted',
     ];
 
     protected $casts = [
         'read_at' => 'datetime',
+        'is_solved' => 'boolean',
+        'is_contacted' => 'boolean',
     ];
 
     public function user(): BelongsTo

@@ -221,10 +221,16 @@ return [
     'models.question_report.user' => 'User',
     'models.question_report.chapter' => 'Chapter',
     'models.question_report.question' => 'Question',
+    'models.question_report.is_solved' => 'Solved',
+    'models.question_report.is_contacted' => 'Contacted',
     'models.question_report.sections.report_info' => 'Report Information',
     'models.question_report.sections.references' => 'References',
     'models.question_report.actions.mark_as_read' => 'Mark as read',
     'models.question_report.actions.mark_as_unread' => 'Mark as unread',
+    'models.question_report.actions.mark_as_solved' => 'Mark as Solved',
+    'models.question_report.actions.mark_as_unsolved' => 'Mark as Unsolved',
+    'models.question_report.actions.mark_as_contacted' => 'Mark as Contacted',
+    'models.question_report.actions.mark_as_not_contacted' => 'Mark as Not Contacted',
 
     // Generic
     'models.generic.empty' => '—',

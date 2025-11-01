@@ -239,10 +239,16 @@ return [
     'models.question_report.user' => 'المستخدم',
     'models.question_report.chapter' => 'الفصل',
     'models.question_report.question' => 'السؤال',
+    'models.question_report.is_solved' => 'محلول',
+    'models.question_report.is_contacted' => 'تم الاتصال',
     'models.question_report.sections.report_info' => 'معلومات التقرير',
     'models.question_report.sections.references' => 'المراجع',
     'models.question_report.actions.mark_as_read' => 'تعيين كمقروء',
     'models.question_report.actions.mark_as_unread' => 'تعيين كغير مقروء',
+    'models.question_report.actions.mark_as_solved' => 'تعيين كمحلول',
+    'models.question_report.actions.mark_as_unsolved' => 'تعيين كغير محلول',
+    'models.question_report.actions.mark_as_contacted' => 'تعيين كمتصل',
+    'models.question_report.actions.mark_as_not_contacted' => 'تعيين كغير متصل',
 
     // عام
     'models.generic.empty' => '—',
@@ -318,7 +324,6 @@ return [
     'models.question.difficulty.easy' => 'سهل',
     'models.question.difficulty.medium' => 'متوسط',
     'models.question.difficulty.hard' => 'صعب',
-    // نماذج الاتصال
     // نماذج الاتصال
     'models.contact_forms' => 'نماذج الاتصال',
     'models.contact_form' => 'نموذج الاتصال',
