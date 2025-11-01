@@ -102,12 +102,12 @@ class QuestionReportResource extends Resource
                     ->toggleable(),
             ])
             ->filters([
-                TernaryFilter::make('is_read')
-                    ->label(__('custom.models.question_report.read')),
-                TernaryFilter::make('is_solved')
-                    ->label(__("custom.models.question_report.is_solved")),
-                TernaryFilter::make('is_contacted')
-                    ->label(__("custom.models.question_report.is_contacted"))
+                // TernaryFilter::make('is_read')
+                //     ->label(__('custom.models.question_report.read')),
+                // TernaryFilter::make('is_solved')
+                //     ->label(__("custom.models.question_report.is_solved")),
+                // TernaryFilter::make('is_contacted')
+                //     ->label(__("custom.models.question_report.is_contacted"))
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

@@ -182,6 +182,7 @@ class ViewPayment extends ViewRecord
                         Grid::make(2)
                             ->schema([
                                 TextEntry::make('promoCode.code')
+                                    ->placeholder(__('custom.models.generic.empty'))
                                     ->label(__('custom.models.promoCode.code')),
                                 TextEntry::make('attachment')
                                     ->label(__('custom.models.payment.attachment'))
