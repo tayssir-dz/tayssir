@@ -23,20 +23,6 @@ class ViewQuestionReport extends ViewRecord
             Actions\DeleteAction::make()
                 ->label(__('custom.models.generic.delete')),
             Actions\ActionGroup::make([
-                Actions\Action::make('markAsRead')
-                    ->label(__('custom.models.question_report.actions.mark_as_read'))
-                    ->visible(fn() => ! $this->record->is_read)
-                    ->icon('heroicon-o-envelope-open')
-                    ->action(fn() => $this->record->markAsRead())
-                    ->color('success')
-                    ->requiresConfirmation(),
-                Actions\Action::make('markAsUnread')
-                    ->label(__('custom.models.question_report.actions.mark_as_unread'))
-                    ->visible(fn() => $this->record->is_read)
-                    ->icon('heroicon-o-envelope')
-                    ->action(fn() => $this->record->markAsUnread())
-                    ->color('warning')
-                    ->requiresConfirmation(),
                 Actions\Action::make('markAsSolved')
                     ->icon(fn(): string => $this->record->is_solved ? 'heroicon-o-x-circle' : 'heroicon-o-check-circle')
                     ->label(fn(): string => $this->record->is_solved ? __('custom.models.question_report.actions.mark_as_unsolved') : __('custom.models.question_report.actions.mark_as_solved'))

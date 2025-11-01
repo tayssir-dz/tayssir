@@ -83,12 +83,7 @@ class QuestionReportResource extends Resource
                     ->grow()
                     ->toggleable()
                     ->placeholder(__('custom.models.generic.empty')),
-                IconColumn::make('is_read')
-                    ->boolean()
-                    ->alignCenter()
-                    ->label(__('custom.models.question_report.read'))
-                    ->sortable()
-                    ->toggleable(),
+
                 IconColumn::make('is_solved')
                     ->boolean()
                     ->alignCenter()
@@ -103,8 +98,7 @@ class QuestionReportResource extends Resource
                     ->toggleable(),
             ])
             ->filters([
-                // TernaryFilter::make('is_read')
-                //     ->label(__('custom.models.question_report.read')),
+
                 // TernaryFilter::make('is_solved')
                 //     ->label(__("custom.models.question_report.is_solved")),
                 // TernaryFilter::make('is_contacted')
@@ -113,20 +107,6 @@ class QuestionReportResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\Action::make('markAsRead')
-                        ->icon('heroicon-o-eye')
-                        ->label(__('custom.models.question_report.actions.mark_as_read'))
-                        ->visible(fn($record) => ! $record->is_read)
-                        ->action(fn($record) => $record->markAsRead())
-                        ->color('success')
-                        ->requiresConfirmation(),
-                    Tables\Actions\Action::make('markAsUnread')
-                        ->icon('heroicon-o-eye-slash')
-                        ->label(__('custom.models.question_report.actions.mark_as_unread'))
-                        ->visible(fn($record) => $record->is_read)
-                        ->action(fn($record) => $record->markAsUnread())
-                        ->color('warning')
-                        ->requiresConfirmation(),
                     Tables\Actions\Action::make('markAsSolved')
                         ->icon(fn($record): string => $record->is_solved ? 'heroicon-o-x-circle' : 'heroicon-o-check-circle')
                         ->label(fn($record): string => $record->is_solved ? __('custom.models.question_report.actions.mark_as_unsolved') : __('custom.models.question_report.actions.mark_as_solved'))
@@ -187,9 +167,6 @@ class QuestionReportResource extends Resource
                             ->label(__('custom.models.question_report.description'))
                             ->placeholder(__('custom.models.generic.empty'))
                             ->columnSpanFull(),
-                        IconEntry::make('is_read')
-                            ->label(__('custom.models.question_report.read'))
-                            ->boolean(),
                         IconEntry::make('is_solved')
                             ->label(__('custom.models.question_report.is_solved'))
                             ->boolean(),

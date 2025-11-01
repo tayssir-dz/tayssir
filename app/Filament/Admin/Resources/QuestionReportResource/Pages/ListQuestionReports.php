@@ -22,12 +22,6 @@ class ListQuestionReports extends ListRecords
         return [
             'all' => Tab::make(__('custom.models.question_report.tabs.all'))
                 ->icon('heroicon-o-circle-stack'),
-            'read' => Tab::make(__('custom.models.question_report.tabs.read'))
-                ->icon('heroicon-o-envelope-open')
-                ->modifyQueryUsing(fn(Builder $query) => $query->whereNotNull('read_at')),
-            'unread' => Tab::make(__('custom.models.question_report.tabs.unread'))
-                ->icon('heroicon-o-envelope')
-                ->modifyQueryUsing(fn(Builder $query) => $query->whereNull('read_at')),
             'solved' => Tab::make(__('custom.models.question_report.tabs.solved'))
                 ->icon('heroicon-o-check-circle')
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('is_solved', true)),

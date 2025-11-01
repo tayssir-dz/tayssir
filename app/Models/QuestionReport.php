@@ -16,7 +16,6 @@ class QuestionReport extends Model
     ];
 
     protected $casts = [
-        'read_at' => 'datetime',
         'is_solved' => 'boolean',
         'is_contacted' => 'boolean',
     ];
@@ -29,22 +28,5 @@ class QuestionReport extends Model
     public function question(): BelongsTo
     {
         return $this->belongsTo(Question::class);
-    }
-
-    public function getIsReadAttribute(): bool
-    {
-        return (bool) $this->read_at;
-    }
-
-    public function markAsRead(): void
-    {
-        $this->read_at = now();
-        $this->save();
-    }
-
-    public function markAsUnread(): void
-    {
-        $this->read_at = null;
-        $this->save();
     }
 }
