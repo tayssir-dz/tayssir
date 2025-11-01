@@ -143,7 +143,7 @@ trait InteractsWithContent
             }
 
             // If first element is already an object with 'value' key, return as-is
-            if (isset($hint[0]) && is_array($hint[0]) && isset($hint[0]['value'])) {
+            if (isset($hint[0]) && is_array($hint[0]) && isset($hint[0]['value']) && isset($hint[0]['is_latex'])) {
                 return $hint;
             }
 
