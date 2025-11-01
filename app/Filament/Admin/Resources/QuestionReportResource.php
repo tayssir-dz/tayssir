@@ -56,6 +56,8 @@ class QuestionReportResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->striped()
+            ->openRecordUrlInNewTab()
             ->defaultSort('created_at', 'desc')
             ->recordUrl(fn($record) => static::getUrl('view', ['record' => $record]))
             ->modifyQueryUsing(fn(Builder $query) => $query->with(['user', 'question']))

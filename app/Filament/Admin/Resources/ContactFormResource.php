@@ -52,6 +52,8 @@ class ContactFormResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->striped()
+            ->openRecordUrlInNewTab()
             ->defaultSort('created_at', 'desc')
             ->modifyQueryUsing(fn(Builder $query) => $query->with('user'))
             ->recordUrl(fn($record) => static::getUrl('view', ['record' => $record]))
