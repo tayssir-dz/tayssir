@@ -65,19 +65,21 @@ class QuestionReportResource extends Resource
                     ->placeholder(__('custom.models.generic.empty'))
                     ->toggleable(),
                 TextColumn::make('description')
+                    ->grow()
                     ->label(__('custom.models.question_report.description'))
-                    ->limit(40)
+                    ->limit(25)
                     ->placeholder(__('custom.models.generic.empty'))
-                    ->wrap()
                     ->toggleable(),
                 TextColumn::make('question.chapter_name')
+                    ->limit(25)
+                    ->grow()
                     ->label(__('custom.models.question_report.chapter'))
                     ->placeholder(__('custom.models.generic.empty'))
                     ->toggleable(),
                 TextColumn::make('question.question')
                     ->label(__('custom.models.question_report.question'))
-                    ->limit(50)
-                    ->wrap()
+                    ->limit(25)
+                    ->grow()
                     ->toggleable()
                     ->placeholder(__('custom.models.generic.empty')),
                 IconColumn::make('is_read')
