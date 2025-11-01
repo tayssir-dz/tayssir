@@ -102,8 +102,8 @@ class ContactFormResource extends Resource
                     ->toggleable(),
             ])
             ->filters([
-                Tables\Filters\TernaryFilter::make('is_solved')
-                    ->label(__('is solved')),
+                // Tables\Filters\TernaryFilter::make('is_solved')
+                //     ->label(__('is solved')),
                 // keep simple for now
             ])
             ->actions([
