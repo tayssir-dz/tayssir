@@ -16,6 +16,7 @@ class BacsUploadManyAction
     public static function make()
     {
         return Tables\Actions\Action::make('upload_many')
+            ->slideOver()
             ->label(__('custom.actions.bacs.upload_many'))
             ->color('info')
             ->icon('heroicon-o-document-plus')

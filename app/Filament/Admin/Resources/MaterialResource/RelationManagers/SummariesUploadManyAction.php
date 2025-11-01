@@ -19,6 +19,7 @@ class SummariesUploadManyAction
     {
 
         return Tables\Actions\Action::make('upload_many')
+            ->slideOver()
             ->label(__('custom.actions.summaries.upload_many'))
             ->color('info')
             ->icon('heroicon-o-document-plus')
