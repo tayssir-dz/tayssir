@@ -230,7 +230,7 @@ trait InteractsWithContent
         foreach ($choices as $index => $choice) {
             $options[] = [
                 'value' => ! empty($choice['option']) ? $choice['option'] : null,
-                'is_latex' => $choice['option_is_latex'] ?? false,
+                'is_latex' => (bool) ($choice['option_is_latex'] ?? false),
             ];
 
             if (! empty($choice['is_correct'])) {
@@ -253,7 +253,7 @@ trait InteractsWithContent
         foreach ($wordsArr as $index => $item) {
             $words[] = [
                 'value' => ! empty($item['word']) ? $item['word'] : null,
-                'is_latex' => $item['word_is_latex'] ?? false,
+                'is_latex' => (bool) ($item['word_is_latex'] ?? false),
             ];
 
             if (! empty($item['is_intruder'])) {
@@ -270,7 +270,7 @@ trait InteractsWithContent
     public function transformTrueOrFalse($question)
     {
         return [
-            'correctAnswer' => $question->options['correct'] ?? false,
+            'correctAnswer' => (bool) ($question->options['correct'] ?? false),
         ];
     }
 
@@ -306,11 +306,11 @@ trait InteractsWithContent
             $pairs[] = [
                 'first' => [
                     'value' => ! empty($pair['first']) ? $pair['first'] : null,
-                    'is_latex' => $pair['first_is_latex'] ?? false,
+                    'is_latex' => (bool) ($pair['first_is_latex'] ?? false),
                 ],
                 'second' => [
                     'value' => ! empty($pair['second']) ? $pair['second'] : null,
-                    'is_latex' => $pair['second_is_latex'] ?? false,
+                    'is_latex' => (bool) ($pair['second_is_latex'] ?? false),
                 ],
             ];
         }
