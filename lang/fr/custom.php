@@ -141,11 +141,32 @@ return [
     // # Summary
     'forms.summary.create.section.infos' => 'Informations du résumé',
     'forms.summary.create.section.file' => 'Fichier PDF du résumé',
+    'forms.summary.upload_many.files_label' => 'Télécharger les fichiers PDF',
     'models.summary.title' => 'Titre',
     'models.summary.description' => 'Description',
     'models.summary.material' => 'Matière',
     'models.summary.pdf' => 'Fichier PDF',
     'models.summary.is_active' => 'Actif',
+
+    // # Summaries Actions
+    'actions.summaries.upload_many' => 'Téléchargement en masse',
+
+    // # Summaries Notifications
+    'notifications.summaries.upload_success_title' => 'Téléchargement réussi',
+    'notifications.summaries.upload_success_message' => ':count résumés ont été téléchargés avec succès',
+    'notifications.summaries.upload_warning_title' => 'Aucun fichier sélectionné',
+    'notifications.summaries.upload_warning_message' => 'Veuillez sélectionner au moins un fichier PDF à télécharger',
+    'notifications.summaries.upload_error_title' => 'Erreur de téléchargement',
+    'notifications.summaries.upload_error_message' => ':count fichier(s) n\'a/n\'ont pas pu être traité(s)',
+
+    'actions.bacs.upload_many' => 'Téléchargement en masse',
+    'forms.bac.upload_many.files_label' => 'Télécharger des fichiers PDF',
+    'notifications.bacs.upload_success_title' => 'Téléchargement réussi',
+    'notifications.bacs.upload_success_message' => ':count bac(s) téléchargé(s)',
+    'notifications.bacs.upload_warning_title' => 'Aucun fichier sélectionné',
+    'notifications.bacs.upload_warning_message' => 'Veuillez sélectionner au moins un fichier PDF à télécharger',
+    'notifications.bacs.upload_error_title' => 'Erreur de téléchargement',
+    'notifications.bacs.upload_error_message' => ':count fichier(s) n\'a/n\'ont pas pu être traité(s)',
 
     'models.bacs' => 'Bacs',
     'models.bac' => 'Bac',

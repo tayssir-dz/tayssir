@@ -147,11 +147,32 @@ return [
     // # Summary
     'forms.summary.create.section.infos' => 'Summary Information',
     'forms.summary.create.section.file' => 'Summary PDF File',
+    'forms.summary.upload_many.files_label' => 'Upload PDF Files',
     'models.summary.title' => 'Title',
     'models.summary.description' => 'Description',
     'models.summary.material' => 'Material',
     'models.summary.pdf' => 'PDF File',
     'models.summary.is_active' => 'Active',
+
+    // # Summaries Actions
+    'actions.summaries.upload_many' => 'Bulk Upload',
+
+    // # Summaries Notifications
+    'notifications.summaries.upload_success_title' => 'Upload Successful',
+    'notifications.summaries.upload_success_message' => ':count summaries have been successfully uploaded',
+    'notifications.summaries.upload_warning_title' => 'No Files Selected',
+    'notifications.summaries.upload_warning_message' => 'Please select at least one PDF file to upload',
+    'notifications.summaries.upload_error_title' => 'Upload Error',
+    'notifications.summaries.upload_error_message' => ':count file(s) could not be processed',
+
+    'actions.bacs.upload_many' => 'Bulk Upload',
+    'forms.bac.upload_many.files_label' => 'Upload PDF Files',
+    'notifications.bacs.upload_success_title' => 'Upload Successful',
+    'notifications.bacs.upload_success_message' => ':count bacs uploaded',
+    'notifications.bacs.upload_warning_title' => 'No Files Selected',
+    'notifications.bacs.upload_warning_message' => 'Please select at least one PDF file to upload',
+    'notifications.bacs.upload_error_title' => 'Upload Error',
+    'notifications.bacs.upload_error_message' => ':count file(s) could not be processed',
 
     'models.bacs' => 'Bacs',
     'models.bac' => 'Bac',

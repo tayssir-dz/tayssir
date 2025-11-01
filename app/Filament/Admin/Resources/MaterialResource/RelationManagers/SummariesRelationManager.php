@@ -108,6 +108,7 @@ class SummariesRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
+                SummariesUploadManyAction::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

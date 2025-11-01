@@ -108,6 +108,7 @@ class BacsRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
+                BacsUploadManyAction::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

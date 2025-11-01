@@ -143,11 +143,32 @@ return [
     // # Summary
     'forms.summary.create.section.infos' => 'معلومات الملخص',
     'forms.summary.create.section.file' => 'ملف الملخص PDF',
+    'forms.summary.upload_many.files_label' => 'رفع ملفات PDF',
     'models.summary.title' => 'العنوان',
     'models.summary.description' => 'الوصف',
     'models.summary.material' => 'المادة',
     'models.summary.pdf' => 'ملف PDF',
     'models.summary.is_active' => 'نشط',
+
+    // # Summaries Actions
+    'actions.summaries.upload_many' => 'رفع متعدد',
+
+    // # Summaries Notifications
+    'notifications.summaries.upload_success_title' => 'تم الرفع بنجاح',
+    'notifications.summaries.upload_success_message' => 'تم رفع :count ملخص بنجاح',
+    'notifications.summaries.upload_warning_title' => 'لم يتم تحديد ملفات',
+    'notifications.summaries.upload_warning_message' => 'يرجى تحديد ملف PDF واحد على الأقل للرفع',
+    'notifications.summaries.upload_error_title' => 'خطأ في الرفع',
+    'notifications.summaries.upload_error_message' => ':count ملف(ات) لم يتمكن من معالجتها',
+
+    'actions.bacs.upload_many' => 'تحميل جماعي',
+    'forms.bac.upload_many.files_label' => 'تحميل ملفات PDF',
+    'notifications.bacs.upload_success_title' => 'تم التحميل بنجاح',
+    'notifications.bacs.upload_success_message' => 'تم تحميل :count من البكالوريا',
+    'notifications.bacs.upload_warning_title' => 'لم يتم تحديد ملفات',
+    'notifications.bacs.upload_warning_message' => 'يرجى تحديد ملف PDF واحد على الأقل للتحميل',
+    'notifications.bacs.upload_error_title' => 'خطأ في التحميل',
+    'notifications.bacs.upload_error_message' => ':count ملف(ات) لم يتمكن من معالجتها',
 
     'models.bacs' => 'بكالوريات',
     'models.bac' => 'بكالوريا',
