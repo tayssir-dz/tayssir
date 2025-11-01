@@ -81,7 +81,7 @@ class ContactFormResource extends Resource
                     ->toggleable(),
                 TextColumn::make('message')
                     ->label(__('custom.models.contact_form.message'))
-                    ->limit(60)
+                    ->limit(10)
                     ->placeholder(__('custom.models.generic.empty'))
                     ->wrap()
                     ->toggleable(),
