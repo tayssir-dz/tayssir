@@ -130,6 +130,10 @@ class QuestionJsonUploadAction
                                 $validatedData['explanation_text_is_latex'] = filter_var($validatedData['explanation_text_is_latex'], FILTER_VALIDATE_BOOLEAN);
                             }
 
+                            if (isset($validatedData['hint']['is_latex']) && is_string($validatedData['hint']['is_latex'])) {
+                                $validatedData['hint']['is_latex'] = filter_var($validatedData['hint']['is_latex'], FILTER_VALIDATE_BOOLEAN);
+                            }
+
                             // Ensure the options array is correctly formatted
                             switch ($validatedData['question_type']) {
                                 case QuestionType::TRUE_OR_FALSE->value:
@@ -235,6 +239,8 @@ class QuestionJsonUploadAction
         $rules = [
             'question' => 'required|string',
             'hint' => 'nullable|array',
+            'hint.value' => 'required_with:hint|string',
+            'hint.is_latex' => 'required_with:hint|boolean',
             'explanation_text' => 'nullable|string',
             'question_type' => 'required|string|in:' . implode(',', array_column(QuestionType::cases(), 'value')),
             'scope' => 'required|string|in:' . implode(',', array_column(QuestionScope::cases(), 'value')),
@@ -249,6 +255,11 @@ class QuestionJsonUploadAction
             if (isset($data[$field]) && is_string($data[$field])) {
                 $data[$field] = filter_var($data[$field], FILTER_VALIDATE_BOOLEAN);
             }
+        }
+
+        // Convert hint.is_latex string to boolean if needed
+        if (isset($data['hint']['is_latex']) && is_string($data['hint']['is_latex'])) {
+            $data['hint']['is_latex'] = filter_var($data['hint']['is_latex'], FILTER_VALIDATE_BOOLEAN);
         }
 
         // Add validation rules based on question type
