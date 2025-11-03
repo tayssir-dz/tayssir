@@ -108,8 +108,20 @@ class QuestionJsonUploadAction
                                 continue;
                             }
 
+                            // Normalize hint if present as array
+                            if (isset($questionData['hint']) && is_array($questionData['hint'])) {
+                                if (count($questionData['hint']) === 1 && isset($questionData['hint'][0]) && is_array($questionData['hint'][0])) {
+                                    $questionData['hint'] = $questionData['hint'][0];
+                                    Log::info("Question #{$index}: Converted hint from array to object", ['hint' => $questionData['hint']]);
+                                }
+                            }
+
+                            Log::info("Question #{$index}: Data before validation", ['questionData' => $questionData]);
+
                             // Validate the question data
                             $validator = self::validateQuestionData($questionData);
+
+                            Log::info("Question #{$index}: Validation result", ['passed' => $validator->passes(), 'errors' => $validator->errors()->all()]);
 
                             if ($validator->fails()) {
                                 $errorCount++;
@@ -120,6 +132,13 @@ class QuestionJsonUploadAction
 
                             // Prepare the question data
                             $validatedData = $validator->validated();
+
+                            // Handle hint: if it's an array with single element, extract it
+                            if (isset($validatedData['hint']) && is_array($validatedData['hint'])) {
+                                if (count($validatedData['hint']) === 1 && isset($validatedData['hint'][0]) && is_array($validatedData['hint'][0])) {
+                                    $validatedData['hint'] = $validatedData['hint'][0];
+                                }
+                            }
 
                             // Handle boolean fields that might be strings
                             if (isset($validatedData['question_is_latex'])) {
@@ -239,8 +258,6 @@ class QuestionJsonUploadAction
         $rules = [
             'question' => 'required|string',
             'hint' => 'nullable|array',
-            'hint.value' => 'required_with:hint|string',
-            'hint.is_latex' => 'required_with:hint|boolean',
             'explanation_text' => 'nullable|string',
             'question_type' => 'required|string|in:' . implode(',', array_column(QuestionType::cases(), 'value')),
             'scope' => 'required|string|in:' . implode(',', array_column(QuestionScope::cases(), 'value')),
@@ -249,6 +266,12 @@ class QuestionJsonUploadAction
             'explanation_text_is_latex' => 'boolean',
             'options' => 'required|array',
         ];
+
+        // Add hint validation rules only if hint is present
+        if (isset($data['hint']) && is_array($data['hint'])) {
+            $rules['hint.value'] = 'required|string';
+            $rules['hint.is_latex'] = 'required|boolean';
+        }
 
         // Convert string booleans to actual booleans
         foreach (['question_is_latex', 'explanation_text_is_latex'] as $field) {
