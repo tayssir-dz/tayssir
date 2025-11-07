@@ -72,22 +72,20 @@ class ContentWebController extends BaseController
     /**
      * List my materials (paginated).
      *
-     * Returns the user-accessible materials for the current division, filtered by active subscriptions. Supports pagination via per_page (1-100, default 15) and page.
+     * Returns all active materials for the current division. Supports pagination via per_page (1-100, default 15) and page.
+     * NOTE: This endpoint returns all materials regardless of subscription status, similar to V2 behavior.
+     * Unit visibility (premium/available) is determined per-unit based on user subscriptions.
      */
     public function materials(Request $request)
     {
         $user = $request->user();
         $progressData = $user->getAllProgressData();
-        $subscriptionIds = $user->subscriptions->pluck('id');
 
+        // QUERY HERE: Load all active materials from the division (no subscription filter)
+        // This matches ContentService::getUserContent() behavior in V2
         $materials = $user->division
             ->materials()
             ->active()
-            ->whereHas('units', function ($query) use ($subscriptionIds) {
-                $query->whereHas('subscriptions', function ($subQuery) use ($subscriptionIds) {
-                    $subQuery->whereIn('subscriptions.id', $subscriptionIds);
-                });
-            })
             ->paginate($this->perPage($request));
 
         $materials->setCollection(
