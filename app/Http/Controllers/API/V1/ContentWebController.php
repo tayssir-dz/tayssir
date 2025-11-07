@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\API\BaseController;
+use App\Enums\UnitVisibility;
 use App\Models\Chapter;
 use App\Models\Material;
 use App\Models\Unit;
@@ -32,17 +33,13 @@ class ContentWebController extends BaseController
         }
 
         $progressData = $user->getAllProgressData();
-        $subscriptionIds = $user->subscriptions->pluck('id');
+        $subscriptionIds = $user->subscriptions->pluck('id')->all();
 
-        // Minimal, paginated content snapshot for web
+        // QUERY HERE: Load all active materials from the division (no subscription filter)
+        // This matches ContentService::getUserContent() behavior in V2
         $materials = $user->division
             ->materials()
             ->active()
-            ->whereHas('units', function ($query) use ($subscriptionIds) {
-                $query->whereHas('subscriptions', function ($subQuery) use ($subscriptionIds) {
-                    $subQuery->whereIn('subscriptions.id', $subscriptionIds);
-                });
-            })
             ->paginate($this->perPage($request));
 
         $materialsData = $materials->getCollection()->map(function ($material) use ($progressData) {
@@ -113,26 +110,30 @@ class ContentWebController extends BaseController
     /**
      * List units by material (paginated).
      *
-     * Returns units for the specified material if accessible to the user. Supports pagination via per_page (1-100, default 15) and page.
+     * Returns all units for the specified material. Includes progress, points and visibility.
+     * Premium units (not in user's subscriptions) are included with premium visibility.
+     * Supports pagination via per_page (1-100, default 15) and page.
      */
     public function units(Request $request, int $materialId)
     {
         $user = $request->user();
         $progressData = $user->getAllProgressData();
-        $subscriptionIds = $user->subscriptions->pluck('id');
+        $subscriptionIds = $user->subscriptions->pluck('id')->all();
 
         $material = Material::active()->findOrFail($materialId);
 
+        // QUERY HERE: Load all active units from the material (no subscription filter)
+        // This matches ContentService::getUserContent() behavior in V2
         $units = $material
             ->units()
             ->active()
-            ->whereHas('subscriptions', function ($query) use ($subscriptionIds) {
-                $query->whereIn('subscriptions.id', $subscriptionIds);
-            })
             ->paginate($this->perPage($request));
 
         $units->setCollection(
-            $units->getCollection()->map(function ($unit) use ($progressData, $material) {
+            $units->getCollection()->map(function ($unit) use ($progressData, $material, $subscriptionIds) {
+                // Determine if unit is available (in any of the user's subscriptions)
+                $unitSubscribed = $unit->subscriptions()->whereIn('subscriptions.id', $subscriptionIds)->exists();
+
                 return [
                     'id' => $unit->id,
                     'name' => $unit->name,
@@ -142,6 +143,7 @@ class ContentWebController extends BaseController
                     'material_id' => $material->id,
                     'progress' => $progressData['units'][$unit->id] ?? 0,
                     'points' => $progressData['points']['units'][$unit->id] ?? 0,
+                    'visibility' => $unitSubscribed ? UnitVisibility::AVAILABLE->value : UnitVisibility::PREMIUM->value,
                 ];
             })
         );
