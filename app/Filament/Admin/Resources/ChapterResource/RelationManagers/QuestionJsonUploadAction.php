@@ -108,14 +108,6 @@ class QuestionJsonUploadAction
                                 continue;
                             }
 
-                            // Normalize hint if present as array
-                            if (isset($questionData['hint']) && is_array($questionData['hint'])) {
-                                if (count($questionData['hint']) === 1 && isset($questionData['hint'][0]) && is_array($questionData['hint'][0])) {
-                                    $questionData['hint'] = $questionData['hint'][0];
-                                    Log::info("Question #{$index}: Converted hint from array to object", ['hint' => $questionData['hint']]);
-                                }
-                            }
-
                             Log::info("Question #{$index}: Data before validation", ['questionData' => $questionData]);
 
                             // Validate the question data
@@ -133,13 +125,6 @@ class QuestionJsonUploadAction
                             // Prepare the question data
                             $validatedData = $validator->validated();
 
-                            // Handle hint: if it's an array with single element, extract it
-                            if (isset($validatedData['hint']) && is_array($validatedData['hint'])) {
-                                if (count($validatedData['hint']) === 1 && isset($validatedData['hint'][0]) && is_array($validatedData['hint'][0])) {
-                                    $validatedData['hint'] = $validatedData['hint'][0];
-                                }
-                            }
-
                             // Handle boolean fields that might be strings
                             if (isset($validatedData['question_is_latex'])) {
                                 $validatedData['question_is_latex'] = filter_var($validatedData['question_is_latex'], FILTER_VALIDATE_BOOLEAN);
@@ -149,8 +134,13 @@ class QuestionJsonUploadAction
                                 $validatedData['explanation_text_is_latex'] = filter_var($validatedData['explanation_text_is_latex'], FILTER_VALIDATE_BOOLEAN);
                             }
 
-                            if (isset($validatedData['hint']['is_latex']) && is_string($validatedData['hint']['is_latex'])) {
-                                $validatedData['hint']['is_latex'] = filter_var($validatedData['hint']['is_latex'], FILTER_VALIDATE_BOOLEAN);
+                            // Handle hint array boolean conversion
+                            if (isset($validatedData['hint']) && is_array($validatedData['hint'])) {
+                                foreach ($validatedData['hint'] as $key => $hintItem) {
+                                    if (isset($hintItem['is_latex']) && is_string($hintItem['is_latex'])) {
+                                        $validatedData['hint'][$key]['is_latex'] = filter_var($hintItem['is_latex'], FILTER_VALIDATE_BOOLEAN);
+                                    }
+                                }
                             }
 
                             // Ensure the options array is correctly formatted
@@ -269,8 +259,12 @@ class QuestionJsonUploadAction
 
         // Add hint validation rules only if hint is present
         if (isset($data['hint']) && is_array($data['hint'])) {
-            $rules['hint.value'] = 'required|string';
-            $rules['hint.is_latex'] = 'required|boolean';
+            // Check if hint is an array of objects or single object
+            if (!empty($data['hint']) && is_array($data['hint'][0])) {
+                // Array of hint objects
+                $rules['hint.*.value'] = 'required|string';
+                $rules['hint.*.is_latex'] = 'required|boolean';
+            }
         }
 
         // Convert string booleans to actual booleans
@@ -280,9 +274,13 @@ class QuestionJsonUploadAction
             }
         }
 
-        // Convert hint.is_latex string to boolean if needed
-        if (isset($data['hint']['is_latex']) && is_string($data['hint']['is_latex'])) {
-            $data['hint']['is_latex'] = filter_var($data['hint']['is_latex'], FILTER_VALIDATE_BOOLEAN);
+        // Convert hint array string booleans to actual booleans
+        if (isset($data['hint']) && is_array($data['hint'])) {
+            foreach ($data['hint'] as $key => $hintItem) {
+                if (isset($hintItem['is_latex']) && is_string($hintItem['is_latex'])) {
+                    $data['hint'][$key]['is_latex'] = filter_var($hintItem['is_latex'], FILTER_VALIDATE_BOOLEAN);
+                }
+            }
         }
 
         // Add validation rules based on question type
